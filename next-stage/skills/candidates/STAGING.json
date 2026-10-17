@@ -1,0 +1,74 @@
+{
+  "state": "PREPARED_NOT_PUBLISHED_NOT_INSTALLED",
+  "source_repositories_modified": false,
+  "reconciliation": {
+    "inspected_local_commit": "8ce882054346cfbec7cc12046c4d09b74e7a44a9",
+    "supplied_base_commit": "e42beeb26a1065ec57af2999f2970046ccd21f53",
+    "reason": "Supplied execute-roadmap-efficiently expects 2.0.1; actual checked-out file is 2.0.0. Exact current file inspected; preserve every instruction and insert supplied bounded section before unique canonical-navigation anchor. Increment local candidate to 2.0.1; do not claim missing prior release was applied. Other six expected blobs match unchanged.",
+    "override": {
+      "expected_git_blob": "b344628e5e8da85954d21cfa35f1dddf68fb1956",
+      "version_from": "2.0.0",
+      "version_to": "2.0.1"
+    }
+  },
+  "files": [
+    {
+      "repository": "agent-skills",
+      "path": "skills/chatgpt/build-implementation-roadmap/SKILL.md",
+      "base_blob": "ae1d3cdb1246ef35a519ad14ed6c3d3e82b5aaf3",
+      "candidate_blob": "7d5b7f5caaa69b108ff7b3d09b3037232e02d30d",
+      "version_from": "2.0.0",
+      "version_to": "2.0.1"
+    },
+    {
+      "repository": "agent-skills",
+      "path": "skills/chatgpt/design-solution-before-implementation/SKILL.md",
+      "base_blob": "d9cc14af840abb0a73b64045e84528b5fe40ea0f",
+      "candidate_blob": "486a91899117019fe29872565578db1350c638ba",
+      "version_from": "2.0.5",
+      "version_to": "2.0.6"
+    },
+    {
+      "repository": "agent-skills",
+      "path": "skills/codex/execute-roadmap-efficiently/SKILL.md",
+      "base_blob": "b344628e5e8da85954d21cfa35f1dddf68fb1956",
+      "candidate_blob": "2925eae4d101547cb981fbb882bb9458f0a0f8f2",
+      "version_from": "2.0.0",
+      "version_to": "2.0.1"
+    },
+    {
+      "repository": "Waypoint",
+      "path": "waypoint/skills/waypoint-map/SKILL.md",
+      "base_blob": "6402368c982b44a2b96de2082351226ac3c27401",
+      "candidate_blob": "6bce586833bd0a17ad5519ecddde462399b384d5",
+      "version_from": "0.1.0",
+      "version_to": "0.2.0"
+    },
+    {
+      "repository": "Waypoint",
+      "path": "waypoint/skills/waypoint-map/SKILL.ru.md",
+      "base_blob": "a1cdfc37b21cbb72411320afe15650d42f08e532",
+      "candidate_blob": "5e01d36a692d22e494a5b88a209332dba2432075",
+      "version_from": "0.1.0",
+      "version_to": "0.2.0"
+    },
+    {
+      "repository": "Waypoint",
+      "path": "waypoint/skills/waypoint-observe/SKILL.md",
+      "base_blob": "52f1301ad4a4d4568d2fa05ab187a326e5002f46",
+      "candidate_blob": "554f0e9701d75d1f58c48fe780071d184bfd7295",
+      "version_from": "0.1.0",
+      "version_to": "0.2.0"
+    },
+    {
+      "repository": "Waypoint",
+      "path": "waypoint/skills/waypoint-observe/SKILL.ru.md",
+      "base_blob": "395350fd6c17c9942d58c88de4297c2ed0cb1da2",
+      "candidate_blob": "6b4ffb7fedebcb27f8f17f1351390bf14e8da056",
+      "version_from": "0.1.0",
+      "version_to": "0.2.0"
+    }
+  ],
+  "translation_scope": "Global RU files are amendment fragments only; absent full translations remain absent. Project complete EN/RU candidates updated in pairs.",
+  "runtime_activation": "Use new contracts only after /api/health advertises corresponding implemented capabilities."
+}

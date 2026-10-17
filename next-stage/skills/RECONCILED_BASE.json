@@ -1,0 +1,10 @@
+{
+  "inspected_local_commit": "8ce882054346cfbec7cc12046c4d09b74e7a44a9",
+  "supplied_base_commit": "e42beeb26a1065ec57af2999f2970046ccd21f53",
+  "reason": "Supplied execute-roadmap-efficiently expects 2.0.1; actual checked-out file is 2.0.0. Exact current file inspected; preserve every instruction and insert supplied bounded section before unique canonical-navigation anchor. Increment local candidate to 2.0.1; do not claim missing prior release was applied. Other six expected blobs match unchanged.",
+  "override": {
+    "expected_git_blob": "b344628e5e8da85954d21cfa35f1dddf68fb1956",
+    "version_from": "2.0.0",
+    "version_to": "2.0.1"
+  }
+}

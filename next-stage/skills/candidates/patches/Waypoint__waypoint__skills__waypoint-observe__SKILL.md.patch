@@ -1,0 +1,28 @@
+--- a/waypoint/skills/waypoint-observe/SKILL.md
++++ b/waypoint/skills/waypoint-observe/SKILL.md
+@@ -2,7 +2,7 @@
+ name: waypoint-observe
+ description: "Use Waypoint's sparse local work signals during authorized agent work, without summaries, polling turns or changing execution authority."
+ metadata:
+-  version: "0.1.0"
++  version: "0.2.0"
+   status: "draft-candidate"
+ ---
+ 
+@@ -23,3 +23,16 @@
+ `QUEUED_LOCALLY` means recorded in the local outbox, not delivered to the viewer. A telemetry failure does not stop the real task; preserve the missed signal once and continue authorized work. Invalid plan edits or conflicting operation IDs are different: do not claim they were applied. Do not retry in a tight inference loop.
+ 
+ The observer never sends start/resume/steer/approval/stop to agents. Installation, native binding and source adapter repair are separate bounded integration work. This candidate is not installed or globally registered.
++
++## Joined views and revision-aware evidence
++Do not populate the viewer's Plan or project summaries separately: they derive
++from the existing node/event record. Reader filters are local viewing preferences;
++never stop collecting messages because a category is hidden. Use the feature's
++actual capability/contract before relying on new typed queries or prerequisites.
++
++For a meaningful prerequisite/output or algorithm change, attach existing artifact,
++correctness or measurement receipts with source and applicable revision/workspace.
++Do not convert arbitrary status text into proof, invent success, or rerun tests
++solely to fill a panel. If work proceeds with unknown prerequisites, preserve the
++activity and explained discrepancy; no provider-control RPC is introduced. An
++old measurement tied to other code stays historical/stale, not a fresh speedup.

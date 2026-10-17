@@ -1,0 +1,117 @@
+{
+  "schema": "waypoint.plan/1",
+  "project_id": "sample-next-project",
+  "title": "Пример следующего проекта — заменить требования своими",
+  "nodes": {
+    "MAP-01": {
+      "title": "Самостоятельный результат",
+      "parent": null,
+      "assignment": "Это шаблон, не новое поручение. Замените описание на согласованное задание проекта. Сформулируйте ожидаемый результат, входы, разрешённый объём, нужное чтение и остановку при препятствии.",
+      "acceptance": {
+        "A-01": {
+          "text": "Здесь должно находиться наблюдаемое условие приёмки результата, а не только декларация агента."
+        }
+      },
+      "tests": {
+        "T-01": {
+          "label": "Существенная проверка результата",
+          "procedure": "Заменить на минимальную проверку конкретного требования.",
+          "evidence_level": "to be selected for this project",
+          "invalidated_by": "Relevant source/environment change."
+        }
+      },
+      "layout": {
+        "x": 80,
+        "y": 100
+      },
+      "source_refs": [],
+      "x_roadmap": {
+        "kind": "packet",
+        "preferred_executor": "UNSELECTED",
+        "owned_paths": [],
+        "read_set": []
+      },
+      "x_observability": {
+        "intent": {
+          "summary": "Подготовить самостоятельный результат",
+          "context": "Следующий этап использует конкретный результат этой работы.",
+          "change": "Создать согласованный артефакт и дать воспроизводимую ссылку на него."
+        },
+        "outputs": {
+          "DELIVERABLE": {
+            "definition": "Согласованный артефакт нового проекта по его собственным требованиям; заменить перед использованием.",
+            "revision": 1
+          }
+        },
+        "algorithm_refs": []
+      }
+    },
+    "MAP-02": {
+      "title": "Интеграция результата",
+      "parent": null,
+      "assignment": "Использовать результат MAP-01 и проверить его в целевом окружении. Не реализовывать MAP-01 повторно. Назначения исполнителя и разрешения на запуск этот шаблон не создаёт.",
+      "acceptance": {
+        "A-01": {
+          "text": "Утверждение об интеграции подкреплено фактическим наблюдением в указанном окружении."
+        }
+      },
+      "tests": {
+        "T-01": {
+          "label": "Целевая приёмка",
+          "procedure": "Заменить наблюдением реального сценария нового проекта.",
+          "evidence_level": "target",
+          "invalidated_by": "Integration source or target configuration."
+        }
+      },
+      "layout": {
+        "x": 620,
+        "y": 100
+      },
+      "source_refs": [],
+      "x_roadmap": {
+        "kind": "packet",
+        "preferred_executor": "UNSELECTED",
+        "owned_paths": [],
+        "read_set": []
+      },
+      "x_observability": {
+        "intent": {
+          "summary": "Подтвердить пригодность результата",
+          "context": "Готовность производителя не доказывает доступность результата в целевой рабочей области.",
+          "change": "Использовать полученный артефакт в целевом окружении и записать фактическое свидетельство."
+        },
+        "outputs": {},
+        "algorithm_refs": []
+      }
+    }
+  },
+  "edges": {
+    "E-01": {
+      "from": "MAP-01",
+      "to": "MAP-02",
+      "x_observability": {
+        "relation": "requires",
+        "phase": "start",
+        "target_scope": "node",
+        "why": "Для интеграции нужен согласованный артефакт первого этапа.",
+        "condition": {
+          "output_id": "DELIVERABLE",
+          "revision": 1,
+          "workspace": "consumer"
+        }
+      }
+    }
+  },
+  "x_roadmap": {
+    "profile": "waypoint.roadmap-authoring/1",
+    "resource_policy": "UNSELECTED",
+    "template_only": true,
+    "note": "MIXED не наследуется другим проектом автоматически. Подставить его согласованную ресурсную политику. Для реального плана добавить происхождение, волны и применимые границы чтения/изменений.",
+    "initial_supplied_ids": []
+  },
+  "x_observability": {
+    "schema": "waypoint.observability/1",
+    "purpose": "Пример: доставить согласованный результат нового проекта и подтвердить его пригодность в целевом окружении.",
+    "algorithms": {}
+  }
+}

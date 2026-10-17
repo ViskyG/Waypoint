@@ -309,7 +309,7 @@ class Normalizer:
 
 class JsonlTail:
     """Read complete lines only. Cursors are committed by the consumer with events."""
-    def __init__(self, path: Path, cursor: dict | None = None, max_line: int = 3_000_000):
+    def __init__(self, path: Path, cursor: dict | None = None, max_line: int = 16 * 1024 * 1024):
         self.path = path
         self.offset = int((cursor or {}).get("offset", 0))
         self.file_identity = (cursor or {}).get("file_identity")

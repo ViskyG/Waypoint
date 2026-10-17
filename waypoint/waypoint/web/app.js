@@ -10,9 +10,20 @@
     const svg = (tag, attrs = {}) => { const x = document.createElementNS('http://www.w3.org/2000/svg', tag); for (const [k, v] of Object.entries(attrs))
         x.setAttribute(k, v); return x; };
     const demo = window.WAYPOINT_DEMO || null;
-    const ui = { project: 'demo', state: null, versions: [], scope: null, selected: null, actor: null, inspector: null, version: null, planMode: false, camera: { x: 60, y: 35, z: .82 }, cameras: {}, drag: null, cursor: 0, busy: false };
+    const modules = window.WaypointUI;
+    const ui = { view: 'projects', summaries: [], project: 'demo', state: null, versions: [], scope: null, selected: null, actor: null, inspector: null, version: null, planMode: false, camera: { x: 60, y: 35, z: .82 }, cameras: {}, drag: null, cursor: 0, busy: false };
     const readers = new Map();
     let key = '', online = false, stopped = false;
+    let navigationGeneration = 0, navigationController = new AbortController(), planMount = null, algorithmsMount = null, catalogueDispose = null, refreshSequence = 0;
+    const serviceIdentity = location.origin === 'null' ? 'offline' : location.origin + location.pathname;
+    const context = () => ({generation: navigationGeneration, project: ui.project, version: ui.version});
+    const matches = request => request.generation === navigationGeneration && request.project === ui.project && request.version === ui.version;
+    function cancelNavigation() { navigationGeneration++; navigationController.abort(); navigationController = new AbortController(); ui.busy = false; }
+    function preferenceKey(view = ui.view) { return JSON.stringify(['waypoint-ui-v2', serviceIdentity, ui.project, view, ui.version || '$current']); }
+    function preferences(view) { try { return JSON.parse(localStorage.getItem(preferenceKey(view))) || {}; } catch { return {}; } }
+    function savePreferences(view, data) { try { localStorage.setItem(preferenceKey(view), JSON.stringify(data)); } catch {} }
+    function saveMap() { if (!ui.state) return; ui.cameras[ui.scope || '$root'] = {...ui.camera}; savePreferences('map', {scope: ui.scope, cameras: ui.cameras, camera: ui.camera}); }
+    function restoreMap() { const saved = preferences('map'); ui.scope = saved.scope || null; ui.cameras = saved.cameras || {}; ui.camera = saved.camera || {x:60,y:35,z:.82}; }
     try {
         key = sessionStorage.getItem('waypoint-read-key') || '';
     }
@@ -24,23 +35,19 @@
             sessionStorage.setItem('waypoint-read-key', key);
         }
         catch { }
-        history.replaceState(null, '', location.pathname + location.search);
+        initialHash.delete('key');
+        const remainingHash = initialHash.toString();
+        history.replaceState(null, '', location.pathname + location.search + (remainingHash ? '#' + remainingHash : ''));
     }
-    try {
-        document.documentElement.dataset.theme = localStorage.getItem('waypoint-theme') || 'terracotta';
-    }
-    catch { }
-    function themeLabel() { $('#theme span').textContent = document.documentElement.dataset.theme === 'obsidian' ? 'Обсидиан' : 'Терракота'; }
-    themeLabel();
-    $('#theme').onclick = () => { document.documentElement.dataset.theme = document.documentElement.dataset.theme === 'obsidian' ? 'terracotta' : 'obsidian'; themeLabel(); try {
-        localStorage.setItem('waypoint-theme', document.documentElement.dataset.theme);
-    }
-    catch { } };
+    modules.mountThemeSelector($('#theme'));
     function notice(text) { const n = $('#notice'); n.textContent = text; n.hidden = false; clearTimeout(n.timer); n.timer = setTimeout(() => n.hidden = true, 5500); }
-    async function api(path) { const r = await fetch(path, { headers: { Authorization: 'Bearer ' + key }, cache: 'no-store' }); if (!r.ok) {
-        const e = await r.json().catch(() => ({}));
-        throw Error(e.message || e.error || `HTTP ${r.status}`);
-    } return r.json(); }
+    async function api(path) { const requested = context(), signal = navigationController.signal;
+        const r = await fetch(path, {headers: {Authorization: 'Bearer ' + key}, cache: 'no-store', signal});
+        const result = await r.json().catch(() => ({}));
+        if (!matches(requested)) throw new DOMException('Obsolete navigation', 'AbortError');
+        if (!r.ok) throw Error(result.message || result.error || `HTTP ${r.status}`);
+        return result;
+    }
     const base = () => '/api/p/' + encodeURIComponent(ui.project);
     function nodeName(id) { return ui.state?.plan.nodes[id]?.title || ui.state?.ghosts?.[id]?.title || id; }
     function nodesWithGhosts() { return { ...ui.state.plan.nodes, ...ui.state.ghosts }; }
@@ -84,7 +91,7 @@
                 ids.add(scope.agent_id);
         }
     } return ui.state.agents.filter(a => ids.has(a.id)); }
-    function nodeStatus(id) { return ui.state.node_states.find(s => s.id === id) || {}; }
+    function nodeStatus(id) { const raw = ui.state.node_states.find(s => s.id === id) || {}; return {...raw, status: modules.reportedStatus(ui.state, id)}; }
     function nodeMessages(id, deep = true) { const ids = deep ? childNodes(id) : new Set([id]); return ui.state.items.filter(i => i.node_ids?.some(n => ids.has(n))); }
     function fmtTime(t) { const d = new Date(t); return Number.isFinite(+d) ? d.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' }) : '—'; }
     function kindLabel(k) { return { agentMessage: '', userMessage: 'пользователь', reasoning: 'пояснение', commandExecution: 'команда', mcpToolCall: 'инструмент', fileChange: 'файлы' }[k] ?? k; }
@@ -106,14 +113,18 @@
         box.title = 'Привязка к блоку не установлена'; return box; }
     document.addEventListener('selectionchange', () => { for (const box of document.querySelectorAll('.message')) if (box._pendingItem && !hasSelection(box)) patchMessage(box, box._pendingItem); });
     function readerFor(channel, kind, id, deep = true) {
-        const key = JSON.stringify([ui.project, ui.version, channel, kind, id, deep]);
-        if (!readers.has(key)) readers.set(key, { key, kind, id, deep, channel, limit: channel === 'card' ? 24 : 100, items: [], latest: [], pending: new Set(), follow: true, top: 0, needsRefresh: true, hasMore: false });
+        const key = JSON.stringify([serviceIdentity, ui.project, ui.state?.version || ui.version, channel, kind, id, deep]);
+        if (!readers.has(key)) { let query = {categories:null,only_errors:false}; try { query = JSON.parse(localStorage.getItem(key)) || query; } catch {} readers.set(key, { key, kind, id, deep, channel, query, limit: channel === 'card' ? 24 : 100, items: [], latest: [], pending: new Set(), follow: true, top: 0, needsRefresh: true, hasMore: false }); }
         return readers.get(key);
     }
-    function detachReader(reader) { if (!reader?.scroll) return; reader.top = reader.scroll.scrollTop; reader.scroll = reader.list = reader.button = reader.more = null; }
+    function detachReader(reader) { if (!reader?.scroll) return; reader.top = reader.scroll.scrollTop; reader.scroll = reader.list = reader.button = reader.more = null; reader.filterMount?.dispose(); reader.filterMount = null; }
     function bindReader(reader, list, scroll, button, more = null) {
         if (reader.scroll && reader.scroll !== scroll) detachReader(reader);
         reader.list = list; reader.scroll = scroll; reader.button = button; reader.more = more;
+        if (reader.channel === 'inspector' && !reader.filterMount) {
+            const filter = el('details','reader-filter'); filter.append(el('summary','','Фильтр сообщений')); const controls = el('div','reader-filter-controls'); filter.append(controls); list.before(filter);
+            reader.filterMount = modules.bindTypeFilter(controls,reader.query,{onChange:query=>{ reader.query = query; try{localStorage.setItem(reader.key,JSON.stringify(query));}catch{} reader.generation = (reader.generation||0)+1; reader.queryGeneration = (reader.queryGeneration||0)+1; reader.items=[];reader.latest=[];reader.pending.clear();reader.follow=true;reader.before=null;reader.hasMore=false;reader.needsRefresh=true;paintReader(reader);loadReader(reader); }});
+        }
         scroll.onscroll = () => { reader.top = scroll.scrollTop; if (!reader.pending.size) reader.follow = scroll.scrollHeight - scroll.scrollTop - scroll.clientHeight < 12; else if (scroll.scrollHeight - scroll.scrollTop - scroll.clientHeight >= 12) reader.follow = false; };
         button.onclick = () => { reader.follow = true; reader.items = reader.latest.slice(-reader.limit); reader.pending.clear(); paintReader(reader); };
         if (more) more.onclick = () => loadReader(reader, true);
@@ -138,7 +149,7 @@
         const old = new Map(reader.items.map(i => [itemKey(i), i]));
         reader.latest = items.slice(-reader.limit);
         const atTail = !reader.scroll || reader.scroll.scrollHeight - reader.scroll.scrollTop - reader.scroll.clientHeight < 12;
-        if (reader.follow && atTail) { reader.items = reader.latest.slice(); reader.pending.clear(); if (result) { reader.before = result.before; reader.hasMore = result.has_more; } }
+        if (reader.follow && atTail) { reader.items = reader.latest.slice(); reader.pending.clear(); if (result) { reader.before = result.next_cursor || result.before; reader.hasMore = result.has_more; } }
         else {
             reader.follow = false;
             for (const item of items) if (!old.has(itemKey(item)) && (!reader.items.length || (item.first_seq || 0) > (reader.items.at(-1).first_seq || 0))) reader.pending.add(itemKey(item));
@@ -150,17 +161,19 @@
     async function loadReader(reader, older = false) {
         if (reader.loading) return;
         reader.loading = true;
-        const generation = reader.generation || 0;
+        const generation = reader.generation || 0, queryGeneration = reader.queryGeneration || 0, requested = context();
         try {
-            const result = await stream(reader.kind, reader.id, reader.deep, older ? reader.before : null, reader.limit);
+            const result = await stream(reader.kind, reader.id, reader.deep, older ? reader.before : null, reader.limit, reader.query);
+            if (!matches(requested) || queryGeneration !== (reader.queryGeneration || 0)) return;
             if (!older && !reader.follow && reader.items.length) {
-                const window = await stream(reader.kind, reader.id, reader.deep, Math.max(...reader.items.map(item => item.first_seq || 0)) + 1, Math.min(200, reader.items.length));
+                const window = await stream(reader.kind, reader.id, reader.deep, Math.max(...reader.items.map(item => item.first_seq || 0)) + 1, Math.min(200, reader.items.length), reader.query);
+                if (!matches(requested) || queryGeneration !== (reader.queryGeneration || 0)) return;
                 const revisions = new Map(window.items.map(item => [itemKey(item), item]));
                 reader.items = reader.items.map(item => revisions.get(itemKey(item)) || item);
             }
-            if (older) { reader.follow = false; const combined = new Map([...result.items, ...reader.items].map(i => [itemKey(i), i])); reader.items = [...combined.values()].slice(0, 200); reader.before = result.before; reader.hasMore = result.has_more; paintReader(reader, true); }
+            if (older) { reader.follow = false; const combined = new Map([...result.items, ...reader.items].map(i => [itemKey(i), i])); reader.items = [...combined.values()].slice(0, 200); reader.before = result.next_cursor || result.before; reader.hasMore = result.has_more; paintReader(reader, true); }
             else { updateReader(reader, result.items, result); reader.needsRefresh = generation !== (reader.generation || 0); }
-        } catch (e) { notice(e.message); }
+        } catch (e) { if (e.name !== 'AbortError') notice(e.message); }
         finally { reader.loading = false; if (reader.more) reader.more.disabled = false; if (reader.needsRefresh && generation !== (reader.generation || 0) && reader.scroll?.isConnected) setTimeout(() => loadReader(reader), 0); }
     }
     function invalidateReaders(events = null, previousState = null) {
@@ -233,7 +246,7 @@
         }
         keyedChildren(strip, actorCards); keyedChildren(rail, railCards);
         const outside = ui.state.items.filter(item => !item.node_ids?.length && !item.edge_ids?.length || item.node_ids?.some(id => !ui.state.plan.nodes[id] && !ui.state.ghosts[id]));
-        $('#outside-count').textContent = outside.length;
+        $('#outside-count').textContent = outside.length; $('#outside-count').title = 'Число в последнем ограниченном снимке; полный поток доступен по нажатию';
         $('#reset-selection').hidden = !ui.actor && !ui.selected;
     }
     function renderToolbar() { const crumbs = $('#crumbs'); crumbs.replaceChildren(btn('Карта', () => enter(null))); for (const id of parents(ui.scope)) {
@@ -285,7 +298,7 @@
             down.setAttribute('aria-label', 'Раскрыть ' + id);
             head.append(down);
         }
-        const detail = btn('⋯', () => openInspector('node', id, 'assignment'));
+        const detail = btn('⋯', () => openInspector('node', id, 'task'));
         detail.title = 'Подробности';
         head.append(detail);
         const chat = el('div', 'messages');
@@ -294,11 +307,12 @@
         const status = el('div', 'node-status'), state = nodeStatus(id), agents = workActors(id);
         const running = agents.some(actorActive);
         status.append(el('span', 'status-icon' + (running ? ' running' : state.status === 'done' ? ' done' : '')), btn(state.status || 'Запланировано', () => openInspector('node', id, 'status'), 'status-label'));
+        const descendantActivity = modules.activityText(modules.nodeView(ui.state,id)); if (descendantActivity) { status.title = descendantActivity; status.append(el('small','descendant-badge',descendantActivity)); }
         const names = el('div', 'node-actors');
         for (const a of agents.slice(0, 4))
             names.append(btn(agentCode(a.id), () => selectActor(a.id)));
         status.append(names);
-        const req = btn('ЗАДАНИЕ', () => openInspector('node', id, 'assignment'), 'node-tab assignment'), accept = btn('ПРИЁМКА', () => openInspector('node', id, 'acceptance'), 'node-tab acceptance');
+        const req = btn('ЗАДАНИЕ', () => openInspector('node', id, 'task'), 'node-tab assignment'), accept = btn('ПРИЁМКА', () => openInspector('node', id, 'acceptance'), 'node-tab acceptance');
         const latest = btn('', null, 'new-messages'); latest.hidden = true;
         card.append(test, head, chat, status, req, accept, latest);
         card.ondblclick = e => { if (hasChild && !e.target.closest('.messages,button'))
@@ -306,7 +320,7 @@
         return card;
     }
     function renderMap() {
-        if (!ui.state)
+        if (!ui.state || ui.view !== 'map')
             return;
         const world = $('#world');
         world.style.transform = `translate(${ui.camera.x}px, ${ui.camera.y}px) scale(${ui.camera.z})`;
@@ -319,7 +333,7 @@
         for (const [id, card] of mounted) if (!visible.has(id)) { detachReader(card._reader); card.remove(); }
         onScreen.slice(0, 1000).forEach(([id, node]) => {
             let card = mounted.get(id);
-            const signature = JSON.stringify([node, nodeStatus(id), ui.state.checks.filter(c => c.node_id === id), workActors(id), ui.actor, ui.selected]);
+            const signature = JSON.stringify([node, nodeStatus(id), ui.state.node_views?.[id], ui.state.checks.filter(c => c.node_id === id), workActors(id), ui.actor, ui.selected]);
             if (!card) { card = renderNode(id, node); ns.append(card); }
             else if (card._signature !== signature) {
                 const next = renderNode(id, node);
@@ -392,6 +406,7 @@
         $('#empty').textContent = !current.length ? 'На этом уровне пока нет блоков' : '';
         $('#summary').textContent = `${current.length} блоков · ${Object.keys(ui.state.plan.edges).length} связей`;
         $('#zoom').textContent = Math.round(ui.camera.z * 100) + '%';
+        saveMap();
         if (onScreen.length > 1000)
             $('#map-note').textContent = 'Показано 1000 видимых блоков · приблизьте интересующий участок';
     }
@@ -412,7 +427,7 @@
         if (scope)
             h.set('scope', scope);
         history.pushState(null, '', '#' + h.toString());
-    } renderToolbar(); renderActors(); renderMap(); }
+    } saveMap(); renderToolbar(); renderActors(); renderMap(); }
     function cameraZoom(z, point) { const rect = $('#viewport').getBoundingClientRect(); const p = point || { x: rect.width / 2, y: rect.height / 2 }; z = Math.max(.12, Math.min(1.8, z)); const ratio = z / ui.camera.z; ui.camera.x = p.x - (p.x - ui.camera.x) * ratio; ui.camera.y = p.y - (p.y - ui.camera.y) * ratio; ui.camera.z = z; renderMap(); }
     function focusNode(id) { const node = nodesWithGhosts()[id]; if (!node)
         return notice('Блок не найден'); if ((node.parent || null) !== ui.scope)
@@ -452,9 +467,9 @@
     $('#reset-selection').onclick = () => { ui.actor = ui.selected = null; renderMap(); renderActors(); closeInspector(); };
     $('#outside').onclick = () => openInspector('outside', null, 'messages');
     $('#close').onclick = closeInspector;
-    function closeInspector() { if (ui.inspector?.reader) detachReader(ui.inspector.reader); $('#inspector').hidden = true; ui.inspector = null; }
+    function closeInspector() { ui.inspector?.algorithmMount?.dispose(); if (ui.inspector?.reader) detachReader(ui.inspector.reader); $('#inspector').hidden = true; ui.inspector = null; }
     function blockSection(body, title, content) { body.append(el('h4', '', title), el('div', 'prose', content)); }
-    async function stream(kind, id, deep = true, before = null, limit = 100) {
+    async function stream(kind, id, deep = true, before = null, limit = 100, query = {categories:null,only_errors:false}) {
         if (demo) {
             let items = ui.state.items;
             if (kind === 'node') {
@@ -467,24 +482,25 @@
                 items = items.filter(i => i.edge_ids.includes(id));
             else if (kind === 'outside')
                 items = items.filter(i => !i.node_ids.length && !i.edge_ids.length || i.node_ids.some(n => !ui.state.plan.nodes[n] && !ui.state.ghosts[n]));
+            items = items.filter(item => (query.categories == null || query.categories.includes(item.category || 'other')) && (!query.only_errors || item.is_error));
             const eligible = before ? items.filter(i => i.first_seq < before) : items; const page = eligible.slice(-limit); return { items: page, has_more: eligible.length > limit, before: page[0]?.first_seq };
         }
-        if (kind === 'outside')
-            return { items: ui.state.items.filter(i => !i.node_ids.length && !i.edge_ids.length || i.node_ids.some(n => !ui.state.plan.nodes[n] && !ui.state.ghosts[n])), has_more: false };
-        const q = new URLSearchParams({ limit, deep: String(deep), version: ui.state.version });
-        q.set(kind, id);
-        if (before)
-            q.set('before', before);
+        const q = new URLSearchParams({ limit, deep: String(deep), version: ui.state.version, only_errors:String(!!query.only_errors) });
+        if (query.categories !== null) q.set('categories', query.categories.join(','));
+        if (kind === 'outside') q.set('outside','true'); else q.set(kind, id);
+        if (before) q.set(typeof before === 'string' ? 'page_cursor' : 'before', before);
         return api(base() + '/items?' + q);
     }
     function inspectorSignature(kind, id, tab) {
         const node = nodesWithGhosts()[id], actor = ui.state.agents.find(actor => actor.id === id);
         if (kind === 'node') {
-            if (tab === 'assignment') return JSON.stringify([node, ui.state.plan.edges]);
+            if (['task', 'assignment', 'executor'].includes(tab)) return JSON.stringify([node, ui.state.plan.edges, ui.state.node_views?.[id]]);
             if (tab === 'acceptance') return JSON.stringify([node?.acceptance, nodeStatus(id).result]);
             if (tab === 'tests') return JSON.stringify([node?.tests, ui.state.checks.filter(check => check.node_id === id)]);
-            if (tab === 'status') return JSON.stringify([nodeStatus(id), workActors(id)]);
+            if (tab === 'status') return JSON.stringify([nodeStatus(id), workActors(id),ui.state.node_views?.[id]]);
+            if (tab === 'algorithms') return JSON.stringify([ui.state.basis,ui.state.node_views?.[id]?.algorithm_refs]);
         }
+        if (kind === 'algorithm') return JSON.stringify(ui.state.basis);
         if (kind === 'agent') return JSON.stringify([actor, ui.state.scopes.filter(scope => scope.agent_id === id)]);
         return null;
     }
@@ -493,10 +509,11 @@
         if (!inspector || inspector.tab === 'messages' || inspector.kind === 'diff' || inspector.signature === inspectorSignature(inspector.kind, inspector.id, inspector.tab)) return;
         if (hasSelection($('#inspector-body'))) { inspector.needsRefresh = true; return; }
         const top = $('#inspector-body').scrollTop;
-        openInspector(inspector.kind, inspector.id, inspector.tab, inspector.deep).then(() => { $('#inspector-body').scrollTop = top; });
+        (inspector.kind === 'algorithm' ? openAlgorithm(inspector.id) : openInspector(inspector.kind, inspector.id, inspector.tab, inspector.deep)).then(() => { $('#inspector-body').scrollTop = top; });
     }
     document.addEventListener('selectionchange', () => { if (ui.inspector?.needsRefresh) refreshInspectorDetails(); });
     async function openInspector(kind, id, tab = 'messages', deep = true) {
+        ui.inspector?.algorithmMount?.dispose();
         if (ui.inspector?.reader) detachReader(ui.inspector.reader);
         if (kind === 'agent') deep = false;
         const state = { kind, id, tab, deep, signature: inspectorSignature(kind, id, tab) };
@@ -507,7 +524,7 @@
         tabs.replaceChildren();
         $('#inspector-id').textContent = id || 'Непривязанная работа';
         $('#inspector-title').textContent = kind === 'node' ? nodeName(id) : kind === 'agent' ? agentName(id) : kind === 'edge' ? 'На переходе' : 'Вне карты';
-        const choices = kind === 'node' ? [['assignment', 'Задание'], ['acceptance', 'Приёмка'], ['messages', 'Сообщения'], ['tests', 'Тесты'], ['status', 'Статус']] : kind === 'agent' ? [['messages', 'Сообщения'], ['work', 'Работы']] : [['messages', 'Сообщения']];
+        const choices = kind === 'node' ? [['task', 'Задание'], ['acceptance', 'Приёмка'], ['messages', 'Сообщения'], ['tests', 'Тесты'], ['status', 'Статус'], ['algorithms', 'Алгоритмы']] : kind === 'agent' ? [['messages', 'Сообщения'], ['work', 'Работы']] : [['messages', 'Сообщения']];
         for (const [value, name] of choices)
             tabs.append(btn(name, () => openInspector(kind, id, value, deep), value === tab ? 'current' : ''));
         if (kind === 'agent') { const actor = ui.state.agents.find(actor => actor.id === id); if (actor?.activity_historical) body.append(el('p', 'small-note activity-provenance', 'История · ' + (actor.activity_reported_by || actor.activity_source || '') + ' · ' + actor.activity_at)); }
@@ -543,8 +560,16 @@
         if (!node)
             return;
         const status = nodeStatus(id);
-        if (tab === 'assignment') {
-            blockSection(body, 'Задание', node.assignment);
+        if (['task', 'assignment', 'executor'].includes(tab)) {
+            const subtabs = el('nav', 'task-subtabs'); subtabs.append(btn('Для владельца', () => openInspector(kind,id,'task'), tab !== 'executor' ? 'current' : ''), btn('Для исполнителя', () => openInspector(kind,id,'executor'), tab === 'executor' ? 'current' : '')); body.append(subtabs);
+            if (tab !== 'executor') {
+                const intent = modules.nodeView(ui.state,id).intent || modules.intentFor(node);
+                if (!intent) body.append(el('p','missing-intent','Описание для владельца пока не заполнено. Техническое задание доступно во вкладке «Для исполнителя».'));
+                else for (const [label,field] of [['Суть','summary'],['Зачем','context'],['Что изменится','change'],['Границы','scope']]) if (intent[field]) blockSection(body,label,typeof intent[field] === 'string' ? intent[field] : JSON.stringify(intent[field]));
+                modules.appendDependencies(body, modules.nodeView(ui.state,id));
+                return;
+            }
+            blockSection(body, 'Задание исполнителю', node.assignment);
             for (const r of node.source_refs || []) {
                 body.append(el('h4', '', r.label || 'Источник'));
                 if (/^https?:\/\//.test(r.uri || '')) {
@@ -564,6 +589,13 @@
                 const other = e.to === id ? e.from : e.to;
                 body.append(btn((e.to === id ? '← ' : '→ ') + other + ' · ' + nodeName(other), () => focusNode(other), 'related'));
             }
+        }
+        else if (tab === 'algorithms') {
+            const requested = context();
+            try { const view = demo ? {algorithms: []} : await api(base() + '/algorithms?' + new URLSearchParams({node:id,deep:'false',version:ui.state.version}));
+                if (!matches(requested) || ui.inspector !== state || view.basis?.plan_version && view.basis.plan_version !== ui.state.version) return;
+                state.algorithmMount = modules.mountAlgorithms(body, view, {onOpenNode: target => {setView('map');focusNode(target);openInspector('node',target,'task');}, onOpenAlgorithm: algorithm => openAlgorithm(algorithm)});
+            } catch(e) { if (e.name !== 'AbortError' && ui.inspector === state) body.append(el('p','source-warning',e.message)); }
         }
         else if (tab === 'acceptance') {
             body.append(el('h4', '', 'Ожидалось'));
@@ -589,6 +621,8 @@
         }
         else if (tab === 'status') {
             blockSection(body, 'Сообщённый статус', status.status || 'Не указан');
+            const activity = modules.activityText(modules.nodeView(ui.state,id)); if (activity) blockSection(body, 'Потомки', activity);
+            modules.appendDependencies(body, modules.nodeView(ui.state,id));
             blockSection(body, 'Пояснение', status.explanation || 'Не указано');
             blockSection(body, 'Последнее сообщение о статусе', status.at || 'Нет');
             for (const a of workActors(id))
@@ -604,7 +638,7 @@
             notice('Блок: ' + id);
         } }, 'more'));
     }
-    $('#diff').onclick = async () => { const index = ui.versions.findIndex(v => v.version === ui.state.version), previous = ui.versions[index + 1]; if (!previous)
+    $('#diff').onclick = async () => { const requested = context(); const index = ui.versions.findIndex(v => v.version === ui.state.version), previous = ui.versions[index + 1]; if (!previous)
         return notice('Предыдущей версии нет'); openInspector('diff', null, 'diff'); $('#inspector-title').textContent = 'Изменения плана'; const body = $('#inspector-body'); body.replaceChildren(); try {
         let changes;
         if (demo) {
@@ -613,6 +647,7 @@
         }
         else
             changes = (await api(base() + '/diff?' + new URLSearchParams({ before: previous.version, after: ui.state.version }))).changes;
+        if (!matches(requested) || ui.inspector?.kind !== 'diff') return;
         for (const c of changes) {
             const row = el('div', 'diff-row');
             row.append(el('code', '', c.op + ' · ' + c.path.join('/')));
@@ -626,111 +661,118 @@
             body.append(el('p', '', 'Структура не менялась'));
     }
     catch (e) {
-        notice(e.message);
+        if (e.name !== 'AbortError') notice(e.message);
     } };
     function objectDiff(a, b, path = []) { if (JSON.stringify(a) === JSON.stringify(b))
         return []; if (a && b && !Array.isArray(a) && !Array.isArray(b) && typeof a === 'object' && typeof b === 'object') {
         return [...new Set([...Object.keys(a), ...Object.keys(b)])].flatMap(k => objectDiff(a[k], b[k], [...path, k]));
     } return [{ path, op: a === undefined ? 'add' : b === undefined ? 'remove' : 'replace', before: a, after: b }]; }
-    $('#version').onchange = async (e) => { ui.version = e.target.value; await refresh(true); };
-    $('#project').onchange = async (e) => { closeInspector(); for (const reader of readers.values()) detachReader(reader); readers.clear(); $('#nodes').replaceChildren(); ui.project = e.target.value; ui.cursor = 0; ui.version = null; ui.scope = null; ui.camera = { x: 60, y: 35, z: .82 }; await refresh(true); };
-    async function refresh(includeVersions = false, events = null) { if (ui.busy)
-        return; ui.busy = true; try {
-        let state;
-        if (demo) {
-            state = demo.states[ui.version || demo.current];
-            ui.versions = demo.versions;
-        }
-        else {
-            state = await api(base() + '/state' + (ui.version ? '?version=' + encodeURIComponent(ui.version) : ''));
-            if (includeVersions)
-                ui.versions = await api(base() + '/versions');
-        }
-        const previousState = ui.state;
-        ui.state = state;
-        invalidateReaders(events && (state.cursor || 0) <= ui.cursor ? events : null, previousState);
-        ui.cursor = Math.max(ui.cursor, state.cursor || 0);
-        if (ui.scope && !state.plan.nodes[ui.scope]) {
-            ui.scope = null;
-            notice('Этот блок отсутствует в выбранной версии. История сохранена.');
-        }
-        $('.project-title').textContent = 'Карта исполнения';
-        renderToolbar();
-        renderActors();
-        renderMap();
-        online = true;
-        $('#foot-status').classList.remove('source-warning');
-        $('#foot-status').textContent = demo || ui.project === 'demo' ? 'Демо · вымышленные события' : 'Локальный сервис · тексты не отправляются в облако';
-        refreshInspectorDetails();
+    function disposeProjectViews() { planMount?.dispose(); planMount = null; algorithmsMount?.dispose(); algorithmsMount = null; }
+    async function openAlgorithm(id) {
+        const requested = context(); const body = $('#inspector-body');
+        closeInspector(); $('#inspector').hidden = false; $('#inspector-id').textContent = id; $('#inspector-title').textContent = 'Алгоритм'; $('#tabs').replaceChildren(); body.replaceChildren();
+        const selection = {kind:'algorithm',id,signature:inspectorSignature('algorithm',id)}; ui.inspector = selection;
+        try { const result = await api(base() + '/algorithms/' + encodeURIComponent(id) + '?' + new URLSearchParams({version:ui.state.version}));
+            if (!matches(requested) || ui.inspector !== selection) return;
+            const algorithms = result.algorithms || [result.algorithm || result];
+            selection.algorithmMount = modules.mountAlgorithms(body, {algorithms,basis:result.basis}, {onOpenNode: target => {setView('map');focusNode(target);openInspector('node',target,'task');},onOpenAlgorithm:()=>{}});
+        } catch(e) { if (e.name !== 'AbortError' && ui.inspector === selection) body.append(el('p','source-warning',e.message)); }
     }
-    catch (e) {
-        online = false;
-        $('#foot-status').textContent = 'Нет связи · показаны последние полученные данные';
-        $('#foot-status').classList.add('source-warning');
-        notice(e.message);
+    async function renderAlgorithms() {
+        if (!ui.state || ui.view !== 'algorithms') return;
+        const requested = context();
+        try { const result = demo ? {algorithms: []} : await api(base() + '/algorithms?' + new URLSearchParams({version:ui.state.version}));
+            if (!matches(requested) || ui.view !== 'algorithms' || result.basis?.plan_version && result.basis.plan_version !== ui.state.version) return;
+            if (algorithmsMount) algorithmsMount.update(result);
+            else algorithmsMount = modules.mountAlgorithms($('#algorithms-view'), result, {onOpenAlgorithm:openAlgorithm,onOpenNode:id=>{setView('map');focusNode(id);openInspector('node',id,'task');}});
+        } catch(e) { if (e.name !== 'AbortError') notice(e.message); }
     }
-    finally {
-        ui.busy = false;
-    } }
-    async function watch() { while (!stopped && !demo) {
-        try {
-            const requestedProject = ui.project;
-            const reply = await api(base() + '/events?' + new URLSearchParams({ after: ui.cursor, wait: 12, limit: 200 }));
-            if (ui.project !== requestedProject)
-                continue;
-            if (reply.events.length) {
-                ui.cursor = reply.cursor;
-                await refresh(reply.events.some(e => e.kind === 'plan.changed'), reply.events);
-            }
-            else if (!online)
-                await refresh(true);
-        }
-        catch {
-            online = false;
-            $('#foot-status').textContent = 'Связь прервана · исполнители не остановлены';
-            $('#foot-status').classList.add('source-warning');
-            await new Promise(r => setTimeout(r, 1800));
-        }
-    } }
-    async function boot() { try {
-        const projects = demo ? [{ project_id: 'demo', title: 'Маршруты армий' }] : await api('/api/projects');
-        if (!projects.length) {
-            $('#empty').textContent = 'Пока нет карт. Импортируйте план через wp plan-import.';
-            return;
-        }
-        const hash = new URLSearchParams(location.hash.slice(1));
-        ui.project = projects.some(p => p.project_id === hash.get('project')) ? hash.get('project') : projects[0].project_id;
-        $('#project').replaceChildren();
-        for (const p of projects) {
-            const o = el('option', '', p.title);
-            o.value = p.project_id;
-            o.selected = p.project_id === ui.project;
-            $('#project').append(o);
-        }
-        $('#connection').textContent = demo ? 'Демо' : 'Локально';
-        $('#connection').classList.toggle('demo', !!demo);
+    function renderPlan() {
+        if (!ui.state || ui.view !== 'plan') return;
+        if (planMount) planMount.update(ui.state);
+        else { const prefs = preferences('plan'); prefs.onChange = () => savePreferences('plan',prefs); planMount = modules.mountPlan($('#plan-view'),ui.state,{onOpenNode:id=>{setView('map');focusNode(id);openInspector('node',id,'task');},preferences:prefs}); }
+    }
+    function setView(view) {
+        if (ui.view === 'map') saveMap();
+        ui.view = view;
+        if (view !== 'plan' && planMount) { planMount.dispose(); planMount = null; }
+        if (view !== 'algorithms' && algorithmsMount) { algorithmsMount.dispose(); algorithmsMount = null; }
+        $('#projects-view').hidden = view !== 'projects'; $('#plan-view').hidden = view !== 'plan'; $('#algorithms-view').hidden = view !== 'algorithms'; $('#viewport').hidden = view !== 'map';
+        $('.agents-bar').hidden = view === 'projects'; $('.orchestrators').hidden = view === 'projects'; $('.toolbar').hidden = view === 'projects';
+        for (const button of $('#project-views').children) button.classList.toggle('current',button.dataset.view === view);
+        for (const id of ['crumbs','up','fit','minus','zoom','plus','full']) $('#'+id).hidden = view !== 'map';
+        $('.project-title').textContent = view === 'projects' ? 'Проекты' : ui.summaries.find(p=>p.project_id===ui.project)?.title || 'Waypoint';
+        if (view === 'projects') { closeInspector(); catalogueDispose?.(); catalogueDispose = modules.mountProjectCatalogue($('#projects-view'),ui.summaries,{onOpenProject:openProject}); $('#summary').textContent = ui.summaries.length + ' проектов'; }
+        else { savePreferences('navigation',{view}); renderMap(); renderPlan(); if (view === 'algorithms') renderAlgorithms(); }
+    }
+    async function loadCatalogue() {
+        const demoPlan = demo?.states?.[demo.current]?.plan;
+        const result = demo ? demo.projects || [{project_id:demoPlan.project_id,title:demoPlan.title,purpose:demoPlan.x_observability?.purpose || demoPlan.description || 'Вымышленный проект для знакомства с Waypoint',source_health:'fictional'}] : await api('/api/projects?summary=true');
+        ui.summaries = Array.isArray(result) ? result : result.projects || [];
+        $('#project').replaceChildren(el('option','','Выбрать проект…'));
+        $('#project').firstChild.value = '';
+        for (const project of ui.summaries) { const option = el('option','',project.title); option.value = project.project_id; $('#project').append(option); }
+    }
+    async function showProjects(writeHash = true) {
+        saveMap(); disposeProjectViews(); cancelNavigation(); closeInspector(); for (const reader of readers.values()) detachReader(reader); readers.clear(); ui.state = null; $('#nodes').replaceChildren(); $('#project').value = ''; setView('projects');
+        if (writeHash) history.pushState(null,'',location.pathname + location.search);
+        try { await loadCatalogue(); setView('projects'); } catch(e) { if(e.name!=='AbortError')notice(e.message); }
+    }
+    async function openProject(project, {fromHash=false}={}) {
+        saveMap(); disposeProjectViews(); cancelNavigation(); closeInspector(); for (const reader of readers.values()) detachReader(reader); readers.clear(); $('#nodes').replaceChildren();
+        ui.project = project; ui.cursor = 0; ui.version = null; ui.state = null; restoreMap(); ui.selected = ui.actor = null; $('#project').value = project;
+        const selectedView = preferences('navigation').view || 'map'; setView(['map','plan','algorithms'].includes(selectedView) ? selectedView : 'map');
+        if (!fromHash) history.pushState(null,'','#project='+encodeURIComponent(project));
         await refresh(true);
-        if (hash.get('scope'))
-            enter(hash.get('scope'), false);
-        if (hash.get('node'))
-            focusNode(hash.get('node'));
-        watch();
     }
-    catch (e) {
-        $('#empty').textContent = 'Откройте локальный адрес из команды wp url. Ключ доступа хранится только в этой вкладке.';
-        $('#foot-status').textContent = e.message;
-    } }
-    window.addEventListener('popstate', () => { if (!ui.state)
-        return; const p = new URLSearchParams(location.hash.slice(1)); enter(p.get('scope') || null, false); if (p.get('node'))
-        focusNode(p.get('node')); });
+    $('#home').onclick = () => showProjects();
+    for (const button of $('#project-views').children) button.onclick = () => setView(button.dataset.view);
+    $('#version').onchange = async e => { saveMap(); disposeProjectViews(); cancelNavigation(); closeInspector(); ui.version = e.target.value; restoreMap(); for (const reader of readers.values()) detachReader(reader); readers.clear(); $('#nodes').replaceChildren(); await refresh(true); };
+    $('#project').onchange = e => e.target.value ? openProject(e.target.value) : showProjects();
+    async function refresh(includeVersions = false, events = null) {
+        if (ui.busy || ui.view === 'projects') return;
+        const requested = context(), sequence = ++refreshSequence; ui.busy = true;
+        try {
+            const state = demo ? demo.states[ui.version || demo.current] : await api(base() + '/state' + (ui.version ? '?version=' + encodeURIComponent(ui.version) : ''));
+            const versions = demo ? demo.versions : includeVersions ? await api(base() + '/versions') : ui.versions;
+            if (!matches(requested)) return;
+            const previousState = ui.state; ui.versions = versions; ui.state = state;
+            invalidateReaders(events && (state.cursor || 0) <= ui.cursor ? events : null, previousState);
+            ui.cursor = Math.max(ui.cursor,state.cursor || 0);
+            if (ui.scope && !state.plan.nodes[ui.scope]) { ui.scope = null; notice('Этот блок отсутствует в выбранной версии. История сохранена.'); }
+            renderToolbar(); renderActors(); renderMap(); renderPlan(); if(ui.view === 'algorithms') renderAlgorithms();
+            online = true; $('#foot-status').classList.remove('source-warning');
+            $('#foot-status').textContent = demo || ui.project === 'demo' ? demo?.notice || 'Демо · вымышленные события' : 'Локальный сервис · тексты не отправляются в облако'; refreshInspectorDetails();
+        } catch(e) { if (e.name !== 'AbortError' && matches(requested)) { online = false; $('#foot-status').textContent = 'Нет связи · показаны последние полученные данные'; $('#foot-status').classList.add('source-warning'); notice(e.message); } }
+        finally { if (sequence === refreshSequence && matches(requested)) ui.busy = false; }
+    }
+    async function watch() {
+        while (!stopped && !demo) {
+            if (ui.view === 'projects' || !ui.state) { await new Promise(resolve=>setTimeout(resolve,500)); continue; }
+            const requested = context();
+            try { const reply = await api(base() + '/events?' + new URLSearchParams({after:ui.cursor,wait:12,limit:200}));
+                if (!matches(requested)) continue;
+                if (reply.events.length) { ui.cursor = reply.cursor; await refresh(reply.events.some(event=>event.kind==='plan.changed'),reply.events); }
+                else if (!online) await refresh(true);
+            } catch(e) { if (e.name==='AbortError' || !matches(requested)) continue; online=false; $('#foot-status').textContent='Связь прервана · исполнители не остановлены'; $('#foot-status').classList.add('source-warning'); await new Promise(resolve=>setTimeout(resolve,1800)); }
+        }
+    }
+    async function boot() {
+        try { await loadCatalogue(); $('#connection').textContent = demo ? demo.label || 'Демо' : 'Локально'; $('#connection').classList.toggle('demo',!!demo);
+            const hash = new URLSearchParams(location.hash.slice(1)); const project = hash.get('project');
+            if(project && ui.summaries.some(summary=>summary.project_id===project)) { await openProject(project,{fromHash:true}); if(hash.get('scope')) enter(hash.get('scope'),false); if(hash.get('node')) {setView('map');focusNode(hash.get('node'));openInspector('node',hash.get('node'),'task');} }
+            else setView('projects'); watch();
+        } catch(e) { $('#projects-view').hidden=false; $('#projects-view').textContent='Откройте локальный адрес из команды wp url. Ключ доступа хранится только в этой вкладке.'; $('#foot-status').textContent=e.message; }
+    }
+    window.addEventListener('popstate',async()=>{ const hash=new URLSearchParams(location.hash.slice(1)); const project=hash.get('project'); if(!project) {await showProjects(false);return;} if(project!==ui.project||!ui.state) await openProject(project,{fromHash:true}); if(!ui.state)return;setView('map');enter(hash.get('scope')||null,false);if(hash.get('node'))focusNode(hash.get('node')); });
     window.addEventListener('resize', () => renderMap());
-    window.addEventListener('beforeunload', () => { stopped = true; });
+    window.addEventListener('beforeunload', () => { saveMap(); stopped = true; navigationController.abort(); });
     document.addEventListener('keydown', e => { if (e.key === 'Escape')
         closeInspector(); if (e.altKey && e.key === 'ArrowUp' && ui.scope) {
         e.preventDefault();
         enter(ui.state.plan.nodes[ui.scope]?.parent || null);
     } });
     // Developer diagnostic is read-only and does not expose credentials.
-    window.waypointView = () => ({ scope: ui.scope, camera: { ...ui.camera }, visibleNodes: document.querySelectorAll('.node').length, version: ui.state?.version, project: ui.project });
+    window.waypointView = () => ({ view:ui.view, basis:ui.state?.basis, generation:navigationGeneration, scope: ui.scope, camera: { ...ui.camera }, visibleNodes: document.querySelectorAll('.node').length, version: ui.state?.version, project: ui.project });
     boot();
 })();

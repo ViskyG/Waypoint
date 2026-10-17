@@ -1,0 +1,47 @@
+{
+  "synthetic": true,
+  "do_not_import_into_live_history": true,
+  "cases": [
+    {
+      "label": "comparable metric, correctness checked",
+      "baseline": {
+        "metric": "query_duration",
+        "unit": "ms",
+        "method": "same deterministic fixture",
+        "environment_ref": "fixture-env-1",
+        "dataset_ref": "fixture-data-1",
+        "workload_ref": "deep-100",
+        "semantic_revision": "1",
+        "direction": "lower",
+        "correctness": "passed",
+        "n": 5,
+        "value": 12
+      },
+      "candidate": {
+        "metric": "query_duration",
+        "unit": "ms",
+        "method": "same deterministic fixture",
+        "environment_ref": "fixture-env-1",
+        "dataset_ref": "fixture-data-1",
+        "workload_ref": "deep-100",
+        "semantic_revision": "1",
+        "direction": "lower",
+        "correctness": "passed",
+        "n": 5,
+        "value": 8
+      },
+      "expected": "improved"
+    },
+    {
+      "label": "measurement absent",
+      "measurement": null,
+      "expected": "not_measured"
+    },
+    {
+      "label": "old implementation receipt",
+      "implementation_at_test": "fixture-code-A",
+      "current_implementation": "fixture-code-B",
+      "expected_freshness": "stale"
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "status": "PASS",
+  "fixture": false,
+  "transport": "Actual Chromium → HTTP → installed schema3 Store → current real Codex observations",
+  "checks": [
+    "All actual N08 start requirements have concrete matching receipts",
+    "Read key removed while project deep link retained",
+    "Actual root and observed nested identities rendered",
+    "Actual nested parent relationships retained",
+    "Original actual IPC message bodies reach browser exactly",
+    "None filters actual Codex reader to empty",
+    "All restores actual Codex reader",
+    "Current accepted 32-node plan rendered",
+    "One actual status event refreshes Plan",
+    "Same event refreshes Map without second write",
+    "Actual authored human intent displayed",
+    "Original technical assignment remains available",
+    "Four real curated mechanisms displayed",
+    "Actual theme terracotta",
+    "Actual theme obsidian",
+    "No browser application errors"
+  ],
+  "check_count": 16,
+  "browser": "143.0.7499.4",
+  "native_text_matches": 3,
+  "actors_rendered": 16,
+  "plan_version": "v-bdcf9899dc6647c7",
+  "source_control_commands": 0,
+  "private_text_exported": false,
+  "limitations": [
+    "Bounded installed acceptance, not a guarantee of all future provider formats or end-to-end token latency.",
+    "Third theme remains awaiting a confirmed distinct reference."
+  ]
+}

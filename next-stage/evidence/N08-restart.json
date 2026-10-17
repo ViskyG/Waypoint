@@ -1,0 +1,27 @@
+{
+  "status": "PASS",
+  "fixture": false,
+  "actual_service_restarted": true,
+  "same_database": true,
+  "plan_version": "v-bdcf9899dc6647c7",
+  "before": {
+    "head": "v-bdcf9899dc6647c7",
+    "events": 10350,
+    "max_seq": 10350,
+    "algorithm_evidence": 6,
+    "dependency_evidence": 17
+  },
+  "cursor_after": 10360,
+  "algorithms_current_tested_installed": 4,
+  "requirements_satisfied_after_restart": true,
+  "ledger_integrity": "ok",
+  "codex_restarted": false,
+  "capabilities": [
+    "observability_profile_1",
+    "effective_dependencies_1",
+    "typed_items_1",
+    "project_summary_1",
+    "algorithm_evidence_1"
+  ],
+  "private_content_exported": false
+}

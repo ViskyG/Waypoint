@@ -1,0 +1,33 @@
+{
+  "status": "PASS",
+  "fixture": "SYNTHETIC isolated projects and observations",
+  "transport": "Actual Chromium → localhost HTTP → schema3 Store → durable event polling",
+  "live_codex_tested": false,
+  "production_data_modified": false,
+  "checks": [
+    "Catalogue API is metadata only with distinct active leaf count",
+    "Actual HTTP app opens catalogue and retains two known themes with missing third",
+    "Waiting parent retains independent child activity in actual Store projection",
+    "Nested native agents render with their parent",
+    "Human Task opens first on real state projection",
+    "Executor assignment remains in separate subtab",
+    "One durable event updates both Plan and Map without duplicate agent write",
+    "Empty typed category selection returns no records through HTTP",
+    "Explicit errors facet preserves only machine failed item",
+    "Inspector filtering does not rewrite independent map card reader",
+    "New HTTP event preserves old reader position and selected text",
+    "Algorithm project view exposes saved correctness and safe injected title",
+    "Right inspector opens algorithm detail via actual API",
+    "Node inspector shows associated algorithm cards",
+    "Project switch with identical block IDs keeps proper intent and status",
+    "Actual HTTP theme terracotta keeps readable view",
+    "Actual HTTP theme obsidian keeps readable view",
+    "No browser application errors"
+  ],
+  "check_count": 18,
+  "browser": "143.0.7499.4",
+  "limitations": [
+    "Current production Codex connection is verified by the main N08 integration owner.",
+    "Late cross-project request variants reuse the already passed bounded synthetic race evidence."
+  ]
+}

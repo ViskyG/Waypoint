@@ -1,0 +1,44 @@
+{
+  "status": "PASS",
+  "fixture": false,
+  "source": "SQLite backup of actual accepted local history",
+  "schema_before": "3",
+  "schema_after": "3",
+  "immutable_records": {
+    "events": {
+      "rows": 10295,
+      "sha256": "aa53f7dfeb9a052604f8fb231efab44609e0cb60e060552155af45ac14deef16"
+    },
+    "plans": {
+      "rows": 5,
+      "sha256": "ccad98b4ef24e866436fcb839c8019295cdd89de25b163657db485d0a6f19aa0"
+    },
+    "requests": {
+      "rows": 5,
+      "sha256": "c3105e75e65b40837c179ce5214cf6b01e9a3df142b118601a8eb6d85fcbba5c"
+    },
+    "cursors": {
+      "rows": 17,
+      "sha256": "dc119cfafb378e6ca734f7c79757bb95b5ea3e6d482672d804bb5d1fad1f9d98"
+    },
+    "event_plan": {
+      "rows": 10295,
+      "sha256": "b5f4c1b9bd3bc0534bf232a25ba2c421475958183cfb534addfb7acde9822466"
+    }
+  },
+  "legacy_unknown_arrivals": 6937,
+  "checks": [
+    "online SQLite backup",
+    "integrity_check",
+    "ledger/plans/requests/source cursors/capture versions byte-preserved",
+    "reopen identical",
+    "disposable projection replay identical"
+  ],
+  "recovery": {
+    "replayed": 10295,
+    "external_sources_read": false
+  },
+  "projects": 1,
+  "external_sources_read": false,
+  "private_content_exported": false
+}

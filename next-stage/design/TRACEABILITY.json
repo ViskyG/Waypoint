@@ -1,0 +1,33 @@
+{
+  "reader_task": [
+    "WPT-N01",
+    "WPT-N03"
+  ],
+  "message_filters": [
+    "WPT-N04"
+  ],
+  "project_catalogue": [
+    "WPT-N03"
+  ],
+  "blocker_semantics": [
+    "WPT-N02"
+  ],
+  "live_plan": [
+    "WPT-N03"
+  ],
+  "algorithm_inventory": [
+    "WPT-N05"
+  ],
+  "three_selected_themes": [
+    "WPT-N06",
+    "WPT-N09"
+  ],
+  "skills_alignment": [
+    "WPT-N07"
+  ],
+  "migration_and_acceptance": [
+    "WPT-N00",
+    "WPT-N01",
+    "WPT-N08"
+  ]
+}

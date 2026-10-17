@@ -11,6 +11,7 @@ from pathlib import Path
 from typing import Any
 
 from .domain import ContractError, canonical, descendants, digest, ident, now, plan_diff, three_way, validate_event, validate_plan
+from .item_types import classify, categories as parse_categories, query_hash, encode_cursor, decode_cursor
 
 DDL = """
 CREATE TABLE IF NOT EXISTS meta(key TEXT PRIMARY KEY,value TEXT NOT NULL);
@@ -44,12 +45,63 @@ class Store:
         self.db.execute("PRAGMA busy_timeout=2000")
         self.db.executescript(DDL)
         self.db.execute("INSERT OR IGNORE INTO meta VALUES('schema','1')")
+        self._facets_ready = False
         schema = self.db.execute("SELECT value FROM meta WHERE key='schema'").fetchone()[0]
-        if schema not in {"1", "2"}:
+        if schema not in {"1", "2", "3"}:
             raise ContractError("db_version", "Database schema is newer/incompatible; do not overwrite")
         if schema == "1":
             self._migrate_targets()
+        if schema in {"1", "2"}:
+            self._migrate_observability()
+        self._facets_ready = True
         os.chmod(self.path, 0o600)
+
+    def _migrate_observability(self):
+        """Schema 2 -> 3: additive projections; original ledger bytes/IDs retained."""
+        self.db.execute('BEGIN IMMEDIATE')
+        try:
+            if self.db.execute("SELECT value FROM meta WHERE key='schema'").fetchone()[0] == '3':
+                self.db.execute('COMMIT'); return
+            if 'observed_at' not in [r[1] for r in self.db.execute('PRAGMA table_info(events)')]:
+                self.db.execute('ALTER TABLE events ADD COLUMN observed_at TEXT')
+            statements = [
+                'CREATE TABLE IF NOT EXISTS item_facets(project TEXT NOT NULL,agent TEXT NOT NULL,item TEXT NOT NULL,category TEXT NOT NULL,is_error INTEGER NOT NULL,first_seq INTEGER NOT NULL,PRIMARY KEY(project,agent,item))',
+                'CREATE INDEX IF NOT EXISTS facet_category ON item_facets(project,category,is_error,first_seq DESC,agent DESC,item DESC)',
+                'CREATE INDEX IF NOT EXISTS facet_errors ON item_facets(project,is_error,first_seq DESC,agent DESC,item DESC)',
+                'CREATE INDEX IF NOT EXISTS item_total_order ON items(project,first_seq DESC,agent DESC,id DESC)',
+                'CREATE TABLE IF NOT EXISTS dependency_evidence(project TEXT NOT NULL,event_id TEXT PRIMARY KEY,edge TEXT NOT NULL,consumer TEXT NOT NULL,seq INTEGER NOT NULL,body TEXT NOT NULL)',
+                'CREATE INDEX IF NOT EXISTS dependency_lookup ON dependency_evidence(project,consumer,edge,seq)',
+                'CREATE TABLE IF NOT EXISTS algorithm_evidence(project TEXT NOT NULL,event_id TEXT PRIMARY KEY,algorithm TEXT NOT NULL,seq INTEGER NOT NULL,body TEXT NOT NULL)',
+                'CREATE INDEX IF NOT EXISTS algorithm_lookup ON algorithm_evidence(project,algorithm,seq)',
+                'CREATE TABLE IF NOT EXISTS dependency_starts(project TEXT NOT NULL,seq INTEGER NOT NULL,node TEXT NOT NULL,body TEXT NOT NULL,PRIMARY KEY(project,seq,node))',
+                'CREATE TABLE IF NOT EXISTS project_info(project TEXT PRIMARY KEY,title TEXT NOT NULL,purpose TEXT,version TEXT NOT NULL)',
+                'CREATE TABLE IF NOT EXISTS plan_members(project TEXT NOT NULL,version TEXT NOT NULL,kind TEXT NOT NULL,id TEXT NOT NULL,PRIMARY KEY(project,version,kind,id))',
+            ]
+            for statement in statements:self.db.execute(statement)
+            self.db.execute('DELETE FROM item_facets')
+            for row in self.db.execute('SELECT project,body FROM items').fetchall():self._index_facet(row['project'],json.loads(row['body']))
+            for row in self.db.execute("SELECT seq,body FROM events WHERE kind IN ('dependency.observation','algorithm.observation') ORDER BY seq").fetchall():self._project(json.loads(row['body']),row['seq'])
+            for row in self.db.execute('SELECT project,version,body FROM plans').fetchall():self._plan_members(row['project'],row['version'],json.loads(row['body']))
+            for row in self.db.execute('SELECT h.project,h.version,p.body FROM heads h JOIN plans p ON p.version=h.version').fetchall():self._project_info(row['project'],row['version'],json.loads(row['body']))
+            # Historical absence remains historical; legacy arrivals stay NULL.
+            for row in self.db.execute("SELECT seq,body FROM events WHERE kind='scope.set' ORDER BY seq").fetchall():
+                event=json.loads(row['body'])
+                self._capture_dependency_start(event,row['seq'],event.get('node_ids',[]))
+            self.db.execute("UPDATE meta SET value='3' WHERE key='schema'")
+            self.db.execute('COMMIT')
+        except BaseException:
+            self.db.execute('ROLLBACK');raise
+
+    def _index_facet(self, project, item):
+        facet=classify(item)
+        self.db.execute('INSERT INTO item_facets VALUES(?,?,?,?,?,?) ON CONFLICT(project,agent,item) DO UPDATE SET category=excluded.category,is_error=excluded.is_error,first_seq=excluded.first_seq', (project,item['agent_id'],item['id'],facet['category'],int(facet['is_error']),item['first_seq']))
+
+    def _plan_members(self, project, version, plan):
+        self.db.executemany('INSERT OR IGNORE INTO plan_members VALUES(?,?,?,?)',[(project,version,kind,ident) for kind,key in [('node','nodes'),('edge','edges')] for ident in plan.get(key,{})])
+
+    def _project_info(self, project, version, plan):
+        self._plan_members(project,version,plan)
+        self.db.execute('INSERT INTO project_info VALUES(?,?,?,?) ON CONFLICT(project) DO UPDATE SET title=excluded.title,purpose=excluded.purpose,version=excluded.version',(project,plan['title'],plan.get('x_observability',{}).get('purpose'),version))
 
     def _migrate_targets(self):
         """Schema 1 -> 2, including existing associations, in one transaction."""
@@ -76,6 +128,7 @@ class Store:
             for kind, field in (("node", "node_ids"), ("edge", "edge_ids"))
             for target in dict.fromkeys(item.get(field, []))
         ])
+        if self._facets_ready:self._index_facet(project,item)
 
     def close(self):
         with self.lock:
@@ -144,6 +197,7 @@ class Store:
                     ordinal = current["ordinal"] + 1 if current else 1
                     self.db.execute("INSERT INTO plans VALUES(?,?,?,?,?,?,?)", (version, project, ordinal, head, digest(candidate), now(), canonical(candidate)))
                     self.db.execute("INSERT INTO heads VALUES(?,?) ON CONFLICT(project) DO UPDATE SET version=excluded.version", (project, version))
+                    self._project_info(project,version,candidate)
                     event = {"schema": "waypoint.event/1", "event_id": "plan:" + request_id, "project_id": project, "source": "waypoint", "kind": "plan.changed", "at": now(), "payload": {"version": version, "parent": head}, "node_ids": [], "edge_ids": []}
                     self._append(event)
                     reply = {"version": version, "ordinal": ordinal, "changed": True, "warnings": warnings}
@@ -163,7 +217,7 @@ class Store:
             if old["hash"] != fingerprint:
                 raise ContractError("idempotency_conflict", "event_id was reused with different content")
             return old["seq"], False
-        cur = self.db.execute("INSERT INTO events(event_id,hash,project,source,kind,agent,at,body) VALUES(?,?,?,?,?,?,?,?)", (event["event_id"], fingerprint, event["project_id"], event["source"], event["kind"], event.get("agent_id"), event["at"], canonical(event)))
+        cur = self.db.execute("INSERT INTO events(event_id,hash,project,source,kind,agent,at,body,observed_at) VALUES(?,?,?,?,?,?,?,?,?)", (event["event_id"], fingerprint, event["project_id"], event["source"], event["kind"], event.get("agent_id"), event["at"], canonical(event),now()))
         seq = cur.lastrowid
         self.db.execute("INSERT INTO event_plan VALUES(?,?)", (seq, self.head(event["project_id"])))
         self._project(event, seq)
@@ -197,6 +251,14 @@ class Store:
     def _project(self, event: dict, seq: int):
         project, agent, kind, payload = event["project_id"], event.get("agent_id"), event["kind"], event["payload"]
         nodes, edges = event["node_ids"], event["edge_ids"]
+        if kind in {'dependency.observation','algorithm.observation'}:
+            table='dependency_evidence' if kind=='dependency.observation' else 'algorithm_evidence'
+            record={**event,'seq':seq}
+            if table=='dependency_evidence':
+                if not all(isinstance(payload.get(k),str) for k in ('edge_id','consumer_id','requirement_fingerprint','workspace_ref')):return
+                self.db.execute('INSERT OR REPLACE INTO dependency_evidence VALUES(?,?,?,?,?,?)',(project,event['event_id'],payload['edge_id'],payload['consumer_id'],seq,canonical(record)))
+            elif isinstance(payload.get('algorithm_id'),str):self.db.execute('INSERT OR REPLACE INTO algorithm_evidence VALUES(?,?,?,?,?)',(project,event['event_id'],payload['algorithm_id'],seq,canonical(record)))
+            return
         capture = self.db.execute("SELECT version FROM event_plan WHERE seq=?", (seq,)).fetchone()
         plan_version = capture[0] if capture else None
         if kind in {"agent.upsert", "agent.activity"}:
@@ -213,6 +275,9 @@ class Store:
                 record.update(activity=payload.get("state", "unknown"), activity_at=event["at"], activity_source=event["source"], activity_historical=bool(payload.get("historical")), activity_reported_by=payload.get("reported_by"))
             record["last_seq"] = seq
             self._put("agents", ("project", "id"), (project, agent), record)
+            if kind == 'agent.activity' and payload.get('state') in {'running','active'} and not payload.get('historical'):
+                scope=self._get('scopes',('project','agent'),(project,agent))
+                if scope:self._capture_dependency_start(event,seq,scope.get('node_ids',[]))
         elif kind == "scope.set":
             previous = self._get("scopes", ("project", "agent"), (project, agent))
             if previous and event["at"] < previous["at"]:
@@ -221,6 +286,7 @@ class Store:
             # consult today's source cursor when replaying an earlier focus.
             record = {"agent_id": agent, "node_ids": nodes, "edge_ids": edges, "seq": seq, "at": event["at"], "plan_version": plan_version, "source_boundary": payload.get("source_boundary")}
             self._put("scopes", ("project", "agent"), (project, agent), record)
+            self._capture_dependency_start(event,seq,nodes)
         elif kind == "item.upsert":
             item_id = payload["item_id"]
             row = self.db.execute("SELECT * FROM items WHERE project=? AND agent=? AND id=?", (project, agent, item_id)).fetchone()
@@ -280,6 +346,7 @@ class Store:
             if not current:
                 corrected.update(node_ids=[], edge_ids=[], attribution="unassigned")
             self.db.execute("DELETE FROM item_targets WHERE project=? AND agent=? AND item=?", (project, previous, item_id))
+            self.db.execute('DELETE FROM item_facets WHERE project=? AND agent=? AND item=?',(project,previous,item_id))
             self.db.execute("DELETE FROM items WHERE project=? AND agent=? AND id=?", (project, previous, item_id))
             self.db.execute("INSERT INTO items VALUES(?,?,?,?,?,?) ON CONFLICT(project,agent,id) DO UPDATE SET first_seq=excluded.first_seq,last_seq=excluded.last_seq,body=excluded.body", (project, agent, item_id, corrected["first_seq"], seq, canonical(corrected)))
             self._index_item(project, corrected)
@@ -314,56 +381,56 @@ class Store:
         limit = min(max(limit, 1), 500)
         with self.changed:
             def read():
-                return self.db.execute("SELECT seq,body FROM events WHERE project=? AND seq>? ORDER BY seq LIMIT ?", (project, after, limit)).fetchall()
+                return self.db.execute("SELECT seq,body,observed_at FROM events WHERE project=? AND seq>? ORDER BY seq LIMIT ?", (project, after, limit)).fetchall()
             rows = read()
             if not rows and wait > 0:
                 self.changed.wait(min(wait, 15))
                 rows = read()
-            return {"events": [{"seq": row["seq"], **json.loads(row["body"])} for row in rows], "cursor": rows[-1]["seq"] if rows else after}
+            return {"events": [{"seq": row["seq"], "observed_at":row["observed_at"], **json.loads(row["body"])} for row in rows], "cursor": rows[-1]["seq"] if rows else after}
 
-    def items(self, project: str, node: str | None = None, edge: str | None = None, agent: str | None = None, deep: bool = True, before: int | None = None, limit: int = 100, version: str | None = None) -> dict:
+    def items(self, project: str, node: str | None = None, edge: str | None = None, agent: str | None = None, deep: bool = True, before: int | None = None, limit: int = 100, version: str | None = None, categories=None, only_errors: bool = False, page_cursor: str | None = None, outside: bool = False) -> dict:
         with self.lock:
-            scope = descendants(self.plan(project, version)["plan"], node) if node and deep else {node} if node else None
-            page_size = min(max(limit, 1), 500)
-            # Read target associations before fetching any message body. Each
-            # bounded chunk returns only its newest page; union preserves global
-            # receipt order without JSON extensions or parameter-limit assumptions.
-            targets = sorted(scope) if scope is not None else None
-            chunks = [targets[i:i + 350] for i in range(0, len(targets), 350)] if targets is not None else [None]
-            candidates = {}
-            for chunk in chunks:
-                values = [project]
-                if chunk is not None or edge:
-                    clause = "t.project=?"
+            document=self.plan(project,version); graph=document['plan']; resolved=document['version']
+            selected=parse_categories(categories)
+            qhash=query_hash(project,node,edge,agent,deep,selected,bool(only_errors),resolved,outside)
+            if before is not None and page_cursor is not None:
+                raise ContractError('cursor_scope_mismatch','Use either before or page_cursor, never both')
+            boundary=decode_cursor(page_cursor,resolved,qhash) if page_cursor is not None else None
+            page_size=min(max(limit,1),500)
+            scope=sorted(descendants(graph,node) if node and deep else {node}) if node else None
+            chunks=[scope[i:i+350] for i in range(0,len(scope),350)] if scope is not None else [None]
+            candidates={}
+            if selected != []:
+                for chunk in chunks:
+                    # Facets and target associations are resolved before body retrieval.
+                    filtered=selected is not None or only_errors
+                    table='item_facets f' if filtered else 'items f'
+                    ident_col='f.item' if filtered else 'f.id'
+                    values=[project]; clause='f.project=?'
+                    if selected is not None:
+                        clause+=' AND f.category IN ('+','.join('?' for _ in selected)+')';values.extend(selected)
+                    if only_errors:clause+=' AND f.is_error=1'
+                    if agent:clause+=' AND f.agent=?';values.append(agent)
                     if chunk is not None:
-                        clause += " AND t.target_kind='node' AND t.target_id IN (" + ",".join("?" for _ in chunk) + ")"
-                        values.extend(chunk)
-                    else:
-                        clause += " AND t.target_kind='edge' AND t.target_id=?"
-                        values.append(edge)
-                    if edge and chunk is not None:
-                        clause += " AND EXISTS(SELECT 1 FROM item_targets e WHERE e.project=t.project AND e.agent=t.agent AND e.item=t.item AND e.target_kind='edge' AND e.target_id=?)"
-                        values.append(edge)
-                    if agent:
-                        clause += " AND t.agent=?"; values.append(agent)
-                    if before is not None:
-                        clause += " AND t.first_seq<?"; values.append(before)
-                    query = "SELECT DISTINCT t.agent,t.item AS id,t.first_seq FROM item_targets t WHERE " + clause
-                else:
-                    clause = "project=?"
-                    if agent:
-                        clause += " AND agent=?"; values.append(agent)
-                    if before is not None:
-                        clause += " AND first_seq<?"; values.append(before)
-                    query = "SELECT agent,id,first_seq FROM items WHERE " + clause
-                for row in self.db.execute(query + " ORDER BY first_seq DESC LIMIT ?", (*values, page_size + 1)):
-                    candidates[(row["agent"], row["id"])] = dict(row)
-            ordered = sorted(candidates.values(), key=lambda r: r["first_seq"], reverse=True)
-            more = len(ordered) > page_size
-            selected = ordered[:page_size]
-            found = [self._get("items", ("project", "agent", "id"), (project, row["agent"], row["id"])) for row in selected]
-            cursor = self.db.execute("SELECT COALESCE(MAX(seq),0) FROM events WHERE project=?", (project,)).fetchone()[0]
-            return {"items": list(reversed(found)), "before": found[-1]["first_seq"] if found and more else None, "has_more": more, "cursor": cursor}
+                        clause+=' AND EXISTS(SELECT 1 FROM item_targets t WHERE t.project=f.project AND t.agent=f.agent AND t.item='+ident_col+" AND t.target_kind='node' AND t.target_id IN ("+','.join('?' for _ in chunk)+'))';values.extend(chunk)
+                    if edge:
+                        clause+=' AND EXISTS(SELECT 1 FROM item_targets t WHERE t.project=f.project AND t.agent=f.agent AND t.item='+ident_col+" AND t.target_kind='edge' AND t.target_id=?)";values.append(edge)
+                    if outside:
+                        match='t.project=f.project AND t.agent=f.agent AND t.item='+ident_col
+                        clause+=' AND (NOT EXISTS(SELECT 1 FROM item_targets t WHERE '+match+') OR EXISTS(SELECT 1 FROM item_targets t LEFT JOIN plan_members m ON m.project=t.project AND m.version=? AND m.kind=t.target_kind AND m.id=t.target_id WHERE '+match+' AND m.id IS NULL))';values.append(resolved)
+                    if before is not None:clause+=' AND f.first_seq<?';values.append(before)
+                    if boundary is not None:clause+=' AND (f.first_seq,f.agent,'+ident_col+')<(?,?,?)';values.extend(boundary)
+                    sql='SELECT f.agent,'+ident_col+' AS id,f.first_seq FROM '+table+' WHERE '+clause+' ORDER BY f.first_seq DESC,f.agent DESC,'+ident_col+' DESC LIMIT ?'
+                    for row in self.db.execute(sql,(*values,page_size+1)):candidates[(row['agent'],row['id'])]=dict(row)
+            ordered=sorted(candidates.values(),key=lambda r:(r['first_seq'],r['agent'],r['id']),reverse=True)
+            more=len(ordered)>page_size;rows=ordered[:page_size]
+            found=[]
+            for row in rows:
+                item=self._get('items',('project','agent','id'),(project,row['agent'],row['id']))
+                found.append({**item,**classify(item)})
+            token=encode_cursor((rows[-1]['first_seq'],rows[-1]['agent'],rows[-1]['id']),resolved,qhash) if rows and more else None
+            seq=self.db.execute('SELECT COALESCE(MAX(seq),0) FROM events WHERE project=?',(project,)).fetchone()[0]
+            return {'items':list(reversed(found)),'before':rows[-1]['first_seq'] if rows and more else None,'has_more':more,'cursor':seq,'page_cursor':token,'next_cursor':token,'query_hash':qhash,'resolved_version':resolved}
 
     def projects(self) -> list[dict]:
         with self.lock:
@@ -392,7 +459,31 @@ class Store:
                     if historical:
                         ghosts[ref] = {**historical, "retired": ref not in self.plan(project)["plan"]["nodes"], "absent_from_view": True, "from_version": old["version"]}; break
             seq = self.db.execute("SELECT COALESCE(MAX(seq),0) FROM events WHERE project=?", (project,)).fetchone()[0]
-            return {**plan, "current_version": self.head(project), "agents": agents, "scopes": scopes, "node_states": statuses, "checks": list(latest.values()), "items": recent, "ghosts": ghosts, "sources": all_rows("source_health"), "cursor": seq, "warnings": validate_plan(plan["plan"])[1]}
+            result = {**plan, "current_version": self.head(project), "agents": agents, "scopes": scopes, "node_states": statuses, "checks": list(latest.values()), "items": recent, "ghosts": ghosts, "sources": all_rows("source_health"), "cursor": seq, "warnings": validate_plan(plan["plan"])[1]}
+            from .read_models import augment_state
+            return augment_state(self,result)
+
+    def observations(self, project, kind, before=None, limit=None):
+        table={'dependency':'dependency_evidence','algorithm':'algorithm_evidence'}[kind]
+        clause='project=?';values=[project]
+        if before is not None:clause+=' AND seq<=?';values.append(before)
+        sql='SELECT body FROM '+table+' WHERE '+clause+' ORDER BY seq'
+        if limit is not None:sql+=' LIMIT ?';values.append(limit)
+        return [json.loads(r[0]) for r in self.db.execute(sql,values)]
+
+    def _capture_dependency_start(self,event,seq,nodes):
+        from .read_models import prerequisite_view
+        project=event['project_id'];capture=self.db.execute('SELECT version FROM event_plan WHERE seq=?',(seq,)).fetchone()
+        if not capture or not capture[0]:return
+        document=self.plan(project,capture[0])
+        for node in nodes:
+            if node not in document['plan']['nodes']:continue
+            required=prerequisite_view(self,document,node,'start',before=seq)
+            unresolved=[r for r in required if r.get('classification')=='requires' and r['availability'] not in {'satisfied','waived'}]
+            if unresolved:
+                arrival=self.db.execute('SELECT observed_at FROM events WHERE seq=?',(seq,)).fetchone()[0]
+                body={'code':'started_without_confirmed_prerequisite','node_id':node,'agent_id':event.get('agent_id'),'occurred_at':event['at'],'observed_at':arrival,'seq':seq,'basis':{'plan_version':document['version'],'cursor':seq},'requirements':unresolved,'explanation':'Activity observed before availability was confirmed; no agent command was blocked.'}
+                self.db.execute('INSERT OR REPLACE INTO dependency_starts VALUES(?,?,?,?)',(project,seq,node,canonical(body)))
 
     def diff(self, project: str, before: str, after: str) -> list[dict]:
         return plan_diff(self.plan(project, before)["plan"], self.plan(project, after)["plan"])
@@ -415,7 +506,7 @@ class Store:
         with self.changed:
             self.db.execute("BEGIN IMMEDIATE")
             try:
-                for table in ("agents", "scopes", "items", "item_targets", "node_states", "checks", "source_health"):
+                for table in ("agents", "scopes", "items", "item_targets", "item_facets", "dependency_evidence", "algorithm_evidence", "dependency_starts", "node_states", "checks", "source_health"):
                     self.db.execute(f"DELETE FROM {table}")
                 count = 0
                 for row in self.db.execute("SELECT seq,body FROM events ORDER BY seq").fetchall():

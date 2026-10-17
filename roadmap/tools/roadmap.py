@@ -16,6 +16,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE = ROOT.parent / 'waypoint'
+sys.path.insert(0, str(BASE))
+from waypoint.dependencies import effective_requirements, evaluate_availability
 
 
 def unique_object(pairs):
@@ -72,7 +74,7 @@ def complete_set(plan, completed):
     return done
 
 
-def frontier(plan, completed=(), stages=False):
+def frontier(plan, completed=(), stages=False, *, observations=(), workspace_ref=None):
     done = complete_set(plan, completed)
     kind = 'stage' if stages else 'packet'
     ready, waiting = [], []
@@ -81,12 +83,29 @@ def frontier(plan, completed=(), stages=False):
             continue
         if stages and any(p in done for p in parents(plan, key)[1:] if plan['nodes'][p].get('x_roadmap', {}).get('kind') == 'packet'):
             continue
-        missing = [v for v in predecessors(plan, key, inherit=stages) if v not in done]
+        requirements = []
+        if 'x_observability' in plan:
+            explicit_workspace = workspace_ref
+            if explicit_workspace is None:
+                profile = plan.get('x_observability', {})
+                explicit_workspace = {'consumer': node.get('x_observability', {}).get('workspace_ref', profile.get('workspace_ref')),
+                                      'project': profile.get('project_workspace_ref')}
+            requirements = [{**r, **evaluate_availability(r, observations, explicit_workspace)}
+                            for r in effective_requirements(plan, key, 'start')]
+            # A completion receipt proves a packet was declared complete, not that
+            # a named result exists in this consumer's applicable workspace.
+            missing = sorted({r['producer_id'] for r in requirements if r['state'] not in {'satisfied', 'waived'}})
+        else:
+            # Keep pre-profile authored frontier behaviour for historical maps.
+            missing = [v for v in predecessors(plan, key, inherit=stages) if v not in done]
         if missing:
-            waiting.append({'id': key, 'requires': missing})
+            row = {'id': key, 'requires': missing}
+            if requirements:
+                row['prerequisites'] = requirements
+            waiting.append(row)
         else:
             ready.append(key)
-    return {'meaning': 'planning frontier from supplied source + explicit completion receipts; not live status or assignment',
+    return {'meaning': 'planning frontier; profile prerequisites use matching evidence, never status/completion alone',
             'completed_receipts': sorted(set(completed)), 'ready': ready, 'waiting': waiting}
 
 
@@ -100,11 +119,52 @@ def block_text(plan, key, level=2):
     deps = predecessors(plan, key)
     lines = [('#' * level) + ' ' + key + ' — ' + node['title'], '', node['assignment'], '',
              '**Предшественники:** ' + (', '.join(deps) or 'нет дополнительных прямых зависимостей') + '.', '', '**Условия приёмки**', '']
+    if 'x_observability' in plan:
+        extension = node.get('x_observability', {})
+        intent = extension.get('intent')
+        owner_text = ['**Для владельца:**', '']
+        if intent:
+            owner_text += [intent[field] for field in ('summary', 'context', 'change', 'scope') if intent.get(field)]
+        else:
+            owner_text += ['Человеческое описание отсутствует в прежнем блоке; техническое задание сохранено ниже.']
+        owner_text += ['', '**Для исполнителя:**', '']
+        lines[2:2] = owner_text
+        prerequisites = []
+        for phase, label in [('start', 'Предпосылки начала'), ('finish', 'Предпосылки завершения')]:
+            records = effective_requirements(plan, key, phase)
+            prerequisites += ['**' + label + ':**', '']
+            for record in records:
+                inherited = ('; унаследовано через ' + record['declared_target_id']) if record['inherited'] else ''
+                if record['classification'] == 'legacy_unknown':
+                    prerequisites.append('- `' + record['edge_id'] + '` — ' + record['producer_id'] + inherited + '; прежняя связь, условие доступности неизвестно.')
+                else:
+                    prerequisites.append('- `' + record['edge_id'] + '` — ' + record['producer_id'] + ' / ' + record['output_id']
+                        + ' (rev ' + str(record['condition_revision']) + '; workspace=' + record['workspace_policy'] + ')'
+                        + inherited + ': ' + record['why'])
+            if not records:
+                prerequisites.append('Нет дополнительных условий этой фазы.')
+            prerequisites.append('')
+        prerequisites += ['Доступность требует свидетельства для нужного результата и рабочей базы; отметка завершения сама по себе её не подтверждает.', '']
+        if extension.get('outputs'):
+            prerequisites += ['**Объявленные результаты:**', '']
+            prerequisites += ['- `' + output_id + '` (rev ' + str(output['revision']) + '): ' + output['definition']
+                              for output_id, output in extension['outputs'].items()]
+            prerequisites += ['']
+        if extension.get('algorithm_refs'):
+            prerequisites += ['**Алгоритмы:** ' + ', '.join('`' + ref + '`' for ref in extension['algorithm_refs']) + '.', '']
+        lines[lines.index('**Условия приёмки**'):lines.index('**Условия приёмки**')] = prerequisites
     lines += [f'- `{aid}` — {a["text"]}' for aid, a in node['acceptance'].items()]
     if node['tests']:
-        lines += ['', '**Планируемые проверки — исходы ещё не получены**', '']
+        lines += ['', '**Описание проверок — фактические исходы хранятся в журнале**' if 'x_observability' in plan else '**Планируемые проверки — исходы ещё не получены**', '']
         for tid, t in node['tests'].items():
-            lines += [f'- `{tid}` **{t["label"]}.** {t["procedure"]} Уровень: {t["evidence_level"]}. Инвалидируется: {t["invalidated_by"]}']
+            if 'x_observability' in plan:
+                label = t.get('label', t.get('text', tid))
+                detail = t.get('procedure') or t.get('validation_detail') or t.get('text', '')
+                suffix = (' Уровень: ' + str(t['evidence_level']) + '.') if t.get('evidence_level') else ''
+                suffix += (' Инвалидируется: ' + str(t['invalidated_by']) + '.') if t.get('invalidated_by') else ''
+                lines += [f'- `{tid}` **{label}.**' + ((' ' + detail) if detail and detail != label else '') + suffix]
+            else:
+                lines += [f'- `{tid}` **{t["label"]}.** {t["procedure"]} Уровень: {t["evidence_level"]}. Инвалидируется: {t["invalidated_by"]}']
     if x.get('delivered_source'):
         result = x['delivered_source']
         lines += ['', '**Уже поставлено:** ' + ', '.join('`' + p + '`' for p in result['paths']) + '.',
@@ -114,7 +174,11 @@ def block_text(plan, key, level=2):
 
 def packet_text(plan, key):
     out = '# Пакет ' + key + '\n\n' + heading(plan)
-    out += 'Все относительные пути ниже считаются от каталога `roadmap/`, не от `packets/`. '
+    reference_root = plan['nodes'][key].get('x_roadmap', {}).get('reference_root')
+    if reference_root:
+        out += 'Источники этого пакета читаются от `' + reference_root + '` относительно каталога `roadmap/`; пути репозитория — от корня проекта. '
+    else:
+        out += 'Все относительные пути ниже считаются от каталога `roadmap/`, не от `packets/`. '
     out += 'Назначения в этом документе нет; сначала координация с текущим владельцем работ.\n\n'
     out += block_text(plan, key)
     cs = children(plan, key)
@@ -129,6 +193,8 @@ def packet_text(plan, key):
 
 
 def rendered(plan):
+    if 'x_observability' in plan:
+        return profile_rendered(plan)
     h = heading(plan)
     packets = [k for k, n in plan['nodes'].items() if n.get('x_roadmap', {}).get('kind') == 'packet']
     stages = [k for k, n in plan['nodes'].items() if n.get('x_roadmap', {}).get('kind') == 'stage']
@@ -211,6 +277,8 @@ def render(plan, check=False):
 
 
 def validate(plan):
+    if 'x_observability' in plan:
+        return validate_profile_authoring(plan)
     # Pure source/Store checks in disposable paths. Never connect to existing Codex.
     sys.path.insert(0, str(BASE))
     from waypoint.domain import validate_plan, ContractError, digest
@@ -309,6 +377,131 @@ def validate(plan):
             'checks':checks,'check_count':len(checks),
             'environment':{'python':platform.python_version(),'sqlite':__import__('sqlite3').sqlite_version,'fastapi':importlib.metadata.version('fastapi'),'httpx':importlib.metadata.version('httpx'),'jsonschema':importlib.metadata.version('jsonschema')},
             'not_run':['owner-machine integration','live Codex observation','canonical skill publication/installation','Runner application','shared registry/inbox mutation']}
+
+
+def profile_rendered(plan):
+    """Generic merged-profile views. Do not replay a prior phase's narrative."""
+    h = heading(plan)
+    packets = [k for k, n in plan['nodes'].items() if n.get('x_roadmap', {}).get('kind') == 'packet']
+    lines = ['# ' + plan['title'] + ' — дорожная карта', '', h,
+        'Режим: **' + plan.get('x_roadmap', {}).get('resource_policy', 'не указан') + '**. '
+        'Сохранённый граф включает прежние и новые этапы; это описание работ, не текущие статусы или повторное назначение.', '',
+        f'Состав: {len(plan["nodes"])} узлов, {len(plan["edges"])} связей, {len(packets)} пакетов.', '',
+        plan.get('x_observability', {}).get('purpose', 'Назначение проекта не описано.'), '',
+        '| Пакет | Результат для владельца | Родитель | Для начала | Для завершения |',
+        '|---|---|---|---|---|']
+    def requirement_label(node, phase):
+        records = effective_requirements(plan, node, phase)
+        return '; '.join(r['producer_id'] + (' / ' + r['output_id'] if r.get('output_id') else ' (прежняя связь: условие неизвестно)')
+            + (' через ' + r['declared_target_id'] if r['inherited'] else '') for r in records) or 'Нет дополнительных условий'
+    def cell(value):
+        return str(value).replace('|', '\\|').replace('\n', ' ')
+    for key in packets:
+        node = plan['nodes'][key]
+        intent = node.get('x_observability', {}).get('intent')
+        summary = intent.get('summary') if intent else 'Человеческое описание отсутствует: ' + node['title']
+        lines += [f'| [{key}](packets/{key}.md) | {cell(summary)} | {cell(node.get("parent") or "—")} | '
+                  f'{cell(requirement_label(key,"start"))} | {cell(requirement_label(key,"finish"))} |']
+    lines += ['', '## Чтение зависимостей', '',
+        'Прямые и унаследованные предпосылки вычисляет общий резолвер приложения. '
+        'Условие поддерева наследуется по реальному parent; связь с одним узлом не наследуется. '
+        'Порядок order остаётся рекомендацией. Начало и завершение проверяются отдельно.', '',
+        'Доступность требует подходящего свидетельства для результата, revision и рабочей базы. '
+        'Статус done и переданный список завершённых пакетов не доказывают наличие требуемого результата. '
+        'INITIAL_FRONTIER.json рассчитан без текущего журнала и не означает, что прежние пакеты нужно выполнять повторно.', '',
+        '## Источники и история', '',
+        'Источник авторской структуры — ROADMAP.plan.json. Текущая версия и свидетельства находятся в установленном Waypoint. '
+        'Markdown, волны и начальный frontier — производные представления. Отсутствие референса или свидетельства остаётся явно неизвестным.', '',
+        'Для правки работающего проекта сначала экспортировать свежий head, сохранить base_version и импортировать только согласованные изменения '
+        'со стабильным request_id. INITIAL_IMPORT.json предназначен для новой пустой базы; к установленному проекту его не применять.', '']
+    waves = ['# Производные группы пакетов', '', h,
+        'Группировка использует только явно заданные в графе wave. Это не планировщик, очередь, claim или команды Runner. '
+        'Отсутствующей волне не присваивается выдуманный порядок; готовность определяется отдельно по свидетельствам.', '']
+    groups = {}
+    for key in packets:
+        groups.setdefault(plan['nodes'][key].get('x_roadmap', {}).get('wave'), []).append(key)
+    definitions = plan.get('x_roadmap', {}).get('waves', {})
+    for wave, members in groups.items():
+        definition = definitions.get(wave, {})
+        waves += ['## ' + (str(wave) + (' — ' + definition['title'] if definition.get('title') else '') if wave else 'Без заданной волны'), '',
+                  'Состав: ' + ', '.join('`' + key + '`' for key in members) + '.', '']
+        if definition.get('integration_boundary'):
+            waves += ['Граница интеграции: ' + definition['integration_boundary'], '']
+        for key in members:
+            waves += ['- `' + key + '` — начало: ' + requirement_label(key, 'start') + '; завершение: ' + requirement_label(key, 'finish') + '.']
+        waves += ['']
+    result = {'ROADMAP.md': '\n'.join(lines), 'RUNNER_WAVES.md': '\n'.join(waves),
+        'INITIAL_FRONTIER.json': encoded({**frontier(plan), 'evidence_scope': 'offline_without_current_ledger',
+            'warning': 'Not an instruction to repeat prior work; use current runtime evidence.'}),
+        'INITIAL_IMPORT.json': encoded({'warning': 'FOR A NEW EMPTY STORE ONLY. Do not apply to an installed project; export its current head first.',
+            'initialization_only': True, 'request_id': 'roadmap-empty-store-' + fingerprint(plan)[:24],
+            'base_version': None, 'merge': False, 'plan': plan})}
+    for key in packets:
+        result['packets/' + key + '.md'] = packet_text(plan, key)
+    return result
+
+
+def validate_profile_authoring(plan):
+    """Bounded validation of authored state, reusing existing runtime regression evidence."""
+    from waypoint.domain import validate_plan
+    from waypoint.store import Store
+    import jsonschema
+    checks = []
+    def check(name, condition):
+        if not condition:
+            raise AssertionError(name)
+        checks.append(name)
+    normalized, warnings = validate_plan(plan)
+    check('native_domain_keeps_entire_plan_and_extensions', normalized == plan)
+    schema = json.loads((BASE / 'schemas/plan.schema.json').read_text())
+    jsonschema.Draft202012Validator(schema).validate(plan)
+    check('native_json_schema_accepts_merged_profile', True)
+    workspace = ROOT.parent.resolve()
+    roots = plan.get('x_roadmap', {}).get('reference_roots', {})
+    for name, value in roots.items():
+        path = (ROOT / value).resolve()
+        check('reference_root_' + name, path.is_relative_to(workspace) and path.is_dir())
+    for key, node in plan['nodes'].items():
+        metadata = node.get('x_roadmap', {})
+        check('assignment_preserved_' + key, isinstance(node.get('assignment'), str))
+        read_set = [reference.get('uri') if isinstance(reference, dict) else reference
+                    for reference in metadata.get('read_set', [])]
+        check('authored_read_set_in_assignment_' + key, all(uri in node['assignment'] for uri in read_set))
+        base = (ROOT / metadata.get('reference_root', '.')).resolve()
+        check('node_reference_root_' + key, base.is_relative_to(workspace) and base.is_dir())
+        for reference in node.get('source_refs', []):
+            uri = reference['uri']
+            if '://' in uri:
+                check('remote_reference_scheme_' + key + '_' + uri, uri.startswith(('https://', 'http://')))
+                continue  # Pinned remote source citation; no network or duplicate reinspection.
+            path = (base / uri.split('#', 1)[0]).resolve()
+            check('source_exists_' + key + '_' + uri, path.is_relative_to(workspace) and path.exists())
+        if metadata.get('kind') in {'packet', 'stage'}:
+            check('planned_acceptance_and_tests_' + key,
+                bool(node.get('acceptance')) and bool(node.get('tests')) and
+                all(test.get('procedure') or test.get('validation_detail') or test.get('text') or test.get('label')
+                    for test in node['tests'].values()))
+    # Repeat only the Store compatibility seam for this new baseline. Merge,
+    # recovery, HTTP and real browser behaviour have separate changed-seam tests.
+    with tempfile.TemporaryDirectory(prefix='waypoint-profile-authoring-') as tmp:
+        store = Store(Path(tmp) / 'check.sqlite')
+        try:
+            reply = store.import_plan(plan, None, 'profile-authoring-first')
+            readback = store.plan(plan['project_id'])['plan']
+            check('store_roundtrip_entire_merged_plan', readback == plan)
+            check('stable_node_and_edge_ids', set(readback['nodes']) == set(plan['nodes']) and set(readback['edges']) == set(plan['edges']))
+            check('request_retry_idempotent', store.import_plan(plan, None, 'profile-authoring-first') == reply)
+            state = store.state(plan['project_id'])
+            check('no_synthetic_agents_tests_or_dependency_evidence',
+                not state['agents'] and not state['checks'] and not store.observations(plan['project_id'], 'dependency'))
+        finally:
+            store.close()
+    render(plan, check=True)
+    check('generated_views_match_single_authoring_source', True)
+    return {'status': 'PASS', 'scope': 'merged profile authoring + native schema + disposable Store roundtrip; no live runtime or repeated baseline campaign',
+        'plan_content_sha256': fingerprint(plan), 'node_count': len(plan['nodes']), 'edge_count': len(plan['edges']),
+        'checks': checks, 'check_count': len(checks), 'warnings': warnings,
+        'not_run': ['live Codex connection', 'target browser acceptance', 'global skill publication or installation', 'old completed phase reimplementation']}
 
 
 def main():

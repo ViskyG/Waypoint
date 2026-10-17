@@ -1,0 +1,124 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Waypoint plan 1",
+  "type": "object",
+  "required": [
+    "schema",
+    "project_id",
+    "title",
+    "nodes"
+  ],
+  "properties": {
+    "schema": {
+      "const": "waypoint.plan/1"
+    },
+    "project_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@\\-]{0,199}$"
+    },
+    "title": {
+      "type": "string",
+      "maxLength": 500
+    },
+    "nodes": {
+      "type": "object",
+      "maxProperties": 20000,
+      "propertyNames": {
+        "type": "string",
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@/\\-]{0,199}$"
+      },
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "title"
+        ],
+        "properties": {
+          "title": {
+            "type": "string",
+            "maxLength": 500
+          },
+          "parent": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@/\\-]{0,199}$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "assignment": {
+            "type": "string",
+            "maxLength": 2000000
+          },
+          "acceptance": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object"
+            }
+          },
+          "tests": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object"
+            }
+          },
+          "layout": {
+            "type": "object",
+            "properties": {
+              "x": {
+                "type": "number",
+                "minimum": -1000000,
+                "maximum": 1000000
+              },
+              "y": {
+                "type": "number",
+                "minimum": -1000000,
+                "maximum": 1000000
+              },
+              "lane": {
+                "type": "number",
+                "minimum": -1000000,
+                "maximum": 1000000
+              },
+              "depth": {
+                "type": "number",
+                "minimum": -1000000,
+                "maximum": 1000000
+              }
+            }
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "edges": {
+      "type": "object",
+      "maxProperties": 100000,
+      "propertyNames": {
+        "type": "string",
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@/\\-]{0,199}$"
+      },
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "from",
+          "to"
+        ],
+        "properties": {
+          "from": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@/\\-]{0,199}$"
+          },
+          "to": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@/\\-]{0,199}$"
+          }
+        }
+      }
+    }
+  },
+  "additionalProperties": true,
+  "$comment": "Cross-references, parent-cycle and dependency-cycle diagnostics are implemented by domain.validate_plan; JSON Schema alone cannot establish them."
+}

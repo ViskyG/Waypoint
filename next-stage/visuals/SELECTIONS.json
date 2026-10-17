@@ -1,0 +1,26 @@
+{
+  "required_distinct_themes": 3,
+  "selection_slots": [
+    {
+      "id": "selected-01",
+      "theme_id": "terracotta",
+      "reference": "terracotta.png",
+      "state": "reference_available"
+    },
+    {
+      "id": "selected-02",
+      "theme_id": "obsidian",
+      "reference": "obsidian.png",
+      "state": "reference_available"
+    },
+    {
+      "id": "selected-03",
+      "theme_id": null,
+      "accessible_attachment_sha256": "087db550daab26e5be7404bef2e74b86e1b9aa3cc266cdb022172375bdd773a4",
+      "state": "intended_distinct_reference_missing",
+      "note": "Accessible third attachment duplicates selected-02; do not redefine the owner requirement or invent the missing theme."
+    }
+  ],
+  "affected_packet": "WPT-N09",
+  "other_work_may_continue": true
+}

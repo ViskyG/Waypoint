@@ -148,6 +148,8 @@ def validate_plan(value: Any) -> tuple[dict, list[dict]]:
     if visited != len(nodes):
         warnings.append({"code": "dependency_cycle", "message": "Dependency graph is cyclic; displayed, not enforced", "affected_or_downstream": [key for key, degree in indegree.items() if degree]})
     canonical(plan)  # Reject NaN or non-JSON content even in extensions.
+    from .observability import validate_profile
+    warnings.extend(validate_profile(plan))
     return plan, warnings
 
 
@@ -239,4 +241,9 @@ def validate_event(value: Any, project: str | None = None) -> dict:
             raise ContractError("basis_required", "Current evidence needs an explicit basis")
     if len(canonical(event).encode()) > 3_000_000:
         raise ContractError("event_too_large", "Normalized event exceeds 3 MB")
+    from .observability import validate_observation
+    validate_observation(event)
+    if event['kind'] == 'algorithm.observation':
+        from .algorithm_evidence import validate_algorithm_observation
+        validate_algorithm_observation(event)
     return event

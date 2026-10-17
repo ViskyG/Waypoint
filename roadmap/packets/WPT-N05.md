@@ -1,0 +1,75 @@
+# Пакет WPT-N05
+
+> Сгенерировано из `ROADMAP.plan.json`, SHA-256 содержимого `e5d0d46fac7e8da66d8531ccc42ff3ce0359457f5e7d398229dae3a30b9ace21`.
+> Это представление плана, не самостоятельный источник статусов. Менять JSON и затем выполнять `python tools/roadmap.py render`.
+
+Источники этого пакета читаются от `../next-stage` относительно каталога `roadmap/`; пути репозитория — от корня проекта. Назначения в этом документе нет; сначала координация с текущим владельцем работ.
+
+## WPT-N05 — Сделать алгоритмы видимыми и проверяемыми
+
+**Для владельца:**
+
+Показать важную собственную логику проекта вместе с её кодом, проверками и измерениями оптимизации.
+Выбор технологии не объясняет, как выполняется сложное преобразование и на чём основано заявление об ускорении.
+По отметке блока откроется список его алгоритмов; в проекте — общий реестр с версиями, проверяемостью и честной историей улучшений.
+
+**Для исполнителя:**
+
+1. Validate one project-level definition per meaningful mechanism and many-to-many block references.
+2. Add badge/right inspector and project Algorithms view; distinguish direct/descendant refs and deduplicate.
+3. Link exact existing implementation path/symbol/revision or null planned state; never maintain a mutable code copy in the plan.
+4. Record immutable correctness/measurement observations with actual basis and mark changed-code evidence stale.
+5. Compare only compatible benchmark inputs/methods/units; show uncertainty/regressions and never infer speedup from a prose claim.
+6. Populate the small real Waypoint inventory from inspected functions and known tests; no fictitious measurement runs.
+
+Required reading (this archive):
+design/DESIGN.md#d6
+design/CONTRACTS.md#c6
+design/CONTRACTS.md#c4
+contracts/examples/algorithm-observations.json
+
+Actual repository reading:
+waypoint/waypoint/domain.py
+waypoint/waypoint/store.py
+waypoint/waypoint/server.py
+waypoint/waypoint/web/app.js
+
+**Предшественники:** WPT-N01.
+
+**Предпосылки начала:**
+
+- `WPT-NEXT-E-05` — WPT-N01 / O-PROFILE (rev 1; workspace=consumer): Нужны согласованные поля профиля, совместимые схемы и фикстуры, а не предположения разных исполнителей.
+
+**Предпосылки завершения:**
+
+Нет дополнительных условий этой фазы.
+
+Доступность требует свидетельства для нужного результата и рабочей базы; отметка завершения сама по себе её не подтверждает.
+
+**Объявленные результаты:**
+
+- `O-ALGORITHMS` (rev 1): Curated algorithm catalogue, block badges and revision-aware evidence views
+
+**Алгоритмы:** `ALG-MERGE`, `ALG-PAGE`, `ALG-DEPS`, `ALG-READ`.
+
+**Условия приёмки**
+
+- `A01` — У общего алгоритма одна идентичность в нескольких блоках и в проектном реестре.
+- `A02` — Пометка блока открывает справа связанные алгоритмы; реестр не заполняется одними названиями технологий.
+- `A03` — Планируемая логика, наличие кода, проверка и измерение показаны раздельно.
+- `A04` — Новая реализация делает прежние свидетельства устаревшими; неуспешная проверка корректности не превращается в успешную оптимизацию.
+- `A05` — Несовместимые данные, единицы и методы помечаются несопоставимыми; у измерения указаны выборка и среда.
+- `A06` — Код и ссылки безопасно отображаются; карточка не запускает команды и не читает произвольные локальные файлы.
+
+**Описание проверок — фактические исходы хранятся в журнале**
+
+- `T01` **У общего алгоритма одна идентичность в нескольких блоках и в проектном реестре..**
+- `T02` **Пометка блока открывает справа связанные алгоритмы; реестр не заполняется одними названиями технологий..**
+- `T03` **Планируемая логика, наличие кода, проверка и измерение показаны раздельно..**
+- `T04` **Новая реализация делает прежние свидетельства устаревшими; неуспешная проверка корректности не превращается в успешную оптимизацию..**
+- `T05` **Несовместимые данные, единицы и методы помечаются несопоставимыми; у измерения указаны выборка и среда..**
+- `T06` **Код и ссылки безопасно отображаются; карточка не запускает команды и не читает произвольные локальные файлы..**
+
+## Возврат
+
+Использовать `../waypoint/reports/RETURN_TO_CHAT_RU.md` и дополнить полями из `RETURN_FIELDS.md`. Вернуть actual/expected diff, текущий plan_version, изменённые пути, реальную базу, пройденные/непройденные проверки и безопасное следующее действие. Не копировать приватные тексты, auth или всю рабочую БД в отчёт.

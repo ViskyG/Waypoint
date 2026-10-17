@@ -1,0 +1,23 @@
+## Human-readable plans and evidenced dependencies
+For each meaningful node, author its project context, intended change and observable
+outcome separately from the executor assignment. The owner's Plan outline and Task
+view use the same intent; join status from existing node events, never ask an agent
+to maintain a second status summary. Preserve legacy technical assignments.
+
+A hard edge names a required producer output, affected consumer scope, start/finish
+phase and evidence of availability. Keep preferred coding order and containment
+separate. Check inherited dependencies using the SAME resolver in packet/frontier
+and UI projections; collapsed links disclose their actual endpoints. Do not infer
+input availability from free status text alone. The observer preserves early work
+and unknown evidence instead of enforcing an execution gate.
+
+Use the project's compatible machine-readable profile as the common authoring
+source, preserving IDs, version guards and unknown extensions. Add algorithm
+references only for substantial custom logic needing correctness/cost review;
+framework names and trivial wrappers are not inventory entries. Runtime algorithm
+checks/measurements remain evidence, not repeated plan editing.
+
+Chat capsules remain OPTIONAL supply for a node's result. Every roadmap retains a
+permitted non-chat route; absence of chat delivery is not a hard dependency. Existing
+claims and integration ownership still prevent duplicate work. These additions do
+not change the selected resource policy, create schedules or authorize installation.

@@ -1,0 +1,10 @@
+{
+  "state": "PASS",
+  "project_skill_files": 4,
+  "project_source_preserved_by_stager": true,
+  "unified_patches_apply_to_disposable_copy": true,
+  "candidate_matches_applied_patch": true,
+  "global_three_skills_staging": "NOT_RUN here; source hashes and anchors taken from inspected canonical files, actual checkout required",
+  "runtime_installation": "NOT_RUN",
+  "stdout": "PREPARED_ONLY 4 files. Skipped without supplied root: 3\n"
+}

@@ -1,0 +1,25 @@
+{
+  "observed_on": "2026-10-17",
+  "project_id": "waypoint",
+  "repository": "ViskyG/Waypoint",
+  "commit": "c36e2e9a296ec8a78e4a19fad1975ea6ed951ade",
+  "skills_repository": "ViskyG/agent-skills",
+  "skills_commit": "e42beeb26a1065ec57af2999f2970046ccd21f53",
+  "scope": "Design and source inspection, not reproduction of owner runtime",
+  "integration_report": "waypoint/reports/RETURN_TO_CHAT_RU.md",
+  "prior_implementation": "R00/C05/C06/C07 reported complete by target executor; preserve and reconcile rather than reimplement",
+  "inspected_files": {
+    "waypoint/waypoint/domain.py": "80b26ecb4d87933ac031c7c75d4c16522fbd71fc",
+    "waypoint/waypoint/server.py": "91790ca3430c9b97e94fb76b3e9f43ee747cf3e2",
+    "waypoint/waypoint/store.py": "47d85868ad07fafac984e569133330599c28d204",
+    "waypoint/waypoint/web/app.js": "504c0b0f47f4c87520163a651dac8645a107c926",
+    "roadmap/tools/roadmap.py": "b158b806b06c227719287a8c57ca6e9ba2a582b3"
+  },
+  "legacy_domain_source": {
+    "file": "reference/legacy_domain.py",
+    "git_blob_sha": "80b26ecb4d87933ac031c7c75d4c16522fbd71fc",
+    "byte_identity": "matches inspected current domain.py"
+  },
+  "not_included": "Current full runtime source, credentials, private logs, database and live event stream",
+  "entry_rule": "Use actual repository checkout. Do not reset to this commit or copy an October 16 full archive over current work."
+}

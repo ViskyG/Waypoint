@@ -1,0 +1,93 @@
+{
+  "schema": "waypoint.plan/1",
+  "project_id": "sample-reporting",
+  "title": "Пример переносимой карты",
+  "nodes": {
+    "FETCH": {
+      "title": "Получить исходные данные",
+      "parent": null,
+      "assignment": "Synthetic template; replace with the real project executor contract.",
+      "acceptance": {
+        "A1": {
+          "text": "Fill actual observable acceptance before execution."
+        }
+      },
+      "tests": {},
+      "layout": {
+        "x": 0,
+        "y": 0
+      },
+      "source_refs": [],
+      "x_observability": {
+        "intent": {
+          "summary": "Получить проверяемые данные.",
+          "context": "Пример другого проекта.",
+          "change": "Заполняется автором для настоящего проекта."
+        },
+        "outputs": {
+          "O1": {
+            "definition": "Prepared input dataset",
+            "revision": 1
+          }
+        },
+        "algorithm_refs": []
+      }
+    },
+    "REPORT": {
+      "title": "Собрать отчёт",
+      "parent": null,
+      "assignment": "Synthetic template; replace with the real project executor contract.",
+      "acceptance": {
+        "A1": {
+          "text": "Fill actual observable acceptance before execution."
+        }
+      },
+      "tests": {},
+      "layout": {
+        "x": 500,
+        "y": 0
+      },
+      "source_refs": [],
+      "x_observability": {
+        "intent": {
+          "summary": "Превратить подготовленные данные в читаемый отчёт.",
+          "context": "Пример другого проекта.",
+          "change": "Заполняется автором для настоящего проекта."
+        },
+        "outputs": {
+          "O1": {
+            "definition": "Produced report",
+            "revision": 1
+          }
+        },
+        "algorithm_refs": []
+      }
+    }
+  },
+  "edges": {
+    "NEEDS_DATA": {
+      "from": "FETCH",
+      "to": "REPORT",
+      "x_observability": {
+        "relation": "requires",
+        "phase": "start",
+        "target_scope": "node",
+        "why": "Без подготовленных данных отчёт нельзя заполнить.",
+        "condition": {
+          "output_id": "O1",
+          "revision": 1,
+          "workspace": "consumer"
+        }
+      }
+    }
+  },
+  "x_roadmap": {
+    "resource_policy": "UNSELECTED",
+    "fixture": true
+  },
+  "x_observability": {
+    "schema": "waypoint.observability/1",
+    "purpose": "Показать переносимость формата, не назначать ресурсы другому проекту.",
+    "algorithms": {}
+  }
+}

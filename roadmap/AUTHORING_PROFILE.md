@@ -18,10 +18,44 @@ When updating, export the current head, preserve unchanged IDs and base_version,
 
 ## Reuse and limits
 
-`templates/PROJECT.plan.json` demonstrates the same schema with another project ID. It is intentionally marked TEMPLATE and UNSELECTED resource policy. Replace its requirements, tests, sources and ownership before using it; it is not a second project scheduled by this archive.
+`PROJECT.plan.json` demonstrates the same schema with another project ID. It is intentionally marked TEMPLATE and UNSELECTED resource policy. Replace its requirements, tests, sources and ownership before using it; it is not a second project scheduled by this archive.
 
 This profile applies to the **format of future maps**, not mandatory use of every Waypoint feature in every tiny project. One compact map is sufficient for a small task. Do not introduce a new workflow service, separate queue or parallel task graph.
 
 ## Условие результата
 
 Карта, подготовленная в чате, загружается в Waypoint без повторного проектирования и ручного перевода; задания и человекочитаемые представления получаются из неё же. При изменениях источника/версии повторно проверяется только затронутая совместимость. Публикация этого профиля в общих скилах — отдельное явно согласованное изменение, а не побочный эффект импорта карты.
+
+## Observability profile 1
+
+When `observability_profile_1` is available, author project purpose and one
+`x_observability.intent` per meaningful node: `summary`, `context`, `change`,
+optional `scope`. This is the owner’s explanation, separate from `assignment`.
+Keep unknown extensions, IDs and layouts on revision. Missing legacy intent is
+explicitly incomplete data, not a request for a model-generated runtime summary.
+
+A `requires` edge names a producer output and matching positive revision, phase
+(`start`/`finish`), explicit target scope (`node`/`subtree`), workspace policy and
+reason. `order` expresses preferred sequence without an output condition. Keep
+legacy unclassified arrows visible rather than automatically making them hard
+requirements. Use the installed shared dependency resolver for Plan, packet and
+frontier; free `done` status never proves that an output is available. Record
+actual availability through dependency observations, preserving unknown/conflict.
+
+Curate only meaningful custom algorithms in the project dictionary. Nodes reference
+stable IDs, including shared algorithms. Definition, exact code revision, authored
+tests, executed correctness, measurements and installed integration are separate.
+No benchmark tables or copied implementation live in the plan. Runtime observations
+are immutable ledger records. Use compatible workloads, data, units, methods and
+correctness before making any improvement claim; keep stale evidence historical.
+
+Generate Plan, Task and executor views from this one graph, joined to runtime
+status rather than manually maintained status documents. Chat capsules remain
+optional supply, and each task retains a permitted non-chat route. The template
+uses another project ID and UNSELECTED policy; it conveys no resource permission.
+
+Prepare migrations from a fresh installed export plus base version and stable
+request ID. Review a bounded candidate before import. The helper
+`next-stage/tools/prepare_authoring_revision.py` is deliberately specific to the
+Waypoint legacy map; another project starts from the transferable template. New
+instructions activate only after their actual capability is advertised.

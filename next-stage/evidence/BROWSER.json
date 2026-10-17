@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "browser": "144.0.7559.96",
+  "viewport": [
+    1680,
+    1050
+  ],
+  "checks": [
+    "10 packet navigation buttons",
+    "default N00",
+    "human project plan description",
+    "executor detail collapsed by default",
+    "executor detail expands",
+    "third reference unresolved not faked",
+    "dependency packet navigation",
+    "no JavaScript page errors"
+  ],
+  "js_errors": [],
+  "mode": "standalone design preview via set_content; NOT product/UI integration"
+}

@@ -230,7 +230,8 @@ def test_rollout_mapping_upgrade_replays_selected_source_without_changing_record
     assert saved["normalization_version"] == 3 and saved["offset"] == source.stat().st_size
     assert saved["generation"] == cursor["generation"] and saved["file_identity"] == cursor["file_identity"]
     collector.tail_once()
-    assert sink.store.db.execute("SELECT count(*) FROM events").fetchone()[0] == 2
+    assert sink.store.db.execute("SELECT count(*) FROM events").fetchone()[0] == 3
+    assert sink.store.db.execute("SELECT count(*) FROM events WHERE kind='source.health'").fetchone()[0] == 1
 
 
 def test_recreated_ipc_observer_fresh_timestamp_does_not_reuse_receipt_identity(tmp_path, monkeypatch):
@@ -304,7 +305,7 @@ def test_fork_explicit_native_marker_restores_child_without_changing_source_loca
             return [("child", self["child"])]
     collector.family = Family(collector.family)
     collector.tail_once()
-    corrected = [e for post in sink.posts for e in post["events"] if e["agent_id"] == "codex/child" and e["payload"].get("text") == "own child"]
+    corrected = [e for post in sink.posts for e in post["events"] if e.get("agent_id") == "codex/child" and e["payload"].get("text") == "own child"]
     assert len(corrected) == 1 and corrected[0]["payload"]["item_id"] == original_child_location
     assert "secret" not in canonical(sink.posts)
     saved = sink.store.cursor(source_key)
@@ -333,7 +334,7 @@ def test_unknown_fork_identity_is_quarantined_until_exact_verified_marker(tmp_pa
     collector.family = {"child": ({"id": "child", "forked_from_id": "unknown-parent"}, source)}
     collector.tail_once()
     events = [e for post in sink.posts for e in post["events"]]
-    assert {e["agent_id"] for e in events} == {"codex/child"}
+    assert {e.get("agent_id") for e in events if e.get("agent_id")} == {"codex/child"}
     activities = [e for e in events if e["kind"] == "agent.activity"]
     assert len(activities) == 1 and activities[0]["payload"]["turn_id"] == "own"
     assert not any(e["kind"] == "item.upsert" for e in events)

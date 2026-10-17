@@ -1,0 +1,63 @@
+{
+  "scope": "New design archive and executable contract examples only",
+  "date": "2026-10-17",
+  "python": "3.13.5",
+  "status": "PASS",
+  "structure": {
+    "status": "PASS",
+    "structural_checks": 115,
+    "nodes": 12,
+    "edges": 17,
+    "packets": 10,
+    "schema_checks": "native + profile + second-project schemas passed",
+    "target_execution_started": false,
+    "meaning": "Design/package consistency only; no target runtime acceptance."
+  },
+  "model_tests": {
+    "passed": 38,
+    "target_runtime": false,
+    "report": "UNIT_TESTS.txt"
+  },
+  "browser": {
+    "status": "PASS",
+    "browser": "144.0.7559.96",
+    "viewport": [
+      1680,
+      1050
+    ],
+    "checks": [
+      "10 packet navigation buttons",
+      "default N00",
+      "human project plan description",
+      "executor detail collapsed by default",
+      "executor detail expands",
+      "third reference unresolved not faked",
+      "dependency packet navigation",
+      "no JavaScript page errors"
+    ],
+    "js_errors": [],
+    "mode": "standalone design preview via set_content; NOT product/UI integration"
+  },
+  "skill_staging": {
+    "state": "PASS",
+    "project_skill_files": 4,
+    "project_source_preserved_by_stager": true,
+    "unified_patches_apply_to_disposable_copy": true,
+    "candidate_matches_applied_patch": true,
+    "global_three_skills_staging": "NOT_RUN here; source hashes and anchors taken from inspected canonical files, actual checkout required",
+    "runtime_installation": "NOT_RUN",
+    "stdout": "PREPARED_ONLY 4 files. Skipped without supplied root: 3\n"
+  },
+  "not_run": [
+    "Next-stage runtime implementation",
+    "Current owner Codex/service/database migration",
+    "Real browser-to-new-service integration",
+    "Global three-skill patch application on checkout",
+    "Global publication or runtime installation",
+    "Third distinct theme acceptance"
+  ],
+  "construction_corrections": [
+    "Merge test fixture originally had UNSELECTED policy; fixture now explicitly uses chosen MIXED, no production permission relaxation.",
+    "Preview check originally expected text inside a collapsed technical section; assertion corrected to the visible dependency title, UI unchanged."
+  ]
+}

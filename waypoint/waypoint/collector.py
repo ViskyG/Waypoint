@@ -48,6 +48,7 @@ class Collector:
         if not 0 <= self.coalesce_seconds <= 5:
             raise ContractError("coalescing", "Coalescing interval must be between zero and five seconds")
         self.last_health = 0.0
+        self._rollout_health = None
         self.issues = set()
         self.started_at = now()
 
@@ -55,6 +56,8 @@ class Collector:
         source = source or self.ipc_source
         event = {"event_id": uuid.uuid4().hex, "project_id": self.project, "source": source, "kind": "source.health", "at": now(), "payload": {"source_key": source, "state": state, "detail": detail, "root_thread": self.thread}}
         self.client.call("POST", self.path + "/events", {"events": [event]})
+        if source == self.rollout_source:
+            self._rollout_health = state
         self.last_health = time.monotonic()
 
     def snapshot(self, thread: str, state: dict, historical: bool, change: dict | None = None):
@@ -106,6 +109,7 @@ class Collector:
             del self.pending[native]
 
     def tail_once(self):
+        had_issue = False
         for native, (meta, path) in list(self.family.items()):
             source_key = "rollout:" + self.project + ":" + digest(str(path.resolve()))[:32]
             saved = self.client.call("GET", "/api/cursor?" + urlencode({"source_key": source_key})) or {}
@@ -159,7 +163,13 @@ class Collector:
                         body["cursor"] = cursor
                     self.client.call("POST", self.path + "/events", body)
             if reader.issue:
+                had_issue = True
                 self.health("gap", reader.issue, self.rollout_source)
+        # Clear a persisted gap only after every selected source was actually
+        # read and its receipts committed. Ordinary successful rounds are quiet.
+        # IPC health remains independent and previous gap events stay immutable.
+        if self.family and not had_issue and self._rollout_health != "connected":
+            self.health("connected", "Selected-family rollout round committed", self.rollout_source)
 
     def run(self, duration: float | None = None):
         lock_path = self.client.directory / ("collector-" + digest([self.project, self.thread])[:16] + ".lock")

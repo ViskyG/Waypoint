@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "base_version": "v-97d3f60f3b04408f",
+  "request_id": "waypoint-authoring-b0b4d3915e629c402e41607d",
+  "receipt": {
+    "version": "v-bdcf9899dc6647c7",
+    "ordinal": 5,
+    "changed": true,
+    "warnings": []
+  },
+  "canonical_ids": [
+    "ALG-DEPS",
+    "ALG-MERGE",
+    "ALG-PAGE",
+    "ALG-READ"
+  ],
+  "prior_versions_preserved": true,
+  "removed_only_helper_aliases": true,
+  "unknown_fields_preserved": true
+}

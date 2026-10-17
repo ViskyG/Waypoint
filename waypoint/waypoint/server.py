@@ -44,7 +44,7 @@ def create_app(data_dir: Path, tokens: dict | None = None, testing: bool = False
                 pass
             store.close()
 
-    app = FastAPI(title="Waypoint local observation API", version="0.1.0", docs_url=None, redoc_url=None, openapi_url=None, lifespan=lifespan)
+    app = FastAPI(title="Waypoint local observation API", version="0.2.0", docs_url=None, redoc_url=None, openapi_url=None, lifespan=lifespan)
     app.state.store = store
     app.state.tokens = tokens
 
@@ -93,11 +93,14 @@ def create_app(data_dir: Path, tokens: dict | None = None, testing: bool = False
 
     @app.get("/api/health")
     def health():
-        return {"service": "waypoint", "version": "0.1.0", "observer_only": True, "outbox_error": getattr(app.state, "outbox_error", None)}
+        from .read_models import CAPABILITIES
+        return {"service": "waypoint", "version": "0.2.0", "observer_only": True, "outbox_error": getattr(app.state, "outbox_error", None), "capabilities":CAPABILITIES}
 
     @app.get("/api/projects")
-    def projects():
-        return store.projects()
+    def projects(summary: bool = False):
+        if not summary:return store.projects()
+        from .read_models import project_summaries
+        with store.lock:return project_summaries(store)
 
     @app.get("/api/p/{project}/state")
     def state(project: str, version: str | None = None):
@@ -116,8 +119,8 @@ def create_app(data_dir: Path, tokens: dict | None = None, testing: bool = False
         return {"changes": store.diff(project, before, after)}
 
     @app.get("/api/p/{project}/items")
-    def items(project: str, node: str | None = None, edge: str | None = None, agent: str | None = None, deep: bool = True, before: int | None = None, limit: int = 100, version: str | None = None):
-        return store.items(project, node, edge, agent, deep, before, limit, version)
+    def items(project: str, node: str | None = None, edge: str | None = None, agent: str | None = None, deep: bool = True, before: int | None = None, limit: int = 100, version: str | None = None, categories: str | None = None, only_errors: bool = False, page_cursor: str | None = None, outside: bool = False):
+        return store.items(project, node, edge, agent, deep, before, limit, version,categories,only_errors,page_cursor,outside)
 
     @app.get("/api/p/{project}/events")
     def events(project: str, after: int = 0, limit: int = 200, wait: float = 0):
@@ -129,12 +132,40 @@ def create_app(data_dir: Path, tokens: dict | None = None, testing: bool = False
 
     @app.get("/api/p/{project}/packet/{node_id:path}")
     def packet(project: str, node_id: str):
+        from .read_models import prerequisite_view,basis
+        with store.lock:
+            result=packet_core(project,node_id)
+            document=store.plan(project)
+            import json
+            warnings=[json.loads(r[0]) for r in store.db.execute('SELECT body FROM dependency_starts WHERE project=? AND node=? ORDER BY seq DESC LIMIT 20',(project,node_id))]
+            result.update(intent=document['plan']['nodes'][node_id].get('x_observability',{}).get('intent'),prerequisites={phase:prerequisite_view(store,document,node_id,phase) for phase in ('start','finish')},dependency_warnings=warnings,algorithm_refs=document['plan']['nodes'][node_id].get('x_observability',{}).get('algorithm_refs',[]),basis=basis(store,document))
+            return result
+
+    def packet_core(project,node_id):
         document = store.plan(project)
         graph = document["plan"]
         if node_id not in graph["nodes"]:
             raise ContractError("not_found", "Block not found")
         node = graph["nodes"][node_id]
         return {"project_id": project, "plan_version": document["version"], "node_id": node_id, "assignment": node["assignment"], "acceptance": node["acceptance"], "tests": node["tests"], "source_refs": node.get("source_refs", []), "predecessors": [e["from"] for e in graph["edges"].values() if e["to"] == node_id], "children": [k for k, n in graph["nodes"].items() if n.get("parent") == node_id]}
+
+    @app.get('/api/p/{project}/prerequisites')
+    def prerequisites(project: str,node: str,phase: str='start',workspace: str | None=None,version: str | None=None):
+        from .read_models import prerequisite_view,basis
+        with store.lock:
+            document=store.plan(project,version)
+            if node not in document['plan']['nodes']:raise ContractError('not_found','Block not found')
+            return {'basis':basis(store,document),'requirements':prerequisite_view(store,document,node,phase,workspace)}
+
+    @app.get('/api/p/{project}/algorithms')
+    def algorithms(project: str,node: str | None=None,deep: bool=False,version: str | None=None):
+        from .read_models import algorithms
+        with store.lock:return algorithms(store,project,node,deep,version)
+
+    @app.get('/api/p/{project}/algorithms/{algorithm_id}')
+    def algorithm(project: str,algorithm_id: str,version: str | None=None,before: int | None=None,limit: int=100):
+        from .read_models import algorithm
+        with store.lock:return algorithm(store,project,algorithm_id,version,before,limit)
 
     @app.post("/api/p/{project}/events")
     def ingest(project: str, body: dict):

@@ -4,6 +4,8 @@ from pathlib import Path
 import json, sys, tempfile
 root=Path(__file__).resolve().parents[1];sys.path.insert(0,str(root))
 from waypoint.server import create_app
+from waypoint.observability import profile_schema, dependency_observation_schema
+from waypoint.algorithm_evidence import algorithm_observation_schema
 ID={"type":"string","pattern":r"^[A-Za-z0-9][A-Za-z0-9_.:@/\-]{0,199}$"}
 project={"type":"string","pattern":r"^[A-Za-z0-9][A-Za-z0-9_.:@\-]{0,199}$"}
 record={"type":"object"}
@@ -17,10 +19,17 @@ event['allOf'].append(condition(['test.result'],['node_ids','payload'],{'type':'
 event['allOf'].append({'if':{'properties':{'kind':{'enum':['scope.set','agent.upsert','agent.activity','item.upsert','item.link','item.identity_corrected']}}},'then':{'required':['agent_id'],'properties':{'agent_id':ID}}})
 event['allOf'].append(condition(['item.upsert','item.link'],['payload'],{'type':'object','required':['item_id'],'properties':{'item_id':ID,'text':{'type':'string','maxLength':2000000}}}))
 event['allOf'].append(condition(['item.identity_corrected'],['payload'],{'type':'object','required':['item_id','previous_agent_id','basis'],'properties':{'item_id':ID,'previous_agent_id':ID,'basis':{'type':'string','minLength':1}}}))
-for name,doc in [('plan.schema.json',plan),('event.schema.json',event)]:
+# Use the runtime constructors as the single additive field vocabulary.
+profile=profile_schema()
+plan.setdefault('allOf',[]).append(profile)
+plan['$comment'] += ' The additive observability contract is generated from waypoint.observability.profile_schema; expanded typed cycles and output references require runtime validation.'
+event['allOf'].append(condition(['dependency.observation'],['payload'],dependency_observation_schema()))
+event['allOf'].append(condition(['algorithm.observation'],['payload'],algorithm_observation_schema()))
+event['$comment']='Receipt identity, exact SHA-256 requirement fingerprints, timezone awareness, finite measurement values and graph/project references are checked by domain/runtime validators. JSON Schema validates the portable field shape; it does not establish actual evidence or measurement comparability.'
+for name,doc in [('plan.schema.json',plan),('event.schema.json',event),('observability-profile.schema.json',profile)]:
  (root/'schemas'/name).write_text(json.dumps(doc,ensure_ascii=False,indent=2))
 with tempfile.TemporaryDirectory() as temp:
  app=create_app(Path(temp),tokens={'read':'synthetic-read-key-long-enough-for-test','write':'synthetic-write-key-long-enough-for-test'},testing=True)
  spec=app.openapi();spec['info']['description']='Actual reference API. See CONTRACTS.md and adjacent JSON Schemas for graph/event semantic validation. No agent-execution routes.'
  (root/'schemas/openapi.json').write_text(json.dumps(spec,ensure_ascii=False,indent=2));app.state.store.close()
-print('Wrote plan/event schemas and actual OpenAPI paths.')
+print('Wrote plan/event/profile schemas and actual OpenAPI paths.')

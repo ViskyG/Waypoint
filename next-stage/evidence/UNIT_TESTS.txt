@@ -1,0 +1,43 @@
+test_comparable (test_contract_models.AlgorithmModelTests.test_comparable) ... ok
+test_dataset_not_comparable (test_contract_models.AlgorithmModelTests.test_dataset_not_comparable) ... ok
+test_invalid_number (test_contract_models.AlgorithmModelTests.test_invalid_number) ... ok
+test_regression_not_hidden (test_contract_models.AlgorithmModelTests.test_regression_not_hidden) ... ok
+test_wrong_correctness (test_contract_models.AlgorithmModelTests.test_wrong_correctness) ... ok
+test_direct (test_contract_models.DependencyModelTests.test_direct) ... ok
+test_effective_self_dependency (test_contract_models.DependencyModelTests.test_effective_self_dependency) ... ok
+test_finish_not_start (test_contract_models.DependencyModelTests.test_finish_not_start) ... ok
+test_layout_does_not_invalidate (test_contract_models.DependencyModelTests.test_layout_does_not_invalidate) ... ok
+test_legacy_not_silently_ready (test_contract_models.DependencyModelTests.test_legacy_not_silently_ready) ... ok
+test_matching_evidence_satisfied (test_contract_models.DependencyModelTests.test_matching_evidence_satisfied) ... ok
+test_missing_evidence_not_status_done (test_contract_models.DependencyModelTests.test_missing_evidence_not_status_done) ... ok
+test_node_only_not_inherited (test_contract_models.DependencyModelTests.test_node_only_not_inherited) ... ok
+test_order_not_blocker (test_contract_models.DependencyModelTests.test_order_not_blocker) ... ok
+test_other_workspace_unknown (test_contract_models.DependencyModelTests.test_other_workspace_unknown) ... ok
+test_parent_cycle_rejected (test_contract_models.DependencyModelTests.test_parent_cycle_rejected) ... ok
+test_parent_id_not_name_prefix (test_contract_models.DependencyModelTests.test_parent_id_not_name_prefix) ... ok
+test_predicate_does_invalidate (test_contract_models.DependencyModelTests.test_predicate_does_invalidate) ... ok
+test_reporter_conflict_not_last_writer_wins (test_contract_models.DependencyModelTests.test_reporter_conflict_not_last_writer_wins) ... ok
+test_same_reporter_can_withdraw (test_contract_models.DependencyModelTests.test_same_reporter_can_withdraw) ... ok
+test_subtree_inherited (test_contract_models.DependencyModelTests.test_subtree_inherited) ... ok
+test_all_default (test_contract_models.FilterModelTests.test_all_default) ... ok
+test_deep_duplicate_identity_once (test_contract_models.FilterModelTests.test_deep_duplicate_identity_once) ... ok
+test_equal_seq_total_order (test_contract_models.FilterModelTests.test_equal_seq_total_order) ... ok
+test_error_is_orthogonal (test_contract_models.FilterModelTests.test_error_is_orthogonal) ... ok
+test_none_is_not_all (test_contract_models.FilterModelTests.test_none_is_not_all) ... ok
+test_project_isolation (test_contract_models.FilterModelTests.test_project_isolation) ... ok
+test_rare_old_match_before_limit (test_contract_models.FilterModelTests.test_rare_old_match_before_limit) ... ok
+test_unknown_stays_visible (test_contract_models.FilterModelTests.test_unknown_stays_visible) ... ok
+test_collision_fails (test_contract_models.PackageContractTests.test_collision_fails) ... ok
+test_missing_export_version_fails (test_contract_models.PackageContractTests.test_missing_export_version_fails) ... ok
+test_native_schema_preserves_profile (test_contract_models.PackageContractTests.test_native_schema_preserves_profile) ... ok
+test_prepared_request_stable (test_contract_models.PackageContractTests.test_prepared_request_stable) ... ok
+test_reimport_does_not_overwrite_live_stage_edits (test_contract_models.PackageContractTests.test_reimport_does_not_overwrite_live_stage_edits) ... ok
+test_second_project_profile (test_contract_models.PackageContractTests.test_second_project_profile) ... ok
+test_stage_merge_preserves_unrelated (test_contract_models.PackageContractTests.test_stage_merge_preserves_unrelated) ... ok
+test_stage_profile_and_no_cycle (test_contract_models.PackageContractTests.test_stage_profile_and_no_cycle) ... ok
+test_wrong_project_fails (test_contract_models.PackageContractTests.test_wrong_project_fails) ... ok
+
+----------------------------------------------------------------------
+Ran 38 tests in 0.021s
+
+OK

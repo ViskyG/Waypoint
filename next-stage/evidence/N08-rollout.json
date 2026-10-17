@@ -1,0 +1,26 @@
+{
+  "status": "PASS",
+  "schema": "3",
+  "events_before": 6937,
+  "events_after": 7040,
+  "all_prior_ledger_plans_requests_capture_versions_preserved": true,
+  "health": {
+    "service": "waypoint",
+    "version": "0.2.0",
+    "observer_only": true,
+    "outbox_error": null,
+    "capabilities": [
+      "observability_profile_1",
+      "effective_dependencies_1",
+      "typed_items_1",
+      "project_summary_1",
+      "algorithm_evidence_1"
+    ]
+  },
+  "replaced_database": false,
+  "codex_restarted": false,
+  "migration_probe_checks_source_cursors_exactly": true,
+  "observer_resume_advances_cursors": true,
+  "backup": "private .runtime/stage2/before-rollout.sqlite",
+  "first_launch": "service lock still held during graceful shutdown; waited for actual release and relaunched; no DB overwrite"
+}

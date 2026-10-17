@@ -6,3 +6,5 @@ __pycache__/
 *.db*
 access.json
 connection.json
+/*.zip
+/*.zip.sha256

@@ -1,0 +1,245 @@
+{
+  "status": "PASS",
+  "fixture": "SYNTHETIC isolated rich histories; no owner transcript",
+  "transport": "Actual Chromium → localhost HTTP → schema3 Store",
+  "live_codex_tested": false,
+  "production_data_modified": false,
+  "recovered_issue": "First attempt found project hash lost while consuming read key; root fixed key-only removal and this run checks project retained/key removed",
+  "browser": "143.0.7499.4",
+  "headless": true,
+  "viewport": {
+    "width": 1660,
+    "height": 1050
+  },
+  "environment": {
+    "os": "Linux-6.8.0-138-generic-x86_64-with-glibc2.39",
+    "machine": "x86_64",
+    "logical_cpus": 8,
+    "cpu": "AMD Ryzen 7 9800X3D 8-Core Processor",
+    "memory_total": "MemTotal:       48413820 kB"
+  },
+  "checks": [
+    "100 nodes: All/None and explicit rare errors filtered before limit despite newer rich history",
+    "100 nodes: deep link retains project after read key removal",
+    "100 nodes: browser error filter reaches old matching bodies through HTTP; all 100 Plan rows mounted",
+    "300 nodes: All/None and explicit rare errors filtered before limit despite newer rich history",
+    "300 nodes: deep link retains project after read key removal",
+    "300 nodes: browser error filter reaches old matching bodies through HTTP; all 300 Plan rows mounted"
+  ],
+  "samples": [
+    {
+      "nodes": 100,
+      "root_nodes": 80,
+      "edges": 200,
+      "actors": 24,
+      "history_items": 4043,
+      "seed_events": 4815,
+      "body_shape": "mixed native message/reasoning/command/tool/change; ~800 chars per ordinary item; 500 items in each of N-000/N-001",
+      "service_rss": "VmRSS:\t   60880 kB",
+      "db_bytes": 15032320,
+      "http": {
+        "catalogue": {
+          "n": 3,
+          "ms": [
+            2.4285840008815285,
+            2.4431210003967863,
+            10.832818999915617
+          ],
+          "median_ms": 2.4431210003967863,
+          "max_ms": 10.832818999915617,
+          "bytes": 389,
+          "records": 1
+        },
+        "state": {
+          "n": 3,
+          "ms": [
+            46.86540600232547,
+            45.33627700220677,
+            45.56877800132497
+          ],
+          "median_ms": 45.56877800132497,
+          "max_ms": 46.86540600232547,
+          "bytes": 1199137,
+          "records": 500
+        },
+        "all_20": {
+          "n": 3,
+          "ms": [
+            1.8191790004493669,
+            1.789973997802008,
+            1.7862470012914855
+          ],
+          "median_ms": 1.789973997802008,
+          "max_ms": 1.8191790004493669,
+          "bytes": 27179,
+          "records": 20
+        },
+        "none_20": {
+          "n": 3,
+          "ms": [
+            1.43379799919785,
+            1.1318560027575586,
+            1.0899259978032205
+          ],
+          "median_ms": 1.1318560027575586,
+          "max_ms": 1.43379799919785,
+          "bytes": 215,
+          "records": 0
+        },
+        "command_20": {
+          "n": 3,
+          "ms": [
+            1.993270001548808,
+            1.9452579981589224,
+            2.0875580012216233
+          ],
+          "median_ms": 1.993270001548808,
+          "max_ms": 2.0875580012216233,
+          "bytes": 27355,
+          "records": 20
+        },
+        "errors_20": {
+          "n": 3,
+          "ms": [
+            1.386588999594096,
+            1.3242710010672454,
+            1.2292809988139197
+          ],
+          "median_ms": 1.3242710010672454,
+          "max_ms": 1.386588999594096,
+          "bytes": 1801,
+          "records": 3
+        }
+      },
+      "browser_initial_readable_ms": 276.851908001845,
+      "browser_plan_mount_ms": 53.689114000007976,
+      "reading": {
+        "mounted_cards": 15,
+        "mounted_messages": 360,
+        "elements": 3642,
+        "heap": {
+          "usedSize": 7366920,
+          "totalSize": 12140544,
+          "embedderHeapUsedSize": 21984640,
+          "backingStorageSize": 1868541
+        },
+        "dom": {
+          "documents": 3,
+          "nodes": 5900,
+          "jsEventListeners": 615
+        }
+      },
+      "browser_errors": []
+    },
+    {
+      "nodes": 300,
+      "root_nodes": 240,
+      "edges": 600,
+      "actors": 24,
+      "history_items": 10243,
+      "seed_events": 12415,
+      "body_shape": "mixed native message/reasoning/command/tool/change; ~800 chars per ordinary item; 500 items in each of N-000/N-001",
+      "service_rss": "VmRSS:\t   72260 kB",
+      "db_bytes": 36921344,
+      "http": {
+        "catalogue": {
+          "n": 3,
+          "ms": [
+            4.960223999660229,
+            4.824797997571295,
+            4.772938998939935
+          ],
+          "median_ms": 4.824797997571295,
+          "max_ms": 4.960223999660229,
+          "bytes": 389,
+          "records": 1
+        },
+        "state": {
+          "n": 3,
+          "ms": [
+            128.8313030017889,
+            138.9255520007282,
+            138.7065970011463
+          ],
+          "median_ms": 138.7065970011463,
+          "max_ms": 138.9255520007282,
+          "bytes": 2251190,
+          "records": 500
+        },
+        "all_20": {
+          "n": 3,
+          "ms": [
+            2.8196359999128617,
+            2.743362001638161,
+            2.616081001178827
+          ],
+          "median_ms": 2.743362001638161,
+          "max_ms": 2.8196359999128617,
+          "bytes": 27223,
+          "records": 20
+        },
+        "none_20": {
+          "n": 3,
+          "ms": [
+            1.6827309991640504,
+            1.7914869968080893,
+            1.744017001328757
+          ],
+          "median_ms": 1.744017001328757,
+          "max_ms": 1.7914869968080893,
+          "bytes": 216,
+          "records": 0
+        },
+        "command_20": {
+          "n": 3,
+          "ms": [
+            3.214153999579139,
+            3.055812998354668,
+            3.131667002890026
+          ],
+          "median_ms": 3.131667002890026,
+          "max_ms": 3.214153999579139,
+          "bytes": 27399,
+          "records": 20
+        },
+        "errors_20": {
+          "n": 3,
+          "ms": [
+            1.7252520010515582,
+            1.9049010006710887,
+            1.8488560017431155
+          ],
+          "median_ms": 1.8488560017431155,
+          "max_ms": 1.9049010006710887,
+          "bytes": 1802,
+          "records": 3
+        }
+      },
+      "browser_initial_readable_ms": 383.12027199935983,
+      "browser_plan_mount_ms": 80.18356799948378,
+      "reading": {
+        "mounted_cards": 15,
+        "mounted_messages": 360,
+        "elements": 4612,
+        "heap": {
+          "usedSize": 8171696,
+          "totalSize": 14761984,
+          "embedderHeapUsedSize": 16150336,
+          "backingStorageSize": 171460
+        },
+        "dom": {
+          "documents": 1,
+          "nodes": 6799,
+          "jsEventListeners": 1265
+        }
+      },
+      "browser_errors": []
+    }
+  ],
+  "limitations": [
+    "Three timed HTTP samples after one warmup are descriptive, not confidence intervals or universal thresholds.",
+    "Single-machine headless synthetic measurement; no FPS, production SLA, provider latency or hours-long soak claim.",
+    "HTTP response semantics prove old rare matches survive before the limit; Store structural query checks separately establish that bodies are fetched after association/type/error ID selection.",
+    "Existing C01–C07 sustained-flow evidence was reused; no repeated 60-event campaign."
+  ]
+}

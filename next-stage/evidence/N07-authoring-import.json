@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "base_version": "v-e3363063b40e4d41",
+  "request_id": "waypoint-authoring-0de3a3fa1be7f8cfa6bd0da2",
+  "receipt": {
+    "version": "v-97d3f60f3b04408f",
+    "ordinal": 4,
+    "changed": true,
+    "warnings": []
+  },
+  "all_existing_assignments_layouts_ids_preserved": true,
+  "skill_publication": false
+}

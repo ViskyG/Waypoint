@@ -1,0 +1,359 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Waypoint observability profile 1 over native plan 1",
+  "type": "object",
+  "required": [
+    "schema",
+    "project_id",
+    "nodes",
+    "edges",
+    "x_observability"
+  ],
+  "properties": {
+    "schema": {
+      "const": "waypoint.plan/1"
+    },
+    "project_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "x_observability": {
+      "type": "object",
+      "required": [
+        "schema",
+        "algorithms"
+      ],
+      "properties": {
+        "schema": {
+          "const": "waypoint.observability/1"
+        },
+        "purpose": {
+          "type": "string",
+          "minLength": 1
+        },
+        "algorithms": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "required": [
+              "id",
+              "title",
+              "purpose",
+              "inputs",
+              "outputs",
+              "steps",
+              "invariants",
+              "edge_cases",
+              "definition_revision",
+              "implementation",
+              "testability",
+              "resource_risks"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "title": {
+                "type": "string",
+                "minLength": 1
+              },
+              "purpose": {
+                "type": "string",
+                "minLength": 1
+              },
+              "inputs": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "outputs": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "steps": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "invariants": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "edge_cases": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "definition_revision": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "implementation": {
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "required": [
+                  "repository",
+                  "revision",
+                  "refs"
+                ],
+                "properties": {
+                  "repository": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "revision": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "refs": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "path"
+                      ],
+                      "properties": {
+                        "path": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "symbol": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "additionalProperties": true
+                    },
+                    "minItems": 1
+                  }
+                },
+                "additionalProperties": true
+              },
+              "testability": {
+                "type": "object",
+                "required": [
+                  "strategy",
+                  "test_refs",
+                  "missing_cases"
+                ],
+                "properties": {
+                  "strategy": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "test_refs": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "path"
+                      ],
+                      "properties": {
+                        "path": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "symbol": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "additionalProperties": true
+                    }
+                  },
+                  "missing_cases": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  }
+                }
+              },
+              "resource_risks": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            },
+            "additionalProperties": true
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "nodes": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "x_observability": {
+            "type": "object",
+            "properties": {
+              "intent": {
+                "type": "object",
+                "required": [
+                  "summary",
+                  "context",
+                  "change"
+                ],
+                "properties": {
+                  "summary": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "context": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "change": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "scope": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "additionalProperties": true
+              },
+              "outputs": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "object",
+                  "required": [
+                    "definition",
+                    "revision"
+                  ],
+                  "properties": {
+                    "definition": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "revision": {
+                      "type": "integer",
+                      "minimum": 1
+                    }
+                  },
+                  "additionalProperties": true
+                }
+              },
+              "algorithm_refs": {
+                "type": "array",
+                "uniqueItems": true,
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            },
+            "additionalProperties": true
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "edges": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "x_observability": {
+            "type": "object",
+            "required": [
+              "relation",
+              "phase",
+              "target_scope",
+              "why"
+            ],
+            "properties": {
+              "relation": {
+                "enum": [
+                  "requires",
+                  "order"
+                ]
+              },
+              "phase": {
+                "enum": [
+                  "start",
+                  "finish"
+                ]
+              },
+              "target_scope": {
+                "enum": [
+                  "node",
+                  "subtree"
+                ]
+              },
+              "why": {
+                "type": "string",
+                "minLength": 1
+              },
+              "condition": {
+                "type": "object",
+                "required": [
+                  "output_id",
+                  "revision",
+                  "workspace"
+                ],
+                "properties": {
+                  "output_id": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "revision": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "workspace": {
+                    "enum": [
+                      "consumer",
+                      "project"
+                    ]
+                  }
+                },
+                "additionalProperties": true
+              }
+            },
+            "allOf": [
+              {
+                "if": {
+                  "properties": {
+                    "relation": {
+                      "const": "requires"
+                    }
+                  }
+                },
+                "then": {
+                  "required": [
+                    "condition"
+                  ]
+                }
+              }
+            ],
+            "additionalProperties": true
+          }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true
+}

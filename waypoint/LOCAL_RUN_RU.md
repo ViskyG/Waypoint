@@ -2,6 +2,8 @@
 
 Все команды запускаются из `waypoint/`. Состояние этой установки находится в `../.runtime/data/` (0700); ключи и переписка не входят в поставку.
 
+Версия 0.2 мигрирует схему SQLite 1/2 до 3 аддитивно. Перед обновлением делайте SQLite backup через `Store.backup()` или SQLite backup API, а не копирование активного файла без WAL. Неизвестная более новая схема отклоняется. Старые события сохраняют неизвестное время получения (`observed_at: null`); исходное `at` не переписывается. `Store.rebuild()` восстанавливает только производные таблицы из принятого журнала и не перечитывает Codex.
+
 ```bash
 .venv/bin/python -m waypoint --data ../.runtime/data serve --port 8769
 ```
@@ -29,3 +31,5 @@
 Дорожная карта меняется через текущий `plan-export`, правку snapshot и `plan-import --merge` с его `base_version` и новым стабильным `request_id`. После неизвестного результата повторяйте идентичное тело/ID. Текущий экспорт и производные представления сохраняются в `roadmap/`; runtime статусы и сообщения остаются в ledger.
 
 Проверки: `.venv/bin/python -m pytest -q`; `.venv/bin/python tools/verify_http.py`; из `roadmap/`: `../waypoint/.venv/bin/python tools/roadmap.py validate`. Для браузера см. `tests/browser_check.py --help` и `tools/verify_live.py --help`. Синтетические fixtures не доказывают подключение к Codex. Подробности фактического запуска и ограничений — `reports/RETURN_TO_CHAT_RU.md`.
+
+Актуальные проверки следующей фазы: `../next-stage/reports/IMPLEMENTED_RU.md`. Кандидаты общих скилов подготовлены отдельно и не установлены. N09 требует третьего подтверждённого референса.

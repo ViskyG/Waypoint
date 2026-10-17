@@ -1,0 +1,47 @@
+{
+  "status": "PASS",
+  "method": "Actual Chromium loads final self-contained file:// previews; no API, provider or production data accessed",
+  "live_codex_tested": false,
+  "production_data_modified": false,
+  "browser": "143.0.7499.4",
+  "checks": [
+    "Both final previews embed exactly six explicit UI modules and stylesheet",
+    "Roadmap has all 32 approved nodes and no fabricated agents/checks/messages",
+    "Catalogue derives actual preview project ID; Plan opens every saved node",
+    "Both known themes work; third slot remains missing reference",
+    "Source-delivery snapshot and fictional-demo notices remain truthful",
+    "No external requests or browser application errors"
+  ],
+  "previews": [
+    {
+      "file": "roadmap/PREVIEW.html",
+      "project_id": "waypoint",
+      "node_count": 32,
+      "agent_count": 0,
+      "runtime_check_count": 0,
+      "item_count": 0,
+      "external_requests": 0,
+      "browser_errors": 0,
+      "title": "Waypoint · дорожная карта реализации",
+      "notice": "Снимок плана · исходные декларации поставки; текущая работа не воспроизводится",
+      "script_modules": 6,
+      "theme_ready_count": 2,
+      "third_theme_reference_missing": true
+    },
+    {
+      "file": "waypoint/preview.html",
+      "project_id": "demo",
+      "node_count": 11,
+      "agent_count": 9,
+      "runtime_check_count": 10,
+      "item_count": 26,
+      "external_requests": 0,
+      "browser_errors": 0,
+      "title": "Waypoint · Карта работ",
+      "notice": "Демо · вымышленные события",
+      "script_modules": 6,
+      "theme_ready_count": 2,
+      "third_theme_reference_missing": true
+    }
+  ]
+}

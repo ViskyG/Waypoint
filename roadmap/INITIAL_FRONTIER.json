@@ -1,20 +1,54 @@
 {
-  "meaning": "planning frontier from supplied source + explicit completion receipts; not live status or assignment",
+  "meaning": "planning frontier; profile prerequisites use matching evidence, never status/completion alone",
   "completed_receipts": [],
   "ready": [
-    "WPT-R00"
+    "WPT-N00"
   ],
   "waiting": [
     {
       "id": "WPT-C05",
       "requires": [
         "WPT-R00"
+      ],
+      "prerequisites": [
+        {
+          "edge_id": "E-WPT-R00--WPT-C05",
+          "producer_id": "WPT-R00",
+          "declared_target_id": "WPT-C05",
+          "consumer_id": "WPT-C05",
+          "phase": "start",
+          "inherited": false,
+          "classification": "legacy_unknown",
+          "requirement_fingerprint": null,
+          "state": "unknown",
+          "availability": "unknown",
+          "reason": "unclassified_legacy_edge",
+          "receipts": [],
+          "stale_receipts": []
+        }
       ]
     },
     {
       "id": "WPT-C06",
       "requires": [
         "WPT-R00"
+      ],
+      "prerequisites": [
+        {
+          "edge_id": "E-WPT-R00--WPT-C06",
+          "producer_id": "WPT-R00",
+          "declared_target_id": "WPT-C06",
+          "consumer_id": "WPT-C06",
+          "phase": "start",
+          "inherited": false,
+          "classification": "legacy_unknown",
+          "requirement_fingerprint": null,
+          "state": "unknown",
+          "availability": "unknown",
+          "reason": "unclassified_legacy_edge",
+          "receipts": [],
+          "stale_receipts": []
+        }
       ]
     },
     {
@@ -22,7 +56,490 @@
       "requires": [
         "WPT-C05",
         "WPT-C06"
+      ],
+      "prerequisites": [
+        {
+          "edge_id": "E-WPT-C05--WPT-C07",
+          "producer_id": "WPT-C05",
+          "declared_target_id": "WPT-C07",
+          "consumer_id": "WPT-C07",
+          "phase": "start",
+          "inherited": false,
+          "classification": "legacy_unknown",
+          "requirement_fingerprint": null,
+          "state": "unknown",
+          "availability": "unknown",
+          "reason": "unclassified_legacy_edge",
+          "receipts": [],
+          "stale_receipts": []
+        },
+        {
+          "edge_id": "E-WPT-C06--WPT-C07",
+          "producer_id": "WPT-C06",
+          "declared_target_id": "WPT-C07",
+          "consumer_id": "WPT-C07",
+          "phase": "start",
+          "inherited": false,
+          "classification": "legacy_unknown",
+          "requirement_fingerprint": null,
+          "state": "unknown",
+          "availability": "unknown",
+          "reason": "unclassified_legacy_edge",
+          "receipts": [],
+          "stale_receipts": []
+        }
+      ]
+    },
+    {
+      "id": "WPT-N01",
+      "requires": [
+        "WPT-N00"
+      ],
+      "prerequisites": [
+        {
+          "edge_id": "WPT-NEXT-E-01",
+          "producer_id": "WPT-N00",
+          "declared_target_id": "WPT-N01",
+          "consumer_id": "WPT-N01",
+          "phase": "start",
+          "inherited": false,
+          "classification": "requires",
+          "target_scope": "node",
+          "why": "Нужны актуальные исходники, известная схема данных и безопасный экспорт для совместимой миграции.",
+          "output_id": "O-BASE",
+          "condition_revision": 1,
+          "workspace_policy": "consumer",
+          "requirement_fingerprint": "e078d3dafce34c17645d3d1c8025494d6e975cfc74e666513251e4577e717a21",
+          "state": "unknown",
+          "availability": "unknown",
+          "reason": "no_current_matching_evidence",
+          "receipts": [],
+          "stale_receipts": []
+        }
+      ]
+    },
+    {
+      "id": "WPT-N02",
+      "requires": [
+        "WPT-N01"
+      ],
+      "prerequisites": [
+        {
+          "edge_id": "WPT-NEXT-E-02",
+          "producer_id": "WPT-N01",
+          "declared_target_id": "WPT-N02",
+          "consumer_id": "WPT-N02",
+          "phase": "start",
+          "inherited": false,
+          "classification": "requires",
+          "target_scope": "node",
+          "why": "Нужны согласованные поля профиля, совместимые схемы и фикстуры, а не предположения разных исполнителей.",
+          "output_id": "O-PROFILE",
+          "condition_revision": 1,
+          "workspace_policy": "consumer",
+          "requirement_fingerprint": "7c4cb45f12d954c65215768446d994247ba235890ec8cdc47610db783072d0be",
+          "state": "unknown",
+          "availability": "unknown",
+          "reason": "no_current_matching_evidence",
+          "receipts": [],
+          "stale_receipts": []
+        }
+      ]
+    },
+    {
+      "id": "WPT-N03",
+      "requires": [
+        "WPT-N01"
+      ],
+      "prerequisites": [
+        {
+          "edge_id": "WPT-NEXT-E-03",
+          "producer_id": "WPT-N01",
+          "declared_target_id": "WPT-N03",
+          "consumer_id": "WPT-N03",
+          "phase": "start",
+          "inherited": false,
+          "classification": "requires",
+          "target_scope": "node",
+          "why": "Нужны согласованные поля профиля, совместимые схемы и фикстуры, а не предположения разных исполнителей.",
+          "output_id": "O-PROFILE",
+          "condition_revision": 1,
+          "workspace_policy": "consumer",
+          "requirement_fingerprint": "f9794fb6f4eac657615706e624c57e2d9b4b59a827222af8eb8bdcf649f5376e",
+          "state": "unknown",
+          "availability": "unknown",
+          "reason": "no_current_matching_evidence",
+          "receipts": [],
+          "stale_receipts": []
+        }
+      ]
+    },
+    {
+      "id": "WPT-N04",
+      "requires": [
+        "WPT-N01"
+      ],
+      "prerequisites": [
+        {
+          "edge_id": "WPT-NEXT-E-04",
+          "producer_id": "WPT-N01",
+          "declared_target_id": "WPT-N04",
+          "consumer_id": "WPT-N04",
+          "phase": "start",
+          "inherited": false,
+          "classification": "requires",
+          "target_scope": "node",
+          "why": "Нужны согласованные поля профиля, совместимые схемы и фикстуры, а не предположения разных исполнителей.",
+          "output_id": "O-PROFILE",
+          "condition_revision": 1,
+          "workspace_policy": "consumer",
+          "requirement_fingerprint": "70bfedd25b56cab686f5f77934703a884b49eb78f95c78c4a9cb8863b6f60099",
+          "state": "unknown",
+          "availability": "unknown",
+          "reason": "no_current_matching_evidence",
+          "receipts": [],
+          "stale_receipts": []
+        }
+      ]
+    },
+    {
+      "id": "WPT-N05",
+      "requires": [
+        "WPT-N01"
+      ],
+      "prerequisites": [
+        {
+          "edge_id": "WPT-NEXT-E-05",
+          "producer_id": "WPT-N01",
+          "declared_target_id": "WPT-N05",
+          "consumer_id": "WPT-N05",
+          "phase": "start",
+          "inherited": false,
+          "classification": "requires",
+          "target_scope": "node",
+          "why": "Нужны согласованные поля профиля, совместимые схемы и фикстуры, а не предположения разных исполнителей.",
+          "output_id": "O-PROFILE",
+          "condition_revision": 1,
+          "workspace_policy": "consumer",
+          "requirement_fingerprint": "76b09bd3b6f3a538fd31f559d0aebe95af0824a97403c3c15938b463b2067018",
+          "state": "unknown",
+          "availability": "unknown",
+          "reason": "no_current_matching_evidence",
+          "receipts": [],
+          "stale_receipts": []
+        }
+      ]
+    },
+    {
+      "id": "WPT-N06",
+      "requires": [
+        "WPT-N00"
+      ],
+      "prerequisites": [
+        {
+          "edge_id": "WPT-NEXT-E-06",
+          "producer_id": "WPT-N00",
+          "declared_target_id": "WPT-N06",
+          "consumer_id": "WPT-N06",
+          "phase": "start",
+          "inherited": false,
+          "classification": "requires",
+          "target_scope": "node",
+          "why": "Для правки реестра тем нужны актуальные UI-файлы и сохранённые референсы; новый профиль описаний не является её блокером.",
+          "output_id": "O-BASE",
+          "condition_revision": 1,
+          "workspace_policy": "consumer",
+          "requirement_fingerprint": "093d58122d644e4bf10211a47a0c278a2436d947d59d4c07c3cae6cdd681f364",
+          "state": "unknown",
+          "availability": "unknown",
+          "reason": "no_current_matching_evidence",
+          "receipts": [],
+          "stale_receipts": []
+        }
+      ]
+    },
+    {
+      "id": "WPT-N07",
+      "requires": [
+        "WPT-N01"
+      ],
+      "prerequisites": [
+        {
+          "edge_id": "WPT-NEXT-E-07",
+          "producer_id": "WPT-N01",
+          "declared_target_id": "WPT-N07",
+          "consumer_id": "WPT-N07",
+          "phase": "start",
+          "inherited": false,
+          "classification": "requires",
+          "target_scope": "node",
+          "why": "Нужны согласованные поля профиля, совместимые схемы и фикстуры, а не предположения разных исполнителей.",
+          "output_id": "O-PROFILE",
+          "condition_revision": 1,
+          "workspace_policy": "consumer",
+          "requirement_fingerprint": "4bd6d123adb8e4857d4f0fd90e74a5969a5999e895debbf9ce9b16388e2315ca",
+          "state": "unknown",
+          "availability": "unknown",
+          "reason": "no_current_matching_evidence",
+          "receipts": [],
+          "stale_receipts": []
+        }
+      ]
+    },
+    {
+      "id": "WPT-N08",
+      "requires": [
+        "WPT-N02",
+        "WPT-N03",
+        "WPT-N04",
+        "WPT-N05",
+        "WPT-N06",
+        "WPT-N07"
+      ],
+      "prerequisites": [
+        {
+          "edge_id": "WPT-NEXT-E-09",
+          "producer_id": "WPT-N02",
+          "declared_target_id": "WPT-N08",
+          "consumer_id": "WPT-N08",
+          "phase": "start",
+          "inherited": false,
+          "classification": "requires",
+          "target_scope": "node",
+          "why": "Нужен готовый результат этой ветки для сквозной проверки единой функциональной версии.",
+          "output_id": "O-DEPS",
+          "condition_revision": 1,
+          "workspace_policy": "consumer",
+          "requirement_fingerprint": "61c3cbd69da32cc437c9163ca50ef8bab66e3c5ec8b09e81ca87f6b2ac2237c5",
+          "state": "unknown",
+          "availability": "unknown",
+          "reason": "no_current_matching_evidence",
+          "receipts": [],
+          "stale_receipts": []
+        },
+        {
+          "edge_id": "WPT-NEXT-E-10",
+          "producer_id": "WPT-N03",
+          "declared_target_id": "WPT-N08",
+          "consumer_id": "WPT-N08",
+          "phase": "start",
+          "inherited": false,
+          "classification": "requires",
+          "target_scope": "node",
+          "why": "Нужен готовый результат этой ветки для сквозной проверки единой функциональной версии.",
+          "output_id": "O-UX",
+          "condition_revision": 1,
+          "workspace_policy": "consumer",
+          "requirement_fingerprint": "65abbb18f8fd23ee2e9cff02e4724a7048b7ce2f6dedad6da963a7d3155b9397",
+          "state": "unknown",
+          "availability": "unknown",
+          "reason": "no_current_matching_evidence",
+          "receipts": [],
+          "stale_receipts": []
+        },
+        {
+          "edge_id": "WPT-NEXT-E-11",
+          "producer_id": "WPT-N04",
+          "declared_target_id": "WPT-N08",
+          "consumer_id": "WPT-N08",
+          "phase": "start",
+          "inherited": false,
+          "classification": "requires",
+          "target_scope": "node",
+          "why": "Нужен готовый результат этой ветки для сквозной проверки единой функциональной версии.",
+          "output_id": "O-FILTERS",
+          "condition_revision": 1,
+          "workspace_policy": "consumer",
+          "requirement_fingerprint": "052cf5856bda3fcd5b8446f976db9ea38733fe41e08ebb4576f0a6c63287b68b",
+          "state": "unknown",
+          "availability": "unknown",
+          "reason": "no_current_matching_evidence",
+          "receipts": [],
+          "stale_receipts": []
+        },
+        {
+          "edge_id": "WPT-NEXT-E-12",
+          "producer_id": "WPT-N05",
+          "declared_target_id": "WPT-N08",
+          "consumer_id": "WPT-N08",
+          "phase": "start",
+          "inherited": false,
+          "classification": "requires",
+          "target_scope": "node",
+          "why": "Нужен готовый результат этой ветки для сквозной проверки единой функциональной версии.",
+          "output_id": "O-ALGORITHMS",
+          "condition_revision": 1,
+          "workspace_policy": "consumer",
+          "requirement_fingerprint": "087ec45880b6b0977c957c52ff4fd31d303a6307d81c4b2aa32a67b7d9d4e037",
+          "state": "unknown",
+          "availability": "unknown",
+          "reason": "no_current_matching_evidence",
+          "receipts": [],
+          "stale_receipts": []
+        },
+        {
+          "edge_id": "WPT-NEXT-E-13",
+          "producer_id": "WPT-N06",
+          "declared_target_id": "WPT-N08",
+          "consumer_id": "WPT-N08",
+          "phase": "start",
+          "inherited": false,
+          "classification": "requires",
+          "target_scope": "node",
+          "why": "Нужен готовый результат этой ветки для сквозной проверки единой функциональной версии.",
+          "output_id": "O-THEMES",
+          "condition_revision": 1,
+          "workspace_policy": "consumer",
+          "requirement_fingerprint": "9aa4660a07b44b325798e07d1154293c80f6c0d5b47aac9a93cf602721d7b0c2",
+          "state": "unknown",
+          "availability": "unknown",
+          "reason": "no_current_matching_evidence",
+          "receipts": [],
+          "stale_receipts": []
+        },
+        {
+          "edge_id": "WPT-NEXT-E-14",
+          "producer_id": "WPT-N07",
+          "declared_target_id": "WPT-N08",
+          "consumer_id": "WPT-N08",
+          "phase": "start",
+          "inherited": false,
+          "classification": "requires",
+          "target_scope": "node",
+          "why": "Нужен готовый результат этой ветки для сквозной проверки единой функциональной версии.",
+          "output_id": "O-AUTHORING",
+          "condition_revision": 1,
+          "workspace_policy": "consumer",
+          "requirement_fingerprint": "fa7cd583c53d592e14b3ed665b4bc785c6a572db0edc35618ef408aaf5cb407d",
+          "state": "unknown",
+          "availability": "unknown",
+          "reason": "no_current_matching_evidence",
+          "receipts": [],
+          "stale_receipts": []
+        }
+      ]
+    },
+    {
+      "id": "WPT-N09",
+      "requires": [
+        "WPT-INPUT-T3",
+        "WPT-N06"
+      ],
+      "prerequisites": [
+        {
+          "edge_id": "WPT-NEXT-E-15",
+          "producer_id": "WPT-N06",
+          "declared_target_id": "WPT-N09",
+          "consumer_id": "WPT-N09",
+          "phase": "start",
+          "inherited": false,
+          "classification": "requires",
+          "target_scope": "node",
+          "why": "Третья тема подключается к реализованному общему реестру.",
+          "output_id": "O-THEMES",
+          "condition_revision": 1,
+          "workspace_policy": "consumer",
+          "requirement_fingerprint": "7e252525f77de8d9ab5171208701dde8c532d45459536228056826ee7ebaf951",
+          "state": "unknown",
+          "availability": "unknown",
+          "reason": "no_current_matching_evidence",
+          "receipts": [],
+          "stale_receipts": []
+        },
+        {
+          "edge_id": "WPT-NEXT-E-16",
+          "producer_id": "WPT-INPUT-T3",
+          "declared_target_id": "WPT-N09",
+          "consumer_id": "WPT-N09",
+          "phase": "start",
+          "inherited": false,
+          "classification": "requires",
+          "target_scope": "node",
+          "why": "Без выбранного референса нельзя честно реализовать именно третье оформление.",
+          "output_id": "O-REF",
+          "condition_revision": 1,
+          "workspace_policy": "consumer",
+          "requirement_fingerprint": "d7d10b04c7557a50297ffc29953eb5d4e0f5da876d643e48a093045fbc094f22",
+          "state": "unknown",
+          "availability": "unknown",
+          "reason": "no_current_matching_evidence",
+          "receipts": [],
+          "stale_receipts": []
+        }
+      ]
+    },
+    {
+      "id": "WPT-R00",
+      "requires": [
+        "WPT-C01",
+        "WPT-C02",
+        "WPT-C03",
+        "WPT-C04"
+      ],
+      "prerequisites": [
+        {
+          "edge_id": "E-WPT-C01--WPT-R00",
+          "producer_id": "WPT-C01",
+          "declared_target_id": "WPT-R00",
+          "consumer_id": "WPT-R00",
+          "phase": "start",
+          "inherited": false,
+          "classification": "legacy_unknown",
+          "requirement_fingerprint": null,
+          "state": "unknown",
+          "availability": "unknown",
+          "reason": "unclassified_legacy_edge",
+          "receipts": [],
+          "stale_receipts": []
+        },
+        {
+          "edge_id": "E-WPT-C02--WPT-R00",
+          "producer_id": "WPT-C02",
+          "declared_target_id": "WPT-R00",
+          "consumer_id": "WPT-R00",
+          "phase": "start",
+          "inherited": false,
+          "classification": "legacy_unknown",
+          "requirement_fingerprint": null,
+          "state": "unknown",
+          "availability": "unknown",
+          "reason": "unclassified_legacy_edge",
+          "receipts": [],
+          "stale_receipts": []
+        },
+        {
+          "edge_id": "E-WPT-C03--WPT-R00",
+          "producer_id": "WPT-C03",
+          "declared_target_id": "WPT-R00",
+          "consumer_id": "WPT-R00",
+          "phase": "start",
+          "inherited": false,
+          "classification": "legacy_unknown",
+          "requirement_fingerprint": null,
+          "state": "unknown",
+          "availability": "unknown",
+          "reason": "unclassified_legacy_edge",
+          "receipts": [],
+          "stale_receipts": []
+        },
+        {
+          "edge_id": "E-WPT-C04--WPT-R00",
+          "producer_id": "WPT-C04",
+          "declared_target_id": "WPT-R00",
+          "consumer_id": "WPT-R00",
+          "phase": "start",
+          "inherited": false,
+          "classification": "legacy_unknown",
+          "requirement_fingerprint": null,
+          "state": "unknown",
+          "availability": "unknown",
+          "reason": "unclassified_legacy_edge",
+          "receipts": [],
+          "stale_receipts": []
+        }
       ]
     }
-  ]
+  ],
+  "evidence_scope": "offline_without_current_ledger",
+  "warning": "Not an instruction to repeat prior work; use current runtime evidence."
 }

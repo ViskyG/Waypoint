@@ -1,0 +1,35 @@
+--- a/skills/chatgpt/design-solution-before-implementation/SKILL.md
++++ b/skills/chatgpt/design-solution-before-implementation/SKILL.md
+@@ -2,7 +2,7 @@
+ name: design-solution-before-implementation
+ description: "Use one non-interactive Pro pass to deepen the whole design from breadth to implementation, persist recoverable Library artifacts, and keep all design-session outputs embargoed until the run ends."
+ metadata:
+-  version: "2.0.5"
++  version: "2.0.6"
+   maturity: "experimental"
+ ---
+ 
+@@ -74,5 +74,23 @@
+ Keep filenames/folders proportional to navigation needs. Use workflow-state-and-transit P8 for stable anchors and central state; avoid duplicate summaries of every contract and every capsule state. Capsule execution after this pass belongs to execute-capsules-in-chat, not an embedded second workflow in this skill.
+ 
+ 
++## Reader intent and inspectable custom logic
++Separate the owner's explanation of a work node (context, change, outcome) from
++its executor instructions. Design one data source for its graph and outline views,
++with runtime status joined by stable project/node identity rather than duplicated.
++Preserve selected visual-reference identities; an unavailable or duplicate-looking
++attachment does not authorize reducing the number of requested distinct designs.
++Isolate the missing reference while continuing independent work.
++
++Identify significant custom transformations, selection, recovery, merge, layout
++or optimization mechanisms that warrant individual correctness/cost review. Do
++not catalogue every helper, framework or library call. Record purpose, inputs,
++outputs, strategy, invariants/edge cases, actual implementation refs (or planned),
++and testability. Keep observed evidence tied to implementation/definition revisions.
++Optimization claims need compatible workloads/methods/units and correctness evidence;
++otherwise state unmeasured or not comparable. No extra model reporting or benchmark
++is required after each edit. Product-specific schema details belong in the owning
++project's contract, not replicated across global skills.
++
+ ## Canonical navigation
+ [Workflow map](../../shared/project-workflow/SKILL.md) · [Shared contract](../../shared/workflow-state-and-transit/SKILL.md)

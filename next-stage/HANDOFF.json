@@ -1,0 +1,16 @@
+{
+  "kind": "next-stage-design-archive",
+  "id": "waypoint-stage2-20261017-r1",
+  "project_id": "waypoint",
+  "artifact_status": "PREPARED_AND_LOCALLY_CHECKED",
+  "resource_policy": "MIXED",
+  "entry": "CODEX_START.md",
+  "plan": "roadmap/ROADMAP.plan.json",
+  "basis_commit": "c36e2e9a296ec8a78e4a19fad1975ea6ed951ade",
+  "execution_started": false,
+  "global_skills_changed": false,
+  "scheduler_assignment_created": false,
+  "pending_external_input": "Third distinct visual reference, affects WPT-N09 only",
+  "full_request_accepted": false,
+  "note": "Design complete enough for N00–N08 execution; future target checks and actual third theme remain implementation obligations."
+}

@@ -1,9 +1,10 @@
 {
   "schema_version": "waypoint-delivery-manifest/1",
   "project_id": "waypoint",
-  "state": "LOCAL_INTEGRATION_20261017",
+  "state": "STAGE2_FUNCTIONAL_N09_OPEN_20261017",
   "source_archive_sha256": "6c5c77322e79d56df988a5954830353d2493c6400750f87d040e62a054f40da6",
-  "file_count": 104,
+  "next_stage_archive_sha256": "eb9d06b3df05e3afa73b8fe055a94b677a1ffc02dcd3350815510688b46588af",
+  "file_count": 129,
   "files": [
     {
       "path": ".gitignore",
@@ -17,8 +18,8 @@
     },
     {
       "path": "LOCAL_RUN_RU.md",
-      "size_bytes": 3462,
-      "sha256": "3622b68ce306c0df4ecd784014929873dcde8f1445580aae4e8718f686160df9"
+      "size_bytes": 4492,
+      "sha256": "d3045054a60c00fa301ec32e4cc1b7ae6d7e2bdaabc6a6e43dd944f430c8d098"
     },
     {
       "path": "NOTICE.md",
@@ -26,9 +27,14 @@
       "sha256": "10bed3d6d9ea8d1403faba2c2580707b5060c4d3d41371763b3875219c6e83f1"
     },
     {
+      "path": "OBSERVABILITY_API.md",
+      "size_bytes": 2504,
+      "sha256": "5ef9f257a79ebf5473a0d83e2fed439c6fa7a8a67dc08b52b963d73467a52abb"
+    },
+    {
       "path": "README_RU.md",
-      "size_bytes": 6858,
-      "sha256": "c34fcb84b6d6d009ec94d152aed3854968d3262e3354917569ba3c43e9305811"
+      "size_bytes": 7176,
+      "sha256": "ff6be937354b7ca13605621a5270e10d5482bde79299f26222f8599079d2b004"
     },
     {
       "path": "SESSION.json",
@@ -191,6 +197,31 @@
       "sha256": "07332c58cceba55b2c96348a938997b2fce56a5314cb0ca11e05ee91e89c75ab"
     },
     {
+      "path": "evidence/stage2-obsidian-offline-chat.png",
+      "size_bytes": 249587,
+      "sha256": "0150d8f909c39ca215adc94dba309738d048b5c4ba9bc0044a1654fc48fe26f8"
+    },
+    {
+      "path": "evidence/stage2-obsidian-synthetic.png",
+      "size_bytes": 79088,
+      "sha256": "9a96077e200e29f7cc3d554efdcb3c741333c241398605211f29fd351b663125"
+    },
+    {
+      "path": "evidence/stage2-terracotta-offline-chat.png",
+      "size_bytes": 251417,
+      "sha256": "fdf483d87792031ac94bd4a1f3047f5e4853276cd16e27679f6024fda9ae2662"
+    },
+    {
+      "path": "evidence/stage2-terracotta-synthetic.png",
+      "size_bytes": 82954,
+      "sha256": "7045567b7e580bc60d3c35831b7210f3e6ec451a907304eb08fb94b504ee6590"
+    },
+    {
+      "path": "evidence/stage2-ui-synthetic.json",
+      "size_bytes": 1008,
+      "sha256": "05506edbe82b3f74a34be1764741d65079b3f8e48929c9b18899f3e2ffab2eb4"
+    },
+    {
       "path": "evidence/ui-nested.png",
       "size_bytes": 112666,
       "sha256": "fa1e2adeef7a41b19d872027c154d69de7863eee994f64aad7b185951c16b16d"
@@ -242,13 +273,13 @@
     },
     {
       "path": "preview.html",
-      "size_bytes": 143679,
-      "sha256": "f1f52df436a186f4fb578bb828065589a2294d4cf008f60be6f13039250a3db7"
+      "size_bytes": 218838,
+      "sha256": "22fb2b3f991a00cd6f315a5730f9dc70fddeca1bf3418a33b792c3e6d3ad71f8"
     },
     {
       "path": "pyproject.toml",
       "size_bytes": 636,
-      "sha256": "e718c0f8555aa5ccefa401a25aab4a97fdb7c8ce6389836579501623987692e6"
+      "sha256": "b2fe5d95d1c967451ebbae7e6e1d888bb93ffc63e364fa4709f044562070eb63"
     },
     {
       "path": "reports/C05_ADAPTER.md",
@@ -282,18 +313,23 @@
     },
     {
       "path": "schemas/event.schema.json",
-      "size_bytes": 5561,
-      "sha256": "fa3adc6b6d98bb31c16359060d0dcb086ee73e0ee5632f6f5ff20492ff7dd1e5"
+      "size_bytes": 18189,
+      "sha256": "ce25469bc94c3d4c1df3c8e20658d79abc65d539e5faa77ef6be3397b9fcf657"
+    },
+    {
+      "path": "schemas/observability-profile.schema.json",
+      "size_bytes": 12428,
+      "sha256": "fdbfe7141e505db6630bfcff04169e5623e0253453ca218553282a2f50b1a544"
     },
     {
       "path": "schemas/openapi.json",
-      "size_bytes": 16779,
-      "sha256": "148114ebea95eaadd379fc6e7a1a7021606515cb1302de94193501faf0ea0f93"
+      "size_bytes": 24829,
+      "sha256": "4c2d197533ed1858016e9d20f9cafb0418f087778314d02d4ce82bd1aec07086"
     },
     {
       "path": "schemas/plan.schema.json",
-      "size_bytes": 3098,
-      "sha256": "a5c3573d83a90699d97f5fbd64b9d9838361f5ecb38126e392cb7238cfca39b7"
+      "size_bytes": 17418,
+      "sha256": "4f3c0a72dd6524677dcfe9f51210be20c15fa2ce5b29a60a2a298efbf38efe18"
     },
     {
       "path": "skills/INTEGRATION.md",
@@ -371,9 +407,19 @@
       "sha256": "4d54c7adc24e7a077b2d3402ee1fc81a96507c95a0b2b0a91af2f5cd7c931593"
     },
     {
+      "path": "tests/stage2_http_browser_check.py",
+      "size_bytes": 15556,
+      "sha256": "278bf312e55387f7dbee84226c0fa2f8d6fb4f7b93988f9a0c0fe317f9a3a8c9"
+    },
+    {
+      "path": "tests/stage2_ui_check.py",
+      "size_bytes": 9949,
+      "sha256": "2871a13bf685cc8248bc83273810a6dc6329b9e6ce960990060aaa4c92d2c141"
+    },
+    {
       "path": "tests/test_adapter_incremental.py",
-      "size_bytes": 23241,
-      "sha256": "37c3764383b65a0e6f38a784752d3d28b6a6ee0626f70fe1f9f3ee70908de53b"
+      "size_bytes": 23380,
+      "sha256": "904f746a144697ddab177fedf18e143328355fbda3178957595fb53d8c19a6a3"
     },
     {
       "path": "tests/test_adapters.py",
@@ -381,9 +427,34 @@
       "sha256": "ad008f8d448815d8bea2a21129dfd728387063a99a66d774029be13db8e15e7d"
     },
     {
+      "path": "tests/test_algorithm_evidence.py",
+      "size_bytes": 5008,
+      "sha256": "c851f42b242df33025e6fe1211daf2306bdbb818a8caef0fe5dcd395bc57a35c"
+    },
+    {
+      "path": "tests/test_authoring_next_stage.py",
+      "size_bytes": 7000,
+      "sha256": "8f34a89df54e273e61e550f3bef573e4b55f87a94efcd3ed5faefc1a71170fbd"
+    },
+    {
       "path": "tests/test_core.py",
       "size_bytes": 9991,
       "sha256": "dde0b6b303566fb12b96d1756fc712375505881261523a915ce04e73ea1a3847"
+    },
+    {
+      "path": "tests/test_dependencies.py",
+      "size_bytes": 8054,
+      "sha256": "eb999746b199698d9516fba257eea136fe47d8eae389a3157d892dc35edba7e8"
+    },
+    {
+      "path": "tests/test_native_line_budget.py",
+      "size_bytes": 3412,
+      "sha256": "3ddaa286a75264af24b53c75320d7a12b28d399e5dfc72ad930be778c97caea2"
+    },
+    {
+      "path": "tests/test_observability.py",
+      "size_bytes": 4438,
+      "sha256": "a80d11b3637d5b240cb7a798bbefcde9472d649243c7085f7139cf06f5eb0951"
     },
     {
       "path": "tests/test_schema.py",
@@ -391,19 +462,24 @@
       "sha256": "277273f1f183a5c54cdfbe30342ed021996eee41bbb03269c800eae5c7b4cbaa"
     },
     {
+      "path": "tests/test_stage2_store_api.py",
+      "size_bytes": 17590,
+      "sha256": "b19fb1724bc5dc0cc1e2941d5fc4272d6a7355e14b28adadddf67f4615049188"
+    },
+    {
       "path": "tests/test_targets_binding.py",
       "size_bytes": 7524,
-      "sha256": "978605217de9c80abba5e6ceffe2799076c9eae8429b5d60a56948e09fdd38ad"
+      "sha256": "3571b645c17263be47f1e47697c761f76d9f8b740bbeee3ba06640fe5b943651"
     },
     {
       "path": "tools/build_preview.py",
-      "size_bytes": 1332,
-      "sha256": "378f57b22ab61a3b0a7467ea7905e2799d8b346c266c915c9ca64ce918e9686d"
+      "size_bytes": 1723,
+      "sha256": "c5ae57fbf96a49ac4b6792da0f656b2c71ed25d38123769cb473a0a4bb8766b7"
     },
     {
       "path": "tools/generate_contracts.py",
-      "size_bytes": 4165,
-      "sha256": "fdceea97e2b38c4b4765a22e83b41cf70b88c4ce874e5fc5651254c31b3992c1"
+      "size_bytes": 5217,
+      "sha256": "7e56eeefe6adf04e0ccc5ff6a57e774c2a5143d24a734568ab87abdcd1da962c"
     },
     {
       "path": "tools/measure_live_ingest.py",
@@ -412,8 +488,8 @@
     },
     {
       "path": "tools/package_local.py",
-      "size_bytes": 3752,
-      "sha256": "9e6f203ddd7da90b1fa9bdbe6aa34d29e9a0248803a8d8df60f121ede7432466"
+      "size_bytes": 3890,
+      "sha256": "b48be1ad6ac094e535f9f63115f1bdcc77f18e02f24219d058ca12b262adc263"
     },
     {
       "path": "tools/verify_http.py",
@@ -452,8 +528,8 @@
     },
     {
       "path": "waypoint/adapters/codex.py",
-      "size_bytes": 21595,
-      "sha256": "bf7ad3277b3f65d1d5c0ca375d2f0878f1e67afdb997fbef6b702e46ceabe0b4"
+      "size_bytes": 21602,
+      "sha256": "c326ea15b1003fec9c47a29e7fd64252773f751ea84a454e213afd904ba2a838"
     },
     {
       "path": "waypoint/adapters/ipc.py",
@@ -464,6 +540,11 @@
       "path": "waypoint/adapters/patches.py",
       "size_bytes": 7768,
       "sha256": "48f1792bf6f665914cba31fa8047aa45be7195dc614d3955db5902d00f5a10ac"
+    },
+    {
+      "path": "waypoint/algorithm_evidence.py",
+      "size_bytes": 12817,
+      "sha256": "a859a8dd8ac369ae09ddd840817a950a3f6b869d0a3b895eec3ffe20ec606704"
     },
     {
       "path": "waypoint/cli.py",
@@ -477,8 +558,8 @@
     },
     {
       "path": "waypoint/collector.py",
-      "size_bytes": 13395,
-      "sha256": "57050f7f13d85fe554de24334a2cf721aca4bf18537c11540b99fbdf42a26a87"
+      "size_bytes": 13996,
+      "sha256": "e881668d69d2e8154b5355f77673f20e5e9ad01c89898aed63b1bacfe1a9c33d"
     },
     {
       "path": "waypoint/demo.py",
@@ -486,9 +567,29 @@
       "sha256": "910495a8c44d507ad92b25461eac58c10300b48ba98944e090ea0a75eb394166"
     },
     {
+      "path": "waypoint/dependencies.py",
+      "size_bytes": 10301,
+      "sha256": "d3ea0e5b0dd73466f3b747d1cc59e39f8adb2700c0e47faab68d85ff26ff9c58"
+    },
+    {
       "path": "waypoint/domain.py",
-      "size_bytes": 11299,
-      "sha256": "94cfcd5b2b2a9ca4475ece794d4d7a90d36e4fcd19742d1339122ddaf0c6d938"
+      "size_bytes": 11641,
+      "sha256": "51485a83f12a7c501e9eabcfddd019bbae4a27dd689351d4a6e021353979394c"
+    },
+    {
+      "path": "waypoint/item_types.py",
+      "size_bytes": 3053,
+      "sha256": "a0c9a33bef7bfca5b8054844fe8eca328597b4dcda0b59db5232d0578c27b753"
+    },
+    {
+      "path": "waypoint/observability.py",
+      "size_bytes": 11253,
+      "sha256": "a989a75cad95d921ac15c301d40a09784d0e18fceee32b220e5b756db49aefa2"
+    },
+    {
+      "path": "waypoint/read_models.py",
+      "size_bytes": 6681,
+      "sha256": "25fe6a1464d7824f09d765644ae6571e31ac6629e0d840dd3fb86b178ca713ae"
     },
     {
       "path": "waypoint/security.py",
@@ -497,8 +598,8 @@
     },
     {
       "path": "waypoint/server.py",
-      "size_bytes": 6668,
-      "sha256": "46139bfdc2542811be2604d9f43ab27ffcb1226cf69357035f3e61b1a6c20bf9"
+      "size_bytes": 8939,
+      "sha256": "97cd917affb53637c327b05816ed319dd3048aa649672e511bfe1027b6e14a7e"
     },
     {
       "path": "waypoint/spool.py",
@@ -507,23 +608,48 @@
     },
     {
       "path": "waypoint/store.py",
-      "size_bytes": 29706,
-      "sha256": "6e04dfb56d0049043c82263ee3d5b4b9090458b927431c7f1ab43bd39e3f366b"
+      "size_bytes": 39013,
+      "sha256": "6a768e6314a8817507b81361e4586ecf4fa3b54d384c49583ab573381dc922b7"
+    },
+    {
+      "path": "waypoint/web/algorithm_panel.js",
+      "size_bytes": 5812,
+      "sha256": "bba32110bf515adab794c0885d9b236be1bb91cd72fd4bdfca0fdfc72bc50848"
     },
     {
       "path": "waypoint/web/app.js",
-      "size_bytes": 54064,
-      "sha256": "5e1373eadd63cb72f77153338df4cfe693fbe8d4325ef8062b1a130ff5966c35"
+      "size_bytes": 66114,
+      "sha256": "69d22dfc35e19039c7bf20ce1a810cc7fe3164a233a95f521e9414a88c3928dc"
+    },
+    {
+      "path": "waypoint/web/filters.js",
+      "size_bytes": 2440,
+      "sha256": "499f93ded176728a02e3c5f0ca946ae323ce8309a8ecd390c0987793880727c9"
     },
     {
       "path": "waypoint/web/index.html",
-      "size_bytes": 2929,
-      "sha256": "bd0d67e018782c710bdbd4adca9a3be4c0b618a04ddc96ac930285efd1e16782"
+      "size_bytes": 3559,
+      "sha256": "6c6f8eaa975deee4ed1fe55cd3779a4b732968d81d1676be8abdbb0b3a81da87"
+    },
+    {
+      "path": "waypoint/web/plan.js",
+      "size_bytes": 7000,
+      "sha256": "8276209edd1c45bcd812b4bc89740b98dce6fbf31e7ea1b3d1f7883dd54c732d"
+    },
+    {
+      "path": "waypoint/web/projects.js",
+      "size_bytes": 2030,
+      "sha256": "94ffc08c24a888507b6bc46ceec704be5644046ae9e0136d051f20a2b0e0d8a1"
     },
     {
       "path": "waypoint/web/style.css",
-      "size_bytes": 13822,
-      "sha256": "7915a3772acbcc1a8bd4cf1f0eaa13234bcac8e1e775b3123a5e189c481a0e0e"
+      "size_bytes": 16919,
+      "sha256": "710ee3c152e6369236b8112723d8932e1a35e2cadf68780cbd11198ff3f9ec42"
+    },
+    {
+      "path": "waypoint/web/themes.js",
+      "size_bytes": 1629,
+      "sha256": "b8667e76037bfee9dd91edfcbeb20b1c11385ad3cfb43f52edb55c1cfb597302"
     }
   ]
 }

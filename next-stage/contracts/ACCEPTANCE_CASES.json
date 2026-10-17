@@ -1,0 +1,229 @@
+{
+  "status": "TARGET_NOT_RUN",
+  "cases": [
+    {
+      "id": "A01",
+      "packet": "WPT-N01",
+      "label": "Native/profile round-trip",
+      "expected": "Old assignments/IDs/unknown fields and all retained history unchanged; new fields validated.",
+      "level": "schema + actual Store round-trip",
+      "target_result": "NOT_RUN"
+    },
+    {
+      "id": "A02",
+      "packet": "WPT-N01",
+      "label": "Migration interruption",
+      "expected": "Rollback leaves a usable prior DB; reopen and deterministic rebuild preserve accepted events.",
+      "level": "real temporary SQLite",
+      "target_result": "NOT_RUN"
+    },
+    {
+      "id": "A03",
+      "packet": "WPT-N02",
+      "label": "Inherited prerequisite regression",
+      "expected": "Nested /packet, authoring frontier and view report same ancestor/subtree requirement.",
+      "level": "shared module + API",
+      "target_result": "NOT_RUN"
+    },
+    {
+      "id": "A04",
+      "packet": "WPT-N02",
+      "label": "Partial dependency and phase",
+      "expected": "C05.3-like edge only affects relevant child/finish; independent preparation remains available.",
+      "level": "graph fixture + UI endpoint display",
+      "target_result": "NOT_RUN"
+    },
+    {
+      "id": "A05",
+      "packet": "WPT-N02",
+      "label": "Availability not status",
+      "expected": "Done without receipt is unknown; valid existing output can satisfy while parent status waits.",
+      "level": "ledger + read projection",
+      "target_result": "NOT_RUN"
+    },
+    {
+      "id": "A06",
+      "packet": "WPT-N02",
+      "label": "Stale evidence and conflicts",
+      "expected": "Predicate/workspace changes invalidate; layout does not; contradictory evidence is displayed.",
+      "level": "event projection",
+      "target_result": "NOT_RUN"
+    },
+    {
+      "id": "A07",
+      "packet": "WPT-N02",
+      "label": "Actual early work",
+      "expected": "Activity accepted and visible with missing/unknown prerequisite warning, no control RPC.",
+      "level": "API + browser",
+      "target_result": "NOT_RUN"
+    },
+    {
+      "id": "A08",
+      "packet": "WPT-N02",
+      "label": "Historical incident",
+      "expected": "Use actual IDs/version/chronology or explicitly NOT_RECONSTRUCTED; no speculative single cause.",
+      "level": "target evidence only",
+      "target_result": "NOT_RUN"
+    },
+    {
+      "id": "A09",
+      "packet": "WPT-N03",
+      "label": "Standalone task clarity",
+      "expected": "Human explanation names project context/change/outcome; technical instructions are in separate subtab.",
+      "level": "content review + browser",
+      "target_result": "NOT_RUN"
+    },
+    {
+      "id": "A10",
+      "packet": "WPT-N03",
+      "label": "One Plan/Map state",
+      "expected": "One block event updates both without another agent write; summary text identical to block intent.",
+      "level": "real browser→HTTP→Store",
+      "target_result": "NOT_RUN"
+    },
+    {
+      "id": "A11",
+      "packet": "WPT-N03",
+      "label": "Parent and history semantics",
+      "expected": "Waiting parent can show active descendants; parent/leaves not double counted; current runtime over old plan labelled.",
+      "level": "synthetic fixture + browser",
+      "target_result": "NOT_RUN"
+    },
+    {
+      "id": "A12",
+      "packet": "WPT-N03",
+      "label": "Project switching",
+      "expected": "Same node IDs in two projects remain separate; old late request cannot contaminate new project.",
+      "level": "controlled delayed HTTP + browser",
+      "target_result": "NOT_RUN"
+    },
+    {
+      "id": "A13",
+      "packet": "WPT-N03",
+      "label": "Catalogue cost/boundary",
+      "expected": "Only permitted registered projects; summary excludes raw messages and does not read every transcript.",
+      "level": "API/SQL inspection",
+      "target_result": "NOT_RUN"
+    },
+    {
+      "id": "A14",
+      "packet": "WPT-N04",
+      "label": "Filter before limit",
+      "expected": "One matching old item behind >1000 nonmatching ones is found by next-page query.",
+      "level": "actual indexed Store",
+      "target_result": "NOT_RUN"
+    },
+    {
+      "id": "A15",
+      "packet": "WPT-N04",
+      "label": "Paging identity",
+      "expected": "Equal first_seq ties, deep duplicate links and identity corrections do not lose/duplicate items.",
+      "level": "Store + cursor tests",
+      "target_result": "NOT_RUN"
+    },
+    {
+      "id": "A16",
+      "packet": "WPT-N04",
+      "label": "Cursor scope",
+      "expected": "Reused cursor under different project/filter/deep/version rejected; client deliberately opens new window.",
+      "level": "API + browser",
+      "target_result": "NOT_RUN"
+    },
+    {
+      "id": "A17",
+      "packet": "WPT-N04",
+      "label": "Reader autonomy",
+      "expected": "New matching count, scroll anchor, selected text and reader-specific filters remain correct.",
+      "level": "real mouse/wheel/selection",
+      "target_result": "NOT_RUN"
+    },
+    {
+      "id": "A18",
+      "packet": "WPT-N04",
+      "label": "Retention and unknowns",
+      "expected": "Hidden messages still ingested; unknown types accessible; encrypted reasoning not invented.",
+      "level": "collector unchanged + projection",
+      "target_result": "NOT_RUN"
+    },
+    {
+      "id": "A19",
+      "packet": "WPT-N05",
+      "label": "Algorithm association",
+      "expected": "One definition used by several blocks; right badge list and project inventory agree.",
+      "level": "Store/view + browser",
+      "target_result": "NOT_RUN"
+    },
+    {
+      "id": "A20",
+      "packet": "WPT-N05",
+      "label": "Implementation and stale tests",
+      "expected": "Planned/code/tested/measured states distinct; revision mismatch marks prior evidence stale.",
+      "level": "event fixtures + UI",
+      "target_result": "NOT_RUN"
+    },
+    {
+      "id": "A21",
+      "packet": "WPT-N05",
+      "label": "Optimization claims",
+      "expected": "Correctness required; incompatible dataset/method/unit rejects speedup; regressions retained.",
+      "level": "reference oracle then runtime",
+      "target_result": "NOT_RUN"
+    },
+    {
+      "id": "A22",
+      "packet": "WPT-N05",
+      "label": "Code/reference safety",
+      "expected": "Hostile strings escaped; no arbitrary read/eval/execution; snippets/links labelled by revision.",
+      "level": "HTTP/UI security test",
+      "target_result": "NOT_RUN"
+    },
+    {
+      "id": "A23",
+      "packet": "WPT-N06",
+      "label": "Known themes",
+      "expected": "Two known references preserved, errors/test states independent from accent, theme choice saved.",
+      "level": "actual browser appearance",
+      "target_result": "NOT_RUN"
+    },
+    {
+      "id": "A24",
+      "packet": "WPT-N09",
+      "label": "Actual third theme",
+      "expected": "Distinct owner-selected third reference implemented, all three available; not a duplicate slot.",
+      "level": "owner reference + browser",
+      "target_result": "NOT_RUN"
+    },
+    {
+      "id": "A25",
+      "packet": "WPT-N07",
+      "label": "Transferable authoring",
+      "expected": "Second project native profile accepted with its own IDs and no inherited MIXED permission.",
+      "level": "schema + import/export",
+      "target_result": "NOT_RUN"
+    },
+    {
+      "id": "A26",
+      "packet": "WPT-N07",
+      "label": "Skill behaviour and publication",
+      "expected": "Optional chat route remains optional; exact patches preserve unrelated rules; publication/install states explicit.",
+      "level": "candidate review + repository validator + bounded workflow scenarios",
+      "target_result": "NOT_RUN"
+    },
+    {
+      "id": "A27",
+      "packet": "WPT-N08",
+      "label": "Composed live system",
+      "expected": "Map/Plan/filter/algorithm/catalogue together on true browser/service and normal existing Codex events.",
+      "level": "target machine",
+      "target_result": "NOT_RUN"
+    },
+    {
+      "id": "A28",
+      "packet": "WPT-N08",
+      "label": "Recovery and cost",
+      "expected": "Reconnect/migration preserves new accepted events, bounded rich history observations and measured environment/n.",
+      "level": "target machine + representative fixtures",
+      "target_result": "NOT_RUN"
+    }
+  ]
+}

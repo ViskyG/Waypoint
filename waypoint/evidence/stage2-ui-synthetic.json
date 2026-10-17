@@ -1,0 +1,22 @@
+{
+  "status": "PASS",
+  "fixture": "SYNTHETIC API; authored assets in real Chromium",
+  "live_codex_tested": false,
+  "real_service_tested": false,
+  "checks": [
+    "Default home is metadata project catalogue",
+    "Three selection slots; only two real ready themes",
+    "Registry selection survives reload",
+    "Plan consumes intent and independent parent/descendant projection",
+    "Human Task first; executor instructions in separate subtab",
+    "Map roundtrip restores expanded Plan context",
+    "Late prior-project events cannot replace selected project",
+    "Late state, versions, items, algorithms and catalogue replies cannot mutate next project",
+    "Reader filter distinguishes empty category selection from all",
+    "No browser application exceptions across both themes"
+  ],
+  "limitations": [
+    "Target N08 browser/service/store evidence is separate.",
+    "This bounded check covers late prior-project events; shared cancellation and generation guards also cover all requests."
+  ]
+}

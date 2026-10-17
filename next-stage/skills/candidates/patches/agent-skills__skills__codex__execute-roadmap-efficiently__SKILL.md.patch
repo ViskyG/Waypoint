@@ -1,0 +1,32 @@
+--- a/skills/codex/execute-roadmap-efficiently/SKILL.md
++++ b/skills/codex/execute-roadmap-efficiently/SKILL.md
+@@ -2,7 +2,7 @@
+ name: execute-roadmap-efficiently
+ description: "Execute permitted direct Codex work from a small roadmap frontier, reuse evidence, coordinate incoming chat capsules and switch to safe independent work during waits."
+ metadata:
+-  version: "2.0.0"
++  version: "2.0.1"
+   maturity: "experimental"
+ ---
+ 
+@@ -38,5 +38,20 @@
+ On the machine's return after offline accumulation, do not resume mutations until Udot's synchronization barrier has established the workspace baseline. Apply revised plans only to affected work, preserving unchanged completed code and evidence. Finish with actual implementation/publication/evidence status, not a generic "all green".
+ 
+ 
++## Input evidence and observed algorithm changes
++Before dependent work, use the current packet's effective prerequisites and check
++that the required output is available in the relevant workspace. Free status text
++or a collapsed parent arrow alone is insufficient. If an edge is inaccurate,
++revise its bounded contract or record an explained deviation; preserve actual
++work and unknown evidence. The observer is not an execution authority.
++
++At meaningful changes to a registered custom algorithm, update exact implementation
++and affected test/measurement references. Separate authored tests, executed evidence,
++correctness and resource claims. A changed implementation can make evidence stale;
++it does not make an old run fail. Do not declare an optimization measured without
++compatible data/method evidence. Do not maintain a second Plan status document or
++ask the model to summarize streams merely to refresh the UI. These rules preserve
++optional chat supply and the already selected resource permissions.
++
+ ## Canonical navigation
+ [Workflow map](../../shared/project-workflow/SKILL.md) · [Shared contract](../../shared/workflow-state-and-transit/SKILL.md)

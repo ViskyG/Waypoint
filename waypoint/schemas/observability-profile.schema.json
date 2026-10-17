@@ -1,0 +1,427 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Waypoint observability profile 1",
+  "type": "object",
+  "properties": {
+    "x_observability": {
+      "type": "object",
+      "properties": {
+        "schema": {
+          "const": "waypoint.observability/1"
+        },
+        "purpose": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 50000
+        },
+        "algorithms": {
+          "type": "object",
+          "maxProperties": 5000,
+          "propertyNames": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@/\\-]{0,199}$"
+          },
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              },
+              "title": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 500
+              },
+              "purpose": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 50000
+              },
+              "inputs": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 50000
+                },
+                "maxItems": 1000
+              },
+              "outputs": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 50000
+                },
+                "maxItems": 1000
+              },
+              "steps": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 50000
+                },
+                "maxItems": 1000
+              },
+              "invariants": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 50000
+                },
+                "maxItems": 1000
+              },
+              "edge_cases": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 50000
+                },
+                "maxItems": 1000
+              },
+              "resource_risks": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 50000
+                },
+                "maxItems": 1000
+              },
+              "definition_revision": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "implementation": {
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "properties": {
+                  "repository": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 2000
+                  },
+                  "revision": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 1000
+                  },
+                  "refs": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "path": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 2000
+                        },
+                        "symbol": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 1000
+                        }
+                      },
+                      "required": [
+                        "path"
+                      ],
+                      "additionalProperties": true
+                    },
+                    "maxItems": 1000,
+                    "minItems": 1
+                  }
+                },
+                "required": [
+                  "repository",
+                  "revision",
+                  "refs"
+                ],
+                "additionalProperties": true
+              },
+              "testability": {
+                "type": "object",
+                "properties": {
+                  "strategy": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 50000
+                  },
+                  "test_refs": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "path": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 2000
+                        },
+                        "symbol": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 1000
+                        }
+                      },
+                      "required": [
+                        "path"
+                      ],
+                      "additionalProperties": true
+                    },
+                    "maxItems": 1000
+                  },
+                  "missing_cases": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 50000
+                    },
+                    "maxItems": 1000
+                  }
+                },
+                "required": [
+                  "strategy",
+                  "test_refs",
+                  "missing_cases"
+                ],
+                "additionalProperties": true
+              }
+            },
+            "required": [
+              "id",
+              "title",
+              "purpose",
+              "inputs",
+              "outputs",
+              "steps",
+              "invariants",
+              "edge_cases",
+              "definition_revision",
+              "implementation",
+              "testability",
+              "resource_risks"
+            ],
+            "additionalProperties": true
+          }
+        }
+      },
+      "required": [
+        "schema",
+        "algorithms"
+      ],
+      "additionalProperties": true
+    },
+    "nodes": {
+      "type": "object",
+      "maxProperties": 20000,
+      "propertyNames": {
+        "type": "string",
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@/\\-]{0,199}$"
+      },
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "x_observability": {
+            "type": "object",
+            "properties": {
+              "intent": {
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "summary": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 50000
+                      },
+                      "context": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 50000
+                      },
+                      "change": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 50000
+                      },
+                      "scope": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 50000
+                      }
+                    },
+                    "required": [
+                      "summary",
+                      "context",
+                      "change"
+                    ],
+                    "additionalProperties": true
+                  },
+                  {
+                    "const": {}
+                  }
+                ]
+              },
+              "outputs": {
+                "type": "object",
+                "maxProperties": 20000,
+                "propertyNames": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@/\\-]{0,199}$"
+                },
+                "additionalProperties": {
+                  "type": "object",
+                  "properties": {
+                    "definition": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 50000
+                    },
+                    "revision": {
+                      "type": "integer",
+                      "minimum": 1
+                    }
+                  },
+                  "required": [
+                    "definition",
+                    "revision"
+                  ],
+                  "additionalProperties": true
+                }
+              },
+              "algorithm_refs": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@/\\-]{0,199}$"
+                },
+                "maxItems": 1000,
+                "uniqueItems": true
+              }
+            },
+            "required": [],
+            "additionalProperties": true
+          }
+        },
+        "required": [],
+        "additionalProperties": true
+      }
+    },
+    "edges": {
+      "type": "object",
+      "maxProperties": 100000,
+      "propertyNames": {
+        "type": "string",
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@/\\-]{0,199}$"
+      },
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "x_observability": {
+            "type": "object",
+            "properties": {
+              "relation": {
+                "enum": [
+                  "requires",
+                  "order"
+                ]
+              },
+              "phase": {
+                "enum": [
+                  "start",
+                  "finish"
+                ]
+              },
+              "target_scope": {
+                "enum": [
+                  "node",
+                  "subtree"
+                ]
+              },
+              "why": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 50000
+              },
+              "condition": {
+                "type": "object",
+                "properties": {
+                  "output_id": {
+                    "type": "string",
+                    "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@/\\-]{0,199}$"
+                  },
+                  "revision": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "workspace": {
+                    "enum": [
+                      "consumer",
+                      "project"
+                    ]
+                  }
+                },
+                "required": [
+                  "output_id",
+                  "revision",
+                  "workspace"
+                ],
+                "additionalProperties": true
+              }
+            },
+            "required": [
+              "relation",
+              "phase",
+              "target_scope",
+              "why"
+            ],
+            "additionalProperties": true,
+            "allOf": [
+              {
+                "if": {
+                  "properties": {
+                    "relation": {
+                      "const": "requires"
+                    }
+                  }
+                },
+                "then": {
+                  "required": [
+                    "condition"
+                  ]
+                }
+              },
+              {
+                "if": {
+                  "properties": {
+                    "relation": {
+                      "const": "order"
+                    }
+                  }
+                },
+                "then": {
+                  "not": {
+                    "required": [
+                      "condition"
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "required": [],
+        "additionalProperties": true
+      }
+    }
+  },
+  "required": [],
+  "additionalProperties": true
+}

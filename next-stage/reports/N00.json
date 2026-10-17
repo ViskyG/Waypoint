@@ -1,0 +1,17 @@
+{
+  "packet": "WPT-N00",
+  "status": "TARGET_VERIFIED",
+  "git_base": "c36e2e9a296ec8a78e4a19fad1975ea6ed951ade",
+  "source_archive_sha256": "eb9d06b3df05e3afa73b8fe055a94b677a1ffc02dcd3350815510688b46588af",
+  "db_schema": "2",
+  "prior_plan_version": "v-55e4a40332434c53",
+  "plan_version": "v-e3363063b40e4d41",
+  "request_id": "waypoint-stage2-de79e7b792d48463d620e8fc",
+  "new_nodes": 12,
+  "prior_ids_and_content_preserved": true,
+  "backup_integrity": "ok",
+  "native_execution_state_changed": false,
+  "incident": "INCIDENT_NOT_RECONSTRUCTED",
+  "N09": "missing confirmed distinct visual reference",
+  "prior_runtime_tests_reused": "62 unchanged-source tests +target evidence;not rerun"
+}

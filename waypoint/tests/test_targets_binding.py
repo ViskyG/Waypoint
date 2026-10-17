@@ -14,7 +14,7 @@ def test_schema_one_migration_link_reopen_rebuild(tmp_path):
     s.ingest([event('old', 'item.upsert', {'item_id':'i','text':'old'}, nodes=['W1'], edge_ids=['E1'])])
     s.db.execute('DROP TABLE item_targets'); s.db.execute("UPDATE meta SET value='1'")
     s.close(); s = Store(path)
-    assert s.db.execute("SELECT value FROM meta WHERE key='schema'").fetchone()[0] == '2'
+    assert s.db.execute("SELECT value FROM meta WHERE key='schema'").fetchone()[0] == '3'
     assert len(s.items('p', node='W1', edge='E1')['items']) == 1
     s.ingest([event('link','item.link',{'item_id':'i'},nodes=['W2'])])
     assert s.items('p',node='W1',deep=False)['items'] == []

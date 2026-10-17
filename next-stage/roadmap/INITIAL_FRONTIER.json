@@ -1,0 +1,11 @@
+{
+  "basis": "authoring snapshot, not live status",
+  "start_packets": [
+    "WPT-N00"
+  ],
+  "requires_owner_input": [
+    "WPT-N09"
+  ],
+  "execution_started": false,
+  "note": "Fresh actual receipts, claims and workspace decide runtime availability. No claim is made by this file."
+}

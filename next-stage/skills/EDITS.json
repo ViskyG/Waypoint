@@ -1,0 +1,80 @@
+{
+  "state": "PREPARED_NOT_PUBLISHED_NOT_INSTALLED",
+  "base_skills_commit": "e42beeb26a1065ec57af2999f2970046ccd21f53",
+  "base_project_commit": "c36e2e9a296ec8a78e4a19fad1975ea6ed951ade",
+  "edits": [
+    {
+      "repository": "agent-skills",
+      "path": "skills/chatgpt/build-implementation-roadmap/SKILL.md",
+      "expected_git_blob": "ae1d3cdb1246ef35a519ad14ed6c3d3e82b5aaf3",
+      "version_from": "2.0.0",
+      "version_to": "2.0.1",
+      "insert_before": "## Canonical navigation",
+      "section": "sections/roadmap.en.md",
+      "owner_translation_fragment": "sections/roadmap.ru.md",
+      "translation_scope": "amendment only; existing absent full translation remains absent"
+    },
+    {
+      "repository": "agent-skills",
+      "path": "skills/chatgpt/design-solution-before-implementation/SKILL.md",
+      "expected_git_blob": "d9cc14af840abb0a73b64045e84528b5fe40ea0f",
+      "version_from": "2.0.5",
+      "version_to": "2.0.6",
+      "insert_before": "## Canonical navigation",
+      "section": "sections/design.en.md",
+      "owner_translation_fragment": "sections/design.ru.md",
+      "translation_scope": "amendment only; existing absent full translation remains absent"
+    },
+    {
+      "repository": "agent-skills",
+      "path": "skills/codex/execute-roadmap-efficiently/SKILL.md",
+      "expected_git_blob": "26d3eb0ff4618b18b0b737fb11f4bde9eae35615",
+      "version_from": "2.0.1",
+      "version_to": "2.0.2",
+      "insert_before": "## Canonical navigation",
+      "section": "sections/execution.en.md",
+      "owner_translation_fragment": "sections/execution.ru.md",
+      "translation_scope": "amendment only; existing absent full translation remains absent"
+    },
+    {
+      "repository": "Waypoint",
+      "path": "waypoint/skills/waypoint-map/SKILL.md",
+      "expected_git_blob": "6402368c982b44a2b96de2082351226ac3c27401",
+      "version_from": "0.1.0",
+      "version_to": "0.2.0",
+      "insert_before": null,
+      "section": "sections/waypoint-map.en.md",
+      "translation_scope": "paired complete existing skill updated by this fragment"
+    },
+    {
+      "repository": "Waypoint",
+      "path": "waypoint/skills/waypoint-map/SKILL.ru.md",
+      "expected_git_blob": "a1cdfc37b21cbb72411320afe15650d42f08e532",
+      "version_from": "0.1.0",
+      "version_to": "0.2.0",
+      "insert_before": null,
+      "section": "sections/waypoint-map.ru.md",
+      "translation_scope": "paired complete existing skill updated by this fragment"
+    },
+    {
+      "repository": "Waypoint",
+      "path": "waypoint/skills/waypoint-observe/SKILL.md",
+      "expected_git_blob": "52f1301ad4a4d4568d2fa05ab187a326e5002f46",
+      "version_from": "0.1.0",
+      "version_to": "0.2.0",
+      "insert_before": null,
+      "section": "sections/waypoint-observe.en.md",
+      "translation_scope": "paired complete existing skill updated by this fragment"
+    },
+    {
+      "repository": "Waypoint",
+      "path": "waypoint/skills/waypoint-observe/SKILL.ru.md",
+      "expected_git_blob": "395350fd6c17c9942d58c88de4297c2ed0cb1da2",
+      "version_from": "0.1.0",
+      "version_to": "0.2.0",
+      "insert_before": null,
+      "section": "sections/waypoint-observe.ru.md",
+      "translation_scope": "paired complete existing skill updated by this fragment"
+    }
+  ]
+}

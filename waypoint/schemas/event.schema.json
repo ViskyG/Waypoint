@@ -254,6 +254,400 @@
           }
         }
       }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "enum": [
+              "dependency.observation"
+            ]
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "payload"
+        ],
+        "properties": {
+          "payload": {
+            "type": "object",
+            "properties": {
+              "edge_id": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@/\\-]{0,199}$"
+              },
+              "consumer_id": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@/\\-]{0,199}$"
+              },
+              "requirement_fingerprint": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 64
+              },
+              "workspace_ref": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000
+              },
+              "availability": {
+                "enum": [
+                  "available",
+                  "missing",
+                  "waived"
+                ]
+              },
+              "basis": {
+                "type": "object",
+                "properties": {
+                  "kind": {
+                    "enum": [
+                      "artifact",
+                      "test",
+                      "executor_attestation",
+                      "waiver"
+                    ]
+                  },
+                  "ref": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 2000
+                  },
+                  "revision": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 2000
+                  },
+                  "explanation": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 50000
+                  }
+                },
+                "required": [
+                  "kind",
+                  "ref",
+                  "explanation"
+                ],
+                "additionalProperties": true
+              },
+              "occurred_at": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "supersedes": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@/\\-]{0,199}$"
+                },
+                "maxItems": 1000,
+                "uniqueItems": true
+              }
+            },
+            "required": [
+              "edge_id",
+              "consumer_id",
+              "requirement_fingerprint",
+              "workspace_ref",
+              "availability",
+              "basis",
+              "occurred_at"
+            ],
+            "additionalProperties": true
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "enum": [
+              "algorithm.observation"
+            ]
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "payload"
+        ],
+        "properties": {
+          "payload": {
+            "type": "object",
+            "properties": {
+              "algorithm_id": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@/\\-]{0,199}$"
+              },
+              "definition_revision": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "implementation_ref": {
+                "anyOf": [
+                  {
+                    "type": "null"
+                  },
+                  {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 500,
+                    "pattern": "\\S"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "repository": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 2000,
+                        "pattern": "\\S"
+                      },
+                      "revision": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 500,
+                        "pattern": "\\S"
+                      },
+                      "refs": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "path": {
+                              "type": "string",
+                              "minLength": 1,
+                              "maxLength": 2000,
+                              "pattern": "\\S"
+                            },
+                            "symbol": {
+                              "type": "string",
+                              "minLength": 1,
+                              "maxLength": 500,
+                              "pattern": "\\S"
+                            }
+                          },
+                          "required": [
+                            "path",
+                            "symbol"
+                          ],
+                          "additionalProperties": true
+                        },
+                        "maxItems": 100
+                      }
+                    },
+                    "required": [
+                      "repository",
+                      "revision",
+                      "refs"
+                    ],
+                    "additionalProperties": true
+                  }
+                ]
+              },
+              "observation_kind": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 100,
+                "pattern": "\\S"
+              },
+              "correctness": {
+                "type": "object",
+                "properties": {
+                  "outcome": {
+                    "enum": [
+                      "passed",
+                      "failed",
+                      "not_run"
+                    ]
+                  },
+                  "evidence_refs": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 4000,
+                      "pattern": "\\S"
+                    },
+                    "maxItems": 100
+                  }
+                },
+                "required": [
+                  "outcome",
+                  "evidence_refs"
+                ],
+                "additionalProperties": true,
+                "allOf": [
+                  {
+                    "if": {
+                      "properties": {
+                        "outcome": {
+                          "enum": [
+                            "passed",
+                            "failed"
+                          ]
+                        }
+                      }
+                    },
+                    "then": {
+                      "properties": {
+                        "evidence_refs": {
+                          "minItems": 1
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              "measurement": {
+                "anyOf": [
+                  {
+                    "type": "null"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "metric": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 2000,
+                        "pattern": "\\S"
+                      },
+                      "unit": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 2000,
+                        "pattern": "\\S"
+                      },
+                      "statistic": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 2000,
+                        "pattern": "\\S"
+                      },
+                      "method": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 2000,
+                        "pattern": "\\S"
+                      },
+                      "environment_ref": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 2000,
+                        "pattern": "\\S"
+                      },
+                      "dataset_ref": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 2000,
+                        "pattern": "\\S"
+                      },
+                      "workload_ref": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 2000,
+                        "pattern": "\\S"
+                      },
+                      "semantic_revision": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 2000,
+                        "pattern": "\\S"
+                      },
+                      "n": {
+                        "type": "integer",
+                        "minimum": 1
+                      },
+                      "value": {
+                        "type": "number"
+                      },
+                      "direction": {
+                        "enum": [
+                          "lower",
+                          "higher"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "metric",
+                      "unit",
+                      "statistic",
+                      "method",
+                      "environment_ref",
+                      "dataset_ref",
+                      "workload_ref",
+                      "semantic_revision",
+                      "n",
+                      "value",
+                      "direction"
+                    ],
+                    "additionalProperties": true
+                  }
+                ]
+              },
+              "comparison": {
+                "anyOf": [
+                  {
+                    "type": "null"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "baseline_observation_id": {
+                        "type": "string",
+                        "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@/\\-]{0,199}$"
+                      },
+                      "candidate_observation_id": {
+                        "type": "string",
+                        "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@/\\-]{0,199}$"
+                      },
+                      "constraints": {
+                        "anyOf": [
+                          {
+                            "type": "object"
+                          },
+                          {
+                            "type": "array"
+                          }
+                        ]
+                      },
+                      "claim": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 16000,
+                        "pattern": "\\S"
+                      }
+                    },
+                    "required": [
+                      "baseline_observation_id",
+                      "candidate_observation_id",
+                      "constraints",
+                      "claim"
+                    ],
+                    "additionalProperties": true
+                  }
+                ]
+              },
+              "note": {
+                "type": "string",
+                "maxLength": 16000
+              }
+            },
+            "required": [
+              "algorithm_id",
+              "definition_revision",
+              "observation_kind",
+              "correctness"
+            ],
+            "additionalProperties": true
+          }
+        }
+      }
     }
-  ]
+  ],
+  "$comment": "Receipt identity, exact SHA-256 requirement fingerprints, timezone awareness, finite measurement values and graph/project references are checked by domain/runtime validators. JSON Schema validates the portable field shape; it does not establish actual evidence or measurement comparability."
 }
