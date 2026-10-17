@@ -1,10 +1,10 @@
 """Shared read-only projections for Map, Plan, packet and catalogue."""
 from __future__ import annotations
-from datetime import datetime, timezone
 import json
 from .domain import ContractError, descendants
-from .dependencies import effective_requirements, evaluate_availability
+from .dependencies import effective_relations, evaluate_availability
 from .algorithm_evidence import algorithm_views
+from .source_health import aggregate_source_health, source_is_connected
 
 PROJECTION_VERSION='observability/1'
 CAPABILITIES=['observability_profile_1','effective_dependencies_1','typed_items_1','project_summary_1','algorithm_evidence_1']
@@ -14,23 +14,26 @@ def workspace_basis(plan,node=None,workspace=None):
     local=plan['nodes'].get(node,{}).get('x_observability',{}) if node else {}
     return {'consumer':workspace or local.get('workspace_ref') or profile.get('workspace_ref'), 'project':profile.get('project_workspace_ref')}
 
-def basis(store,document):
+def basis(store,document,node=None,workspace=None):
     project=document['plan']['project_id']
     seq=store.db.execute('SELECT COALESCE(MAX(seq),0) FROM events WHERE project=?',(project,)).fetchone()[0]
-    return {'plan_version':document['version'],'cursor':seq,'projection_version':PROJECTION_VERSION,'workspace_ref':workspace_basis(document['plan'])}
+    return {'plan_version':document['version'],'cursor':seq,'projection_version':PROJECTION_VERSION,'workspace_ref':workspace_basis(document['plan'],node,workspace)}
+
+def evaluated_relations(plan,node,phase,observations,workspace=None):
+    """All applicable context, with the exact workspace used for evaluation."""
+    refs=workspace_basis(plan,node,workspace)
+    return [{**r,**evaluate_availability(r,observations,refs),'workspace_ref':refs}
+            for r in effective_relations(plan,node,phase)]
 
 def prerequisite_view(store,document,node,phase='start',workspace=None,before=None):
     plan=document['plan']; observations=store.observations(plan['project_id'],'dependency',before=before)
-    refs=workspace_basis(plan,node,workspace)
-    return [{**r,**evaluate_availability(r,observations,refs)} for r in effective_requirements(plan,node,phase)]
+    return evaluated_relations(plan,node,phase,observations,workspace)
 
 def actor_active(actor,sources):
     if actor.get('activity') not in {'running','active'} or actor.get('activity_historical'):return False
     if actor.get('activity_source')=='demo':return True
     health=next((s for s in sources if s.get('source_key')==actor.get('activity_source')),None)
-    if not health or health.get('state')!='connected':return False
-    try:return (datetime.now(timezone.utc)-datetime.fromisoformat(health['at'].replace('Z','+00:00'))).total_seconds()<25
-    except (ValueError,KeyError,TypeError):return False
+    return bool(health and source_is_connected(health))
 
 def activity_views(plan,agents,scopes,sources):
     active={a['id'] for a in agents if actor_active(a,sources)}
@@ -50,7 +53,9 @@ def activity_views(plan,agents,scopes,sources):
 
 def augment_state(store,state):
     plan=state['plan'];project=plan['project_id'];document={'plan':plan,'version':state['version']}
-    active=activity_views(plan,state['agents'],state['scopes'],state['sources'])
+    shared_basis=basis(store,document)
+    sources=aggregate_source_health(state['sources'])['sources']
+    active=activity_views(plan,state['agents'],state['scopes'],sources)
     statuses={x['id']:x for x in state['node_states']}
     # Read once per consistent Store lock, never once per card/transcript.
     observations=store.observations(project,'dependency')
@@ -60,9 +65,9 @@ def augment_state(store,state):
     views={}
     for node,definition in plan['nodes'].items():
         extension=definition.get('x_observability',{}); intent=extension.get('intent')
-        prerequisites={phase:[{**r,**evaluate_availability(r,observations,workspace_basis(plan,node))} for r in effective_requirements(plan,node,phase)] for phase in ('start','finish')}
-        views[node]={'id':node,'intent':intent or None,'description_incomplete':not intent,'status':statuses.get(node,{}),'activity':active[node],'prerequisites':prerequisites,'dependency_warnings':warnings.get(node,[]),'algorithm_refs':extension.get('algorithm_refs',[])}
-    return {**state,'basis':basis(store,document),'node_views':views,'purpose':plan.get('x_observability',{}).get('purpose'),'capabilities':CAPABILITIES}
+        prerequisites={phase:evaluated_relations(plan,node,phase,observations) for phase in ('start','finish')}
+        views[node]={'id':node,'intent':intent or None,'description_incomplete':not intent,'status':statuses.get(node,{}),'activity':active[node],'prerequisites':prerequisites,'basis':{**shared_basis,'workspace_ref':workspace_basis(plan,node)},'dependency_warnings':warnings.get(node,[]),'algorithm_refs':extension.get('algorithm_refs',[])}
+    return {**state,'sources':sources,'basis':shared_basis,'node_views':views,'purpose':plan.get('x_observability',{}).get('purpose'),'capabilities':CAPABILITIES}
 
 def project_summaries(store):
     summaries=[]
@@ -70,14 +75,15 @@ def project_summaries(store):
         project=info['project']
         def rows(table):return [json.loads(r[0]) for r in store.db.execute('SELECT body FROM '+table+' WHERE project=?',(project,))]
         sources=rows('source_health');agents=rows('agents');scopes=rows('scopes')
+        health=aggregate_source_health(sources)
         active={a['id'] for a in agents if actor_active(a,sources)}
         nodes={n for scope in scopes if scope['agent_id'] in active for n in scope.get('node_ids',[])}
         # Metadata memberships plus parent IDs only; no item bodies/transcripts.
         plan=store.plan(project)['plan']
         leaves={n for n in nodes if not (descendants(plan,n)-{n})&nodes}
         latest=store.db.execute('SELECT MAX(observed_at) FROM events WHERE project=?',(project,)).fetchone()[0]
-        known=bool(sources)
-        summaries.append({'project_id':project,'title':info['title'],'version':info['version'],'purpose':info['purpose'],'distinct_active_agents':len(active) if known else None,'distinct_active_blocks':len(leaves) if known else None,'last_observed_at':latest,'source_health':{'state':'unknown' if not sources else 'connected' if any(x.get('state')=='connected' for x in sources) else 'disconnected','sources':[{k:x.get(k) for k in ('source_key','state','at')} for x in sources]}})
+        known=health['state'] in {'connected','disconnected'}
+        summaries.append({'project_id':project,'title':info['title'],'version':info['version'],'purpose':info['purpose'],'distinct_active_agents':len(active) if known else None,'distinct_active_blocks':len(leaves) if known else None,'last_observed_at':latest,'source_health':health})
     return summaries
 
 def algorithms(store,project,node=None,deep=False,version=None):

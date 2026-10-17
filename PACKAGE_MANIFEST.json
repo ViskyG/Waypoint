@@ -1,6 +1,6 @@
 {
   "schema_version": "waypoint-local-package/1",
-  "state": "CONFORMANCE_AUDIT_REMEDIATION_REQUIRED_20261017",
+  "state": "FOUR_DEFECTS_FIXED_REMAINING_AUDIT_OPEN_20261017",
   "files": [
     {
       "path": ".gitignore",
@@ -9,8 +9,8 @@
     },
     {
       "path": "START_HERE_RU.md",
-      "size_bytes": 4385,
-      "sha256": "c8ad824251e2424b98c150215f429b0f63df25f70cad985b5c97738f0eb9fef9"
+      "size_bytes": 5003,
+      "sha256": "10beb86cbec613bbb623541c451139646605b5b7167a4f5aa011a31fb6963764"
     },
     {
       "path": "next-stage/CODEX_START.md",
@@ -331,6 +331,116 @@
       "path": "next-stage/evidence/completion-terracotta.png",
       "size_bytes": 22001,
       "sha256": "8f0966031108b12f40705ac26c5676cecf59fd63e6ef3114c7661fed264b5dae"
+    },
+    {
+      "path": "next-stage/evidence/four-defects-20261017/APPLIED.json",
+      "size_bytes": 2752,
+      "sha256": "28d8a07da9712de2ede5efbf86583cd24e56934cf044f9dd9a705074bd086f21"
+    },
+    {
+      "path": "next-stage/evidence/four-defects-20261017/APPLIED_FINAL.json",
+      "size_bytes": 1544,
+      "sha256": "b73ad5f0863152f7876631e4d62b8203e64fcdf54e95642dbdd4ee915469e1c9"
+    },
+    {
+      "path": "next-stage/evidence/four-defects-20261017/FINAL_RU.md",
+      "size_bytes": 2900,
+      "sha256": "c62c5bc6ce2cc4c16fdd9068a29acee9dbb97c4b31d301214d6b73fcf3a8333a"
+    },
+    {
+      "path": "next-stage/evidence/four-defects-20261017/LIVE.json",
+      "size_bytes": 1397,
+      "sha256": "9f9fc91445e5dc5892c61d08a2ca41674aefa4b547d613247e6aba2f5c1c1ad9"
+    },
+    {
+      "path": "next-stage/evidence/four-defects-20261017/LIVE.png",
+      "size_bytes": 147276,
+      "sha256": "286bd8656c5df63dbef2e27f9549df6afd9c8da15f757f2c91fe351f386711a4"
+    },
+    {
+      "path": "next-stage/evidence/four-defects-20261017/REPORT_RU.md",
+      "size_bytes": 7914,
+      "sha256": "303c6a26fdbdda904ca4f25220b29b59096373a084b61148e0034bf17395a7e1"
+    },
+    {
+      "path": "next-stage/evidence/four-defects-20261017/SOURCE.json",
+      "size_bytes": 2242,
+      "sha256": "afc34cde60ee0cc6cf395e29a48cc8deb8fae4a5ed5e6658486a459f1e9adae8"
+    },
+    {
+      "path": "next-stage/evidence/four-defects-20261017/SOURCE_FINAL.json",
+      "size_bytes": 2200,
+      "sha256": "4eaebd0295881bab4367c73315c8130d9cfdf8c81768922389ec8cbdab6baf99"
+    },
+    {
+      "path": "next-stage/evidence/four-defects-20261017/conformance-health-api-junit.xml",
+      "size_bytes": 368,
+      "sha256": "fcc64971907905d182e05f3712c834251b5c3b2a98e1f1f4ee612672c3c8e75e"
+    },
+    {
+      "path": "next-stage/evidence/four-defects-20261017/fix-dependencies-tests.xml",
+      "size_bytes": 3093,
+      "sha256": "de3856fcd5e8cd1c66a9eb1f6f6f1b1ea22fa1140449ae8eab17b567c9bc2e3a"
+    },
+    {
+      "path": "next-stage/evidence/four-defects-20261017/fix-reader-tests.xml",
+      "size_bytes": 382,
+      "sha256": "6ff961b934f6d6c5ca8940fefc8879ec116b0777a217de27c4cfed265f12aa9e"
+    },
+    {
+      "path": "next-stage/evidence/four-defects-20261017/fix-resolve-api-tests.xml",
+      "size_bytes": 389,
+      "sha256": "ca84b219f7b43d8903998491f222dcc9060358e2c9b95bc4d5eb0946e3179112"
+    },
+    {
+      "path": "next-stage/evidence/four-defects-20261017/plan-validation-final.json",
+      "size_bytes": 20469,
+      "sha256": "46f63254315e6d15741eca0fd6d0cc41a9d32807495031b9cfb536d3b3c3366d"
+    },
+    {
+      "path": "next-stage/evidence/four-defects-20261017/plan-validation.json",
+      "size_bytes": 20469,
+      "sha256": "f66ec1609ed56a6f44046bc595348b306c4a13b4dd936bd083dc9c3a1ec3cb2c"
+    },
+    {
+      "path": "next-stage/evidence/four-defects-20261017/pytest-health-followup.xml",
+      "size_bytes": 2570,
+      "sha256": "f31371bc490c0e7455798004a8d4d90fab7007e77c2daabcf9cb076e84c09456"
+    },
+    {
+      "path": "next-stage/evidence/four-defects-20261017/pytest.xml",
+      "size_bytes": 17970,
+      "sha256": "27dba42084aa73a89f4933e5439d41c54e12f201a9e51efcfe04dcb0ebacb9eb"
+    },
+    {
+      "path": "next-stage/evidence/four-defects-20261017/run1/RESULT.json",
+      "size_bytes": 2615,
+      "sha256": "920eb18dd0e1ebb55100044f6178c71ec7eaf78cfd8d7da7a78cfc70ae54c549"
+    },
+    {
+      "path": "next-stage/evidence/four-defects-20261017/run1/plan.png",
+      "size_bytes": 94410,
+      "sha256": "37c4be0f11f108a30296eba737bc135b9810edb6e423449bdb90c02860ff3282"
+    },
+    {
+      "path": "next-stage/evidence/four-defects-20261017/run1/reader.png",
+      "size_bytes": 223375,
+      "sha256": "4d42f5806d78b9f384695453fbdb924e3bbaf3e7dabb4a5c357c9ff9da9a269e"
+    },
+    {
+      "path": "next-stage/evidence/four-defects-20261017/run2/RESULT.json",
+      "size_bytes": 2615,
+      "sha256": "9ce88a46065a2ea75b7ef3c08ee045c2644df8dda2c86b0afbaadf175a9664ea"
+    },
+    {
+      "path": "next-stage/evidence/four-defects-20261017/run2/plan.png",
+      "size_bytes": 94402,
+      "sha256": "fea0d643603236269e33b0af75d5f49bf3ad45d1b99e8c7950438bd5688b4f57"
+    },
+    {
+      "path": "next-stage/evidence/four-defects-20261017/run2/reader.png",
+      "size_bytes": 226697,
+      "sha256": "f5c8d87ba40b9e142751912f3acee1b9c10e2e8768227974267c9240864c9633"
     },
     {
       "path": "next-stage/reference/contract_model.py",
@@ -899,8 +1009,8 @@
     },
     {
       "path": "roadmap/CODEX_START.md",
-      "size_bytes": 5509,
-      "sha256": "52674c8eb3562a43706e4bacc8040597942d4fc73bf450e859221af60be0f993"
+      "size_bytes": 6276,
+      "sha256": "9e813d1d747d2e20806270bca40a249b9be401aabe27695763a20036cec48e5b"
     },
     {
       "path": "roadmap/DELIVERY.json",
@@ -920,7 +1030,7 @@
     {
       "path": "roadmap/INITIAL_IMPORT.json",
       "size_bytes": 279516,
-      "sha256": "7969d598bbe4c0c3bb3f480be5a55d44a3adbacd5d1f19198a3ea23fccd5baa8"
+      "sha256": "79a678e931a2951e43e1301bc9d413dd01390436efb7abcb2b6ead0188867164"
     },
     {
       "path": "roadmap/INITIAL_SOURCE_EVIDENCE.json",
@@ -929,8 +1039,8 @@
     },
     {
       "path": "roadmap/PREVIEW.html",
-      "size_bytes": 421105,
-      "sha256": "968c0dbb2cbe634c8e1887b4c21e08810c1d5434c8291ba3ca7cfb0446f42af4"
+      "size_bytes": 444756,
+      "sha256": "603bbe8b4108aefd4e4e6d865de994639786747dd2a634139e3b25c9e8c3e655"
     },
     {
       "path": "roadmap/PROJECT.plan.json",
@@ -945,17 +1055,17 @@
     {
       "path": "roadmap/ROADMAP.md",
       "size_bytes": 9393,
-      "sha256": "6ca11da6e2f4b438d03d4f630a6ac91a23df2ab87185d16796ce66d432a851fb"
+      "sha256": "f0c2837cf27ef27e51432e0f190570042d9efb02f9d40b915894a65d39775e5a"
     },
     {
       "path": "roadmap/ROADMAP.plan.json",
       "size_bytes": 270056,
-      "sha256": "2189488c71740c6ef01f5dcd4c04144553af7a144946752b75e98d5b6b03e23a"
+      "sha256": "ac910918a9009bdc22fecf9b93492ad60e4816b953a407032b85a6df8654494a"
     },
     {
       "path": "roadmap/RUNNER_WAVES.md",
       "size_bytes": 5575,
-      "sha256": "717d993a7b6e9454331d19eb5591e721a50e9ce8d332d5e9e46c4503860a0297"
+      "sha256": "487032536b31d9328a4db765f1e9f37f7025a2532455f0e3f15bc984a10ce9c2"
     },
     {
       "path": "roadmap/SKILL_INTEGRATION_PROPOSAL.md",
@@ -1028,6 +1138,16 @@
       "sha256": "7bfbe9ed027cef893492acc79d11db1e836b725d9ef8b34dfd5b6b030a93e773"
     },
     {
+      "path": "roadmap/history/2026-10-17-before-edge-label-spacing.plan.json",
+      "size_bytes": 270056,
+      "sha256": "44b0c2dfd13f555ecbe4fd6c11709b71bb917ee5fc87a16da0c362c7ecbdc72f"
+    },
+    {
+      "path": "roadmap/history/2026-10-17-before-four-defect-repairs.plan.json",
+      "size_bytes": 270056,
+      "sha256": "2189488c71740c6ef01f5dcd4c04144553af7a144946752b75e98d5b6b03e23a"
+    },
+    {
       "path": "roadmap/history/2026-10-17-before-stage2.plan.json",
       "size_bytes": 107861,
       "sha256": "443288bb32af6a75e41b64c50fddcd1518f8df9960bdee9cb3cbcb88c4abd327"
@@ -1050,102 +1170,102 @@
     {
       "path": "roadmap/packets/WPT-C05.md",
       "size_bytes": 25699,
-      "sha256": "134d8459fafb5f6ab1b24287e878a6e6101a016fae83906a97d211f5bae69cda"
+      "sha256": "b0f698187e605fca3d9ff096820731a7ee2c8740eec51b9b18c97d7f1702e4e3"
     },
     {
       "path": "roadmap/packets/WPT-C06.md",
       "size_bytes": 18881,
-      "sha256": "8d1ded370921fa25ef78415f9e04068d0cfa68aaf0db685ff10871c7fade5995"
+      "sha256": "f6a828a189a7f6fc35b6cacd32de16e6ba16bf3d9e7b89fe15eef9f0ba9eb104"
     },
     {
       "path": "roadmap/packets/WPT-C07.md",
       "size_bytes": 26595,
-      "sha256": "22b494a4a69e51c43b9df49c2c193d49fa20e5dc4b44b5735a0bb92191b33f1f"
+      "sha256": "b13ce6eedcedb15c82b1cda0b984971cc7b238a0990b5b337d329dff9c91e876"
     },
     {
       "path": "roadmap/packets/WPT-N00.md",
       "size_bytes": 5777,
-      "sha256": "b9e9af6c85dde259263a1f9d950008f39df86eeb97e02a8df0a725c0380d66df"
+      "sha256": "9609f5dbaf3f2a307edffb02c77cea5d519d42d681a5daed19a80b4c56064784"
     },
     {
       "path": "roadmap/packets/WPT-N01.md",
       "size_bytes": 6112,
-      "sha256": "38a4fb3ce5cb01b88f9623d45ea252a22b4d2df400450bcd833397d2a18747d6"
+      "sha256": "46643ded3b2da0f50bcbbd5e75be77d2ca3012b0c49d14bb4d34766873f64b7b"
     },
     {
       "path": "roadmap/packets/WPT-N02-FIX.md",
       "size_bytes": 5226,
-      "sha256": "5e6ba2861002431ddcfb47e578eda68c9e1cc51f966cbad434f026b00fb0585d"
+      "sha256": "81e4865bd999ef5dcacbcb505846365cf4c3814a658d4a9cfe873011cd5fa098"
     },
     {
       "path": "roadmap/packets/WPT-N02.md",
       "size_bytes": 10487,
-      "sha256": "2d6f13b282cb31111c1b266cd78f5e6d8399b3f514c2e9f531f9d6ba9b49a81e"
+      "sha256": "af8cfb1077e411727ae11642d038024075c0095bf9ae9176100def9cb9a3f642"
     },
     {
       "path": "roadmap/packets/WPT-N03-FIX.md",
       "size_bytes": 4400,
-      "sha256": "4d6461a70a93214a7f82f6a2f8b56bea1a7452673f300be3cf4695876e963480"
+      "sha256": "870bc8543773386f4501d6622ab8e0a02dd32e6aca0524e45c9de0ce1f374401"
     },
     {
       "path": "roadmap/packets/WPT-N03.md",
       "size_bytes": 9655,
-      "sha256": "861e4f262aaa0cb4659dbfa07237a4856874f2b6cc5f7aba38690f6ecc957e0e"
+      "sha256": "cde6ed0661fbe3a54b71756e211cbb3c8dc3a5e5c5bf098d7ac427e1ca919e05"
     },
     {
       "path": "roadmap/packets/WPT-N04-FIX.md",
       "size_bytes": 5946,
-      "sha256": "2dd1d383d40456e8c35abc73c495dd8fdafe21b5a47c9ee5a549b6871f9af409"
+      "sha256": "85f076ad20cc22530d6d9543e9f42f1c722c59a24961b8f557b6a8e2f3d95abf"
     },
     {
       "path": "roadmap/packets/WPT-N04.md",
       "size_bytes": 11107,
-      "sha256": "e49cc842eb85e67b5007861977824698db77b2ff2bf8e461e5bce9af7ec8d2cc"
+      "sha256": "98c86a2ca9b2cc5d8ed06f92a973f5a462f6eb5a19b8d470d2f857fe90c08589"
     },
     {
       "path": "roadmap/packets/WPT-N05-FIX.md",
       "size_bytes": 5252,
-      "sha256": "ffe12828053a548fecc5c19c4438a7901a85ce37888cbf0695695361e36e3933"
+      "sha256": "ed0f6dd1d713d1bfe8ab681a80cc8b00cc2c1a29b8c98c07ec27789b6ae9c7b1"
     },
     {
       "path": "roadmap/packets/WPT-N05.md",
       "size_bytes": 10577,
-      "sha256": "92aedc50f17fad4d4223a71f7ac350990ac4ab86782b0cca39058008ba5ba465"
+      "sha256": "d74bcfa5ce6b6cdfc4709c7b72ad8dd89bd5fea7c3f1d342ab62caf03bf1331f"
     },
     {
       "path": "roadmap/packets/WPT-N06.md",
       "size_bytes": 5076,
-      "sha256": "31e120826f5fc6a85823fbfc1786afe6a87b4f0fddc01a92f03ef06dd65f5d0a"
+      "sha256": "20526a20261920afaaab06a3bf9d4f8b478f78387228ada16df7970c57cd00a1"
     },
     {
       "path": "roadmap/packets/WPT-N07-FIX.md",
       "size_bytes": 7072,
-      "sha256": "1fd515ef5b792a72cb59e08a36688ee2ac14a51a73a3fb3004c79792fff01ceb"
+      "sha256": "88df63ed70923d65badf3b99f6368f0148f69c2ae134a68d6e4ef66e7141be20"
     },
     {
       "path": "roadmap/packets/WPT-N07.md",
       "size_bytes": 11724,
-      "sha256": "f5d868357f0648e8d8562cc32f952009a0474d01e15f9d032edd2c0f04bce70a"
+      "sha256": "1f95e3a68ac643815ac129df9b75a850be6eba800bd6a34c0f06b5a7f8ff7bd7"
     },
     {
       "path": "roadmap/packets/WPT-N08-FIX.md",
       "size_bytes": 8061,
-      "sha256": "aab6d722e6a08df78b4e21354f316a7deefa29d024a3348742ad41e407f8e703"
+      "sha256": "ab559c3180cf9d10051bd975aef95c24504a582fd7fc0257b11beef66f0b6098"
     },
     {
       "path": "roadmap/packets/WPT-N08.md",
       "size_bytes": 14518,
-      "sha256": "3cfdb5c013cccfe51aa61184ceeeab14a792de69555909a82f56a60389a4e616"
+      "sha256": "ad7ca4e4e7c4acd346bfd18b85a1f1635a7ba19833bb971c244fa3c74b4fd60b"
     },
     {
       "path": "roadmap/packets/WPT-N09.md",
       "size_bytes": 5472,
-      "sha256": "b0aae422a1ce9f963292ff2f0f5683a24cbd807cb0930b93bdb51dcc9020ecef"
+      "sha256": "18dff340c93835efd4c2edae1bea97e9077801fd83b7616830c394f23b181189"
     },
     {
       "path": "roadmap/packets/WPT-R00.md",
       "size_bytes": 8339,
-      "sha256": "dd93363e3bd27abfd40e5ebf5c5d1159d3c9980478eddb6dc27f47e7dc21e9ad"
+      "sha256": "e52e8f6183419fe7d9df67ecba4e647dafd1ac45682fb3f4e0c8c2b7f601b9be"
     },
     {
       "path": "roadmap/templates/PROJECT.plan.json",
@@ -1169,8 +1289,8 @@
     },
     {
       "path": "roadmap/tools/roadmap.py",
-      "size_bytes": 39922,
-      "sha256": "75486621e9e8e14378084bc579daebc70f85384051644b69f9646372d7dc16ce"
+      "size_bytes": 40353,
+      "sha256": "3df05f0db76b6a711b336397bb54134169c4d65339c66e937ad5f0de16a6e4f0"
     },
     {
       "path": "roadmap/tools/verify_delivery.py",
@@ -1199,8 +1319,8 @@
     },
     {
       "path": "waypoint/MANIFEST.json",
-      "size_bytes": 22133,
-      "sha256": "fd7b6cac3786e05efb0a9f11d6cb6b158107c24c2633fa4c2491ec550d800655"
+      "size_bytes": 23170,
+      "sha256": "e16aebd5a8e51249e9c77735a0a821abac4e1984c203485ded79c0a772bd111f"
     },
     {
       "path": "waypoint/NOTICE.md",
@@ -1454,8 +1574,8 @@
     },
     {
       "path": "waypoint/preview.html",
-      "size_bytes": 224015,
-      "sha256": "9f83e84d310bf6409e2ab4bb21ac86888f0a19231c2142d52b2136081fae2d61"
+      "size_bytes": 237350,
+      "sha256": "789bd425ec1fce23b06b3d378b0d7c8db21bff66dc2a54ee941672495450371c"
     },
     {
       "path": "waypoint/pyproject.toml",
@@ -1583,6 +1703,16 @@
       "sha256": "63cc62d20709846dd318301be49e8b51270566b75d9548bf8b874ba1805635e2"
     },
     {
+      "path": "waypoint/tests/conformance_fix_browser_check.py",
+      "size_bytes": 11406,
+      "sha256": "50baf3889d4cde5cbe9bb0f4c23b7589df6b51d2e40c6e92d9477d986aa20541"
+    },
+    {
+      "path": "waypoint/tests/four_fixes_live_check.py",
+      "size_bytes": 5909,
+      "sha256": "ff182e6cb9bcfef9c827b812fb99891c1029d6488f507b456018b8ff9ee692f6"
+    },
+    {
       "path": "waypoint/tests/rich_browser_check.py",
       "size_bytes": 12682,
       "sha256": "070cd3b5c27769541d152b719981687fbbcae0970ba5a5a90315622de114a8e3"
@@ -1621,6 +1751,21 @@
       "path": "waypoint/tests/test_authoring_next_stage.py",
       "size_bytes": 7371,
       "sha256": "a4dd1fbec9d2341f39359ec85afad35cb7649c089f7cdb75daeec0023ac42f79"
+    },
+    {
+      "path": "waypoint/tests/test_conformance_dependencies.py",
+      "size_bytes": 8421,
+      "sha256": "22c7f2e875d59c106116a2093dffce18be59f998f01b840be7a0e1e45b76fcee"
+    },
+    {
+      "path": "waypoint/tests/test_conformance_health.py",
+      "size_bytes": 6556,
+      "sha256": "817e910623ba9bb33fd2cdf3415d762e43e379e5a3d9f641e671459b8644fd68"
+    },
+    {
+      "path": "waypoint/tests/test_conformance_reader.py",
+      "size_bytes": 1807,
+      "sha256": "0734984df13cc94bdf911b75d0051e3898c4867dfb67c4045d6fca17983f3b3f"
     },
     {
       "path": "waypoint/tests/test_core.py",
@@ -1674,8 +1819,8 @@
     },
     {
       "path": "waypoint/tools/package_local.py",
-      "size_bytes": 3914,
-      "sha256": "efd132166d1227fa14f9ad86d84ad5e656793de41832105a2f4ac3cd6c6ad204"
+      "size_bytes": 3920,
+      "sha256": "3e0fe9aa57fbbf1376351e7aafd9e81588236ccae3139ff8632735db8a627afd"
     },
     {
       "path": "waypoint/tools/verify_completion_ui.py",
@@ -1759,8 +1904,8 @@
     },
     {
       "path": "waypoint/waypoint/dependencies.py",
-      "size_bytes": 10301,
-      "sha256": "d3ea0e5b0dd73466f3b747d1cc59e39f8adb2700c0e47faab68d85ff26ff9c58"
+      "size_bytes": 10472,
+      "sha256": "c86ec8c970330a1ccfa4def2e32f6132053013c1d4f70ae7690787bf400686f1"
     },
     {
       "path": "waypoint/waypoint/domain.py",
@@ -1779,8 +1924,8 @@
     },
     {
       "path": "waypoint/waypoint/read_models.py",
-      "size_bytes": 6681,
-      "sha256": "25fe6a1464d7824f09d765644ae6571e31ac6629e0d840dd3fb86b178ca713ae"
+      "size_bytes": 6796,
+      "sha256": "596d0dbe8dc671a419c8d0223e7a439a88936f1c906e24283bd967f83f33914d"
     },
     {
       "path": "waypoint/waypoint/security.py",
@@ -1789,8 +1934,13 @@
     },
     {
       "path": "waypoint/waypoint/server.py",
-      "size_bytes": 8939,
-      "sha256": "97cd917affb53637c327b05816ed319dd3048aa649672e511bfe1027b6e14a7e"
+      "size_bytes": 9821,
+      "sha256": "d16c962db5f6ab49fe6dc132e1a93dbe4a323fdbf17bda4b7fa2bf593e765b53"
+    },
+    {
+      "path": "waypoint/waypoint/source_health.py",
+      "size_bytes": 2974,
+      "sha256": "d23bbda02f9711c4bbdf046fa2b620547329a53501ce485e15af73263ff3c173"
     },
     {
       "path": "waypoint/waypoint/spool.py",
@@ -1799,8 +1949,8 @@
     },
     {
       "path": "waypoint/waypoint/store.py",
-      "size_bytes": 39013,
-      "sha256": "6a768e6314a8817507b81361e4586ecf4fa3b54d384c49583ab573381dc922b7"
+      "size_bytes": 40152,
+      "sha256": "ac6bcca677c966c11af617b93160db9a30c9f3d54159da38380f95b91e49b0d5"
     },
     {
       "path": "waypoint/waypoint/web/algorithm_panel.js",
@@ -1809,8 +1959,8 @@
     },
     {
       "path": "waypoint/waypoint/web/app.js",
-      "size_bytes": 68069,
-      "sha256": "040581394c9212a6df9ed9963833e6dbbc8b1983f74e9ab806d7ad934221a801"
+      "size_bytes": 71747,
+      "sha256": "07602ee19965b6fd61044f9d34dc6a201be238f6babee74d411d6fa60083e1b0"
     },
     {
       "path": "waypoint/waypoint/web/filters.js",
@@ -1824,18 +1974,18 @@
     },
     {
       "path": "waypoint/waypoint/web/plan.js",
-      "size_bytes": 9112,
-      "sha256": "218bc1bef3a7774b2707a938511c377e1580b18081f21d225b3d7aca8388d159"
+      "size_bytes": 9829,
+      "sha256": "60820861e4293091e0fb5a92e335eacb6859a325375e834bf6b8bd8c4a2ed495"
     },
     {
       "path": "waypoint/waypoint/web/projects.js",
-      "size_bytes": 2030,
-      "sha256": "94ffc08c24a888507b6bc46ceec704be5644046ae9e0136d051f20a2b0e0d8a1"
+      "size_bytes": 3451,
+      "sha256": "84390b6b792bceb41d842faf05fab88fa9c22727aa78d852b9087348d83c46ee"
     },
     {
       "path": "waypoint/waypoint/web/style.css",
-      "size_bytes": 18029,
-      "sha256": "b6569114b913f3cf3e39e05a6eb3eb608b402f3e0124c994024dac0b5b2888f4"
+      "size_bytes": 18184,
+      "sha256": "a96889f84d57a93b924a90bed5fbcc0c9136f0cff32f73bb3ddbb2fc6560f9ff"
     },
     {
       "path": "waypoint/waypoint/web/themes.js",

@@ -1,0 +1,39 @@
+{
+  "base_commit": "a8370ad40777ba7031bc515f7076810eaeb100f6",
+  "scope": "Final runtime source after label spacing; run2 is exact browser proof",
+  "sha256": {
+    "waypoint/waypoint/dependencies.py": "c86ec8c970330a1ccfa4def2e32f6132053013c1d4f70ae7690787bf400686f1",
+    "waypoint/waypoint/read_models.py": "596d0dbe8dc671a419c8d0223e7a439a88936f1c906e24283bd967f83f33914d",
+    "waypoint/waypoint/source_health.py": "d23bbda02f9711c4bbdf046fa2b620547329a53501ce485e15af73263ff3c173",
+    "waypoint/waypoint/server.py": "d16c962db5f6ab49fe6dc132e1a93dbe4a323fdbf17bda4b7fa2bf593e765b53",
+    "waypoint/waypoint/store.py": "ac6bcca677c966c11af617b93160db9a30c9f3d54159da38380f95b91e49b0d5",
+    "waypoint/waypoint/web/app.js": "07602ee19965b6fd61044f9d34dc6a201be238f6babee74d411d6fa60083e1b0",
+    "waypoint/waypoint/web/plan.js": "60820861e4293091e0fb5a92e335eacb6859a325375e834bf6b8bd8c4a2ed495",
+    "waypoint/waypoint/web/projects.js": "84390b6b792bceb41d842faf05fab88fa9c22727aa78d852b9087348d83c46ee",
+    "waypoint/waypoint/web/style.css": "a96889f84d57a93b924a90bed5fbcc0c9136f0cff32f73bb3ddbb2fc6560f9ff",
+    "roadmap/tools/roadmap.py": "3df05f0db76b6a711b336397bb54134169c4d65339c66e937ad5f0de16a6e4f0"
+  },
+  "algorithm_changes": [
+    {
+      "algorithm": "ALG-DEPS",
+      "from_revision": 2,
+      "to_revision": 3,
+      "before_implementation": "worktree-sha256:a1297084e07feb3f0b4602916354c64199e14a09e272f2396470062313163901",
+      "implementation": "worktree-sha256:0735f80f8736a13039db8777ab525508ff7fac65c3c4c35b054e408a2b496937"
+    },
+    {
+      "algorithm": "ALG-PAGE",
+      "from_revision": 2,
+      "to_revision": 3,
+      "before_implementation": "worktree-sha256:84f5af93e1751ba790f2c6d7166af4fe842811ddbd66efcbc292a0bddd5764b7",
+      "implementation": "worktree-sha256:8be85906ce0eecb55d4ee833388412933bfce7aa4e2f9825421e7db5b8b9d92c"
+    },
+    {
+      "algorithm": "ALG-READ",
+      "from_revision": 3,
+      "to_revision": 4,
+      "before_implementation": "worktree-sha256:22d381ea2a4febf2ab05c67f044f092a798b14ab3a92660a4a87f14c7222f05c",
+      "implementation": "worktree-sha256:b1e7ba466bdc6323291ec8ad8635b28e9500b6c3ea0052c30cfa03d8b15d7ea6"
+    }
+  ]
+}

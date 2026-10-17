@@ -17,3 +17,5 @@
 .evidence-reference{font:11px/1.5 ui-monospace,monospace;color:var(--muted);overflow-wrap:anywhere;user-select:text}
 .test-row button.node-result-link{margin-left:auto;font-size:10px;color:var(--text);text-decoration:underline;padding:2px 5px;min-height:20px}
 .dependency-history-warning{border-left:3px solid var(--wait);padding:1px 12px;margin:12px 0}.dependency-history-warning h4{font-size:12px}
+
+.edge-order{stroke-dasharray:7 5}.edge-context{font-size:10px;fill:var(--muted);paint-order:stroke;stroke:var(--bg);stroke-width:4px;pointer-events:none}

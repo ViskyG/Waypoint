@@ -25,8 +25,12 @@
             for (const requirement of list) {
                 const record = el('div','dependency-record');
                 const availability = requirement.availability || requirement.state || 'unknown';
-                record.append(el('strong','', (requirement.producer_id || requirement.declared_target_id || 'Требование') + ' · ' + (labels[availability] || availability)));
+                const order = requirement.classification === 'order';
+                record.dataset.relation = requirement.classification || 'legacy_unknown';
+                record.append(el('strong','', (requirement.producer_id || requirement.declared_target_id || 'Требование') + ' · ' + (order ? 'Порядок · не блокирует' : labels[availability] || availability)));
+                if (requirement.declared_target_id) record.append(el('p','small-note',`${requirement.producer_id} → ${requirement.declared_target_id} · ${phase === 'start' ? 'начало' : 'завершение'} · ${requirement.target_scope === 'subtree' ? 'блок и подблоки' : 'только указанный блок'}`));
                 if (requirement.why) record.append(el('p','',requirement.why));
+                if (requirement.workspace_ref) record.append(el('p','small-note','Рабочая копия: ' + JSON.stringify(requirement.workspace_ref)));
                 if (requirement.inherited) record.append(el('small','small-note','Унаследовано от группы ' + (requirement.declared_target_id || '')));
                 if (requirement.receipts?.length) record.append(el('p','small-note','Подтверждений: ' + requirement.receipts.length));
                 if (requirement.stale_receipts?.length) record.append(el('p','small-note','Устаревших подтверждений: ' + requirement.stale_receipts.length));

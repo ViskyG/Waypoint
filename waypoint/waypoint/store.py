@@ -388,8 +388,19 @@ class Store:
                 rows = read()
             return {"events": [{"seq": row["seq"], "observed_at":row["observed_at"], **json.loads(row["body"])} for row in rows], "cursor": rows[-1]["seq"] if rows else after}
 
-    def items(self, project: str, node: str | None = None, edge: str | None = None, agent: str | None = None, deep: bool = True, before: int | None = None, limit: int = 100, version: str | None = None, categories=None, only_errors: bool = False, page_cursor: str | None = None, outside: bool = False) -> dict:
+    def items(self, project: str, node: str | None = None, edge: str | None = None, agent: str | None = None, deep: bool = True, before: int | None = None, limit: int = 100, version: str | None = None, categories=None, only_errors: bool = False, page_cursor: str | None = None, outside: bool = False, identities=None) -> dict:
         with self.lock:
+            # Exact, bounded reconciliation is distinct from paginated discovery.
+            # Missing from a truncated page never means an old item was removed.
+            if identities is not None:
+                if not isinstance(identities,list) or len(identities)>32 or before is not None or page_cursor is not None:
+                    raise ContractError('item_identities','Resolve at most 32 identities without a paging cursor')
+                for pair in identities:
+                    if not isinstance(pair,list) or len(pair)!=2:
+                        raise ContractError('item_identities','Expected [agent_id,item_id] pairs')
+                    ident(pair[0],'identity agent');ident(pair[1],'identity item')
+                identities=list(dict.fromkeys(tuple(pair) for pair in identities))
+                limit=max(1,len(identities))
             document=self.plan(project,version); graph=document['plan']; resolved=document['version']
             selected=parse_categories(categories)
             qhash=query_hash(project,node,edge,agent,deep,selected,bool(only_errors),resolved,outside)
@@ -400,13 +411,16 @@ class Store:
             scope=sorted(descendants(graph,node) if node and deep else {node}) if node else None
             chunks=[scope[i:i+350] for i in range(0,len(scope),350)] if scope is not None else [None]
             candidates={}
-            if selected != []:
+            if selected != [] and identities != []:
                 for chunk in chunks:
                     # Facets and target associations are resolved before body retrieval.
                     filtered=selected is not None or only_errors
                     table='item_facets f' if filtered else 'items f'
                     ident_col='f.item' if filtered else 'f.id'
                     values=[project]; clause='f.project=?'
+                    if identities is not None:
+                        clause+=' AND ('+' OR '.join('(f.agent=? AND '+ident_col+'=?)' for _ in identities)+')'
+                        values.extend(value for pair in identities for value in pair)
                     if selected is not None:
                         clause+=' AND f.category IN ('+','.join('?' for _ in selected)+')';values.extend(selected)
                     if only_errors:clause+=' AND f.is_error=1'

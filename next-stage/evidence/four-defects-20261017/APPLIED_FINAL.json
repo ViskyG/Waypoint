@@ -1,0 +1,87 @@
+{
+  "captured_at": "2026-10-17T13:44:18.607011+00:00",
+  "plan_version": "v-397c97605fdf4fbb",
+  "receipts": {
+    "receipts": [
+      {
+        "seq": 16575,
+        "created": true
+      },
+      {
+        "seq": 16576,
+        "created": true
+      },
+      {
+        "seq": 16577,
+        "created": true
+      },
+      {
+        "seq": 16578,
+        "created": true
+      },
+      {
+        "seq": 16579,
+        "created": true
+      },
+      {
+        "seq": 16580,
+        "created": true
+      },
+      {
+        "seq": 16581,
+        "created": true
+      },
+      {
+        "seq": 16582,
+        "created": true
+      },
+      {
+        "seq": 16583,
+        "created": true
+      },
+      {
+        "seq": 16584,
+        "created": true
+      },
+      {
+        "seq": 16585,
+        "created": true
+      },
+      {
+        "seq": 16586,
+        "created": true
+      },
+      {
+        "seq": 16587,
+        "created": true
+      }
+    ],
+    "cursor_saved": false
+  },
+  "original_checks_retained": 71,
+  "fixed_findings": [
+    "F01",
+    "F02",
+    "F03",
+    "F04"
+  ],
+  "open_findings": [
+    "F05",
+    "F06",
+    "F07"
+  ],
+  "current_fix_statuses": {
+    "WPT-N02-FIX": "done",
+    "WPT-N03-FIX": "done",
+    "WPT-N04-FIX": "Частично: F01 исправлен",
+    "WPT-N05-FIX": "not_started",
+    "WPT-N07-FIX": "not_started",
+    "WPT-N08-FIX": "not_started"
+  },
+  "new_algorithm_revision": {
+    "ALG-READ": 5
+  },
+  "original_proof_files_retained": true,
+  "service_port": 8769,
+  "global_changes": false
+}

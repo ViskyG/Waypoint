@@ -1,0 +1,97 @@
+{
+  "captured_at": "2026-10-17T13:41:19.480583+00:00",
+  "plan_version": "v-ff7bd4ea5a304011",
+  "cursor": 16343,
+  "registered_receipts_seq": [
+    16150,
+    16176
+  ],
+  "root_focus_release_seq": 16191,
+  "original_checks_retained": 71,
+  "current_tests": [
+    {
+      "node_id": "WPT-N02-FIX",
+      "test_id": "T01",
+      "run_id": "four-defects-20261017-final",
+      "outcome": "passed",
+      "seq": 16153,
+      "plan_version": "v-ff7bd4ea5a304011"
+    },
+    {
+      "node_id": "WPT-N02-FIX",
+      "test_id": "T02",
+      "run_id": "four-defects-20261017-final",
+      "outcome": "passed",
+      "seq": 16154,
+      "plan_version": "v-ff7bd4ea5a304011"
+    },
+    {
+      "node_id": "WPT-N03-FIX",
+      "test_id": "T01",
+      "run_id": "four-defects-20261017-final",
+      "outcome": "passed",
+      "seq": 16155,
+      "plan_version": "v-ff7bd4ea5a304011"
+    },
+    {
+      "node_id": "WPT-N04-FIX",
+      "test_id": "T01",
+      "run_id": "four-defects-20261017-final",
+      "outcome": "passed",
+      "seq": 16150,
+      "plan_version": "v-ff7bd4ea5a304011"
+    },
+    {
+      "node_id": "WPT-N04-FIX",
+      "test_id": "T02",
+      "run_id": "four-defects-20261017-final",
+      "outcome": "not_run",
+      "seq": 16151,
+      "plan_version": "v-ff7bd4ea5a304011"
+    },
+    {
+      "node_id": "WPT-N04-FIX",
+      "test_id": "T03",
+      "run_id": "four-defects-20261017-final",
+      "outcome": "not_run",
+      "seq": 16152,
+      "plan_version": "v-ff7bd4ea5a304011"
+    },
+    {
+      "node_id": "WPT-N07-FIX",
+      "test_id": "T01",
+      "run_id": "conformance-20261017",
+      "outcome": "failed",
+      "seq": 13245,
+      "plan_version": "v-117764ba5eb64e27"
+    }
+  ],
+  "current_fix_statuses": {
+    "WPT-N02-FIX": "done",
+    "WPT-N03-FIX": "done",
+    "WPT-N04-FIX": "Частично: F01 исправлен",
+    "WPT-N05-FIX": "not_started",
+    "WPT-N07-FIX": "not_started",
+    "WPT-N08-FIX": "not_started"
+  },
+  "finding_resolution": {
+    "CONTRACT-F01": "FIXED_VERIFIED",
+    "CONTRACT-F02": "FIXED_VERIFIED",
+    "CONTRACT-F03": "FIXED_VERIFIED",
+    "CONTRACT-F04": "FIXED_VERIFIED",
+    "CONTRACT-F05": "OPEN_NOT_IMPLEMENTED",
+    "CONTRACT-F06": "OPEN_NOT_IMPLEMENTED",
+    "CONTRACT-F07": "OPEN_NOT_IMPLEMENTED"
+  },
+  "global_skills_changed": false,
+  "full_product_acceptance": false,
+  "algorithm_definition_revisions": {
+    "ALG-DEPS": 3,
+    "ALG-MERGE": 2,
+    "ALG-PAGE": 3,
+    "ALG-READ": 4
+  },
+  "source_hashes_pinned": "SOURCE.json",
+  "service_hud_id": "92d4927b537847bf8098f47e98aa580e",
+  "receipt_harness_note": "Initial metadata serialization assumed top-level definition_revision; corrected to existing nested definition field before receipt creation. No duplicate result events."
+}

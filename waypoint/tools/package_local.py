@@ -7,7 +7,7 @@ import zipfile
 from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[2]
-ARCHIVE=ROOT/'Waypoint-conformance-audit-2026-10-17.zip'
+ARCHIVE=ROOT/'Waypoint-four-defects-fixed-2026-10-17-r2.zip'
 DENIED={'.runtime','.venv','.git','.agents','.codex','.aws','__pycache__','.pytest_cache','build','dist'}
 
 def include(path):
@@ -27,10 +27,10 @@ def main():
         if not saved.exists():saved.parent.mkdir(parents=True,exist_ok=True);saved.write_bytes(current.read_bytes())
     source_manifest=ROOT/'waypoint/MANIFEST.json'
     files=sorted(p for p in (ROOT/'waypoint').rglob('*') if include(p) and p!=source_manifest)
-    source_manifest.write_text(json.dumps({'schema_version':'waypoint-delivery-manifest/1','project_id':'waypoint','state':'CONFORMANCE_AUDIT_REMEDIATION_REQUIRED_20261017','source_archive_sha256':'6c5c77322e79d56df988a5954830353d2493c6400750f87d040e62a054f40da6','next_stage_archive_sha256':'eb9d06b3df05e3afa73b8fe055a94b677a1ffc02dcd3350815510688b46588af','file_count':len(files),'files':records(files,ROOT/'waypoint')},ensure_ascii=False,indent=2)+'\n')
+    source_manifest.write_text(json.dumps({'schema_version':'waypoint-delivery-manifest/1','project_id':'waypoint','state':'FOUR_DEFECTS_FIXED_REMAINING_AUDIT_OPEN_20261017','source_archive_sha256':'6c5c77322e79d56df988a5954830353d2493c6400750f87d040e62a054f40da6','next_stage_archive_sha256':'eb9d06b3df05e3afa73b8fe055a94b677a1ffc02dcd3350815510688b46588af','file_count':len(files),'files':records(files,ROOT/'waypoint')},ensure_ascii=False,indent=2)+'\n')
     manifest=ROOT/'PACKAGE_MANIFEST.json'
     files=sorted(p for p in ROOT.rglob('*') if include(p) and p!=manifest)
-    manifest.write_text(json.dumps({'schema_version':'waypoint-local-package/1','state':'CONFORMANCE_AUDIT_REMEDIATION_REQUIRED_20261017','files':records(files,ROOT)},ensure_ascii=False,indent=2)+'\n')
+    manifest.write_text(json.dumps({'schema_version':'waypoint-local-package/1','state':'FOUR_DEFECTS_FIXED_REMAINING_AUDIT_OPEN_20261017','files':records(files,ROOT)},ensure_ascii=False,indent=2)+'\n')
     files=sorted([*files,manifest])
     # Compare actual installed capabilities, not merely credential-looking patterns.
     secrets=[]

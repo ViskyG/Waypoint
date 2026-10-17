@@ -130,6 +130,8 @@ def evaluate_availability(requirement: dict, observations: list[dict], workspace
     """
     result = {"state": "unknown", "availability": "unknown", "reason": "no_current_matching_evidence",
               "receipts": [], "stale_receipts": []}
+    if requirement.get("classification") == "order":
+        return {**result, "state": "not_required", "availability": "not_required", "reason": "ordering_context_only"}
     fingerprint = requirement.get("requirement_fingerprint")
     if not fingerprint:
         result["reason"] = "unclassified_legacy_edge"

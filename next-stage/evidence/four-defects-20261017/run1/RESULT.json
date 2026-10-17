@@ -1,0 +1,78 @@
+{
+  "scope": "SYNTHETIC fixture; actual Chromium → HTTP → disposable Store; no native Codex contact",
+  "production_data_modified": false,
+  "checks": [
+    {
+      "name": "F04 API old connected becomes stale and activity counts unknown",
+      "passed": true
+    },
+    {
+      "name": "F03 explicit override is exact API basis and requirement basis",
+      "passed": true
+    },
+    {
+      "name": "F03 node-local workspace in packet and per-node state basis",
+      "passed": true
+    },
+    {
+      "name": "F02 order stays in shared state and packet, never a missing input",
+      "passed": true
+    },
+    {
+      "name": "F04 catalogue explains stale source and preserves reported connected/time",
+      "passed": true
+    },
+    {
+      "name": "F04 fresh report initially stays connected",
+      "passed": true
+    },
+    {
+      "name": "F04 open catalogue refreshes as the report crosses freshness boundary",
+      "passed": true
+    },
+    {
+      "name": "F02 order edges dashed and distinct from requires",
+      "passed": true
+    },
+    {
+      "name": "F02 collapsed edge marks partial and retains actual endpoints",
+      "passed": true
+    },
+    {
+      "name": "F02 edge inspector exposes order, phase and reason",
+      "passed": true
+    },
+    {
+      "name": "F02/F03 Plan shows order reason/non-blocking and actual workspace",
+      "passed": true
+    },
+    {
+      "name": "F01 corrected-out visible identity leaves old reader; unrelated rows remain",
+      "passed": true
+    },
+    {
+      "name": "F01 truncated latest page does not delete arbitrary old identities",
+      "passed": true
+    },
+    {
+      "name": "F01 exact reconciliation also removes an item moved outside scope",
+      "passed": true
+    },
+    {
+      "name": "No uncaught browser errors",
+      "passed": true
+    }
+  ],
+  "browser_errors": [],
+  "browser": "143.0.7499.4",
+  "status": "PASS",
+  "captured_at": "2026-10-17T13:33:04.733414+00:00",
+  "source_hashes": {
+    "waypoint/waypoint/web/app.js": "d9f8259d2f63c009db3dc364799ddc1f2ac1ff6e46d9752fbf7c531b902b5748",
+    "waypoint/waypoint/web/plan.js": "60820861e4293091e0fb5a92e335eacb6859a325375e834bf6b8bd8c4a2ed495",
+    "waypoint/waypoint/read_models.py": "596d0dbe8dc671a419c8d0223e7a439a88936f1c906e24283bd967f83f33914d",
+    "waypoint/waypoint/source_health.py": "bca6522f509d4549ca0074d1b119b33b0a97a794715ca562c1a5a3189432fc89",
+    "waypoint/waypoint/store.py": "ac6bcca677c966c11af617b93160db9a30c9f3d54159da38380f95b91e49b0d5",
+    "waypoint/waypoint/server.py": "d16c962db5f6ab49fe6dc132e1a93dbe4a323fdbf17bda4b7fa2bf593e765b53"
+  }
+}

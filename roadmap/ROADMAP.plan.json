@@ -4213,7 +4213,7 @@
   "x_observability": {
     "algorithms": {
       "ALG-DEPS": {
-        "definition_revision": 2,
+        "definition_revision": 3,
         "edge_cases": [
           "Скрытый цикл после наследования.",
           "Позднее свидетельство."
@@ -4231,7 +4231,7 @@
             }
           ],
           "repository": "https://github.com/ViskyG/Waypoint",
-          "revision": "worktree-sha256:a1297084e07feb3f0b4602916354c64199e14a09e272f2396470062313163901"
+          "revision": "worktree-sha256:0735f80f8736a13039db8777ab525508ff7fac65c3c4c35b054e408a2b496937"
         },
         "inputs": [
           "versioned plan",
@@ -4339,7 +4339,7 @@
         }
       },
       "ALG-PAGE": {
-        "definition_revision": 2,
+        "definition_revision": 3,
         "edge_cases": [
           "Одно сообщение в нескольких потомках.",
           "Старое редкое совпадение."
@@ -4353,7 +4353,7 @@
             }
           ],
           "repository": "https://github.com/ViskyG/Waypoint",
-          "revision": "worktree-sha256:84f5af93e1751ba790f2c6d7166af4fe842811ddbd66efcbc292a0bddd5764b7"
+          "revision": "worktree-sha256:8be85906ce0eecb55d4ee833388412933bfce7aa4e2f9825421e7db5b8b9d92c"
         },
         "inputs": [
           "target refs",
@@ -4401,7 +4401,7 @@
         }
       },
       "ALG-READ": {
-        "definition_revision": 3,
+        "definition_revision": 5,
         "edge_cases": [
           "Смена фильтра.",
           "Изменение категории уже видимого сообщения."
@@ -4419,7 +4419,7 @@
             }
           ],
           "repository": "https://github.com/ViskyG/Waypoint",
-          "revision": "worktree-sha256:22d381ea2a4febf2ab05c67f044f092a798b14ab3a92660a4a87f14c7222f05c"
+          "revision": "worktree-sha256:70cda33ea82d6b495158dce0ed88ef8b5d0af8ca04140a2d6884d053ab58f442"
         },
         "inputs": [
           "current reader",

@@ -1,0 +1,36 @@
+{
+  "status": "PASS",
+  "captured_at": "2026-10-17T13:37:10.041612+00:00",
+  "scope": "Actual installed Waypoint after service replacement, actual Codex root IPC and existing native message, real headless Chromium; no synthetic events",
+  "plan_version": "v-ff7bd4ea5a304011",
+  "cursor": 16062,
+  "event_prefix_preserved": 15968,
+  "prefix_event_ids_and_hashes_equal": true,
+  "old_item_keys_preserved": 1123,
+  "plan_versions_retained": 8,
+  "sqlite_integrity": "ok",
+  "observer_source_connected": true,
+  "outbox_error": null,
+  "native_id_type_original_text_exact": 1,
+  "selected_item_first_seq": 15914,
+  "selected_item_text_exported": false,
+  "native_text_visible_through_resolve_and_browser": true,
+  "ipc": {
+    "subscription_cleanup_sent": true,
+    "connection_closed": true,
+    "owner_found": true,
+    "methods": [
+      "initialize",
+      "thread-follower-load-complete-history",
+      "thread-owner-discovery",
+      "thread-stream-following-changed"
+    ],
+    "snapshot_frame_bytes": 4078044,
+    "snapshot_samples": 2,
+    "source_control_commands": 0
+  },
+  "browser": "143.0.7499.4",
+  "browser_errors": [],
+  "old_health_fixture_and_correction_negative_cases": "Separate SYNTHETIC actual HTTP/Chromium receipt run1/RESULT.json",
+  "limitations": "Bounded root-message and recovery check; not a repeat of complete family/native comparison, not full product acceptance."
+}

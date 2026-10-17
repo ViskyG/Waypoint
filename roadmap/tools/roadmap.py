@@ -17,7 +17,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 BASE = ROOT.parent / 'waypoint'
 sys.path.insert(0, str(BASE))
-from waypoint.dependencies import effective_requirements, evaluate_availability
+from waypoint.dependencies import effective_relations, effective_requirements, evaluate_availability
 
 
 def unique_object(pairs):
@@ -131,12 +131,16 @@ def block_text(plan, key, level=2):
         lines[2:2] = owner_text
         prerequisites = []
         for phase, label in [('start', 'Предпосылки начала'), ('finish', 'Предпосылки завершения')]:
-            records = effective_requirements(plan, key, phase)
+            records = effective_relations(plan, key, phase)
             prerequisites += ['**' + label + ':**', '']
             for record in records:
                 inherited = ('; унаследовано через ' + record['declared_target_id']) if record['inherited'] else ''
                 if record['classification'] == 'legacy_unknown':
                     prerequisites.append('- `' + record['edge_id'] + '` — ' + record['producer_id'] + inherited + '; прежняя связь, условие доступности неизвестно.')
+                elif record['classification'] == 'order':
+                    prerequisites.append('- `' + record['edge_id'] + '` — порядок (не условие готовности): '
+                        + record['producer_id'] + ' → ' + record['declared_target_id'] + inherited
+                        + '; phase=' + record['phase'] + '; scope=' + record['target_scope'] + ': ' + record['why'])
                 else:
                     prerequisites.append('- `' + record['edge_id'] + '` — ' + record['producer_id'] + ' / ' + record['output_id']
                         + ' (rev ' + str(record['condition_revision']) + '; workspace=' + record['workspace_policy'] + ')'

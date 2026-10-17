@@ -122,6 +122,18 @@ def create_app(data_dir: Path, tokens: dict | None = None, testing: bool = False
     def items(project: str, node: str | None = None, edge: str | None = None, agent: str | None = None, deep: bool = True, before: int | None = None, limit: int = 100, version: str | None = None, categories: str | None = None, only_errors: bool = False, page_cursor: str | None = None, outside: bool = False):
         return store.items(project, node, edge, agent, deep, before, limit, version,categories,only_errors,page_cursor,outside)
 
+    @app.get('/api/p/{project}/items/resolve')
+    def resolve_items(project: str, keys: str, node: str | None = None, edge: str | None = None, agent: str | None = None, deep: bool = True, version: str | None = None, categories: str | None = None, only_errors: bool = False, outside: bool = False):
+        import json
+        try:
+            identities=json.loads(keys)
+        except (ValueError, TypeError):
+            raise ContractError('invalid_item_keys', 'Item keys must be a JSON list of identity pairs')
+        if not isinstance(identities,list):
+            raise ContractError('invalid_item_keys', 'Item keys must be a JSON list of identity pairs')
+        return store.items(project,node,edge,agent,deep,limit=32,version=version,
+                           categories=categories,only_errors=only_errors,outside=outside,identities=identities)
+
     @app.get("/api/p/{project}/events")
     def events(project: str, after: int = 0, limit: int = 200, wait: float = 0):
         return store.events_after(project, after, limit, wait)
@@ -138,7 +150,7 @@ def create_app(data_dir: Path, tokens: dict | None = None, testing: bool = False
             document=store.plan(project)
             import json
             warnings=[json.loads(r[0]) for r in store.db.execute('SELECT body FROM dependency_starts WHERE project=? AND node=? ORDER BY seq DESC LIMIT 20',(project,node_id))]
-            result.update(intent=document['plan']['nodes'][node_id].get('x_observability',{}).get('intent'),prerequisites={phase:prerequisite_view(store,document,node_id,phase) for phase in ('start','finish')},dependency_warnings=warnings,algorithm_refs=document['plan']['nodes'][node_id].get('x_observability',{}).get('algorithm_refs',[]),basis=basis(store,document))
+            result.update(intent=document['plan']['nodes'][node_id].get('x_observability',{}).get('intent'),prerequisites={phase:prerequisite_view(store,document,node_id,phase) for phase in ('start','finish')},dependency_warnings=warnings,algorithm_refs=document['plan']['nodes'][node_id].get('x_observability',{}).get('algorithm_refs',[]),basis=basis(store,document,node_id))
             return result
 
     def packet_core(project,node_id):
@@ -155,7 +167,7 @@ def create_app(data_dir: Path, tokens: dict | None = None, testing: bool = False
         with store.lock:
             document=store.plan(project,version)
             if node not in document['plan']['nodes']:raise ContractError('not_found','Block not found')
-            return {'basis':basis(store,document),'requirements':prerequisite_view(store,document,node,phase,workspace)}
+            return {'basis':basis(store,document,node,workspace),'requirements':prerequisite_view(store,document,node,phase,workspace)}
 
     @app.get('/api/p/{project}/algorithms')
     def algorithms(project: str,node: str | None=None,deep: bool=False,version: str | None=None):

@@ -14,7 +14,7 @@
     const ui = { view: 'projects', summaries: [], project: 'demo', state: null, versions: [], scope: null, selected: null, actor: null, inspector: null, version: null, planMode: false, camera: { x: 60, y: 35, z: .82 }, cameras: {}, drag: null, cursor: 0, busy: false };
     const readers = new Map();
     let key = '', online = false, stopped = false;
-    let navigationGeneration = 0, navigationController = new AbortController(), planMount = null, algorithmsMount = null, catalogueDispose = null, refreshSequence = 0;
+    let navigationGeneration = 0, navigationController = new AbortController(), planMount = null, algorithmsMount = null, catalogueDispose = null, refreshSequence = 0, catalogueRefreshAt = 0;
     const serviceIdentity = location.origin === 'null' ? 'offline' : location.origin + location.pathname;
     const context = () => ({generation: navigationGeneration, project: ui.project, version: ui.version});
     const matches = request => request.generation === navigationGeneration && request.project === ui.project && request.version === ui.version;
@@ -170,10 +170,10 @@
             const result = await stream(reader.kind, reader.id, reader.deep, older ? reader.before : null, reader.limit, reader.query);
             if (!matches(requested) || queryGeneration !== (reader.queryGeneration || 0)) return;
             if (!older && !reader.follow && reader.items.length) {
-                const window = await stream(reader.kind, reader.id, reader.deep, Math.max(...reader.items.map(item => item.first_seq || 0)) + 1, Math.min(200, reader.items.length), reader.query);
+                const window = await resolveReaderItems(reader);
                 if (!matches(requested) || queryGeneration !== (reader.queryGeneration || 0)) return;
                 const revisions = new Map(window.items.map(item => [itemKey(item), item]));
-                reader.items = reader.items.map(item => revisions.get(itemKey(item)) || item);
+                reader.items = reader.items.filter(item => revisions.has(itemKey(item))).map(item => revisions.get(itemKey(item)));
             }
             if (older) { reader.follow = false; const combined = new Map([...result.items, ...reader.items].map(i => [itemKey(i), i])); reader.items = [...combined.values()].slice(0, 200); reader.before = result.next_cursor || result.before; reader.hasMore = result.has_more; paintReader(reader, true); }
             else { updateReader(reader, result.items, result); reader.needsRefresh = generation !== (reader.generation || 0); }
@@ -371,31 +371,40 @@
             const a = visibleNodeFor(edge.from), b = visibleNodeFor(edge.to);
             if (!a || !b || a === b)
                 continue;
-            const k = a + '|' + b;
-            const g = groups.get(k) || { a, b, ids: [] };
-            g.ids.push(eid);
-            groups.set(k, g);
+            // Coincident collapsed endpoints must not erase distinct semantics.
+            groups.set(eid, {a,b,ids:[eid],edge});
         }
-        for (const { a, b, ids } of groups.values()) {
+        const lanes = new Map();
+        for (const { a, b, ids, edge } of groups.values()) {
             const p = all[a].layout || {}, q = all[b].layout || {};
-            let x1 = (p.x || 0) + 356, y1 = (p.y || 0) + 190, x2 = (q.x || 0) - 26, y2 = (q.y || 0) + 190;
+            const pair = JSON.stringify([a,b]), lane = lanes.get(pair) || 0; lanes.set(pair,lane + 1);
+            const offset = lane * 24;
+            let x1 = (p.x || 0) + 356, y1 = (p.y || 0) + 190 + offset, x2 = (q.x || 0) - 26, y2 = (q.y || 0) + 190 + offset;
             let d;
             if (x2 > x1)
                 d = `M${x1},${y1} C${x1 + 70},${y1} ${x2 - 70},${y2} ${x2},${y2}`;
             else {
-                x1 = (p.x || 0) + 165;
+                x1 = (p.x || 0) + 165 + offset;
                 y1 = (p.y || 0) + 387;
-                x2 = (q.x || 0) + 165;
+                x2 = (q.x || 0) + 165 + offset;
                 y2 = (q.y || 0);
                 d = `M${x1},${y1} C${x1},${y1 + 70} ${x2},${y2 - 70} ${x2},${y2}`;
             }
-            const group = svg('g');
-            const path = svg('path', { d, class: 'edge', 'marker-end': 'url(#arrow)' }), hit = svg('path', { d, class: 'edge-hit', tabindex: 0, role: 'button', 'aria-label': 'Связь ' + ids.join(', ') });
+            const spec = edge.x_observability, relation = spec?.relation || 'legacy_unknown';
+            const collapsed = a !== edge.from || b !== edge.to, partial = b !== edge.to && spec?.target_scope === 'node';
+            const summary = [relation === 'order' ? 'Порядок' : relation === 'requires' ? 'Нужен результат' : 'Связь', spec?.phase === 'finish' ? 'завершение' : spec ? 'начало' : '', partial ? 'частично' : collapsed ? 'внутри группы' : ''].filter(Boolean).join(' · ');
+            const details = [ids[0],summary,`${edge.from} → ${edge.to}`,spec?.why || 'Тип связи не задан'].join('\n');
+            const group = svg('g',{'data-edge':ids[0],'data-relation':relation,'data-partial':String(partial),'data-phase':spec?.phase || ''});
+            const title = svg('title'); title.textContent = details; group.append(title);
+            const path = svg('path', { d, class: 'edge edge-' + relation, 'marker-end': 'url(#arrow)' }), hit = svg('path', { d, class: 'edge-hit', tabindex: 0, role: 'button', 'aria-label': details });
             const open = () => openInspector('edge', ids[0], 'messages');
             hit.onclick = open;
             hit.onkeydown = e => { if (e.key === 'Enter')
                 open(); };
             group.append(path, hit);
+            const contextLabel = svg('text',{x:(x1+x2)/2,y:(y1+y2)/2 - 10 + lane * 20,'text-anchor':'middle',class:'edge-context'});
+            contextLabel.textContent = summary + (collapsed ? ` · ${edge.from} → ${edge.to}` : '');
+            group.append(contextLabel);
             const msgs = ui.state.items.filter(i => i.edge_ids?.some(id => ids.includes(id))).length;
             if (msgs) {
                 const cx = (x1 + x2) / 2, cy = (y1 + y2) / 2;
@@ -497,6 +506,30 @@
         if (before) q.set(typeof before === 'string' ? 'page_cursor' : 'before', before);
         return api(base() + '/items?' + q);
     }
+    async function resolveReaderItems(reader) {
+        const identities = reader.items.map(item => [item.agent_id || '', item.id]);
+        if (demo) {
+            const result = await stream(reader.kind,reader.id,reader.deep,null,Number.MAX_SAFE_INTEGER,reader.query);
+            const keys = new Set(identities.map(pair => JSON.stringify(pair)));
+            return {items:result.items.filter(item => keys.has(itemKey(item)))};
+        }
+        const items = [];
+        // Respect HTTP header limits even when native identities are long.
+        for (let start = 0; start < identities.length;) {
+            const chunk = [];
+            while (start < identities.length && chunk.length < 32) {
+                const next = [...chunk,identities[start]];
+                if (chunk.length && encodeURIComponent(JSON.stringify(next)).length > 5500) break;
+                chunk.push(identities[start++]);
+            }
+            const q = new URLSearchParams({keys:JSON.stringify(chunk),deep:String(reader.deep),version:ui.state.version,only_errors:String(!!reader.query.only_errors)});
+            if (reader.query.categories != null) q.set('categories',reader.query.categories.join(','));
+            if (reader.kind === 'outside') q.set('outside','true'); else q.set(reader.kind,reader.id);
+            const result = await api(base() + '/items/resolve?' + q);
+            items.push(...result.items);
+        }
+        return {items};
+    }
     function inspectorSignature(kind, id, tab) {
         const node = nodesWithGhosts()[id], actor = ui.state.agents.find(actor => actor.id === id);
         if (kind === 'node') {
@@ -537,7 +570,7 @@
         if (id) body.append(btn(kind === 'agent' ? 'Копировать native/block ID' : 'Копировать ID блока/связи', () => copyId(id), 'copy-id'));
         if (kind === 'edge') {
             const edge = ui.state.plan.edges[id];
-            if (edge) { body.append(el('p', 'small-note', 'Исходные концы связи, включая другие уровни карты:')); for (const endpoint of [edge.from, edge.to]) body.append(btn(endpoint + ' · ' + nodeName(endpoint), () => focusNode(endpoint), 'related')); }
+            if (edge) { const spec = edge.x_observability; blockSection(body,'Условие связи',spec ? `${spec.relation === 'order' ? 'Порядок · не блокирует' : 'Требуется результат'} · ${spec.phase === 'finish' ? 'для завершения' : 'для начала'} · ${spec.target_scope === 'subtree' ? 'блок и подблоки' : 'только указанный блок'}\n${spec.why}` : 'Старая связь без классификации'); body.append(el('p', 'small-note', 'Исходные концы связи, включая другие уровни карты:')); for (const endpoint of [edge.from, edge.to]) body.append(btn(endpoint + ' · ' + nodeName(endpoint), () => focusNode(endpoint), 'related')); }
         }
         if (tab === 'messages') {
             if (kind === 'node' && childNodes(id).size > 1)
@@ -721,6 +754,7 @@
         const demoPlan = demo?.states?.[demo.current]?.plan;
         const result = demo ? demo.projects || [{project_id:demoPlan.project_id,title:demoPlan.title,purpose:demoPlan.x_observability?.purpose || demoPlan.description || 'Вымышленный проект для знакомства с Waypoint',source_health:'fictional'}] : await api('/api/projects?summary=true');
         ui.summaries = Array.isArray(result) ? result : result.projects || [];
+        catalogueRefreshAt = Date.now();
         $('#project').replaceChildren(el('option','','Выбрать проект…'));
         $('#project').firstChild.value = '';
         for (const project of ui.summaries) { const option = el('option','',project.title); option.value = project.project_id; $('#project').append(option); }
@@ -760,7 +794,13 @@
     }
     async function watch() {
         while (!stopped && !demo) {
-            if (ui.view === 'projects' || !ui.state) { await new Promise(resolve=>setTimeout(resolve,500)); continue; }
+            if (ui.view === 'projects' || !ui.state) {
+                if (ui.view === 'projects' && Date.now() - catalogueRefreshAt >= 5000) {
+                    try { await loadCatalogue(); if (ui.view === 'projects') setView('projects'); }
+                    catch (e) { if (e.name !== 'AbortError') notice('Сведения об источниках не обновлены: ' + e.message); catalogueRefreshAt = Date.now(); }
+                }
+                await new Promise(resolve=>setTimeout(resolve,500)); continue;
+            }
             const requested = context();
             try { const reply = await api(base() + '/events?' + new URLSearchParams({after:ui.cursor,wait:12,limit:200}));
                 if (!matches(requested)) continue;
