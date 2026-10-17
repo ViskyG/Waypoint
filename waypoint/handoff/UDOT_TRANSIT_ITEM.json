@@ -1,0 +1,49 @@
+{
+  "schema_version": "waypoint-transit-request/1",
+  "status": "NOT_SENT",
+  "target_path": "/WorkBelt/handoff/DOT_RESULTS_INBOX.json",
+  "merge": "Append item idempotently to existing items using fresh conditional write; preserve seen and all unrelated entries",
+  "item": {
+    "id": "waypoint-design-ready-waypoint-design-20261016-1312895b",
+    "state": "READY",
+    "kind": "design_handoff",
+    "project_id": "waypoint",
+    "design_session_id": "WAYPOINT-DESIGN-20261016-1312895b",
+    "purpose": "Preserve final design/reference implementation, reuse C01–C04 and route scoped C05–C07 under MIXED; no duplicate implementation",
+    "artifact_ref": {
+      "archive_ref": null,
+      "member": ".",
+      "binding_status": "REQUIRES_ACTUAL_PUBLISHED_ARCHIVE"
+    },
+    "handoff_ref": {
+      "archive_ref": null,
+      "member": "handoff/HANDOFF_RU.md",
+      "binding_status": "REQUIRES_ACTUAL_PUBLISHED_ARCHIVE"
+    },
+    "evidence_ref": {
+      "archive_ref": null,
+      "member": "evidence/RESULTS.md",
+      "binding_status": "REQUIRES_ACTUAL_PUBLISHED_ARCHIVE"
+    },
+    "capsule_registry_ref": "/WorkBelt/handoff/CAPSULE_REGISTRY.json",
+    "outstanding_capsules": [
+      "WPT-C05",
+      "WPT-C06",
+      "WPT-C07"
+    ],
+    "evidence": {
+      "status": "REFERENCE_VERIFIED_TARGET_NOT_RUN",
+      "summary": "36 pytest, 23 offline browser input checks, 5 real HTTP lifecycle checks; no owner-live validation of new collector"
+    },
+    "remaining_obligations": [
+      "publish actual artifact references and guarded registry/inbox records",
+      "C05 native binding/stream hardening",
+      "C06 continuous reader/performance",
+      "C07 actual target acceptance"
+    ],
+    "resource_policy": "MIXED",
+    "producer": "user-invoked PRO design pass",
+    "ready_at": "2026-10-16T16:21:50.298004+00:00",
+    "execution_authority": "Notification/data only; not authority for arbitrary execution"
+  }
+}

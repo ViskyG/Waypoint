@@ -1,0 +1,726 @@
+{
+  "schema_version": "waypoint-local-package/1",
+  "state": "LOCAL_INTEGRATION_20261017",
+  "files": [
+    {
+      "path": ".gitignore",
+      "size_bytes": 100,
+      "sha256": "ec2c19c1fcad81c710bdc45f89b55d0ec6f14e8f4e7c453f450168bdff24b1c9"
+    },
+    {
+      "path": "START_HERE_RU.md",
+      "size_bytes": 3004,
+      "sha256": "461e1b87930775f99ebc2c3328738df8caf35def88100fc413920da206bd6571"
+    },
+    {
+      "path": "roadmap/AUTHORING_PROFILE.md",
+      "size_bytes": 4002,
+      "sha256": "b79835f53111cd134699a31c3407728ade2e1b5e2da738f551f3b63c013850f4"
+    },
+    {
+      "path": "roadmap/CODEX_START.md",
+      "size_bytes": 8587,
+      "sha256": "e161aa6b708583b62299a1c820b022aeb23d7e81c283c3cf5ebc6925aa7e9111"
+    },
+    {
+      "path": "roadmap/DELIVERY.json",
+      "size_bytes": 525,
+      "sha256": "a6165819fc609122e0d1ee03daddaf1163a8897e180fd6f2d439d6bfe2528735"
+    },
+    {
+      "path": "roadmap/FORMAT.md",
+      "size_bytes": 10335,
+      "sha256": "38afe34abb6f25b246768d21c6cc252a44c28310257aaa574ab3579df45ac19e"
+    },
+    {
+      "path": "roadmap/INITIAL_FRONTIER.json",
+      "size_bytes": 464,
+      "sha256": "68f04400e569523a3387a2cf76faf6815b29a817e3d8b7502c33bc4444a610b6"
+    },
+    {
+      "path": "roadmap/INITIAL_IMPORT.json",
+      "size_bytes": 111747,
+      "sha256": "4d66ddf1c46544a1443ff692ad87cb86370f1a44ca34ab96fd282409ed208546"
+    },
+    {
+      "path": "roadmap/INITIAL_SOURCE_EVIDENCE.json",
+      "size_bytes": 6554,
+      "sha256": "e3148af456b844aa386da8c6f1e316cf39fe37b6aa42873a66cd7da9d6fa5820"
+    },
+    {
+      "path": "roadmap/PREVIEW.html",
+      "size_bytes": 166077,
+      "sha256": "5cc8263e90262cbdc223bd2985ff4cb316563d36e0f5a573122346b7179c2a7a"
+    },
+    {
+      "path": "roadmap/RETURN_FIELDS.md",
+      "size_bytes": 2487,
+      "sha256": "8adff4e3b4bdab0fb4998aa24acac0eb293bb67a4ad85a95540f812d7e0d384d"
+    },
+    {
+      "path": "roadmap/ROADMAP.md",
+      "size_bytes": 9306,
+      "sha256": "d7c1371de43a20bc18034c28448c435d34ff19678776a0c952915f08ad8078d6"
+    },
+    {
+      "path": "roadmap/ROADMAP.plan.json",
+      "size_bytes": 107861,
+      "sha256": "443288bb32af6a75e41b64c50fddcd1518f8df9960bdee9cb3cbcb88c4abd327"
+    },
+    {
+      "path": "roadmap/RUNNER_WAVES.md",
+      "size_bytes": 3800,
+      "sha256": "148b1ea15fd0a6949892c03b9685f99b600d4cabbb1b51ef432bd40671169f9e"
+    },
+    {
+      "path": "roadmap/SKILL_INTEGRATION_PROPOSAL.md",
+      "size_bytes": 4263,
+      "sha256": "18ada8a59b688d9007e6062094a0fc6234985673e9ea2899a3dbfc29c66a41fc"
+    },
+    {
+      "path": "roadmap/evidence/BROWSER.json",
+      "size_bytes": 759,
+      "sha256": "1823d903dd4562e87afdbf383e533f0c1397b358e5cc24d7ddb2ea6a8bf3a3ee"
+    },
+    {
+      "path": "roadmap/evidence/CLI_IMPORT.json",
+      "size_bytes": 561,
+      "sha256": "2be4c2f0de280187cd8512640cd711a5f75e7c5d09722e4878d0ee5fa7c5800c"
+    },
+    {
+      "path": "roadmap/evidence/INPUTS.md",
+      "size_bytes": 1823,
+      "sha256": "35671398e2addfcc010a046aa4921bcd40b012c1a5f26769f470d0b4f83f9c90"
+    },
+    {
+      "path": "roadmap/evidence/RESULTS_RU.md",
+      "size_bytes": 5410,
+      "sha256": "0ba08a6ae95615ca9c6ce1c872c4173f7ed92ac49db96d2f5d6fc045d9991061"
+    },
+    {
+      "path": "roadmap/evidence/VALIDATION.json",
+      "size_bytes": 8217,
+      "sha256": "8f1a0d9256cf4dd24990ce4e78ac1edbc6b17e19e2c0501aa3673075c013eec3"
+    },
+    {
+      "path": "roadmap/evidence/local-validation.json",
+      "size_bytes": 8218,
+      "sha256": "95bd9ee752e4ebc22bd0bb812235cc318782a022738bbd2ec384ee3f829bb2b4"
+    },
+    {
+      "path": "roadmap/evidence/roadmap-c05.png",
+      "size_bytes": 89945,
+      "sha256": "1552c56ba4c00b5970aaef2c3128a110522f13b9fbcd7d04f6927f5c3947b902"
+    },
+    {
+      "path": "roadmap/evidence/roadmap-obsidian.png",
+      "size_bytes": 103477,
+      "sha256": "95362d5957ed87ded167ace67f5ba1e8763529393b8b99ae9a4df826375e33d7"
+    },
+    {
+      "path": "roadmap/evidence/roadmap-overview.png",
+      "size_bytes": 101825,
+      "sha256": "0b667051339a0bae9cb3723652d0bbab903ece9801c3fff3984197bff9d15a59"
+    },
+    {
+      "path": "roadmap/handoff/PUBLICATION.md",
+      "size_bytes": 3525,
+      "sha256": "7ac1824417b3307ef75ea5a13059b7a687a3dd6eef2e5cf116e5b3ecbfb8d8fb"
+    },
+    {
+      "path": "roadmap/handoff/PUBLICATION_REQUEST.json",
+      "size_bytes": 1275,
+      "sha256": "74a3ff2c72163988a699579957fad65957341002851c6e54d973beca827f0034"
+    },
+    {
+      "path": "roadmap/history/2026-10-16-r1.plan.json",
+      "size_bytes": 107628,
+      "sha256": "328d8f29cddc7421c2f926a1335678720ffd4388e3cda57bf4f77b627839cad8"
+    },
+    {
+      "path": "roadmap/history/original-PACKAGE_MANIFEST.json",
+      "size_bytes": 18937,
+      "sha256": "e54a243dc299454147ffcfc1a6b2502aff630619c75bc024c6325deca6f4354d"
+    },
+    {
+      "path": "roadmap/packets/WPT-C05.md",
+      "size_bytes": 19370,
+      "sha256": "07bce0a210f2c74fbecce7cc347e9234a340c4a88d884fd120503968949efbab"
+    },
+    {
+      "path": "roadmap/packets/WPT-C06.md",
+      "size_bytes": 13678,
+      "sha256": "238bd8b4d5972dc15588f05e9dd19ed6c4c736e176bcf65cbfa5c4bcf6f6deb0"
+    },
+    {
+      "path": "roadmap/packets/WPT-C07.md",
+      "size_bytes": 18544,
+      "sha256": "ee5ca3d1806e535ee9e5214c8a14823a5cff79264d788dc1c41d9414e723a888"
+    },
+    {
+      "path": "roadmap/packets/WPT-R00.md",
+      "size_bytes": 6544,
+      "sha256": "397d38ea909a014358b81531462226bece53a77957da7dce2ec7544e86a6c8a2"
+    },
+    {
+      "path": "roadmap/templates/PROJECT.plan.json",
+      "size_bytes": 3090,
+      "sha256": "3b6008d0bbb92a7e6a600ae271f270af1dbb20b1e61ff7e3e8bcb6a60dd337ab"
+    },
+    {
+      "path": "roadmap/tools/build_preview.py",
+      "size_bytes": 2701,
+      "sha256": "de9b68aa04190c46253f1b1fd12f76ce1c51b83911aae671769e3648a6a52a2c"
+    },
+    {
+      "path": "roadmap/tools/check_cli.py",
+      "size_bytes": 3528,
+      "sha256": "388ca2bb210dc4d475ffd06f4493f5341b16e1ff2bd58bcdea90bf89f84ee5de"
+    },
+    {
+      "path": "roadmap/tools/check_preview.py",
+      "size_bytes": 3387,
+      "sha256": "5c7b0821aeb80c174a1bf50c52a429ec69eeb616cce7d3a18df227762cb6851c"
+    },
+    {
+      "path": "roadmap/tools/roadmap.py",
+      "size_bytes": 24315,
+      "sha256": "83e6fc31a4e05c133f757ce22b80d238cd4f25b808ae4ef04cbcd70955faa263"
+    },
+    {
+      "path": "roadmap/tools/verify_delivery.py",
+      "size_bytes": 774,
+      "sha256": "6c4c0d19ea85cb9045bc279f7bff4e5e709444cb200d2971ee02a98b3b790ec2"
+    },
+    {
+      "path": "roadmap/working-export-20261017.json",
+      "size_bytes": 111703,
+      "sha256": "e18c239f65edee31b6a19a3b30c9a06ad133ce0f84387076c9bccdc0c45d58fa"
+    },
+    {
+      "path": "waypoint/.gitignore",
+      "size_bytes": 153,
+      "sha256": "4997d4bd73a8ada88b72fa1c61757755a3367eb83fb626b935ef7d657f5f464b"
+    },
+    {
+      "path": "waypoint/CODEX_START.md",
+      "size_bytes": 4017,
+      "sha256": "04eb5a8e84897f56394708f734d6a274fd81149d1f54c76a2c5c2d96413e7637"
+    },
+    {
+      "path": "waypoint/LOCAL_RUN_RU.md",
+      "size_bytes": 3462,
+      "sha256": "3622b68ce306c0df4ecd784014929873dcde8f1445580aae4e8718f686160df9"
+    },
+    {
+      "path": "waypoint/MANIFEST.json",
+      "size_bytes": 17424,
+      "sha256": "0237e85c810a9c0cafa23eff80b94fb56456a9e2555b4cd1f48dc07f86f376c4"
+    },
+    {
+      "path": "waypoint/NOTICE.md",
+      "size_bytes": 507,
+      "sha256": "10bed3d6d9ea8d1403faba2c2580707b5060c4d3d41371763b3875219c6e83f1"
+    },
+    {
+      "path": "waypoint/README_RU.md",
+      "size_bytes": 6858,
+      "sha256": "c34fcb84b6d6d009ec94d152aed3854968d3262e3354917569ba3c43e9305811"
+    },
+    {
+      "path": "waypoint/SESSION.json",
+      "size_bytes": 1209,
+      "sha256": "07d809204816e9a786bfbbe948f00652a11e7ead573f3b19ad9999c9d9afe3d7"
+    },
+    {
+      "path": "waypoint/START_HERE.md",
+      "size_bytes": 1104,
+      "sha256": "d9e04269881aae41b4f207c35cdc34153ffc80b4abc6b1942f40ed44b5b35632"
+    },
+    {
+      "path": "waypoint/design/ACCEPTANCE.md",
+      "size_bytes": 6635,
+      "sha256": "c797786083d381db91cfa61ec43cce8099a9bfc2f7e420c757594afacbb60c99"
+    },
+    {
+      "path": "waypoint/design/ARCHITECTURE.md",
+      "size_bytes": 16573,
+      "sha256": "c51eec95ca896cdcdc959ca4925518f708bfffd0d677d8b95c43e396e7e0d43b"
+    },
+    {
+      "path": "waypoint/design/CONTRACTS.md",
+      "size_bytes": 13588,
+      "sha256": "d54ca4bb22ce92d9615e2348d5db488460100af7561f2e93c5da486e8fc39295"
+    },
+    {
+      "path": "waypoint/design/DECISIONS_AND_DOUBTS.md",
+      "size_bytes": 2484,
+      "sha256": "a15b7ca7677cb975d629852c3e72cf541e97536a028f77e568f11682a2a15e81"
+    },
+    {
+      "path": "waypoint/design/IMPLEMENTATION_MAP.md",
+      "size_bytes": 7733,
+      "sha256": "588aaf21ca78dac6cb34d277981442208d5b521082b5211c2e5d33d032127856"
+    },
+    {
+      "path": "waypoint/design/OPERATIONS.md",
+      "size_bytes": 7766,
+      "sha256": "9b48f5154a8ea2e4a702d5f344a37b2d2d81246baf773d74a89036d9f4291658"
+    },
+    {
+      "path": "waypoint/design/WORK_PACKETS.md",
+      "size_bytes": 6913,
+      "sha256": "17a2db871b5657e7ac9b9e18460f1871767288cda038c245430e533c6fcc092a"
+    },
+    {
+      "path": "waypoint/evidence/R00.json",
+      "size_bytes": 556,
+      "sha256": "4cdda530084d9d981367ce44bfdc90c8cd5f7cbfd88707833f5e81502000d324"
+    },
+    {
+      "path": "waypoint/evidence/RESULTS.md",
+      "size_bytes": 5568,
+      "sha256": "b3a30164daf2539ff5cb92cc9cb7a9f98f4a237e8aecc4c9804f74b6df9a778a"
+    },
+    {
+      "path": "waypoint/evidence/browser-details-results.json",
+      "size_bytes": 419,
+      "sha256": "e387f6abb754691eaed78cd86bb0542d3e46eb1004a5144c1739ab983a408f23"
+    },
+    {
+      "path": "waypoint/evidence/browser-http-limitation.json",
+      "size_bytes": 304,
+      "sha256": "b29508f820478c895bfbafc88bf85e3bcf788505c10dec5e9a6be321b80ccd68"
+    },
+    {
+      "path": "waypoint/evidence/browser-results.json",
+      "size_bytes": 2220,
+      "sha256": "abee7e729df17a48328d044bbfa58f4a90f5a334408f3b519f25d9619a8167df"
+    },
+    {
+      "path": "waypoint/evidence/c06-contrast.json",
+      "size_bytes": 521,
+      "sha256": "a04cc0f3baae08f9e23bacf483904d2931a6742fb564c8be79f4d932dccde487"
+    },
+    {
+      "path": "waypoint/evidence/delivery-validation.json",
+      "size_bytes": 435,
+      "sha256": "bd585e7679e749a69e753c843d29245c0c6717b71fd6e135c5bd1f5cbdc11df6"
+    },
+    {
+      "path": "waypoint/evidence/environment.json",
+      "size_bytes": 1567,
+      "sha256": "25fc921ac69450e74779e39fd9edae5ee250edd9750394b40969ff7cd762d6a4"
+    },
+    {
+      "path": "waypoint/evidence/http-results.json",
+      "size_bytes": 494,
+      "sha256": "d601ce7751844c45982c10b95e8f297394b42c700714dc90bb7515cff1d738e1"
+    },
+    {
+      "path": "waypoint/evidence/identity-correction.json",
+      "size_bytes": 291,
+      "sha256": "c18b8e79775d525a7df8cb2c7afaf5bdc0a1480439724dcaf89ac75703de3fcb"
+    },
+    {
+      "path": "waypoint/evidence/live-browser.json",
+      "size_bytes": 719,
+      "sha256": "9e04d5a5b22a937760914a4a301f5b4129f58e606fe2fd618a9fde788664d1df"
+    },
+    {
+      "path": "waypoint/evidence/live-ingest-timing.json",
+      "size_bytes": 666,
+      "sha256": "9b33eebf20933afbb0e98c50afa321c4487b4721044ef0e147ad9497292ebd92"
+    },
+    {
+      "path": "waypoint/evidence/live-recovery.json",
+      "size_bytes": 446,
+      "sha256": "4930feb7d08cd2849e0487f6f791d0631e22953a965f60f606fc0ae99d7b9013"
+    },
+    {
+      "path": "waypoint/evidence/live-target-fork-attribution-failure.json",
+      "size_bytes": 3800,
+      "sha256": "171d507c8dd2d69ec6c6fcb02d694e2aa1836ef1644b3ae63c8251cffc4ef5bd"
+    },
+    {
+      "path": "waypoint/evidence/live-target-restart-failure.json",
+      "size_bytes": 3441,
+      "sha256": "a1c168cd84209fa20d148aa1502d02821588646293cf62c02697d8d772cf39a9"
+    },
+    {
+      "path": "waypoint/evidence/live-target.json",
+      "size_bytes": 5468,
+      "sha256": "048902c38e5bc7d3453913aab83f7940b14327cdd1e6aff5f8ebf69222bd367d"
+    },
+    {
+      "path": "waypoint/evidence/local-unit-results.xml",
+      "size_bytes": 7619,
+      "sha256": "5d69219b97de6ee7b2e7e41cd25f7a8f801f3c53a0776fe433770cfad52ad1b8"
+    },
+    {
+      "path": "waypoint/evidence/original-delivery-manifest.json",
+      "size_bytes": 12628,
+      "sha256": "599727e7a6f25b0b2baee815e28972420da89bec95bd5a2096d372af87dfa2f0"
+    },
+    {
+      "path": "waypoint/evidence/packaging-build.json",
+      "size_bytes": 410,
+      "sha256": "57e66e95b9f4cff65d6e26bfe7e59522b26590a15f22d965cfaf56b6f8bf7780"
+    },
+    {
+      "path": "waypoint/evidence/plan-update.json",
+      "size_bytes": 240,
+      "sha256": "fb81c83ff07af28ab8e52420b1937f1ad937030c3ec556bf59c619cd095c632c"
+    },
+    {
+      "path": "waypoint/evidence/python-compatibility.json",
+      "size_bytes": 182,
+      "sha256": "74130817d16822e445ddf503fed7a1c3b8478f1f0ca1c710268dcb5270134833"
+    },
+    {
+      "path": "waypoint/evidence/rich-browser-results.json",
+      "size_bytes": 11005,
+      "sha256": "6e164b8bd133ca60481881a9526a852cc1766642e88d1994d966955d2835b47d"
+    },
+    {
+      "path": "waypoint/evidence/service-migration.json",
+      "size_bytes": 158,
+      "sha256": "07332c58cceba55b2c96348a938997b2fce56a5314cb0ca11e05ee91e89c75ab"
+    },
+    {
+      "path": "waypoint/evidence/ui-nested.png",
+      "size_bytes": 112666,
+      "sha256": "fa1e2adeef7a41b19d872027c154d69de7863eee994f64aad7b185951c16b16d"
+    },
+    {
+      "path": "waypoint/evidence/ui-obsidian.png",
+      "size_bytes": 226538,
+      "sha256": "6e19eda92cf7b7e531cfd30222e863e44083964340ab462ac44fabe493fe51ed"
+    },
+    {
+      "path": "waypoint/evidence/ui-terracotta.png",
+      "size_bytes": 227207,
+      "sha256": "13df0ecabddfe96af0bb00fecf26e53bf0f206cc96df78eb6e258c25ab9dcfea"
+    },
+    {
+      "path": "waypoint/evidence/unit-results.xml",
+      "size_bytes": 4043,
+      "sha256": "ac40892ca765f5f25b784089ff5625c93be3ed39309c9315623cbbeabbaa98df"
+    },
+    {
+      "path": "waypoint/evidence/unit-tests.txt",
+      "size_bytes": 99,
+      "sha256": "2ddc5cd3143f17254258cb4009ce9c311d021371ee9778531d4a61ee61c3d9c5"
+    },
+    {
+      "path": "waypoint/examples/demo-plan.json",
+      "size_bytes": 12673,
+      "sha256": "1389eaf526a9cfcfc9b868d7530c8d2296d9524b95bbb8b92c26b3585a353db3"
+    },
+    {
+      "path": "waypoint/handoff/HANDOFF_RU.md",
+      "size_bytes": 4562,
+      "sha256": "69465b24f310ccac315f707e3f8454baeec11f19125b907c05970d5979a966f5"
+    },
+    {
+      "path": "waypoint/handoff/PUBLICATION.md",
+      "size_bytes": 3729,
+      "sha256": "dc6e296798dbab16a799331caeaa18e8e4372675f7cc2ea41eea6ec30d981727"
+    },
+    {
+      "path": "waypoint/handoff/REGISTRY_MERGE_REQUEST.json",
+      "size_bytes": 8704,
+      "sha256": "77cf6424293bb951a035bf3283bded7607b51c94b8af39602ceac0cc9828ba18"
+    },
+    {
+      "path": "waypoint/handoff/UDOT_TRANSIT_ITEM.json",
+      "size_bytes": 1930,
+      "sha256": "38ded452e60b2100fe017245133a9d3280b8b3babf3c5b5e770bfa327ec4da84"
+    },
+    {
+      "path": "waypoint/preview.html",
+      "size_bytes": 143679,
+      "sha256": "f1f52df436a186f4fb578bb828065589a2294d4cf008f60be6f13039250a3db7"
+    },
+    {
+      "path": "waypoint/pyproject.toml",
+      "size_bytes": 636,
+      "sha256": "e718c0f8555aa5ccefa401a25aab4a97fdb7c8ce6389836579501623987692e6"
+    },
+    {
+      "path": "waypoint/reports/C05_ADAPTER.md",
+      "size_bytes": 8419,
+      "sha256": "6d2d8eb9d2353064ed03102b9b6ae11465c3b7fdc64a6fe8cd2bb8e0d7b1d602"
+    },
+    {
+      "path": "waypoint/reports/C05_LIVE.md",
+      "size_bytes": 14974,
+      "sha256": "321c9da18c36ac45cc7f88a1ef959bd6cc774c0a4337f75fac5fe0c722aff7ef"
+    },
+    {
+      "path": "waypoint/reports/C06_BROWSER.md",
+      "size_bytes": 11055,
+      "sha256": "42d9642a84dfe05636a06927ad89877f291ab3afd6f09511cfeccea1c83b5bfd"
+    },
+    {
+      "path": "waypoint/reports/RETURN_TO_CHAT_RU.md",
+      "size_bytes": 17967,
+      "sha256": "72aa0c272d2c752a2c884dcd232450ec65dba5fdd52fdb0c517c1cf47749f9f1"
+    },
+    {
+      "path": "waypoint/requirements-local-lock.txt",
+      "size_bytes": 623,
+      "sha256": "fa5cf6d73100adbcdf27789ffaaca37b6ac85f968377a9b0e81d750e15330623"
+    },
+    {
+      "path": "waypoint/requirements-tested.txt",
+      "size_bytes": 378,
+      "sha256": "e58efe04e406f6231637af84e04bb292a625255d733866543ff9a09f3949d493"
+    },
+    {
+      "path": "waypoint/schemas/event.schema.json",
+      "size_bytes": 5561,
+      "sha256": "fa3adc6b6d98bb31c16359060d0dcb086ee73e0ee5632f6f5ff20492ff7dd1e5"
+    },
+    {
+      "path": "waypoint/schemas/openapi.json",
+      "size_bytes": 16779,
+      "sha256": "148114ebea95eaadd379fc6e7a1a7021606515cb1302de94193501faf0ea0f93"
+    },
+    {
+      "path": "waypoint/schemas/plan.schema.json",
+      "size_bytes": 3098,
+      "sha256": "a5c3573d83a90699d97f5fbd64b9d9838361f5ecb38126e392cb7238cfca39b7"
+    },
+    {
+      "path": "waypoint/skills/INTEGRATION.md",
+      "size_bytes": 1711,
+      "sha256": "08b976ed43ebaeb72878613699eb0959c0b2c72f9bea441dad612ea99363eb88"
+    },
+    {
+      "path": "waypoint/skills/waypoint-map/SKILL.md",
+      "size_bytes": 2101,
+      "sha256": "12bad9c1b0c469bd149a2a0fa0bcbdc2f9ae287d0e610e92b0937be8e08dadbc"
+    },
+    {
+      "path": "waypoint/skills/waypoint-map/SKILL.ru.md",
+      "size_bytes": 3400,
+      "sha256": "4d99ae095c36c86c1a2e316e73a0ffd9a331adb0690c1c03644f30a68cb7d5bd"
+    },
+    {
+      "path": "waypoint/skills/waypoint-observe/SKILL.md",
+      "size_bytes": 2237,
+      "sha256": "7a402be58c19206a42aabee410e071712f5a0986cbbeb18fc3f4ae9b57eaf84c"
+    },
+    {
+      "path": "waypoint/skills/waypoint-observe/SKILL.ru.md",
+      "size_bytes": 3650,
+      "sha256": "d8dace30488d7967a4a55775f5655caa46b519fb234e76359722ca5092d1ffa9"
+    },
+    {
+      "path": "waypoint/sources/INPUTS.md",
+      "size_bytes": 1784,
+      "sha256": "cc5400fabcf53f1c01ec910203eee6d5187e30413166b361d1415023f80805af"
+    },
+    {
+      "path": "waypoint/sources/Waypoint — Design Context (discovery).txt",
+      "size_bytes": 26813,
+      "sha256": "884276937dce80baaae6b64f40d3e6dda3566c8f55fd65aaf7f1412e006715bb"
+    },
+    {
+      "path": "waypoint/sources/Waypoint — Feasibility Findings 2026-10-16.txt",
+      "size_bytes": 15738,
+      "sha256": "f9fdd7652e09334491d76df139302f5e968306daac565164f30dde7550dc4b9d"
+    },
+    {
+      "path": "waypoint/sources/feasibility-evidence-v3.zip",
+      "size_bytes": 217599,
+      "sha256": "51fa3627053ea6c9e5e75046401274d08d0d069a806620ad75d57d1028960698"
+    },
+    {
+      "path": "waypoint/sources/obsidian-reference.png",
+      "size_bytes": 2301771,
+      "sha256": "087db550daab26e5be7404bef2e74b86e1b9aa3cc266cdb022172375bdd773a4"
+    },
+    {
+      "path": "waypoint/sources/terracotta-reference.png",
+      "size_bytes": 2277203,
+      "sha256": "794ca5d7e23bf3bddeb6f1ae6d39bb70dbe6964be365196caf3a1d10e70b8588"
+    },
+    {
+      "path": "waypoint/tests/browser_check.py",
+      "size_bytes": 16809,
+      "sha256": "cada3f1e01b7531c38fc4b8100cc2639975f1c17db4b1b18aa1c46685e543e0b"
+    },
+    {
+      "path": "waypoint/tests/browser_details_check.py",
+      "size_bytes": 5277,
+      "sha256": "9a04fd91edbb198abbbd236968a34c4680492f022138e2df836b59cd300fccc1"
+    },
+    {
+      "path": "waypoint/tests/rich_browser_check.py",
+      "size_bytes": 12682,
+      "sha256": "070cd3b5c27769541d152b719981687fbbcae0970ba5a5a90315622de114a8e3"
+    },
+    {
+      "path": "waypoint/tests/run_browser_check.py",
+      "size_bytes": 1209,
+      "sha256": "4d54c7adc24e7a077b2d3402ee1fc81a96507c95a0b2b0a91af2f5cd7c931593"
+    },
+    {
+      "path": "waypoint/tests/test_adapter_incremental.py",
+      "size_bytes": 23241,
+      "sha256": "37c3764383b65a0e6f38a784752d3d28b6a6ee0626f70fe1f9f3ee70908de53b"
+    },
+    {
+      "path": "waypoint/tests/test_adapters.py",
+      "size_bytes": 7081,
+      "sha256": "ad008f8d448815d8bea2a21129dfd728387063a99a66d774029be13db8e15e7d"
+    },
+    {
+      "path": "waypoint/tests/test_core.py",
+      "size_bytes": 9991,
+      "sha256": "dde0b6b303566fb12b96d1756fc712375505881261523a915ce04e73ea1a3847"
+    },
+    {
+      "path": "waypoint/tests/test_schema.py",
+      "size_bytes": 786,
+      "sha256": "277273f1f183a5c54cdfbe30342ed021996eee41bbb03269c800eae5c7b4cbaa"
+    },
+    {
+      "path": "waypoint/tests/test_targets_binding.py",
+      "size_bytes": 7524,
+      "sha256": "978605217de9c80abba5e6ceffe2799076c9eae8429b5d60a56948e09fdd38ad"
+    },
+    {
+      "path": "waypoint/tools/build_preview.py",
+      "size_bytes": 1332,
+      "sha256": "378f57b22ab61a3b0a7467ea7905e2799d8b346c266c915c9ca64ce918e9686d"
+    },
+    {
+      "path": "waypoint/tools/generate_contracts.py",
+      "size_bytes": 4165,
+      "sha256": "fdceea97e2b38c4b4765a22e83b41cf70b88c4ce874e5fc5651254c31b3992c1"
+    },
+    {
+      "path": "waypoint/tools/measure_live_ingest.py",
+      "size_bytes": 2414,
+      "sha256": "e2d92c1289b3f4df0b1b265d4187db558df4781afe227f5c8cd3af9c422d7662"
+    },
+    {
+      "path": "waypoint/tools/package_local.py",
+      "size_bytes": 3752,
+      "sha256": "9e6f203ddd7da90b1fa9bdbe6aa34d29e9a0248803a8d8df60f121ede7432466"
+    },
+    {
+      "path": "waypoint/tools/verify_http.py",
+      "size_bytes": 4394,
+      "sha256": "6bc17f5a023f0f6aadb7ea838bad66f91ac784497f0e0347ede3ba2075c98913"
+    },
+    {
+      "path": "waypoint/tools/verify_live.py",
+      "size_bytes": 19689,
+      "sha256": "17154176cbc366f88def47cf76b90b7ede7b67179ae017318d4a182fd21a7610"
+    },
+    {
+      "path": "waypoint/tools/verify_live_browser.py",
+      "size_bytes": 4635,
+      "sha256": "ca06d4ccf59db8249a2652b3cf0698d926e1cb6467d578ba088083b7805e1165"
+    },
+    {
+      "path": "waypoint/tools/verify_package.py",
+      "size_bytes": 2297,
+      "sha256": "3b6d5486c19b4fc6205cf330a9116b9132b5f59d4ca3c94ff845f0500a0a1e11"
+    },
+    {
+      "path": "waypoint/waypoint/__init__.py",
+      "size_bytes": 79,
+      "sha256": "8b0dd1bccf9dc223b2e8fa6ae3ff9947501ac1c268296311529d26db59b037e5"
+    },
+    {
+      "path": "waypoint/waypoint/__main__.py",
+      "size_bytes": 47,
+      "sha256": "79ee6f134c5c5193377cf9b189cbdcc3e2095e49ba9cec310114441c15a917c4"
+    },
+    {
+      "path": "waypoint/waypoint/adapters/__init__.py",
+      "size_bytes": 85,
+      "sha256": "c1cca14514c90a743bef6097f39afc553adbb3a5a3b9db8310b1ed65523bbd16"
+    },
+    {
+      "path": "waypoint/waypoint/adapters/codex.py",
+      "size_bytes": 21595,
+      "sha256": "bf7ad3277b3f65d1d5c0ca375d2f0878f1e67afdb997fbef6b702e46ceabe0b4"
+    },
+    {
+      "path": "waypoint/waypoint/adapters/ipc.py",
+      "size_bytes": 8655,
+      "sha256": "d3b2ac342c7cf4805e1378df128c3b8436e10a686afc94ce95c2ae978ce8a32f"
+    },
+    {
+      "path": "waypoint/waypoint/adapters/patches.py",
+      "size_bytes": 7768,
+      "sha256": "48f1792bf6f665914cba31fa8047aa45be7195dc614d3955db5902d00f5a10ac"
+    },
+    {
+      "path": "waypoint/waypoint/cli.py",
+      "size_bytes": 12001,
+      "sha256": "6a7d1d17564ebbee274f746a5f4c896feca29f4d0dc46b9cb595927f5d446331"
+    },
+    {
+      "path": "waypoint/waypoint/client.py",
+      "size_bytes": 2116,
+      "sha256": "c9967d923a299f2bd3f03e5914891cfaee559c142184f20251a87c15f36292de"
+    },
+    {
+      "path": "waypoint/waypoint/collector.py",
+      "size_bytes": 13395,
+      "sha256": "57050f7f13d85fe554de24334a2cf721aca4bf18537c11540b99fbdf42a26a87"
+    },
+    {
+      "path": "waypoint/waypoint/demo.py",
+      "size_bytes": 10826,
+      "sha256": "910495a8c44d507ad92b25461eac58c10300b48ba98944e090ea0a75eb394166"
+    },
+    {
+      "path": "waypoint/waypoint/domain.py",
+      "size_bytes": 11299,
+      "sha256": "94cfcd5b2b2a9ca4475ece794d4d7a90d36e4fcd19742d1339122ddaf0c6d938"
+    },
+    {
+      "path": "waypoint/waypoint/security.py",
+      "size_bytes": 1071,
+      "sha256": "57904de13c2a716216cdd82b97eab129eab5fde33e198d40a39143d6b15e5fd4"
+    },
+    {
+      "path": "waypoint/waypoint/server.py",
+      "size_bytes": 6668,
+      "sha256": "46139bfdc2542811be2604d9f43ab27ffcb1226cf69357035f3e61b1a6c20bf9"
+    },
+    {
+      "path": "waypoint/waypoint/spool.py",
+      "size_bytes": 2199,
+      "sha256": "6deb7a53330c084c1e72c019ed074736307f3645e5ba62c962f555aa9f676118"
+    },
+    {
+      "path": "waypoint/waypoint/store.py",
+      "size_bytes": 29706,
+      "sha256": "6e04dfb56d0049043c82263ee3d5b4b9090458b927431c7f1ab43bd39e3f366b"
+    },
+    {
+      "path": "waypoint/waypoint/web/app.js",
+      "size_bytes": 54064,
+      "sha256": "5e1373eadd63cb72f77153338df4cfe693fbe8d4325ef8062b1a130ff5966c35"
+    },
+    {
+      "path": "waypoint/waypoint/web/index.html",
+      "size_bytes": 2929,
+      "sha256": "bd0d67e018782c710bdbd4adca9a3be4c0b618a04ddc96ac930285efd1e16782"
+    },
+    {
+      "path": "waypoint/waypoint/web/style.css",
+      "size_bytes": 13822,
+      "sha256": "7915a3772acbcc1a8bd4cf1f0eaa13234bcac8e1e775b3123a5e189c481a0e0e"
+    }
+  ]
+}

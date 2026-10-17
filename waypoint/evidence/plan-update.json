@@ -1,0 +1,9 @@
+{
+  "previous_version": "v-dbf4fffa0d9949cc",
+  "new_version": "v-55e4a40332434c53",
+  "request_id": "waypoint-local-integration-20261017-r2",
+  "exact_retry_idempotent": true,
+  "stable_nodes": 20,
+  "stable_edges": 21,
+  "applied": true
+}

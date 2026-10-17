@@ -1,0 +1,14 @@
+{
+  "stage": "build-implementation-roadmap",
+  "project_id": "waypoint",
+  "revision": "2026-10-16-r1",
+  "state": "COMPLETED",
+  "resource_policy": "MIXED",
+  "definition": "ROADMAP.plan.json",
+  "source_design_session_id": "WAYPOINT-DESIGN-20261016-1312895b",
+  "source_code_modified": false,
+  "target_execution_started": false,
+  "global_runtime_records_changed": false,
+  "canonical_skills_changed": false,
+  "output_purpose": "Native work graph, generated packets/waves and read-only preview; not target deployment."
+}

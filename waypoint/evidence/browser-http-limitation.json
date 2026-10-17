@@ -1,0 +1,1 @@
+{"status":"BLOCKED","scope":"Chromium navigation to local service","error":"ERR_BLOCKED_BY_ADMINISTRATOR","workaround":"No policy changes attempted. Render same offline HTML via allowed set_content; test HTTP API separately.","not_evidence_of":"Application HTTP failure or user-machine browser failure"}

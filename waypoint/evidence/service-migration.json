@@ -1,0 +1,7 @@
+{
+  "only_waypoint_restarted": true,
+  "plan_version_unchanged": true,
+  "statuses_preserved": true,
+  "cursor_preserved": true,
+  "schema_migrated_to": "2"
+}

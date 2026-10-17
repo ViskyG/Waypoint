@@ -1,0 +1,28 @@
+{
+  "meaning": "planning frontier from supplied source + explicit completion receipts; not live status or assignment",
+  "completed_receipts": [],
+  "ready": [
+    "WPT-R00"
+  ],
+  "waiting": [
+    {
+      "id": "WPT-C05",
+      "requires": [
+        "WPT-R00"
+      ]
+    },
+    {
+      "id": "WPT-C06",
+      "requires": [
+        "WPT-R00"
+      ]
+    },
+    {
+      "id": "WPT-C07",
+      "requires": [
+        "WPT-C05",
+        "WPT-C06"
+      ]
+    }
+  ]
+}

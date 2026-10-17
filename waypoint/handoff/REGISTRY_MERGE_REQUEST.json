@@ -1,0 +1,259 @@
+{
+  "schema_version": "waypoint-publication-request/1",
+  "status": "NOT_APPLIED",
+  "purpose": "Waypoint-only upserts into the existing registry, not a replacement registry or new queue",
+  "target_path": "/WorkBelt/handoff/CAPSULE_REGISTRY.json",
+  "requires": [
+    "publish final archive and resolve actual refs",
+    "fresh full target read",
+    "provider version/CAS guard",
+    "preserve unrelated data",
+    "readback verification"
+  ],
+  "upserts": {
+    "projects": {
+      "waypoint": {
+        "title": "Waypoint",
+        "context_ref": "https://docs.google.com/document/d/19xpj5t9d92nqir3x2FmqWmyK5_eT0G9MNjsb7dShcgs/edit",
+        "resource_policy": "MIXED",
+        "active_design_session_id": null,
+        "latest_design_session_id": "WAYPOINT-DESIGN-20261016-1312895b",
+        "artifact_root": null,
+        "artifact_binding_status": "RESOLVE_AFTER_PUBLICATION"
+      }
+    },
+    "design_sessions": {
+      "WAYPOINT-DESIGN-20261016-1312895b": {
+        "schema_version": "design-session/2.0",
+        "design_session_id": "WAYPOINT-DESIGN-20261016-1312895b",
+        "project_id": "waypoint",
+        "state": "COMPLETED",
+        "resource_policy": "MIXED",
+        "owner_run_ref": {
+          "kind": "current-conversation-design-invocation",
+          "user_invocation": "Начинай проектирование родная прошка. Мы верим в тебя!",
+          "platform_run_id": null
+        },
+        "started_at": "2026-10-16T15:26:00.127781+00:00",
+        "latest_checkpoint_ref": {
+          "archive_ref": null,
+          "member": "handoff/HANDOFF_RU.md",
+          "binding_status": "REQUIRES_ACTUAL_PUBLISHED_ARCHIVE"
+        },
+        "completed_at": "2026-10-16T16:21:50.298004+00:00",
+        "terminal_evidence_ref": {
+          "archive_ref": null,
+          "member": "SESSION.json",
+          "binding_status": "REQUIRES_ACTUAL_PUBLISHED_ARCHIVE"
+        },
+        "execution_scope": "design-and-isolated-reference-implementation",
+        "target_integration": "NOT_RUN",
+        "source_packets_completed": [
+          "WPT-C01",
+          "WPT-C02",
+          "WPT-C03",
+          "WPT-C04"
+        ],
+        "remaining_packets": [
+          "WPT-C05",
+          "WPT-C06",
+          "WPT-C07"
+        ],
+        "output_root": null
+      }
+    },
+    "capsules": {
+      "WPT-C01": {
+        "capsule_id": "WPT-C01",
+        "project_id": "waypoint",
+        "title": "Local domain, plan and event contracts",
+        "design_session_id": "WAYPOINT-DESIGN-20261016-1312895b",
+        "state": "DONE",
+        "recommended_executor": "PRO",
+        "assignment_ref": {
+          "archive_ref": null,
+          "member": "design/WORK_PACKETS.md",
+          "binding_status": "REQUIRES_ACTUAL_PUBLISHED_ARCHIVE",
+          "section_id": "WPT-C01"
+        },
+        "claim": null,
+        "result_ref": {
+          "archive_ref": null,
+          "member": "evidence/RESULTS.md",
+          "binding_status": "REQUIRES_ACTUAL_PUBLISHED_ARCHIVE"
+        },
+        "dependencies": [],
+        "change_scope": [
+          "waypoint/domain.py",
+          "waypoint/store.py",
+          "waypoint/server.py"
+        ],
+        "evidence_scope": "produced reference source; target integration not implied"
+      },
+      "WPT-C02": {
+        "capsule_id": "WPT-C02",
+        "project_id": "waypoint",
+        "title": "Observed native source reference",
+        "design_session_id": "WAYPOINT-DESIGN-20261016-1312895b",
+        "state": "DONE",
+        "recommended_executor": "PRO",
+        "assignment_ref": {
+          "archive_ref": null,
+          "member": "design/WORK_PACKETS.md",
+          "binding_status": "REQUIRES_ACTUAL_PUBLISHED_ARCHIVE",
+          "section_id": "WPT-C02"
+        },
+        "claim": null,
+        "result_ref": {
+          "archive_ref": null,
+          "member": "evidence/RESULTS.md",
+          "binding_status": "REQUIRES_ACTUAL_PUBLISHED_ARCHIVE"
+        },
+        "dependencies": [
+          "WPT-C01"
+        ],
+        "change_scope": [
+          "waypoint/adapters/",
+          "waypoint/collector.py"
+        ],
+        "evidence_scope": "produced reference source; target integration not implied"
+      },
+      "WPT-C03": {
+        "capsule_id": "WPT-C03",
+        "project_id": "waypoint",
+        "title": "Shared visual reader base",
+        "design_session_id": "WAYPOINT-DESIGN-20261016-1312895b",
+        "state": "DONE",
+        "recommended_executor": "PRO",
+        "assignment_ref": {
+          "archive_ref": null,
+          "member": "design/WORK_PACKETS.md",
+          "binding_status": "REQUIRES_ACTUAL_PUBLISHED_ARCHIVE",
+          "section_id": "WPT-C03"
+        },
+        "claim": null,
+        "result_ref": {
+          "archive_ref": null,
+          "member": "evidence/RESULTS.md",
+          "binding_status": "REQUIRES_ACTUAL_PUBLISHED_ARCHIVE"
+        },
+        "dependencies": [
+          "WPT-C01"
+        ],
+        "change_scope": [
+          "waypoint/web/",
+          "preview.html"
+        ],
+        "evidence_scope": "produced reference source; target integration not implied"
+      },
+      "WPT-C04": {
+        "capsule_id": "WPT-C04",
+        "project_id": "waypoint",
+        "title": "Low-overhead agent workflow and handoff",
+        "design_session_id": "WAYPOINT-DESIGN-20261016-1312895b",
+        "state": "DONE",
+        "recommended_executor": "PRO",
+        "assignment_ref": {
+          "archive_ref": null,
+          "member": "design/WORK_PACKETS.md",
+          "binding_status": "REQUIRES_ACTUAL_PUBLISHED_ARCHIVE",
+          "section_id": "WPT-C04"
+        },
+        "claim": null,
+        "result_ref": {
+          "archive_ref": null,
+          "member": "evidence/RESULTS.md",
+          "binding_status": "REQUIRES_ACTUAL_PUBLISHED_ARCHIVE"
+        },
+        "dependencies": [
+          "WPT-C01"
+        ],
+        "change_scope": [
+          "waypoint/cli.py",
+          "skills/"
+        ],
+        "evidence_scope": "produced reference source; target integration not implied"
+      },
+      "WPT-C05": {
+        "capsule_id": "WPT-C05",
+        "project_id": "waypoint",
+        "title": "Source binding, incremental normalization and durable attribution",
+        "design_session_id": "WAYPOINT-DESIGN-20261016-1312895b",
+        "state": "READY",
+        "recommended_executor": "CODEX",
+        "assignment_ref": {
+          "archive_ref": null,
+          "member": "design/WORK_PACKETS.md",
+          "binding_status": "REQUIRES_ACTUAL_PUBLISHED_ARCHIVE",
+          "section_id": "WPT-C05"
+        },
+        "claim": null,
+        "result_ref": null,
+        "dependencies": [
+          "WPT-C01",
+          "WPT-C02",
+          "WPT-C04"
+        ],
+        "change_scope": [
+          "waypoint/adapters/",
+          "waypoint/collector.py",
+          "tests/test_adapters.py"
+        ],
+        "evidence_scope": "target completion per supplied contract"
+      },
+      "WPT-C06": {
+        "capsule_id": "WPT-C06",
+        "project_id": "waypoint",
+        "title": "Continuous live reader and rich-map performance",
+        "design_session_id": "WAYPOINT-DESIGN-20261016-1312895b",
+        "state": "READY",
+        "recommended_executor": "CODEX",
+        "assignment_ref": {
+          "archive_ref": null,
+          "member": "design/WORK_PACKETS.md",
+          "binding_status": "REQUIRES_ACTUAL_PUBLISHED_ARCHIVE",
+          "section_id": "WPT-C06"
+        },
+        "claim": null,
+        "result_ref": null,
+        "dependencies": [
+          "WPT-C01",
+          "WPT-C03",
+          "WPT-C04"
+        ],
+        "change_scope": [
+          "waypoint/web/",
+          "tests/browser_check.py"
+        ],
+        "evidence_scope": "target completion per supplied contract",
+        "eligible_alternative": "Authorized isolated chat preparation with separate file ownership"
+      },
+      "WPT-C07": {
+        "capsule_id": "WPT-C07",
+        "project_id": "waypoint",
+        "title": "One assembled target integration and delivery",
+        "design_session_id": "WAYPOINT-DESIGN-20261016-1312895b",
+        "state": "READY",
+        "recommended_executor": "CODEX",
+        "assignment_ref": {
+          "archive_ref": null,
+          "member": "design/WORK_PACKETS.md",
+          "binding_status": "REQUIRES_ACTUAL_PUBLISHED_ARCHIVE",
+          "section_id": "WPT-C07"
+        },
+        "claim": null,
+        "result_ref": null,
+        "dependencies": [
+          "WPT-C05",
+          "WPT-C06"
+        ],
+        "change_scope": [
+          "packaging",
+          "target config",
+          "integration tests"
+        ],
+        "evidence_scope": "target completion per supplied contract"
+      }
+    }
+  }
+}

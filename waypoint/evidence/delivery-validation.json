@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "verified_at": "2026-10-16T16:23:52.803201+00:00",
+  "json_parse": "PASS",
+  "python_310_grammar": "PASS",
+  "js_syntax": "PASS",
+  "relative_markdown_links": "PASS",
+  "private_runtime_files_excluded": true,
+  "unit_tests": 36,
+  "offline_browser_checks": 23,
+  "real_http_lifecycle_checks": 5,
+  "target_live_codex": "NOT_RUN",
+  "library_registry_and_inbox": "NOT_WRITTEN_TOOL_UNAVAILABLE",
+  "errors": []
+}

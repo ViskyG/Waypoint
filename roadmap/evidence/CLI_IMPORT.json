@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "checks": [
+    "native_cli_import_success",
+    "native_cli_import_retry_same_receipt",
+    "native_cli_packet_correct",
+    "native_cli_export_all_fields_equal",
+    "native_cli_seed_retry_idempotent",
+    "no_agent_or_future_test_created",
+    "baseline_group_is_not_planned_work"
+  ],
+  "check_count": 7,
+  "scope": "real CLI and disposable loopback HTTP service using delivered implementation; no browser network, no native Codex, no owner installation",
+  "cleanup": "own service stopped; temporary data and credentials removed"
+}

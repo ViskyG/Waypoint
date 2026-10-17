@@ -1,0 +1,27 @@
+{
+  "status": "PASS",
+  "checks": [
+    "actual_roadmap_project_not_Whorules",
+    "five_root_blocks",
+    "no_simulated_live_agents",
+    "snapshot_label_not_live",
+    "real_assignment_visible",
+    "acceptance_visible",
+    "planned_test_labels_visible",
+    "nested_C05_four_stages",
+    "up_returns_to_root",
+    "C06_three_stages",
+    "ancestor_navigation",
+    "obsidian_theme",
+    "no_Javascript_errors"
+  ],
+  "check_count": 13,
+  "javascript_errors": [],
+  "browser_version": "144.0.7559.96",
+  "viewport": {
+    "width": 1680,
+    "height": 1050
+  },
+  "mode": "real browser mouse/keyboard with set_content of native derived roadmap viewer",
+  "scope": "read-only roadmap view, not live agent integration and not browser-to-service networking"
+}

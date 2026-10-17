@@ -1,0 +1,163 @@
+{
+  "purpose": "Optional one-time source-delivery declarations for a newly created map only. Not live agent events. Never replay as a replacement for existing runtime state.",
+  "events": [
+    {
+      "schema": "waypoint.event/1",
+      "event_id": "roadmap-baseline-WAYPOINT-DESIGN-20261016-1312895b-WPT-C01-status",
+      "project_id": "waypoint",
+      "source": "design-delivery",
+      "at": "2026-10-16T16:21:50.298004+00:00",
+      "kind": "node.status",
+      "node_ids": [
+        "WPT-C01"
+      ],
+      "edge_ids": [],
+      "payload": {
+        "status": "Исходники готовы",
+        "explanation": "Декларация поставки завершённого дизайн-пакета. Не установка, не приёмка живого источника."
+      }
+    },
+    {
+      "schema": "waypoint.event/1",
+      "event_id": "roadmap-baseline-WAYPOINT-DESIGN-20261016-1312895b-WPT-C01-result",
+      "project_id": "waypoint",
+      "source": "design-delivery",
+      "at": "2026-10-16T16:21:50.298004+00:00",
+      "kind": "node.result",
+      "node_ids": [
+        "WPT-C01"
+      ],
+      "edge_ids": [],
+      "payload": {
+        "summary": "Ядро, хранилище и API — исходный результат поставлен.",
+        "difference": "Целевая доводка/приёмка осталась в WPT-C05–WPT-C07.",
+        "evidence_ref": "../waypoint/evidence/RESULTS.md",
+        "basis": "completed design package 034ac6f6392a11b9ac38f3ed1e9fcb75b90132cc783e410e82a74bffa6199dce"
+      }
+    },
+    {
+      "schema": "waypoint.event/1",
+      "event_id": "roadmap-baseline-WAYPOINT-DESIGN-20261016-1312895b-WPT-C02-status",
+      "project_id": "waypoint",
+      "source": "design-delivery",
+      "at": "2026-10-16T16:21:50.298004+00:00",
+      "kind": "node.status",
+      "node_ids": [
+        "WPT-C02"
+      ],
+      "edge_ids": [],
+      "payload": {
+        "status": "Исходники готовы",
+        "explanation": "Декларация поставки завершённого дизайн-пакета. Не установка, не приёмка живого источника."
+      }
+    },
+    {
+      "schema": "waypoint.event/1",
+      "event_id": "roadmap-baseline-WAYPOINT-DESIGN-20261016-1312895b-WPT-C02-result",
+      "project_id": "waypoint",
+      "source": "design-delivery",
+      "at": "2026-10-16T16:21:50.298004+00:00",
+      "kind": "node.result",
+      "node_ids": [
+        "WPT-C02"
+      ],
+      "edge_ids": [],
+      "payload": {
+        "summary": "Исходный адаптер Codex — исходный результат поставлен.",
+        "difference": "Целевая доводка/приёмка осталась в WPT-C05–WPT-C07.",
+        "evidence_ref": "../waypoint/evidence/RESULTS.md",
+        "basis": "completed design package 034ac6f6392a11b9ac38f3ed1e9fcb75b90132cc783e410e82a74bffa6199dce"
+      }
+    },
+    {
+      "schema": "waypoint.event/1",
+      "event_id": "roadmap-baseline-WAYPOINT-DESIGN-20261016-1312895b-WPT-C03-status",
+      "project_id": "waypoint",
+      "source": "design-delivery",
+      "at": "2026-10-16T16:21:50.298004+00:00",
+      "kind": "node.status",
+      "node_ids": [
+        "WPT-C03"
+      ],
+      "edge_ids": [],
+      "payload": {
+        "status": "Исходники готовы",
+        "explanation": "Декларация поставки завершённого дизайн-пакета. Не установка, не приёмка живого источника."
+      }
+    },
+    {
+      "schema": "waypoint.event/1",
+      "event_id": "roadmap-baseline-WAYPOINT-DESIGN-20261016-1312895b-WPT-C03-result",
+      "project_id": "waypoint",
+      "source": "design-delivery",
+      "at": "2026-10-16T16:21:50.298004+00:00",
+      "kind": "node.result",
+      "node_ids": [
+        "WPT-C03"
+      ],
+      "edge_ids": [],
+      "payload": {
+        "summary": "Браузерный читатель карты — исходный результат поставлен.",
+        "difference": "Целевая доводка/приёмка осталась в WPT-C05–WPT-C07.",
+        "evidence_ref": "../waypoint/evidence/RESULTS.md",
+        "basis": "completed design package 034ac6f6392a11b9ac38f3ed1e9fcb75b90132cc783e410e82a74bffa6199dce"
+      }
+    },
+    {
+      "schema": "waypoint.event/1",
+      "event_id": "roadmap-baseline-WAYPOINT-DESIGN-20261016-1312895b-WPT-C04-status",
+      "project_id": "waypoint",
+      "source": "design-delivery",
+      "at": "2026-10-16T16:21:50.298004+00:00",
+      "kind": "node.status",
+      "node_ids": [
+        "WPT-C04"
+      ],
+      "edge_ids": [],
+      "payload": {
+        "status": "Исходники готовы",
+        "explanation": "Декларация поставки завершённого дизайн-пакета. Не установка, не приёмка живого источника."
+      }
+    },
+    {
+      "schema": "waypoint.event/1",
+      "event_id": "roadmap-baseline-WAYPOINT-DESIGN-20261016-1312895b-WPT-C04-result",
+      "project_id": "waypoint",
+      "source": "design-delivery",
+      "at": "2026-10-16T16:21:50.298004+00:00",
+      "kind": "node.result",
+      "node_ids": [
+        "WPT-C04"
+      ],
+      "edge_ids": [],
+      "payload": {
+        "summary": "CLI, скилы и передача — исходный результат поставлен.",
+        "difference": "Целевая доводка/приёмка осталась в WPT-C05–WPT-C07.",
+        "evidence_ref": "../waypoint/evidence/RESULTS.md",
+        "basis": "completed design package 034ac6f6392a11b9ac38f3ed1e9fcb75b90132cc783e410e82a74bffa6199dce"
+      }
+    },
+    {
+      "schema": "waypoint.event/1",
+      "event_id": "roadmap-source-group-WAYPOINT-DESIGN-20261016-1312895b",
+      "project_id": "waypoint",
+      "source": "roadmap-source-summary",
+      "at": "2026-10-16T16:21:50.298004+00:00",
+      "kind": "node.status",
+      "node_ids": [
+        "WPT-BASE"
+      ],
+      "edge_ids": [],
+      "payload": {
+        "status": "Исходники поставлены",
+        "explanation": "Производная сводка поставки C01–C04. Группа не является новой задачей и не означает установленный продукт.",
+        "derived_from": [
+          "WPT-C01",
+          "WPT-C02",
+          "WPT-C03",
+          "WPT-C04"
+        ]
+      }
+    }
+  ]
+}

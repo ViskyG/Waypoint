@@ -1,0 +1,132 @@
+{
+  "evidence": "actual_selected_owner_rollout_compared_to_current_waypoint_database",
+  "family_count": 8,
+  "family_agents_projected": 8,
+  "genealogy_edges_equal": 7,
+  "source_complete_native_items_by_type": {
+    "reasoning": 41,
+    "agentMessage": 44,
+    "userMessage": 15,
+    "subAgentActivity": 3
+  },
+  "native_id_type_and_original_text_equal_by_type": {
+    "agentMessage": 43,
+    "userMessage": 15
+  },
+  "native_id_type_equal_by_type": {
+    "agentMessage": 43,
+    "userMessage": 15,
+    "subAgentActivity": 3
+  },
+  "subagent_activity_original_metadata_equal": 3,
+  "source_items_not_yet_projected_by_type": {
+    "agentMessage": 1
+  },
+  "unequal_counts": {},
+  "excluded_without_visible_text": {
+    "reasoning_without_provider_visible_text": 41
+  },
+  "source_types_outside_supported_adapter_profile": {},
+  "projected_item_count": 288,
+  "duplicate_native_key_count": 0,
+  "source_bytes_read_selected_family": 6171261,
+  "native_receipt_count": 1,
+  "native_receipts_not_hydrating": 1,
+  "native_receipt_revisions": [
+    169
+  ],
+  "rollout_normalization_versions": [
+    "2"
+  ],
+  "source_health_states": [
+    {
+      "state": "connected",
+      "detail": "Connection present; silence is not agent completion"
+    },
+    {
+      "state": "connected",
+      "detail": "revision_committed"
+    }
+  ],
+  "cli_versions": [
+    "0.160.1"
+  ],
+  "installed_vscode_codex_extension_versions": [
+    "26.930.61225"
+  ],
+  "os": "Linux",
+  "kernel": "6.8.0-138-generic",
+  "family_ipc_activity_states": {
+    "running": 1
+  },
+  "latest_native_turn_lifecycle_equal_states": {
+    "idle": 3,
+    "running": 1
+  },
+  "latest_native_turn_lifecycle_unequal_states": {
+    "running": 2,
+    "idle": 2
+  },
+  "family_activity_provenance": {
+    "current:event_msg.task_complete": 2,
+    "current:threadRuntimeStatus": 1,
+    "historical:event_msg.task_complete": 1,
+    "unobserved:unknown": 3,
+    "current:event_msg.task_started": 1
+  },
+  "family_relationship_evidence": "selected-session metadata; runtime activity only where separate IPC activity records exist",
+  "latency": {
+    "status": "NOT_MEASURED",
+    "samples": 0,
+    "reason": "No provider-receive and projection-receive monotonic timestamp pair captured."
+  },
+  "private_text_exported": false,
+  "source_mutated": false,
+  "limitations": [
+    "Concurrent source/collector activity may leave a tail pending; equality assertions cover completed native items only.",
+    "This comparison does not itself prove simultaneous live child lifecycle or browser behavior."
+  ],
+  "actual_owner_ipc": {
+    "subscription_cleanup_sent": true,
+    "connection_closed": true,
+    "owner_found": true,
+    "methods": [
+      "initialize",
+      "thread-follower-load-complete-history",
+      "thread-owner-discovery",
+      "thread-stream-following-changed"
+    ],
+    "snapshot_frame_bytes": 874728,
+    "snapshot_samples": 2,
+    "source_control_commands": 0,
+    "source_item_types": {
+      "reasoning": 80,
+      "subAgentActivity": 32,
+      "commandExecution": 71,
+      "agentMessage": 11,
+      "fileChange": 4,
+      "mcpToolCall": 1,
+      "userMessage": 1
+    },
+    "native_id_type_equal": {
+      "subAgentActivity": 32,
+      "commandExecution": 71,
+      "agentMessage": 11,
+      "fileChange": 4,
+      "mcpToolCall": 1,
+      "userMessage": 1
+    },
+    "native_id_type_original_text_equal": {
+      "commandExecution": 71,
+      "agentMessage": 11,
+      "userMessage": 1
+    },
+    "not_yet_projected": {},
+    "unequal": {},
+    "excluded_without_visible_text": {
+      "reasoning_without_provider_visible_text": 80
+    },
+    "inflight_command_text_excluded": {},
+    "exact_comparison_scope": "provider-visible messages, reasoning and terminal command text; other types compare native identity/type only"
+  }
+}

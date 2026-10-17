@@ -1,0 +1,47 @@
+import json, traceback
+from pathlib import Path
+from playwright.sync_api import sync_playwright
+root=Path(__file__).resolve().parents[1]
+checks=[];errors=[]
+def chk(name,ok):
+ if not ok:raise AssertionError(name)
+ checks.append(name)
+with sync_playwright() as p:
+ browser=p.chromium.launch(executable_path='/usr/bin/chromium',headless=True,args=['--no-sandbox'])
+ page=browser.new_page(viewport={'width':1680,'height':1050})
+ page.on('pageerror',lambda e:errors.append(str(e)))
+ page.set_content((root/'PREVIEW.html').read_text(),wait_until='load')
+ page.wait_for_selector('.node')
+ page.locator('#fit').click();page.wait_for_timeout(100)
+ chk('actual_roadmap_project_not_Whorules',page.locator('#project').inner_text().startswith('Waypoint'))
+ chk('five_root_blocks',page.locator('.node').count()==5)
+ chk('no_simulated_live_agents',page.locator('.agent-card').count()==0)
+ chk('snapshot_label_not_live', 'исполнение не запускалось' in page.locator('#foot-status').inner_text())
+ page.screenshot(path=str(root/'evidence/roadmap-overview.png'))
+ page.locator('#search').fill('WPT-C05');page.locator('#search').press('Enter')
+ page.locator('#tabs').get_by_role('button',name='Задание',exact=True).click()
+ chk('real_assignment_visible','verified caller binding' in page.locator('#inspector-body').inner_text())
+ page.locator('#tabs').get_by_role('button',name='Приёмка',exact=True).click()
+ chk('acceptance_visible','payload.id' in page.locator('#inspector-body').inner_text())
+ page.locator('#tabs').get_by_role('button',name='Тесты',exact=True).click()
+ chk('planned_test_labels_visible','Идентичность и атрибуция' in page.locator('#inspector-body').inner_text())
+ page.locator('#close').click()
+ page.get_by_role('button',name='Раскрыть WPT-C05',exact=True).click()
+ chk('nested_C05_four_stages',page.evaluate('waypointView().scope')=='WPT-C05' and page.locator('.node').count()==4)
+ page.locator('#fit').click();page.wait_for_timeout(100)
+ page.screenshot(path=str(root/'evidence/roadmap-c05.png'))
+ page.locator('#up').click()
+ chk('up_returns_to_root',page.evaluate('waypointView().scope') is None)
+ page.locator('#search').fill('WPT-C06');page.locator('#search').press('Enter');page.locator('#close').click()
+ page.get_by_role('button',name='Раскрыть WPT-C06',exact=True).click()
+ chk('C06_three_stages',page.locator('.node').count()==3)
+ page.locator('#crumbs').get_by_role('button',name='Карта',exact=True).click()
+ chk('ancestor_navigation',page.evaluate('waypointView().scope') is None)
+ page.locator('#theme').click();page.locator('#fit').click();page.wait_for_timeout(100)
+ chk('obsidian_theme',page.evaluate('document.documentElement.dataset.theme')=='obsidian')
+ page.screenshot(path=str(root/'evidence/roadmap-obsidian.png'))
+ chk('no_Javascript_errors',not errors)
+ result={'status':'PASS','checks':checks,'check_count':len(checks),'javascript_errors':errors,'browser_version':browser.version,'viewport':{'width':1680,'height':1050},'mode':'real browser mouse/keyboard with set_content of native derived roadmap viewer','scope':'read-only roadmap view, not live agent integration and not browser-to-service networking'}
+ browser.close()
+(root/'evidence/BROWSER.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')
+print(json.dumps(result,ensure_ascii=False,indent=2))

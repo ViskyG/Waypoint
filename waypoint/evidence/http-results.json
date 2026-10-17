@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "checks": [
+    "Real loopback HTTP startup and authentication",
+    "Real POST commit wakes GET long-poll with same event",
+    "Browser read capability cannot write over actual HTTP",
+    "CLI queues signal while service is absent, without claiming delivered",
+    "Actual restart imports durable outbox and preserves prior state"
+  ],
+  "check_count": 5,
+  "transport": "real localhost HTTP",
+  "browser": false,
+  "fixture": "fictional",
+  "codex_contacted": false
+}

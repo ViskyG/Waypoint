@@ -1,0 +1,8 @@
+.runtime/
+waypoint/.venv/
+__pycache__/
+.pytest_cache/
+*.egg-info/
+*.db*
+access.json
+connection.json

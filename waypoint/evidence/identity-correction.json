@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "corrected_items": 3,
+  "types": {
+    "agentMessage": 3
+  },
+  "exact_retry_idempotent": true,
+  "old_ledger_rewritten": false,
+  "source_mutated": false,
+  "basis": "explicit verified native provenance, no text inference",
+  "first_receipt_order_preserved": true
+}

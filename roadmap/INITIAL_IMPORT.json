@@ -1,0 +1,1899 @@
+{
+  "request_id": "roadmap-initial-f647aa3e1b60489b36b72db3",
+  "base_version": null,
+  "plan": {
+    "edges": {
+      "E-WPT-C01--WPT-C02": {
+        "from": "WPT-C01",
+        "label": "Требует результата",
+        "to": "WPT-C02"
+      },
+      "E-WPT-C01--WPT-C03": {
+        "from": "WPT-C01",
+        "label": "Требует результата",
+        "to": "WPT-C03"
+      },
+      "E-WPT-C01--WPT-C04": {
+        "from": "WPT-C01",
+        "label": "Требует результата",
+        "to": "WPT-C04"
+      },
+      "E-WPT-C01--WPT-R00": {
+        "from": "WPT-C01",
+        "label": "Требует результата",
+        "to": "WPT-R00"
+      },
+      "E-WPT-C02--WPT-R00": {
+        "from": "WPT-C02",
+        "label": "Требует результата",
+        "to": "WPT-R00"
+      },
+      "E-WPT-C03--WPT-R00": {
+        "from": "WPT-C03",
+        "label": "Требует результата",
+        "to": "WPT-R00"
+      },
+      "E-WPT-C04--WPT-R00": {
+        "from": "WPT-C04",
+        "label": "Требует результата",
+        "to": "WPT-R00"
+      },
+      "E-WPT-C05--WPT-C07": {
+        "from": "WPT-C05",
+        "label": "Требует результата",
+        "to": "WPT-C07"
+      },
+      "E-WPT-C05.1--WPT-C05.2": {
+        "from": "WPT-C05.1",
+        "label": "Требует результата",
+        "to": "WPT-C05.2"
+      },
+      "E-WPT-C05.2--WPT-C05.3": {
+        "from": "WPT-C05.2",
+        "label": "Требует результата",
+        "to": "WPT-C05.3"
+      },
+      "E-WPT-C05.3--WPT-C05.4": {
+        "from": "WPT-C05.3",
+        "label": "Требует результата",
+        "to": "WPT-C05.4"
+      },
+      "E-WPT-C05.3--WPT-C06.3": {
+        "from": "WPT-C05.3",
+        "label": "Требует результата",
+        "to": "WPT-C06.3"
+      },
+      "E-WPT-C06--WPT-C07": {
+        "from": "WPT-C06",
+        "label": "Требует результата",
+        "to": "WPT-C07"
+      },
+      "E-WPT-C06.1--WPT-C06.2": {
+        "from": "WPT-C06.1",
+        "label": "Требует результата",
+        "to": "WPT-C06.2"
+      },
+      "E-WPT-C06.2--WPT-C06.3": {
+        "from": "WPT-C06.2",
+        "label": "Требует результата",
+        "to": "WPT-C06.3"
+      },
+      "E-WPT-C07.1--WPT-C07.2": {
+        "from": "WPT-C07.1",
+        "label": "Требует результата",
+        "to": "WPT-C07.2"
+      },
+      "E-WPT-C07.1--WPT-C07.3": {
+        "from": "WPT-C07.1",
+        "label": "Требует результата",
+        "to": "WPT-C07.3"
+      },
+      "E-WPT-C07.2--WPT-C07.4": {
+        "from": "WPT-C07.2",
+        "label": "Требует результата",
+        "to": "WPT-C07.4"
+      },
+      "E-WPT-C07.3--WPT-C07.4": {
+        "from": "WPT-C07.3",
+        "label": "Требует результата",
+        "to": "WPT-C07.4"
+      },
+      "E-WPT-R00--WPT-C05": {
+        "from": "WPT-R00",
+        "label": "Требует результата",
+        "to": "WPT-C05"
+      },
+      "E-WPT-R00--WPT-C06": {
+        "from": "WPT-R00",
+        "label": "Требует результата",
+        "to": "WPT-C06"
+      }
+    },
+    "nodes": {
+      "WPT-BASE": {
+        "acceptance": {
+          "A-01": {
+            "text": "Исходный архив совпадает с указанным SHA-256 и файловым манифестом."
+          },
+          "A-02": {
+            "text": "DONE относится к поставке исходников; целевая установка и живая приёмка не приписаны этой группе."
+          }
+        },
+        "assignment": "C01–C04 уже написаны в завершённом дизайн-пакете. Это основание следующих работ, не новая очередь реализации. Раскрой блок для границ каждого результата.\n\nТочное чтение (пути от roadmap/):\n../waypoint/evidence/RESULTS.md\n../waypoint/SESSION.json",
+        "layout": {
+          "x": 70,
+          "y": 400
+        },
+        "parent": null,
+        "source_refs": [
+          {
+            "label": "evidence/RESULTS.md",
+            "uri": "../waypoint/evidence/RESULTS.md"
+          },
+          {
+            "label": "SESSION.json",
+            "uri": "../waypoint/SESSION.json"
+          }
+        ],
+        "tests": {},
+        "title": "Поставленная исходная база",
+        "x_roadmap": {
+          "avoid_paths": [],
+          "eligible_alternative": null,
+          "escalation": "",
+          "kind": "group",
+          "owned_paths": [],
+          "preferred_executor": "NONE",
+          "read_set": [
+            {
+              "label": "evidence/RESULTS.md",
+              "uri": "../waypoint/evidence/RESULTS.md"
+            },
+            {
+              "label": "SESSION.json",
+              "uri": "../waypoint/SESSION.json"
+            }
+          ],
+          "safe_alternate_work": "",
+          "source_capsule": null,
+          "wave": null
+        }
+      },
+      "WPT-C01": {
+        "acceptance": {
+          "A-01": {
+            "text": "Перечисленные исходники присутствуют и сохраняются как стартовая база."
+          },
+          "A-02": {
+            "text": "Свидетельства прочитаны в их настоящем объёме: локальные тесты/макеты не заменяют живую приёмку."
+          }
+        },
+        "assignment": "Переиспользовать готовый исходный результат «Local domain, plan and event contracts». Не заказывать повторную реализацию этого объёма. Остаточные целевые доработки перечислены в C05–C07.\n\nТочное чтение (пути от roadmap/):\n../waypoint/design/WORK_PACKETS.md — раздел WPT-C01\n../waypoint/evidence/RESULTS.md",
+        "layout": {
+          "x": 80,
+          "y": 80
+        },
+        "parent": "WPT-BASE",
+        "source_refs": [
+          {
+            "label": "design/WORK_PACKETS.md",
+            "section": "WPT-C01",
+            "uri": "../waypoint/design/WORK_PACKETS.md"
+          },
+          {
+            "label": "evidence/RESULTS.md",
+            "uri": "../waypoint/evidence/RESULTS.md"
+          }
+        ],
+        "tests": {},
+        "title": "Ядро, хранилище и API",
+        "x_roadmap": {
+          "avoid_paths": [],
+          "delivered_source": {
+            "design_session_id": "WAYPOINT-DESIGN-20261016-1312895b",
+            "evidence": "../waypoint/evidence/RESULTS.md",
+            "paths": [
+              "waypoint/domain.py",
+              "waypoint/store.py",
+              "waypoint/server.py",
+              "waypoint/security.py",
+              "waypoint/spool.py",
+              "waypoint/client.py",
+              "schemas/",
+              "tests/test_core.py"
+            ],
+            "state": "SOURCE_DELIVERED",
+            "target_acceptance": "NOT_RUN"
+          },
+          "eligible_alternative": null,
+          "escalation": "",
+          "kind": "source",
+          "owned_paths": [],
+          "preferred_executor": "NONE",
+          "read_set": [
+            {
+              "label": "design/WORK_PACKETS.md",
+              "section": "WPT-C01",
+              "uri": "../waypoint/design/WORK_PACKETS.md"
+            },
+            {
+              "label": "evidence/RESULTS.md",
+              "uri": "../waypoint/evidence/RESULTS.md"
+            }
+          ],
+          "safe_alternate_work": "",
+          "source_capsule": "WPT-C01",
+          "wave": null
+        }
+      },
+      "WPT-C02": {
+        "acceptance": {
+          "A-01": {
+            "text": "Перечисленные исходники присутствуют и сохраняются как стартовая база."
+          },
+          "A-02": {
+            "text": "Свидетельства прочитаны в их настоящем объёме: локальные тесты/макеты не заменяют живую приёмку."
+          }
+        },
+        "assignment": "Переиспользовать готовый исходный результат «Observed native source reference». Не заказывать повторную реализацию этого объёма. Остаточные целевые доработки перечислены в C05–C07.\n\nТочное чтение (пути от roadmap/):\n../waypoint/design/WORK_PACKETS.md — раздел WPT-C02\n../waypoint/evidence/RESULTS.md",
+        "layout": {
+          "x": 610,
+          "y": 80
+        },
+        "parent": "WPT-BASE",
+        "source_refs": [
+          {
+            "label": "design/WORK_PACKETS.md",
+            "section": "WPT-C02",
+            "uri": "../waypoint/design/WORK_PACKETS.md"
+          },
+          {
+            "label": "evidence/RESULTS.md",
+            "uri": "../waypoint/evidence/RESULTS.md"
+          }
+        ],
+        "tests": {},
+        "title": "Исходный адаптер Codex",
+        "x_roadmap": {
+          "avoid_paths": [],
+          "delivered_source": {
+            "design_session_id": "WAYPOINT-DESIGN-20261016-1312895b",
+            "evidence": "../waypoint/evidence/RESULTS.md",
+            "paths": [
+              "waypoint/adapters/",
+              "waypoint/collector.py",
+              "tests/test_adapters.py"
+            ],
+            "state": "SOURCE_DELIVERED",
+            "target_acceptance": "NOT_RUN"
+          },
+          "eligible_alternative": null,
+          "escalation": "",
+          "kind": "source",
+          "owned_paths": [],
+          "preferred_executor": "NONE",
+          "read_set": [
+            {
+              "label": "design/WORK_PACKETS.md",
+              "section": "WPT-C02",
+              "uri": "../waypoint/design/WORK_PACKETS.md"
+            },
+            {
+              "label": "evidence/RESULTS.md",
+              "uri": "../waypoint/evidence/RESULTS.md"
+            }
+          ],
+          "safe_alternate_work": "",
+          "source_capsule": "WPT-C02",
+          "wave": null
+        }
+      },
+      "WPT-C03": {
+        "acceptance": {
+          "A-01": {
+            "text": "Перечисленные исходники присутствуют и сохраняются как стартовая база."
+          },
+          "A-02": {
+            "text": "Свидетельства прочитаны в их настоящем объёме: локальные тесты/макеты не заменяют живую приёмку."
+          }
+        },
+        "assignment": "Переиспользовать готовый исходный результат «Shared visual reader base». Не заказывать повторную реализацию этого объёма. Остаточные целевые доработки перечислены в C05–C07.\n\nТочное чтение (пути от roadmap/):\n../waypoint/design/WORK_PACKETS.md — раздел WPT-C03\n../waypoint/evidence/RESULTS.md",
+        "layout": {
+          "x": 610,
+          "y": 630
+        },
+        "parent": "WPT-BASE",
+        "source_refs": [
+          {
+            "label": "design/WORK_PACKETS.md",
+            "section": "WPT-C03",
+            "uri": "../waypoint/design/WORK_PACKETS.md"
+          },
+          {
+            "label": "evidence/RESULTS.md",
+            "uri": "../waypoint/evidence/RESULTS.md"
+          }
+        ],
+        "tests": {},
+        "title": "Браузерный читатель карты",
+        "x_roadmap": {
+          "avoid_paths": [],
+          "delivered_source": {
+            "design_session_id": "WAYPOINT-DESIGN-20261016-1312895b",
+            "evidence": "../waypoint/evidence/RESULTS.md",
+            "paths": [
+              "waypoint/web/",
+              "waypoint/demo.py",
+              "tests/browser_check.py"
+            ],
+            "state": "SOURCE_DELIVERED",
+            "target_acceptance": "NOT_RUN"
+          },
+          "eligible_alternative": null,
+          "escalation": "",
+          "kind": "source",
+          "owned_paths": [],
+          "preferred_executor": "NONE",
+          "read_set": [
+            {
+              "label": "design/WORK_PACKETS.md",
+              "section": "WPT-C03",
+              "uri": "../waypoint/design/WORK_PACKETS.md"
+            },
+            {
+              "label": "evidence/RESULTS.md",
+              "uri": "../waypoint/evidence/RESULTS.md"
+            }
+          ],
+          "safe_alternate_work": "",
+          "source_capsule": "WPT-C03",
+          "wave": null
+        }
+      },
+      "WPT-C04": {
+        "acceptance": {
+          "A-01": {
+            "text": "Перечисленные исходники присутствуют и сохраняются как стартовая база."
+          },
+          "A-02": {
+            "text": "Свидетельства прочитаны в их настоящем объёме: локальные тесты/макеты не заменяют живую приёмку."
+          }
+        },
+        "assignment": "Переиспользовать готовый исходный результат «Low-overhead agent workflow and handoff». Не заказывать повторную реализацию этого объёма. Остаточные целевые доработки перечислены в C05–C07.\n\nТочное чтение (пути от roadmap/):\n../waypoint/design/WORK_PACKETS.md — раздел WPT-C04\n../waypoint/evidence/RESULTS.md",
+        "layout": {
+          "x": 80,
+          "y": 630
+        },
+        "parent": "WPT-BASE",
+        "source_refs": [
+          {
+            "label": "design/WORK_PACKETS.md",
+            "section": "WPT-C04",
+            "uri": "../waypoint/design/WORK_PACKETS.md"
+          },
+          {
+            "label": "evidence/RESULTS.md",
+            "uri": "../waypoint/evidence/RESULTS.md"
+          }
+        ],
+        "tests": {},
+        "title": "CLI, скилы и передача",
+        "x_roadmap": {
+          "avoid_paths": [],
+          "delivered_source": {
+            "design_session_id": "WAYPOINT-DESIGN-20261016-1312895b",
+            "evidence": "../waypoint/evidence/RESULTS.md",
+            "paths": [
+              "waypoint/cli.py",
+              "skills/",
+              "design/OPERATIONS.md"
+            ],
+            "state": "SOURCE_DELIVERED",
+            "target_acceptance": "NOT_RUN"
+          },
+          "eligible_alternative": null,
+          "escalation": "",
+          "kind": "source",
+          "owned_paths": [],
+          "preferred_executor": "NONE",
+          "read_set": [
+            {
+              "label": "design/WORK_PACKETS.md",
+              "section": "WPT-C04",
+              "uri": "../waypoint/design/WORK_PACKETS.md"
+            },
+            {
+              "label": "evidence/RESULTS.md",
+              "uri": "../waypoint/evidence/RESULTS.md"
+            }
+          ],
+          "safe_alternate_work": "",
+          "source_capsule": "WPT-C04",
+          "wave": null
+        }
+      },
+      "WPT-C05": {
+        "acceptance": {
+          "A-01": {
+            "text": "Установленный профиль и отдельный payload.id подтверждены; общий session_id не склеивает агентов."
+          },
+          "A-02": {
+            "text": "Источник не получает команды запуска/остановки/resume/approval; сбой Waypoint не останавливает Codex."
+          },
+          "A-03": {
+            "text": "Старые и неоднозначные сообщения не присваиваются новому focus; подтверждение ревизии не опережает durable commit."
+          },
+          "A-04": {
+            "text": "C06 получает индексированный и совместимый read-контракт; ограничения живой проверки явно возвращены."
+          }
+        },
+        "assignment": "Довести существующий адаптер до проверенного приёма живых событий и точного связывания с блоками. IPC и JSONL остаются входами одного Store/API/UI.\n\nРабота:\n1. Выполнить C05.1–C05.4, сохраняя исходные алгоритмы дизайна: verified caller binding, watermark, indexed normalization, coalescing и durable acknowledgement.\n2. Единолично владеть изменениями Store/API/миграции, включая индекс item_targets для C06. Передать потребителю проверенный read-контракт; не позволять двум веткам менять store.py одновременно.\n3. Проверить свой новый адаптер на естественной активности существующего Codex, а не повторять весь P00–P11 и не запускать новый App Server вместо владельца.\n\nОбласть изменений: waypoint/adapters/; waypoint/collector.py; waypoint/store.py (единственный писатель); waypoint/server.py (только необходимый совместимый read-контракт); waypoint/cli.py (только verified binding seam); tests/test_adapters.py; tests/test_core.py (атрибуция/индекс/миграция).\n\nНе изменять: waypoint/web/; tests/browser_check.py; Глобальные настройки и управление реальным Codex.\n\nТочное чтение (пути от roadmap/):\n../waypoint/design/WORK_PACKETS.md — раздел WPT-C05\n../waypoint/design/IMPLEMENTATION_MAP.md — раздел Required hardening\n../waypoint/design/CONTRACTS.md — раздел 1. Identity; 4. Observation; 5. Attribution; 7. Private IPC\n../waypoint/design/ACCEPTANCE.md — раздел Target sequence\n\nРежим MIXED. Предпочтительный исполнитель: CODEX. Исполнитель выбирает безопасный порядок внутри согласованного участка; назначение не сделано.\n\nОстановить только затронутое действие и эскалировать: профиль несовместим или неизвестна идентичность вызывающего агента; сохранить доказательство, не угадывать и не строить второй observer.\n\nПри ожидании: пока естественное событие не пришло — локальные контрактные проверки C05.2/C05.3; C06.1/C06.2 могут идти независимо.",
+        "layout": {
+          "x": 1220,
+          "y": 100
+        },
+        "parent": null,
+        "source_refs": [
+          {
+            "label": "design/WORK_PACKETS.md",
+            "section": "WPT-C05",
+            "uri": "../waypoint/design/WORK_PACKETS.md"
+          },
+          {
+            "label": "design/IMPLEMENTATION_MAP.md",
+            "section": "Required hardening",
+            "uri": "../waypoint/design/IMPLEMENTATION_MAP.md"
+          },
+          {
+            "label": "design/CONTRACTS.md",
+            "section": "1. Identity; 4. Observation; 5. Attribution; 7. Private IPC",
+            "uri": "../waypoint/design/CONTRACTS.md"
+          },
+          {
+            "label": "design/ACCEPTANCE.md",
+            "section": "Target sequence",
+            "uri": "../waypoint/design/ACCEPTANCE.md"
+          }
+        ],
+        "tests": {
+          "T-01": {
+            "evidence_level": "contract + target",
+            "invalidated_by": "Binding, watermark, merge источников, schema metadata.",
+            "label": "Идентичность и атрибуция",
+            "procedure": "Фокус до/после hydration, straddling item, одинаковый session_id у разных payload.id. Сверка исторического и живого источника без выдачи fixtures за live."
+          },
+          "T-02": {
+            "evidence_level": "component",
+            "invalidated_by": "Normalizer, patch parser, store transaction, cursor или coalescing.",
+            "label": "Поток и приём в БД",
+            "procedure": "Повтор/пропуск/конфликт revision, отказ sink, reconnect и terminal flush; receipt после транзакции."
+          },
+          "T-03": {
+            "evidence_level": "live target",
+            "invalidated_by": "Версия расширения, профиль IPC, runtime config или адаптер.",
+            "label": "Целевая естественная активность",
+            "procedure": "Одна или несколько реальных операций совпадают по ID/типу/тексту локально; в отчёте только безопасные равенства и типы."
+          }
+        },
+        "title": "Живой источник и точные привязки",
+        "x_roadmap": {
+          "avoid_paths": [
+            "waypoint/web/",
+            "tests/browser_check.py",
+            "Глобальные настройки и управление реальным Codex"
+          ],
+          "eligible_alternative": null,
+          "escalation": "профиль несовместим или неизвестна идентичность вызывающего агента; сохранить доказательство, не угадывать и не строить второй observer.",
+          "kind": "packet",
+          "owned_paths": [
+            "waypoint/adapters/",
+            "waypoint/collector.py",
+            "waypoint/store.py (единственный писатель)",
+            "waypoint/server.py (только необходимый совместимый read-контракт)",
+            "waypoint/cli.py (только verified binding seam)",
+            "tests/test_adapters.py",
+            "tests/test_core.py (атрибуция/индекс/миграция)"
+          ],
+          "preferred_executor": "CODEX",
+          "read_set": [
+            {
+              "label": "design/WORK_PACKETS.md",
+              "section": "WPT-C05",
+              "uri": "../waypoint/design/WORK_PACKETS.md"
+            },
+            {
+              "label": "design/IMPLEMENTATION_MAP.md",
+              "section": "Required hardening",
+              "uri": "../waypoint/design/IMPLEMENTATION_MAP.md"
+            },
+            {
+              "label": "design/CONTRACTS.md",
+              "section": "1. Identity; 4. Observation; 5. Attribution; 7. Private IPC",
+              "uri": "../waypoint/design/CONTRACTS.md"
+            },
+            {
+              "label": "design/ACCEPTANCE.md",
+              "section": "Target sequence",
+              "uri": "../waypoint/design/ACCEPTANCE.md"
+            }
+          ],
+          "safe_alternate_work": "пока естественное событие не пришло — локальные контрактные проверки C05.2/C05.3; C06.1/C06.2 могут идти независимо.",
+          "source_capsule": "WPT-C05",
+          "wave": "RW-01"
+        }
+      },
+      "WPT-C05.1": {
+        "acceptance": {
+          "A-01": {
+            "text": "Разные payload.id с одним session_id остаются разными агентами."
+          },
+          "A-02": {
+            "text": "Две области и ребро могут быть связаны с одним исполнителем; область может быть общей."
+          },
+          "A-03": {
+            "text": "Старое сообщение не получает текущий focus после позднего импорта; исправление item.link сохраняет историю."
+          }
+        },
+        "assignment": "Связать редкий focus-сигнал с настоящим отдельным исполнителем и границей уже наблюдённых сообщений.\n\nРабота:\n1. Использовать payload.id, parent_thread_id, agent_path и forked_from_id по отдельности. Сопоставить native caller в текущем клиенте; не наследовать WP_AGENT родителя вслепую.\n2. Зафиксировать committed revision/item watermark при scope.set. Уже связанные items сохраняют цель; историческая hydration и неоднозначное пересечение focus остаются непривязанными до явного item.link.\n3. Сохранить node/edge many-to-many, пустой scope и неизвестные block ID как допустимые наблюдения; нельзя превращать focus в эксклюзивный lock.\n\nОбласть изменений: waypoint/cli.py (привязка); waypoint/collector.py (source boundary); waypoint/store.py (атрибуция); tests/test_core.py.\n\nНе изменять: web assets.\n\nТочное чтение (пути от roadmap/):\n../waypoint/design/IMPLEMENTATION_MAP.md — раздел Required hardening\n../waypoint/design/CONTRACTS.md — раздел 5. Attribution\n../waypoint/waypoint/cli.py\n../waypoint/waypoint/store.py\n../waypoint/tests/test_core.py\n\nРежим MIXED. Предпочтительный исполнитель: CODEX. Исполнитель выбирает безопасный порядок внутри согласованного участка; назначение не сделано.\n\nПри ожидании: продолжить локальную проверку атрибуции; неизвестный caller не маскировать удобным ID.",
+        "layout": {
+          "x": 80,
+          "y": 80
+        },
+        "parent": "WPT-C05",
+        "source_refs": [
+          {
+            "label": "design/IMPLEMENTATION_MAP.md",
+            "section": "Required hardening",
+            "uri": "../waypoint/design/IMPLEMENTATION_MAP.md"
+          },
+          {
+            "label": "design/CONTRACTS.md",
+            "section": "5. Attribution",
+            "uri": "../waypoint/design/CONTRACTS.md"
+          },
+          {
+            "label": "waypoint/cli.py",
+            "uri": "../waypoint/waypoint/cli.py"
+          },
+          {
+            "label": "waypoint/store.py",
+            "uri": "../waypoint/waypoint/store.py"
+          },
+          {
+            "label": "tests/test_core.py",
+            "uri": "../waypoint/tests/test_core.py"
+          }
+        ],
+        "tests": {
+          "T-01": {
+            "evidence_level": "contract",
+            "invalidated_by": "cli binding, scope projection, native watermark.",
+            "label": "Граничные сообщения",
+            "procedure": "Добавить к существующим focus/historical тестам подтверждённый watermark, поздний сигнал и неоднозначную границу."
+          }
+        },
+        "title": "Исполнитель и граница рабочего участка",
+        "x_roadmap": {
+          "avoid_paths": [
+            "web assets"
+          ],
+          "eligible_alternative": null,
+          "escalation": "",
+          "kind": "stage",
+          "owned_paths": [
+            "waypoint/cli.py (привязка)",
+            "waypoint/collector.py (source boundary)",
+            "waypoint/store.py (атрибуция)",
+            "tests/test_core.py"
+          ],
+          "preferred_executor": "CODEX",
+          "read_set": [
+            {
+              "label": "design/IMPLEMENTATION_MAP.md",
+              "section": "Required hardening",
+              "uri": "../waypoint/design/IMPLEMENTATION_MAP.md"
+            },
+            {
+              "label": "design/CONTRACTS.md",
+              "section": "5. Attribution",
+              "uri": "../waypoint/design/CONTRACTS.md"
+            },
+            {
+              "label": "waypoint/cli.py",
+              "uri": "../waypoint/waypoint/cli.py"
+            },
+            {
+              "label": "waypoint/store.py",
+              "uri": "../waypoint/waypoint/store.py"
+            },
+            {
+              "label": "tests/test_core.py",
+              "uri": "../waypoint/tests/test_core.py"
+            }
+          ],
+          "safe_alternate_work": "продолжить локальную проверку атрибуции; неизвестный caller не маскировать удобным ID.",
+          "source_capsule": "WPT-C05",
+          "wave": null
+        }
+      },
+      "WPT-C05.2": {
+        "acceptance": {
+          "A-01": {
+            "text": "Один patch одного item не вызывает обход всей истории в нормальном случае."
+          },
+          "A-02": {
+            "text": "Одинаковый повтор идемпотентен; конфликт одинаковой ревизии и gap различимы, не скрыты."
+          },
+          "A-03": {
+            "text": "Отключение sink оставляет источник неполностью подтверждённым; replay не создаёт вторую переписку."
+          },
+          "A-04": {
+            "text": "Terminal update не теряется из-за coalescing; защитные лимиты измерены и описаны без фиктивного SLA."
+          }
+        },
+        "assignment": "Довести нормализацию уже реализованного IPC-потока, не сканируя полный длинный диалог на каждой правке.\n\nРабота:\n1. Первый snapshot индексирует известные history roots и item paths. Patch нормализует только dirty items; изменение контейнера инвалидирует только его поддерево.\n2. Неизвестная структурная правка даёт ограниченный rebuild нужного root и диагностику. Хранить ограниченный cache (revision, change hash): точный повтор без эффекта, другая правка на той же ревизии — resync.\n3. Объединять промежуточные текстовые ревизии в малом настраиваемом интервале; terminal flush немедленно. Текст не пересказывать моделью.\n4. Подтверждать source revision после всех необходимых записей/проекций/cursor в БД; ошибка sink не продвигает acknowledgement. Большой snapshot до финального барьера остаётся hydrating.\n\nОбласть изменений: waypoint/adapters/; waypoint/collector.py; tests/test_adapters.py.\n\nНе изменять: web assets.\n\nТочное чтение (пути от roadmap/):\n../waypoint/design/IMPLEMENTATION_MAP.md — раздел Required hardening; Recent-revision consistency\n../waypoint/waypoint/adapters/patches.py\n../waypoint/waypoint/adapters/codex.py\n../waypoint/waypoint/adapters/ipc.py\n../waypoint/waypoint/collector.py\n../waypoint/tests/test_adapters.py\n\nРежим MIXED. Предпочтительный исполнитель: CODEX. Исполнитель выбирает безопасный порядок внутри согласованного участка; назначение не сделано.",
+        "layout": {
+          "x": 80,
+          "y": 650
+        },
+        "parent": "WPT-C05",
+        "source_refs": [
+          {
+            "label": "design/IMPLEMENTATION_MAP.md",
+            "section": "Required hardening; Recent-revision consistency",
+            "uri": "../waypoint/design/IMPLEMENTATION_MAP.md"
+          },
+          {
+            "label": "waypoint/adapters/patches.py",
+            "uri": "../waypoint/waypoint/adapters/patches.py"
+          },
+          {
+            "label": "waypoint/adapters/codex.py",
+            "uri": "../waypoint/waypoint/adapters/codex.py"
+          },
+          {
+            "label": "waypoint/adapters/ipc.py",
+            "uri": "../waypoint/waypoint/adapters/ipc.py"
+          },
+          {
+            "label": "waypoint/collector.py",
+            "uri": "../waypoint/waypoint/collector.py"
+          },
+          {
+            "label": "tests/test_adapters.py",
+            "uri": "../waypoint/tests/test_adapters.py"
+          }
+        ],
+        "tests": {
+          "T-01": {
+            "evidence_level": "component + limited live",
+            "invalidated_by": "Parser/index/coalescing/ack boundary.",
+            "label": "Patch, cache, coalescing, commit",
+            "procedure": "Локальный synthetic Unix peer: точные/конфликтующие повторы, gap, terminal flush и искусственный отказ sink; затем один естественный live patch."
+          }
+        },
+        "title": "Инкрементальный поток и durable receipt",
+        "x_roadmap": {
+          "avoid_paths": [
+            "web assets"
+          ],
+          "eligible_alternative": null,
+          "escalation": "",
+          "kind": "stage",
+          "owned_paths": [
+            "waypoint/adapters/",
+            "waypoint/collector.py",
+            "tests/test_adapters.py"
+          ],
+          "preferred_executor": "CODEX",
+          "read_set": [
+            {
+              "label": "design/IMPLEMENTATION_MAP.md",
+              "section": "Required hardening; Recent-revision consistency",
+              "uri": "../waypoint/design/IMPLEMENTATION_MAP.md"
+            },
+            {
+              "label": "waypoint/adapters/patches.py",
+              "uri": "../waypoint/waypoint/adapters/patches.py"
+            },
+            {
+              "label": "waypoint/adapters/codex.py",
+              "uri": "../waypoint/waypoint/adapters/codex.py"
+            },
+            {
+              "label": "waypoint/adapters/ipc.py",
+              "uri": "../waypoint/waypoint/adapters/ipc.py"
+            },
+            {
+              "label": "waypoint/collector.py",
+              "uri": "../waypoint/waypoint/collector.py"
+            },
+            {
+              "label": "tests/test_adapters.py",
+              "uri": "../waypoint/tests/test_adapters.py"
+            }
+          ],
+          "safe_alternate_work": "",
+          "source_capsule": "WPT-C05",
+          "wave": null
+        }
+      },
+      "WPT-C05.3": {
+        "acceptance": {
+          "A-01": {
+            "text": "Откат транзакции не оставляет индекс и проекцию в разных состояниях."
+          },
+          "A-02": {
+            "text": "Поиск по блоку/ребру/потомкам не сканирует тела всех сообщений."
+          },
+          "A-03": {
+            "text": "Позднее item.link и reopen/rebuild восстанавливают тот же порядок и набор связей."
+          },
+          "A-04": {
+            "text": "Контракт принят C06 до его насыщенных интеграционных измерений."
+          }
+        },
+        "assignment": "Ввести выбранный дизайном индекс item_targets и передать C06 совместимый контракт чтения; это общая точка интеграции с единственным писателем.\n\nРабота:\n1. Добавить явную миграцию item_targets(project,agent,item,target_kind,target_id,first_seq); обновлять индекс в одной транзакции с item projection и item.link.\n2. Выбирать цели до загрузки тел сообщений; descendant IDs разбивать на ограниченные SQL-порции и объединять по first_seq. Не вводить зависимость от необязательных SQLite JSON-функций.\n3. Зафиксировать cursor/порядок/revision read-ответов для C06; сохранить существующие routes. Если требуется обратно совместимое дополнительное поле — обновить schema/документ и сообщить интегратору.\n\nОбласть изменений: waypoint/store.py; waypoint/server.py (совместимые read поля); Миграция БД и её тесты (новые при необходимости); schemas/ (только синхронизация с изменённым контрактом).\n\nНе изменять: waypoint/web/.\n\nТочное чтение (пути от roadmap/):\n../waypoint/design/IMPLEMENTATION_MAP.md — раздел Required completion\n../waypoint/waypoint/store.py\n../waypoint/waypoint/server.py\n../waypoint/design/CONTRACTS.md — раздел 6. Read API\n../waypoint/tests/test_core.py\n\nРежим MIXED. Предпочтительный исполнитель: CODEX. Исполнитель выбирает безопасный порядок внутри согласованного участка; назначение не сделано.\n\nПри ожидании: передать C06 контракт и fixture; не ждать окончания всей C05 ради независимой UI-подготовки.",
+        "layout": {
+          "x": 620,
+          "y": 650
+        },
+        "parent": "WPT-C05",
+        "source_refs": [
+          {
+            "label": "design/IMPLEMENTATION_MAP.md",
+            "section": "Required completion",
+            "uri": "../waypoint/design/IMPLEMENTATION_MAP.md"
+          },
+          {
+            "label": "waypoint/store.py",
+            "uri": "../waypoint/waypoint/store.py"
+          },
+          {
+            "label": "waypoint/server.py",
+            "uri": "../waypoint/waypoint/server.py"
+          },
+          {
+            "label": "design/CONTRACTS.md",
+            "section": "6. Read API",
+            "uri": "../waypoint/design/CONTRACTS.md"
+          },
+          {
+            "label": "tests/test_core.py",
+            "uri": "../waypoint/tests/test_core.py"
+          }
+        ],
+        "tests": {
+          "T-01": {
+            "evidence_level": "database + contract",
+            "invalidated_by": "Schema migration, indexed query, item link, pagination.",
+            "label": "Индекс и миграция",
+            "procedure": "БД из предыдущей schema → миграция → query/link/reopen/rebuild; сравнение с ожидаемыми связями и порядок по first_seq."
+          }
+        },
+        "title": "Индекс сообщений и граница read API",
+        "x_roadmap": {
+          "avoid_paths": [
+            "waypoint/web/"
+          ],
+          "eligible_alternative": null,
+          "escalation": "",
+          "kind": "stage",
+          "owned_paths": [
+            "waypoint/store.py",
+            "waypoint/server.py (совместимые read поля)",
+            "Миграция БД и её тесты (новые при необходимости)",
+            "schemas/ (только синхронизация с изменённым контрактом)"
+          ],
+          "preferred_executor": "CODEX",
+          "read_set": [
+            {
+              "label": "design/IMPLEMENTATION_MAP.md",
+              "section": "Required completion",
+              "uri": "../waypoint/design/IMPLEMENTATION_MAP.md"
+            },
+            {
+              "label": "waypoint/store.py",
+              "uri": "../waypoint/waypoint/store.py"
+            },
+            {
+              "label": "waypoint/server.py",
+              "uri": "../waypoint/waypoint/server.py"
+            },
+            {
+              "label": "design/CONTRACTS.md",
+              "section": "6. Read API",
+              "uri": "../waypoint/design/CONTRACTS.md"
+            },
+            {
+              "label": "tests/test_core.py",
+              "uri": "../waypoint/tests/test_core.py"
+            }
+          ],
+          "safe_alternate_work": "передать C06 контракт и fixture; не ждать окончания всей C05 ради независимой UI-подготовки.",
+          "source_capsule": "WPT-C05",
+          "wave": null
+        }
+      },
+      "WPT-C05.4": {
+        "acceptance": {
+          "A-01": {
+            "text": "Совпадение сообщения/действия подтверждено на новой реализации без пересказа и новых turns ради счётчика."
+          },
+          "A-02": {
+            "text": "Ни одна отправленная команда не управляет исполнителем; закрытие Waypoint не завершает детей."
+          },
+          "A-03": {
+            "text": "Непроверенные жизненные циклы явно названы; в возврате нет реальных текстов/секретов."
+          }
+        },
+        "assignment": "Проверить не старые пробы, а текущую реализацию на существующей выбранной сессии.\n\nРабота:\n1. Соединиться с тем же фактическим owner IPC; установить allowlist и закрыть свои подписки после опыта. Историю читать только в выбранном семействе.\n2. Локально сравнить доступный native message/tool и результат карты. Различить активного родителя и исторических потомков; не выдавать прошлое дерево за одновременный live-run.\n3. Прервать только observer/свой socket и проверить продолжение Codex, health, resync и восстановление receipt. Зафиксировать payload sizes и реально измеренную задержку с n.\n\nОбласть изменений: Тесты нового адаптера; Приватные диагностики и безопасный отчёт C05.\n\nНе изменять: Чужие процессы и их execution state.\n\nТочное чтение (пути от roadmap/):\n../waypoint/design/ACCEPTANCE.md — раздел Target sequence\n../waypoint/design/OPERATIONS.md — раздел Remaining target acceptance\n../waypoint/sources/feasibility-evidence-v3.zip\n\nРежим MIXED. Предпочтительный исполнитель: CODEX. Исполнитель выбирает безопасный порядок внутри согласованного участка; назначение не сделано.\n\nОстановить только затронутое действие и эскалировать: нужный реальный случай не возник: NOT_RUN для этого утверждения; запросить узкий опыт только если он нужен для обещаемой возможности.",
+        "layout": {
+          "x": 1160,
+          "y": 650
+        },
+        "parent": "WPT-C05",
+        "source_refs": [
+          {
+            "label": "design/ACCEPTANCE.md",
+            "section": "Target sequence",
+            "uri": "../waypoint/design/ACCEPTANCE.md"
+          },
+          {
+            "label": "design/OPERATIONS.md",
+            "section": "Remaining target acceptance",
+            "uri": "../waypoint/design/OPERATIONS.md"
+          },
+          {
+            "label": "Только при конкретной непонятной детали P09",
+            "uri": "../waypoint/sources/feasibility-evidence-v3.zip"
+          }
+        ],
+        "tests": {
+          "T-01": {
+            "evidence_level": "live target",
+            "invalidated_by": "Нативный профиль, parser/collector/binding, источник/версия расширения.",
+            "label": "Реальный owner и восстановление",
+            "procedure": "Провести target steps 2–5 из ACCEPTANCE.md; переиспользовать сохраняющее применимость свидетельство в C07, не повторять ради ритуала."
+          }
+        },
+        "title": "Проверка нового адаптера на Codex",
+        "x_roadmap": {
+          "avoid_paths": [
+            "Чужие процессы и их execution state"
+          ],
+          "eligible_alternative": null,
+          "escalation": "нужный реальный случай не возник: NOT_RUN для этого утверждения; запросить узкий опыт только если он нужен для обещаемой возможности.",
+          "kind": "stage",
+          "owned_paths": [
+            "Тесты нового адаптера",
+            "Приватные диагностики и безопасный отчёт C05"
+          ],
+          "preferred_executor": "CODEX",
+          "read_set": [
+            {
+              "label": "design/ACCEPTANCE.md",
+              "section": "Target sequence",
+              "uri": "../waypoint/design/ACCEPTANCE.md"
+            },
+            {
+              "label": "design/OPERATIONS.md",
+              "section": "Remaining target acceptance",
+              "uri": "../waypoint/design/OPERATIONS.md"
+            },
+            {
+              "label": "Только при конкретной непонятной детали P09",
+              "uri": "../waypoint/sources/feasibility-evidence-v3.zip"
+            }
+          ],
+          "safe_alternate_work": "",
+          "source_capsule": "WPT-C05",
+          "wave": null
+        }
+      },
+      "WPT-C06": {
+        "acceptance": {
+          "A-01": {
+            "text": "Текущий чат и открытый инспектор обновляются без потери выбранного места и выделения текста."
+          },
+          "A-02": {
+            "text": "Навигация через три уровня и возврат к родителю восстанавливают camera; нет неработающих декоративных breadcrumbs."
+          },
+          "A-03": {
+            "text": "Перерисовываются затронутые элементы; насыщенная карта измерена на целевой машине."
+          },
+          "A-04": {
+            "text": "Показанный статус, тесты и health независимы; UI не диктует агенту приёмку и маршрут."
+          }
+        },
+        "assignment": "Довести общий браузерный клиент до удобного чтения живых сообщений и больших карт, не меняя архитектуру и не добавляя управление агентами.\n\nРабота:\n1. Выполнить C06.1–C06.3. UI-подготовка C06.1/C06.2 может идти рядом с C05 на стабильном API/fixtures.\n2. Не менять store.py/server.py из frontend-ветки. Индексированные запросы и изменения общего контракта получает от C05.3; только насыщенная C06.3 ждёт эту границу.\n3. Сохранить 235px или больше на масштабе чтения, темы Терракота/Обсидиан и быстрый доступ к заданию/приёмке.\n\nОбласть изменений: waypoint/web/; tests/browser_check.py; UI/performance fixtures (новые при необходимости).\n\nНе изменять: waypoint/store.py; waypoint/server.py; waypoint/collector.py; waypoint/adapters/.\n\nТочное чтение (пути от roadmap/):\n../waypoint/design/WORK_PACKETS.md — раздел WPT-C06\n../waypoint/design/IMPLEMENTATION_MAP.md — раздел Required completion\n../waypoint/design/ARCHITECTURE.md — раздел 8. UI contract\n../waypoint/waypoint/web/app.js\n../waypoint/waypoint/web/style.css\n../waypoint/tests/browser_check.py\n\nРежим MIXED. Предпочтительный исполнитель: CODEX. Изолированная Chat/Pro-подготовка UI допустима в MIXED при отдельном владении файлами. Если её результата нет, Codex продолжает этот же пакет; не ждёт обязательной капсулы и не создаёт второй интерфейс.\n\nОстановить только затронутое действие и эскалировать: общий API нужно изменить: передать конкретный контракт C05/интегратору до записи; при browser policy denial не обходить запрет.\n\nПри ожидании: пока C05.3 не принят — C06.1/C06.2 и проверка fixtures, но не объявления production-производительности.",
+        "layout": {
+          "x": 1220,
+          "y": 760
+        },
+        "parent": null,
+        "source_refs": [
+          {
+            "label": "design/WORK_PACKETS.md",
+            "section": "WPT-C06",
+            "uri": "../waypoint/design/WORK_PACKETS.md"
+          },
+          {
+            "label": "design/IMPLEMENTATION_MAP.md",
+            "section": "Required completion",
+            "uri": "../waypoint/design/IMPLEMENTATION_MAP.md"
+          },
+          {
+            "label": "design/ARCHITECTURE.md",
+            "section": "8. UI contract",
+            "uri": "../waypoint/design/ARCHITECTURE.md"
+          },
+          {
+            "label": "waypoint/web/app.js",
+            "uri": "../waypoint/waypoint/web/app.js"
+          },
+          {
+            "label": "waypoint/web/style.css",
+            "uri": "../waypoint/waypoint/web/style.css"
+          },
+          {
+            "label": "tests/browser_check.py",
+            "uri": "../waypoint/tests/browser_check.py"
+          }
+        ],
+        "tests": {
+          "T-01": {
+            "evidence_level": "browser integration",
+            "invalidated_by": "Состояние читателя, DOM patching, messages query.",
+            "label": "Поток и позиция чтения",
+            "procedure": "Настоящие события локального сервиса обновляют карточку/инспектор; старое окно остаётся на месте, новый текст обозначен."
+          },
+          "T-02": {
+            "evidence_level": "browser input",
+            "invalidated_by": "UI handlers, размеры узла, маршрутизация браузера.",
+            "label": "Навигация и две темы",
+            "procedure": "Три уровня, ↑, предки, browser back, pan/zoom/chat wheel и выделение текста."
+          },
+          "T-03": {
+            "evidence_level": "target measurement",
+            "invalidated_by": "Layout, virtualization, indexed query или среда.",
+            "label": "Насыщенная карта",
+            "procedure": "100/300 репрезентативных карточек с реальной плотностью чатов/рёбер, долгий поток; machine/DOM/sample count фиксируются."
+          }
+        },
+        "title": "Непрерывное чтение живой карты",
+        "x_roadmap": {
+          "avoid_paths": [
+            "waypoint/store.py",
+            "waypoint/server.py",
+            "waypoint/collector.py",
+            "waypoint/adapters/"
+          ],
+          "eligible_alternative": "Изолированная Chat/Pro-подготовка UI допустима в MIXED при отдельном владении файлами. Если её результата нет, Codex продолжает этот же пакет; не ждёт обязательной капсулы и не создаёт второй интерфейс.",
+          "escalation": "общий API нужно изменить: передать конкретный контракт C05/интегратору до записи; при browser policy denial не обходить запрет.",
+          "kind": "packet",
+          "owned_paths": [
+            "waypoint/web/",
+            "tests/browser_check.py",
+            "UI/performance fixtures (новые при необходимости)"
+          ],
+          "preferred_executor": "CODEX",
+          "read_set": [
+            {
+              "label": "design/WORK_PACKETS.md",
+              "section": "WPT-C06",
+              "uri": "../waypoint/design/WORK_PACKETS.md"
+            },
+            {
+              "label": "design/IMPLEMENTATION_MAP.md",
+              "section": "Required completion",
+              "uri": "../waypoint/design/IMPLEMENTATION_MAP.md"
+            },
+            {
+              "label": "design/ARCHITECTURE.md",
+              "section": "8. UI contract",
+              "uri": "../waypoint/design/ARCHITECTURE.md"
+            },
+            {
+              "label": "waypoint/web/app.js",
+              "uri": "../waypoint/waypoint/web/app.js"
+            },
+            {
+              "label": "waypoint/web/style.css",
+              "uri": "../waypoint/waypoint/web/style.css"
+            },
+            {
+              "label": "tests/browser_check.py",
+              "uri": "../waypoint/tests/browser_check.py"
+            }
+          ],
+          "safe_alternate_work": "пока C05.3 не принят — C06.1/C06.2 и проверка fixtures, но не объявления production-производительности.",
+          "source_capsule": "WPT-C06",
+          "wave": "RW-01"
+        }
+      },
+      "WPT-C06.1": {
+        "acceptance": {
+          "A-01": {
+            "text": "Открытый инспектор видит новое сообщение без повторного открытия."
+          },
+          "A-02": {
+            "text": "Чтение старых строк не перескакивает; возврат к хвосту явный."
+          },
+          "A-03": {
+            "text": "Фильтр потомков не копирует тексты и не выдаёт их за прямые сообщения родителя."
+          }
+        },
+        "assignment": "Отделить данные потока от положения читателя в каждом окне сообщений.\n\nРабота:\n1. Хранить per-node/per-inspector read window. Внизу — следовать новым данным; выше — сохранять окно/scroll и показывать небольшой индикатор новых сообщений.\n2. Обновлять revisions существующих items и добавлять новые без потери текстового выделения. Не разворачивать 500 DOM-строк в каждом узле.\n3. Дать переключатель parent+descendants / direct-only и корректно сбрасывать scope при выборе другого узла, не смешивая переписки.\n\nОбласть изменений: waypoint/web/app.js; tests/browser_check.py; UI fixtures.\n\nНе изменять: store.py/server.py.\n\nТочное чтение (пути от roadmap/):\n../waypoint/design/IMPLEMENTATION_MAP.md — раздел Required completion\n../waypoint/waypoint/web/app.js\n../waypoint/tests/browser_check.py\n../waypoint/design/CONTRACTS.md — раздел 6. Read API\n\nРежим MIXED. Предпочтительный исполнитель: CODEX or CHAT-PREPARATION. Исполнитель выбирает безопасный порядок внутри согласованного участка; назначение не сделано.",
+        "layout": {
+          "x": 80,
+          "y": 80
+        },
+        "parent": "WPT-C06",
+        "source_refs": [
+          {
+            "label": "design/IMPLEMENTATION_MAP.md",
+            "section": "Required completion",
+            "uri": "../waypoint/design/IMPLEMENTATION_MAP.md"
+          },
+          {
+            "label": "waypoint/web/app.js",
+            "uri": "../waypoint/waypoint/web/app.js"
+          },
+          {
+            "label": "tests/browser_check.py",
+            "uri": "../waypoint/tests/browser_check.py"
+          },
+          {
+            "label": "design/CONTRACTS.md",
+            "section": "6. Read API",
+            "uri": "../waypoint/design/CONTRACTS.md"
+          }
+        ],
+        "tests": {
+          "T-01": {
+            "evidence_level": "browser",
+            "invalidated_by": "Reader state, keyed item rendering, pagination.",
+            "label": "Read windows",
+            "procedure": "Fixture поток с append и revision: позиция сверху/снизу, инспектор, direct/deep. Затем тот же опыт через локальный HTTP."
+          }
+        },
+        "title": "Чат и инспектор без прыжков прокрутки",
+        "x_roadmap": {
+          "avoid_paths": [
+            "store.py/server.py"
+          ],
+          "eligible_alternative": null,
+          "escalation": "",
+          "kind": "stage",
+          "owned_paths": [
+            "waypoint/web/app.js",
+            "tests/browser_check.py",
+            "UI fixtures"
+          ],
+          "preferred_executor": "CODEX or CHAT-PREPARATION",
+          "read_set": [
+            {
+              "label": "design/IMPLEMENTATION_MAP.md",
+              "section": "Required completion",
+              "uri": "../waypoint/design/IMPLEMENTATION_MAP.md"
+            },
+            {
+              "label": "waypoint/web/app.js",
+              "uri": "../waypoint/waypoint/web/app.js"
+            },
+            {
+              "label": "tests/browser_check.py",
+              "uri": "../waypoint/tests/browser_check.py"
+            },
+            {
+              "label": "design/CONTRACTS.md",
+              "section": "6. Read API",
+              "uri": "../waypoint/design/CONTRACTS.md"
+            }
+          ],
+          "safe_alternate_work": "",
+          "source_capsule": "WPT-C06",
+          "wave": null
+        }
+      },
+      "WPT-C06.2": {
+        "acceptance": {
+          "A-01": {
+            "text": "Правка одного item не пересоздаёт всю видимую карту и все чаты."
+          },
+          "A-02": {
+            "text": "Переходы вниз/вверх не теряют масштаб, положение и доступ к родительской переписке."
+          },
+          "A-03": {
+            "text": "Удаление узла в новой версии не скрывает связанную незавершённую работу."
+          }
+        },
+        "assignment": "Сделать карту устойчивой к живым изменениям топологии и сообщений, не теряя ориентиры пользователя.\n\nРабота:\n1. Инвалидировать отдельный item/card/actor по committed event; plan.changed меняет топологию. Сохранить footprint дальнего масштаба и viewport culling.\n2. Проверить ↑, каждый предок и browser back на трёх уровнях; хранить camera отдельно на уровень. Сделать понятные cross-scope edges и копирование native/block ID.\n3. Сохранить off-map drawer, ghost активного удалённого узла и большой чат в обеих темах. Красный акцент темы не равен красному исходу теста.\n\nОбласть изменений: waypoint/web/; tests/browser_check.py.\n\nНе изменять: store.py/server.py.\n\nТочное чтение (пути от roadmap/):\n../waypoint/design/ARCHITECTURE.md — раздел 8. UI contract\n../waypoint/waypoint/web/\n../waypoint/tests/browser_check.py\n\nРежим MIXED. Предпочтительный исполнитель: CODEX or CHAT-PREPARATION. Исполнитель выбирает безопасный порядок внутри согласованного участка; назначение не сделано.",
+        "layout": {
+          "x": 80,
+          "y": 650
+        },
+        "parent": "WPT-C06",
+        "source_refs": [
+          {
+            "label": "design/ARCHITECTURE.md",
+            "section": "8. UI contract",
+            "uri": "../waypoint/design/ARCHITECTURE.md"
+          },
+          {
+            "label": "Визуальные assets",
+            "uri": "../waypoint/waypoint/web/"
+          },
+          {
+            "label": "tests/browser_check.py",
+            "uri": "../waypoint/tests/browser_check.py"
+          }
+        ],
+        "tests": {
+          "T-01": {
+            "evidence_level": "browser",
+            "invalidated_by": "Navigation/render topology, semantic zoom, ghost resolution.",
+            "label": "Топология и действия",
+            "procedure": "Три уровня/предки/back, selected block, удаление активного узла, неизвестный блок и source disconnect; реальные mouse/keyboard события."
+          }
+        },
+        "title": "Выборочное обновление и вложенность",
+        "x_roadmap": {
+          "avoid_paths": [
+            "store.py/server.py"
+          ],
+          "eligible_alternative": null,
+          "escalation": "",
+          "kind": "stage",
+          "owned_paths": [
+            "waypoint/web/",
+            "tests/browser_check.py"
+          ],
+          "preferred_executor": "CODEX or CHAT-PREPARATION",
+          "read_set": [
+            {
+              "label": "design/ARCHITECTURE.md",
+              "section": "8. UI contract",
+              "uri": "../waypoint/design/ARCHITECTURE.md"
+            },
+            {
+              "label": "Визуальные assets",
+              "uri": "../waypoint/waypoint/web/"
+            },
+            {
+              "label": "tests/browser_check.py",
+              "uri": "../waypoint/tests/browser_check.py"
+            }
+          ],
+          "safe_alternate_work": "",
+          "source_capsule": "WPT-C06",
+          "wave": null
+        }
+      },
+      "WPT-C06.3": {
+        "acceptance": {
+          "A-01": {
+            "text": "Использован настоящий локальный HTTP, а не только set_content."
+          },
+          "A-02": {
+            "text": "Измерения описывают фактический rich fixture и окружение; долгий чат не монтируется целиком в каждом узле."
+          },
+          "A-03": {
+            "text": "Выводы о приемлемом budget основаны на измерениях, непроверенные свойства не названы PASS."
+          }
+        },
+        "assignment": "Оценить цельный путь Browser→API→индекс на представительном, а не декоративно упрощённом графе.\n\nРабота:\n1. После C05.3 использовать согласованный индекс/пагинацию. Прогнать 100 и 300 богатых узлов с чатами, рёбрами, вложенными scopes и длительным потоком.\n2. Записать реальный browser/OS/hardware, DOM, число измерений, размеры истории/снимков, время ответа и память. Не переносить 0.5мс из старого одиночного опыта в обещание сервиса.\n3. Проверить клавиатуру, читаемость и contrast тем; технический отчёт отделить от ещё не полученной человеческой оценки.\n\nОбласть изменений: tests/browser_check.py; Новые performance fixtures и отчёт C06.\n\nНе изменять: Store/API — изменения только через владельца C05.\n\nТочное чтение (пути от roadmap/):\n../waypoint/design/IMPLEMENTATION_MAP.md — раздел Required completion\n../waypoint/design/ACCEPTANCE.md — раздел Target sequence\n../waypoint/tests/browser_check.py\n\nРежим MIXED. Предпочтительный исполнитель: CODEX. Исполнитель выбирает безопасный порядок внутри согласованного участка; назначение не сделано.",
+        "layout": {
+          "x": 640,
+          "y": 650
+        },
+        "parent": "WPT-C06",
+        "source_refs": [
+          {
+            "label": "design/IMPLEMENTATION_MAP.md",
+            "section": "Required completion",
+            "uri": "../waypoint/design/IMPLEMENTATION_MAP.md"
+          },
+          {
+            "label": "design/ACCEPTANCE.md",
+            "section": "Target sequence",
+            "uri": "../waypoint/design/ACCEPTANCE.md"
+          },
+          {
+            "label": "tests/browser_check.py",
+            "uri": "../waypoint/tests/browser_check.py"
+          }
+        ],
+        "tests": {
+          "T-01": {
+            "evidence_level": "target performance + UI",
+            "invalidated_by": "Store index/read contract, UI virtualizer, runtime environment.",
+            "label": "Rich-map report",
+            "procedure": "Один набор representative fixtures, прогрев и несколько измерений если дешёво; вернуть выборку, не выдуманный процент готовности."
+          }
+        },
+        "title": "Насыщенная карта через настоящий сервис",
+        "x_roadmap": {
+          "avoid_paths": [
+            "Store/API — изменения только через владельца C05"
+          ],
+          "eligible_alternative": null,
+          "escalation": "",
+          "kind": "stage",
+          "owned_paths": [
+            "tests/browser_check.py",
+            "Новые performance fixtures и отчёт C06"
+          ],
+          "preferred_executor": "CODEX",
+          "read_set": [
+            {
+              "label": "design/IMPLEMENTATION_MAP.md",
+              "section": "Required completion",
+              "uri": "../waypoint/design/IMPLEMENTATION_MAP.md"
+            },
+            {
+              "label": "design/ACCEPTANCE.md",
+              "section": "Target sequence",
+              "uri": "../waypoint/design/ACCEPTANCE.md"
+            },
+            {
+              "label": "tests/browser_check.py",
+              "uri": "../waypoint/tests/browser_check.py"
+            }
+          ],
+          "safe_alternate_work": "",
+          "source_capsule": "WPT-C06",
+          "wave": null
+        }
+      },
+      "WPT-C07": {
+        "acceptance": {
+          "A-01": {
+            "text": "Собранная новая реализация читает обычный Codex владельца и показывает работу на этой карте."
+          },
+          "A-02": {
+            "text": "Карта, сгенерированная здесь, импортируется/экспортируется/обновляется без ручного переноса и потери полей; старые IDs остаются стабильны."
+          },
+          "A-03": {
+            "text": "Пройдена одна составная целевая последовательность либо точно названы непроверенные/непринятые свойства."
+          },
+          "A-04": {
+            "text": "Секреты и реальные переписки не попали в возврат; установка/публикация/приёмка отражены отдельно."
+          }
+        },
+        "assignment": "Собрать один принятый Waypoint из завершённых C05/C06, проверить его на текущем окружении и закрепить передачу карт из ChatGPT без ручного пересоздания.\n\nРабота:\n1. Выполнить C07.1–C07.4 одним локальным интегратором после остановки пересекающихся писателей.\n2. Использовать эту ROADMAP.plan.json как первую реальную дорожную карту самого Waypoint и шаблон как переносимый пример другого проекта.\n3. Включить в возврат реальные изменения/проверки/ограничения, состояние публикации и точный следующий шаг. Не запускать повторное общее проектирование.\n\nОбласть изменений: Packaging/lock для фактического Python; Настройки только Waypoint; Составные интеграционные тесты; roadmap/ при следующей согласованной версии; skills publication proposal.\n\nНе изменять: Чужие активные ветки/изменения; Глобальные скилы без отдельного согласования; Автоматическая публичная публикация или смена лицензии.\n\nТочное чтение (пути от roadmap/):\n../waypoint/design/WORK_PACKETS.md — раздел WPT-C07\n../waypoint/design/OPERATIONS.md\n../waypoint/design/ACCEPTANCE.md\nFORMAT.md\nRUNNER_WAVES.md\n\nРежим MIXED. Предпочтительный исполнитель: CODEX. Исполнитель выбирает безопасный порядок внутри согласованного участка; назначение не сделано.\n\nОстановить только затронутое действие и эскалировать: провал конкретного release-условия, конкурирующая база или неразрешённая внешняя публикация. Сохранить успехи остальных частей.\n\nПри ожидании: подготовить чистый отчёт и пакет установки, пока идёт действительно независимая длительная проверка; не запускать её повторно ради статуса.",
+        "layout": {
+          "x": 1820,
+          "y": 400
+        },
+        "parent": null,
+        "source_refs": [
+          {
+            "label": "design/WORK_PACKETS.md",
+            "section": "WPT-C07",
+            "uri": "../waypoint/design/WORK_PACKETS.md"
+          },
+          {
+            "label": "design/OPERATIONS.md",
+            "uri": "../waypoint/design/OPERATIONS.md"
+          },
+          {
+            "label": "design/ACCEPTANCE.md",
+            "uri": "../waypoint/design/ACCEPTANCE.md"
+          },
+          {
+            "label": "Один исходный граф",
+            "uri": "FORMAT.md"
+          },
+          {
+            "label": "Проекция волн",
+            "uri": "RUNNER_WAVES.md"
+          }
+        ],
+        "tests": {
+          "T-01": {
+            "evidence_level": "target integration",
+            "invalidated_by": "Состав сборки, общие контракты, окружение.",
+            "label": "Один собранный продукт",
+            "procedure": "Приёмка design/ACCEPTANCE.md с отчётами C05/C06; переиспользовать действующие свидетельства, повторять только инвалидированные границы."
+          },
+          "T-02": {
+            "evidence_level": "interchange + target",
+            "invalidated_by": "Plan schema, serialization, authoring profile, importer.",
+            "label": "Карта является исходным планом",
+            "procedure": "Round-trip этой карты и независимого шаблона, stale base conflict и disjoint update; проверить x_roadmap и чтение через packet."
+          },
+          "T-03": {
+            "evidence_level": "delivery",
+            "invalidated_by": "Файлы релиза, настройки, разрешения публикации.",
+            "label": "Передача и секреты",
+            "procedure": "MANIFEST, воспроизводимый запуск/удаление собственного service, sanitized report и явное состояние global skills/registry."
+          }
+        },
+        "title": "Сквозная приёмка и передача",
+        "x_roadmap": {
+          "avoid_paths": [
+            "Чужие активные ветки/изменения",
+            "Глобальные скилы без отдельного согласования",
+            "Автоматическая публичная публикация или смена лицензии"
+          ],
+          "eligible_alternative": null,
+          "escalation": "провал конкретного release-условия, конкурирующая база или неразрешённая внешняя публикация. Сохранить успехи остальных частей.",
+          "kind": "packet",
+          "owned_paths": [
+            "Packaging/lock для фактического Python",
+            "Настройки только Waypoint",
+            "Составные интеграционные тесты",
+            "roadmap/ при следующей согласованной версии",
+            "skills publication proposal"
+          ],
+          "preferred_executor": "CODEX",
+          "read_set": [
+            {
+              "label": "design/WORK_PACKETS.md",
+              "section": "WPT-C07",
+              "uri": "../waypoint/design/WORK_PACKETS.md"
+            },
+            {
+              "label": "design/OPERATIONS.md",
+              "uri": "../waypoint/design/OPERATIONS.md"
+            },
+            {
+              "label": "design/ACCEPTANCE.md",
+              "uri": "../waypoint/design/ACCEPTANCE.md"
+            },
+            {
+              "label": "Один исходный граф",
+              "uri": "FORMAT.md"
+            },
+            {
+              "label": "Проекция волн",
+              "uri": "RUNNER_WAVES.md"
+            }
+          ],
+          "safe_alternate_work": "подготовить чистый отчёт и пакет установки, пока идёт действительно независимая длительная проверка; не запускать её повторно ради статуса.",
+          "source_capsule": "WPT-C07",
+          "wave": "RW-02"
+        }
+      },
+      "WPT-C07.1": {
+        "acceptance": {
+          "A-01": {
+            "text": "Одна сборка содержит C05/C06, её точная ревизия/manifest известны."
+          },
+          "A-02": {
+            "text": "Отдельные ключи и Host/Origin граница сохраняются; UI assets входят в пакет."
+          }
+        },
+        "assignment": "Принять результаты C05/C06 и получить единую запускаемую рабочую версию.\n\nРабота:\n1. Сопоставить bases и receipts обеих веток; интеграционные конфликты разрешает один владелец. Не затирать чужие изменения.\n2. Проверить миграции, package assets и фактический Python; выбрать/зафиксировать зависимости после smoke на целевой среде. Грамматика Python 3.10 не равна runtime-приёмке 3.10.\n3. Поднять private data dir/loopback UI с read-only browser capability; write credential не отдавать браузеру.\n\nОбласть изменений: Упаковка/lock; Интеграционные исправления только после завершения остальных писателей.\n\nНе изменять: Глобальное окружение машины.\n\nТочное чтение (пути от roadmap/):\n../waypoint/pyproject.toml\n../waypoint/design/OPERATIONS.md\n../waypoint/tools/verify_http.py\n../waypoint/design/IMPLEMENTATION_MAP.md\n\nРежим MIXED. Предпочтительный исполнитель: CODEX. Исполнитель выбирает безопасный порядок внутри согласованного участка; назначение не сделано.",
+        "layout": {
+          "x": 80,
+          "y": 80
+        },
+        "parent": "WPT-C07",
+        "source_refs": [
+          {
+            "label": "pyproject.toml",
+            "uri": "../waypoint/pyproject.toml"
+          },
+          {
+            "label": "design/OPERATIONS.md",
+            "uri": "../waypoint/design/OPERATIONS.md"
+          },
+          {
+            "label": "tools/verify_http.py",
+            "uri": "../waypoint/tools/verify_http.py"
+          },
+          {
+            "label": "design/IMPLEMENTATION_MAP.md",
+            "uri": "../waypoint/design/IMPLEMENTATION_MAP.md"
+          }
+        ],
+        "tests": {
+          "T-01": {
+            "evidence_level": "assembled local/target",
+            "invalidated_by": "Merge shared files, dependency lock, migration.",
+            "label": "Сборка, миграция, smoke",
+            "procedure": "Нужные unit/contract suites после интеграции, verify_http и проверка assets/entrypoint на выбранном интерпретаторе."
+          }
+        },
+        "title": "Одна сборка и совместимые зависимости",
+        "x_roadmap": {
+          "avoid_paths": [
+            "Глобальное окружение машины"
+          ],
+          "eligible_alternative": null,
+          "escalation": "",
+          "kind": "stage",
+          "owned_paths": [
+            "Упаковка/lock",
+            "Интеграционные исправления только после завершения остальных писателей"
+          ],
+          "preferred_executor": "CODEX",
+          "read_set": [
+            {
+              "label": "pyproject.toml",
+              "uri": "../waypoint/pyproject.toml"
+            },
+            {
+              "label": "design/OPERATIONS.md",
+              "uri": "../waypoint/design/OPERATIONS.md"
+            },
+            {
+              "label": "tools/verify_http.py",
+              "uri": "../waypoint/tools/verify_http.py"
+            },
+            {
+              "label": "design/IMPLEMENTATION_MAP.md",
+              "uri": "../waypoint/design/IMPLEMENTATION_MAP.md"
+            }
+          ],
+          "safe_alternate_work": "",
+          "source_capsule": "WPT-C07",
+          "wave": null
+        }
+      },
+      "WPT-C07.2": {
+        "acceptance": {
+          "A-01": {
+            "text": "Наблюдается новый код, а не только работоспособность старого P09."
+          },
+          "A-02": {
+            "text": "Текущий блок/чат/инспектор и реальное действие согласуются без дополнительных отчётов модели."
+          },
+          "A-03": {
+            "text": "Сбой наблюдателя не убивает исполнителя; источник unknown не показан как done."
+          }
+        },
+        "assignment": "Доказать пользовательский цикл собранной реализации на естественной работе Codex и настоящем браузере.\n\nРабота:\n1. Импортировать текущую карту, указать существующую сессию и проверить verified focus/сообщение/инструмент/тест/результат на правильном блоке.\n2. Проверить оригинальный текст локально, многоблочную область, потомков, изменение плана и независимые статусы/лампы. Историческое родство честно обозначать историческим.\n3. Перезапустить только Waypoint collector/service; работа Codex продолжается. Replay/outbox/cursor и health восстанавливаются.\n\nОбласть изменений: Составные тесты и санитарный отчёт; Настройки Waypoint в private directory.\n\nНе изменять: Настройки/жизненный цикл Codex.\n\nТочное чтение (пути от roadmap/):\n../waypoint/design/ACCEPTANCE.md\n../waypoint/design/OPERATIONS.md — раздел Failure and recovery\n../waypoint/reports/RETURN_TO_CHAT_RU.md\n\nРежим MIXED. Предпочтительный исполнитель: CODEX. Исполнитель выбирает безопасный порядок внутри согласованного участка; назначение не сделано.",
+        "layout": {
+          "x": 80,
+          "y": 650
+        },
+        "parent": "WPT-C07",
+        "source_refs": [
+          {
+            "label": "design/ACCEPTANCE.md",
+            "uri": "../waypoint/design/ACCEPTANCE.md"
+          },
+          {
+            "label": "design/OPERATIONS.md",
+            "section": "Failure and recovery",
+            "uri": "../waypoint/design/OPERATIONS.md"
+          },
+          {
+            "label": "reports/RETURN_TO_CHAT_RU.md",
+            "uri": "../waypoint/reports/RETURN_TO_CHAT_RU.md"
+          }
+        ],
+        "tests": {
+          "T-01": {
+            "evidence_level": "live target + browser",
+            "invalidated_by": "Собранные adapter/binding/API/UI, конфигурация клиента.",
+            "label": "Сквозная целевая приёмка",
+            "procedure": "Целевая последовательность ACCEPTANCE.md, с повтором только инвалидированных C05/C06 свидетельств."
+          }
+        },
+        "title": "Карта → агент → события → браузер",
+        "x_roadmap": {
+          "avoid_paths": [
+            "Настройки/жизненный цикл Codex"
+          ],
+          "eligible_alternative": null,
+          "escalation": "",
+          "kind": "stage",
+          "owned_paths": [
+            "Составные тесты и санитарный отчёт",
+            "Настройки Waypoint в private directory"
+          ],
+          "preferred_executor": "CODEX",
+          "read_set": [
+            {
+              "label": "design/ACCEPTANCE.md",
+              "uri": "../waypoint/design/ACCEPTANCE.md"
+            },
+            {
+              "label": "design/OPERATIONS.md",
+              "section": "Failure and recovery",
+              "uri": "../waypoint/design/OPERATIONS.md"
+            },
+            {
+              "label": "reports/RETURN_TO_CHAT_RU.md",
+              "uri": "../waypoint/reports/RETURN_TO_CHAT_RU.md"
+            }
+          ],
+          "safe_alternate_work": "",
+          "source_capsule": "WPT-C07",
+          "wave": null
+        }
+      },
+      "WPT-C07.3": {
+        "acceptance": {
+          "A-01": {
+            "text": "Нет отдельного ручного преобразования human plan → Waypoint; Markdown и Runner waves воспроизводятся из исходного plan JSON."
+          },
+          "A-02": {
+            "text": "Независимый проект меняет только свои поля, а не ядро формата; schema остаётся waypoint.plan/1."
+          },
+          "A-03": {
+            "text": "Одинаковый request_id с одинаковым телом идемпотентен, конфликтующий body не проходит; новая ревизия не теряет agent changes."
+          },
+          "A-04": {
+            "text": "Изменения глобального пайплайна подготовлены или опубликованы с проверенным разрешением; это разные состояния, не условный скрытый запуск."
+          }
+        },
+        "assignment": "Сделать входом Waypoint именно наши дорожные карты; не создавать независимый технический backlog рядом с человеческим планом.\n\nРабота:\n1. Проверить импорт/экспорт этой карты и templates/PROJECT.plan.json. Все заданные поля, IDs, зависимости и x_roadmap должны сохраниться.\n2. После локальных изменений экспортировать актуальный base_version, подготовить snapshot в чате и принять его с merge. Проверить disjoint update, конфликт одного acceptance и удаление узла с новой ссылкой; не переписывать concurrent head.\n3. Сверить короткий AUTHORING_PROFILE.md и предложение изменения build-implementation-roadmap с фактической канонической библиотекой. Передавать только нужный скил и packet.\n4. Глобальную регистрацию waypoint-map/observe и изменение общего скила выполнять только отдельной согласованной публикацией по AGENTS.md; до неё вернуть точный кандидат/статус, не говорить «установлено».\n\nОбласть изменений: Текущая карта/профиль и шаблон; Кандидаты скилов и отчёт о регистрации.\n\nНе изменять: Канонические скилы/расписания без согласованного scope.\n\nТочное чтение (пути от roadmap/):\nFORMAT.md\nAUTHORING_PROFILE.md\nSKILL_INTEGRATION_PROPOSAL.md\n../waypoint/skills/INTEGRATION.md\n../waypoint/design/CONTRACTS.md — раздел 2. Plan; 3. Atomic update\n\nРежим MIXED. Предпочтительный исполнитель: CODEX. Исполнитель выбирает безопасный порядок внутри согласованного участка; назначение не сделано.",
+        "layout": {
+          "x": 640,
+          "y": 80
+        },
+        "parent": "WPT-C07",
+        "source_refs": [
+          {
+            "label": "Контракт roadmap",
+            "uri": "FORMAT.md"
+          },
+          {
+            "label": "Авторство следующих карт",
+            "uri": "AUTHORING_PROFILE.md"
+          },
+          {
+            "label": "Точечное предложение интеграции",
+            "uri": "SKILL_INTEGRATION_PROPOSAL.md"
+          },
+          {
+            "label": "skills/INTEGRATION.md",
+            "uri": "../waypoint/skills/INTEGRATION.md"
+          },
+          {
+            "label": "design/CONTRACTS.md",
+            "section": "2. Plan; 3. Atomic update",
+            "uri": "../waypoint/design/CONTRACTS.md"
+          }
+        ],
+        "tests": {
+          "T-01": {
+            "evidence_level": "interchange",
+            "invalidated_by": "Schema/domain/Store, authoring tools/profile.",
+            "label": "Round-trip и согласованная правка",
+            "procedure": "Текущий importer/exporter/packet на двух project_id; disjoint/conflict/delete cases; детерминированная генерация views."
+          },
+          "T-02": {
+            "evidence_level": "source review / installation if authorized",
+            "invalidated_by": "Canonical skill revision или runtime binding.",
+            "label": "Интеграция скилов",
+            "procedure": "Проверка точечного предложения относительно AGENTS/nav/build skill; при отдельно разрешённой публикации — validator и readback."
+          }
+        },
+        "title": "Переносимые карты и стандарт авторства",
+        "x_roadmap": {
+          "avoid_paths": [
+            "Канонические скилы/расписания без согласованного scope"
+          ],
+          "eligible_alternative": null,
+          "escalation": "",
+          "kind": "stage",
+          "owned_paths": [
+            "Текущая карта/профиль и шаблон",
+            "Кандидаты скилов и отчёт о регистрации"
+          ],
+          "preferred_executor": "CODEX",
+          "read_set": [
+            {
+              "label": "Контракт roadmap",
+              "uri": "FORMAT.md"
+            },
+            {
+              "label": "Авторство следующих карт",
+              "uri": "AUTHORING_PROFILE.md"
+            },
+            {
+              "label": "Точечное предложение интеграции",
+              "uri": "SKILL_INTEGRATION_PROPOSAL.md"
+            },
+            {
+              "label": "skills/INTEGRATION.md",
+              "uri": "../waypoint/skills/INTEGRATION.md"
+            },
+            {
+              "label": "design/CONTRACTS.md",
+              "section": "2. Plan; 3. Atomic update",
+              "uri": "../waypoint/design/CONTRACTS.md"
+            }
+          ],
+          "safe_alternate_work": "",
+          "source_capsule": "WPT-C07",
+          "wave": null
+        }
+      },
+      "WPT-C07.4": {
+        "acceptance": {
+          "A-01": {
+            "text": "RETURN_TO_CHAT_RU.md различает source-written, tested, observed-live, installed, published, accepted."
+          },
+          "A-02": {
+            "text": "Все ссылки/артефакты результата разрешимы; отсутствуют выдуманные commits/версии/получатели."
+          },
+          "A-03": {
+            "text": "Пакет пригоден для восстановления и повторного чтения без всего разговора; новые исполнения сами не запускаются."
+          }
+        },
+        "assignment": "Передать проверенный результат, воспроизводимые инструкции и честный список остаточных ограничений.\n\nРабота:\n1. Собрать санитизированный отчёт из результатов C05/C06/C07 и описать expected/actual diff. Сохранить текущую карту через export с реальной версией, не редактировать сгенерированный Markdown отдельно.\n2. Проверить manifest/архив, инструкции install/uninstall только собственного service и источник lock. Не включать auth, полный HOME, реальные тексты, SQLite с перепиской или приватные ключи.\n3. Для Udot использовать существующий реестр/inbox и реальные текущие версии с защитой записи; не заменять их копией из пакета. Применённые/неприменённые уведомления отмечать отдельно.\n\nОбласть изменений: reports/ и финальный архив; Санитизированные receipts; Публикация в существующий канал при доступной защищённой записи.\n\nНе изменять: Единственные recoverable копии; Чужие строки реестра/inbox.\n\nТочное чтение (пути от roadmap/):\n../waypoint/reports/RETURN_TO_CHAT_RU.md\n../waypoint/design/OPERATIONS.md — раздел Security and output handling\nhandoff/PUBLICATION.md\n\nРежим MIXED. Предпочтительный исполнитель: CODEX. Исполнитель выбирает безопасный порядок внутри согласованного участка; назначение не сделано.",
+        "layout": {
+          "x": 1160,
+          "y": 650
+        },
+        "parent": "WPT-C07",
+        "source_refs": [
+          {
+            "label": "reports/RETURN_TO_CHAT_RU.md",
+            "uri": "../waypoint/reports/RETURN_TO_CHAT_RU.md"
+          },
+          {
+            "label": "design/OPERATIONS.md",
+            "section": "Security and output handling",
+            "uri": "../waypoint/design/OPERATIONS.md"
+          },
+          {
+            "label": "Безопасная публикация",
+            "uri": "handoff/PUBLICATION.md"
+          }
+        ],
+        "tests": {
+          "T-01": {
+            "evidence_level": "delivery",
+            "invalidated_by": "Состав пакета, refs, runtime data, authorization.",
+            "label": "Санитарная передача",
+            "procedure": "Проверить включённые пути и содержимое, checksums, команды запуска/возврата и реальный receipt публикации при её выполнении."
+          }
+        },
+        "title": "Пакет результата и возврат владельцу",
+        "x_roadmap": {
+          "avoid_paths": [
+            "Единственные recoverable копии",
+            "Чужие строки реестра/inbox"
+          ],
+          "eligible_alternative": null,
+          "escalation": "",
+          "kind": "stage",
+          "owned_paths": [
+            "reports/ и финальный архив",
+            "Санитизированные receipts",
+            "Публикация в существующий канал при доступной защищённой записи"
+          ],
+          "preferred_executor": "CODEX",
+          "read_set": [
+            {
+              "label": "reports/RETURN_TO_CHAT_RU.md",
+              "uri": "../waypoint/reports/RETURN_TO_CHAT_RU.md"
+            },
+            {
+              "label": "design/OPERATIONS.md",
+              "section": "Security and output handling",
+              "uri": "../waypoint/design/OPERATIONS.md"
+            },
+            {
+              "label": "Безопасная публикация",
+              "uri": "handoff/PUBLICATION.md"
+            }
+          ],
+          "safe_alternate_work": "",
+          "source_capsule": "WPT-C07",
+          "wave": null
+        }
+      },
+      "WPT-R00": {
+        "acceptance": {
+          "A-01": {
+            "text": "Фактическая база установлена: путь/ветка/commit либо честно «новая распакованная копия», локальные изменения сохранены."
+          },
+          "A-02": {
+            "text": "Карта принята текущим сервером; все ID, parent, assignment, acceptance, tests, edges и x_roadmap сохранены."
+          },
+          "A-03": {
+            "text": "Короткий packet достаточен для начала выбранного участка; нет подмены roadmap демонстрацией WhoRules."
+          },
+          "A-04": {
+            "text": "C05/C06 могут начать независимую работу после этого пакета; канал Runner не считается подключённым без проверки существующего протокола."
+          }
+        },
+        "assignment": "Подготовить подтверждённую рабочую копию и импортировать ROADMAP.plan.json через настоящий Waypoint. Не перепроектировать готовый код и не менять пользовательские проекты.\n\nРабота:\n1. Сверить архив и манифест. Найти фактическую рабочую папку/ветку; при наличии более нового кода сопоставить изменения, не распаковывать поверх него вслепую. Зафиксировать основание в рабочем receipt, а не выдумывать git SHA.\n2. В изолированном окружении проверить запуск базы и один импорт этой карты. При новой БД использовать base_version:null; при существующей карте сначала экспортировать её актуальную версию и согласовать изменения.\n3. Проверить native packet для C05/C06, вложенность, требования, приёмку и список проверок. Исторические исходные результаты импортировать только при первичном создании этой карты, без зелёных лампочек за будущие тесты.\n4. Назначить одного интегратора и владельца Store/API C05; развести C05/C06 по файлам/worktree. Не запускать параллельного писателя общих файлов.\n\nОбласть изменений: Новая рабочая копия и локальное окружение Waypoint; Приватный журнал интеграционных receipts.\n\nНе изменять: Чужие репозитории/изменения; Глобальная конфигурация Codex, hooks и секреты; ROADMAP.plan.json поверх неизвестного нового head.\n\nТочное чтение (пути от roadmap/):\n../waypoint/START_HERE.md\n../waypoint/design/IMPLEMENTATION_MAP.md\nFORMAT.md\nCODEX_START.md\n\nРежим MIXED. Предпочтительный исполнитель: CODEX. Исполнитель выбирает безопасный порядок внутри согласованного участка; назначение не сделано.\n\nОстановить только затронутое действие и эскалировать: несовпадающая локальная база, неразрешённый конфликт или отказ доступа. Новую архитектуру из этого не выводить.\n\nПри ожидании: офлайн прочитать пакет C05 или подготовить fixtures C06 без изменения непроверенной рабочей базы.",
+        "layout": {
+          "x": 630,
+          "y": 400
+        },
+        "parent": null,
+        "source_refs": [
+          {
+            "label": "START_HERE.md",
+            "uri": "../waypoint/START_HERE.md"
+          },
+          {
+            "label": "Граница готового кода",
+            "uri": "../waypoint/design/IMPLEMENTATION_MAP.md"
+          },
+          {
+            "label": "Формат единой карты",
+            "uri": "FORMAT.md"
+          },
+          {
+            "label": "Запуск по карте",
+            "uri": "CODEX_START.md"
+          }
+        ],
+        "tests": {
+          "T-01": {
+            "evidence_level": "structure",
+            "invalidated_by": "Изменение базового архива или ROADMAP.plan.json.",
+            "label": "Целостность и совместимость карты",
+            "procedure": "Из waypoint/: python tools/verify_package.py; из roadmap/: python tools/roadmap.py validate. Проверяет поставленные файлы/граф, не установленный источник."
+          },
+          "T-02": {
+            "evidence_level": "local integration",
+            "invalidated_by": "Изменения schema/domain/store/API или базовой карты.",
+            "label": "Первый импорт и чтение packet",
+            "procedure": "В приватной Waypoint БД импортировать карту и получить packet WPT-C05/WPT-C06. Сравнить поля с исходным JSON."
+          },
+          "T-03": {
+            "evidence_level": "target inspection",
+            "invalidated_by": "Изменение рабочей базы, ветки, незакоммиченных правок или исполнителей.",
+            "label": "Безопасная рабочая копия",
+            "procedure": "Сопоставить существующий рабочий каталог/Git и установить непересекающееся владение C05/C06."
+          }
+        },
+        "title": "Принять базу и открыть эту карту",
+        "x_roadmap": {
+          "avoid_paths": [
+            "Чужие репозитории/изменения",
+            "Глобальная конфигурация Codex, hooks и секреты",
+            "ROADMAP.plan.json поверх неизвестного нового head"
+          ],
+          "eligible_alternative": null,
+          "escalation": "несовпадающая локальная база, неразрешённый конфликт или отказ доступа. Новую архитектуру из этого не выводить.",
+          "kind": "packet",
+          "owned_paths": [
+            "Новая рабочая копия и локальное окружение Waypoint",
+            "Приватный журнал интеграционных receipts"
+          ],
+          "preferred_executor": "CODEX",
+          "read_set": [
+            {
+              "label": "START_HERE.md",
+              "uri": "../waypoint/START_HERE.md"
+            },
+            {
+              "label": "Граница готового кода",
+              "uri": "../waypoint/design/IMPLEMENTATION_MAP.md"
+            },
+            {
+              "label": "Формат единой карты",
+              "uri": "FORMAT.md"
+            },
+            {
+              "label": "Запуск по карте",
+              "uri": "CODEX_START.md"
+            }
+          ],
+          "safe_alternate_work": "офлайн прочитать пакет C05 или подготовить fixtures C06 без изменения непроверенной рабочей базы.",
+          "source_capsule": null,
+          "wave": "RW-00"
+        }
+      }
+    },
+    "project_id": "waypoint",
+    "schema": "waypoint.plan/1",
+    "title": "Waypoint · от исходной реализации к рабочему наблюдателю",
+    "x_roadmap": {
+      "basis": "Completed design package and its source code; current owner workspace, installed service and remote code are not observed in this planning pass.",
+      "created_at": "2026-10-16T16:48:03+00:00",
+      "definition": "ROADMAP.plan.json",
+      "design_session_id": "WAYPOINT-DESIGN-20261016-1312895b",
+      "initial_frontier_note": "WPT-R00 is eligible to start after the owner hands this package to a local executor. No executor is assigned or started by this file.",
+      "initial_supplied_ids": [
+        "WPT-C01",
+        "WPT-C02",
+        "WPT-C03",
+        "WPT-C04"
+      ],
+      "input_package": {
+        "extracted_root": "../waypoint",
+        "integrity": "75 manifest members verified; 76 ZIP members",
+        "name": "waypoint-design-package-2026-10-16.zip",
+        "sha256": "034ac6f6392a11b9ac38f3ed1e9fcb75b90132cc783e410e82a74bffa6199dce",
+        "size_bytes": 5546508
+      },
+      "local_delivery": {
+        "date": "2026-10-17",
+        "mode": "MIXED",
+        "observer_only": true,
+        "report": "../waypoint/reports/RETURN_TO_CHAT_RU.md",
+        "source": "existing C01-C04; C05-C07 local integration"
+      },
+      "planning_decisions": [
+        {
+          "basis": "build-implementation-roadmap requires observed starting-state assumptions and safe handoff.",
+          "decision": "Add WPT-R00 as a short integration-readiness packet, not a new architecture stage.",
+          "id": "RP-01"
+        },
+        {
+          "basis": "design/WORK_PACKETS.md and implementation boundaries.",
+          "decision": "Refine existing C05–C07 into stages without creating replacement capsule identities.",
+          "id": "RP-02"
+        },
+        {
+          "basis": "design/IMPLEMENTATION_MAP.md and C06 shared-file restriction; parallelism must have physical ownership.",
+          "decision": "Give C05 ownership of the item-target index and all shared Store/API/migration edits; make C06.3 wait for C05.3 only.",
+          "id": "RP-03"
+        },
+        {
+          "basis": "Owner explicitly requires roadmaps authored here to be the input for Waypoint.",
+          "decision": "Validate this real roadmap through the current Waypoint schema, Store and packet API; use it for the later target acceptance.",
+          "id": "RP-04"
+        },
+        {
+          "basis": "skills/INTEGRATION.md publication boundary.",
+          "decision": "Ship a reusable authoring profile and bounded canonical-skill integration proposal. Do not silently install/change global skills.",
+          "id": "RP-05"
+        }
+      ],
+      "profile": "waypoint.roadmap-authoring/1",
+      "publication_at_build": {
+        "global_registry": "NOT_CHANGED",
+        "task_dispatch": "NOT_REQUESTED",
+        "udot_inbox": "NOT_CHANGED"
+      },
+      "reference_roots": {
+        "design": "../waypoint",
+        "roadmap": "."
+      },
+      "resource_policy": "MIXED",
+      "revision": "2026-10-16-r1",
+      "scope_rules": [
+        "One work graph. Markdown packets, Runner waves and offline preview are generated views, never independently edited plans.",
+        "C01–C04 are delivered source, not installed/production-accepted functionality. Do not implement them again.",
+        "Graph dependencies express engineering prerequisites, not observer-enforced permissions. Free statuses and off-map work remain valid.",
+        "No agent launches, live observation, task claims, global skill changes or Git pushes are performed by preparing this roadmap.",
+        "Read only the chosen packet and named source sections. Prefer focused tests and reuse evidence until relevant changes invalidate it.",
+        "Keep one integrator for shared Store/API/migration files. Parallel frontend preparation does not edit those files.",
+        "On machine return reconcile real local/Git/integrated state before applying pending preparation. Runner protocol must be read from its installed source, not invented here."
+      ],
+      "skills_used": [
+        {
+          "blob_sha": "ae1d3cdb1246ef35a519ad14ed6c3d3e82b5aaf3",
+          "path": "skills/chatgpt/build-implementation-roadmap/SKILL.md",
+          "repository": "ViskyG/agent-skills",
+          "version": "2.0.0"
+        },
+        {
+          "blob_sha": "e2dc1f18f60db23c8f864b42f8236a01ab400436",
+          "path": "skills/shared/evidence-driven-validation/SKILL.md",
+          "repository": "ViskyG/agent-skills",
+          "version": "2.0.0"
+        },
+        {
+          "blob_sha": "37e304ffa7bceb9db53295eb33dab075a2c88c43",
+          "path": "skills/shared/workflow-state-and-transit/SKILL.md",
+          "repository": "ViskyG/agent-skills",
+          "version": "2.0.3"
+        }
+      ],
+      "source_context": "https://docs.google.com/document/d/19xpj5t9d92nqir3x2FmqWmyK5_eT0G9MNjsb7dShcgs/edit",
+      "views_are_generated": true,
+      "waves": {
+        "RW-00": {
+          "integration_boundary": "Рабочая база подтверждена; карта импортирована без потери полей.",
+          "title": "Рабочая копия и первый импорт"
+        },
+        "RW-01": {
+          "integration_boundary": "C05 и C06 готовы к сборке; C06.3 использует принятый индекс C05.3.",
+          "title": "Источник и интерфейс"
+        },
+        "RW-02": {
+          "integration_boundary": "Собранный продукт, переносимый граф и проверенный возврат результатов.",
+          "title": "Одна сквозная приёмка и передача"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "status": "MEASURED",
+  "fixture": false,
+  "method": "time.monotonic from actual Follower callback entry through normalizer/coalescing to completed HTTP durable receipt",
+  "scope": "selected existing Codex family; actual product Collector",
+  "samples": [
+    {
+      "ms": 86.09308799896098,
+      "initial_hydration": true
+    },
+    {
+      "ms": 13.216638000812964,
+      "initial_hydration": true
+    },
+    {
+      "ms": 235.99245299919858,
+      "initial_hydration": false
+    }
+  ],
+  "n": 3,
+  "median_ms": 86.09308799896098,
+  "max_ms": 235.99245299919858,
+  "provider_emission_to_browser_latency_measured": false,
+  "native_execution_commands": 0
+}

@@ -1,0 +1,21 @@
+{
+  "status": "PASS",
+  "fixture": false,
+  "transport": "actual Chromium → localhost HTTP → current Store → real selected Codex projections",
+  "browser": "143.0.7499.4",
+  "checks": [
+    "read capability removed from address",
+    "actual selected family represented",
+    "original native message text reaches browser exactly",
+    "actual checkpoint event refreshes open status inspector",
+    "browser contains real revised plan head",
+    "no browser application errors"
+  ],
+  "exact_native_text_matches": 3,
+  "actors_rendered": 8,
+  "page_error_count": 0,
+  "no_transcript_export": true,
+  "limitations": [
+    "This bounded test does not measure end-to-end token latency or all client versions."
+  ]
+}

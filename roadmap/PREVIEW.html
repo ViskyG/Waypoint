@@ -1,0 +1,758 @@
+<!doctype html>
+<html lang="ru" data-theme="terracotta">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Waypoint · дорожная карта реализации</title><style>:root{--bg:#f3ede6;--panel:#faf6f0;--surface:#ede4db;--chat:#f5eee7;--line:#dacbbf;--text:#302c28;--muted:#71645a;--accent:#994d42;--accent-soft:#ead5ca;--pass:#3b8463;--fail:#b5373f;--wait:#958377;--shadow:0 8px 24px #4b2a1510;--node:330px;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;font-size:13px;color:var(--text);background:var(--bg)}
+:root[data-theme=obsidian]{color-scheme:dark;--bg:#111315;--panel:#191c1f;--surface:#22262a;--chat:#202428;--line:#363c41;--text:#e7e8e6;--muted:#a5adb4;--accent:#e27068;--accent-soft:#392826;--pass:#78be9b;--fail:#ff8981;--wait:#a49b94;--shadow:0 8px 26px #0003}
+*{box-sizing:border-box}body{margin:0;height:100vh;overflow:hidden;display:flex;flex-direction:column}button,input,select{font:inherit;color:inherit}button,select,input{border:1px solid var(--line);border-radius:8px;background:var(--panel);min-height:34px}button{cursor:pointer;padding:6px 11px;transition:border-color .12s}button:hover{border-color:var(--accent);background:var(--accent-soft)}button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:2px}button:disabled{opacity:.35;cursor:default}input{padding:7px 12px;width:175px}select{padding:5px 10px;max-width:230px}a{color:var(--accent)}.muted{color:var(--muted)}.top{height:59px;flex-shrink:0;display:flex;align-items:center;gap:17px;padding:0 20px;border-bottom:1px solid var(--line);background:var(--panel)}.brand{display:flex;align-items:center;gap:12px;letter-spacing:.16em;min-width:172px;font-size:15px}.mark{letter-spacing:-.15em;background:var(--accent);color:var(--panel);height:34px;width:34px;display:grid;place-items:center;border-radius:10px;font-size:19px;padding-right:3px}.project-title{font-weight:600;flex:1}.pill{font-size:10px;letter-spacing:.07em;text-transform:uppercase;padding:5px 8px;border:1px solid var(--line);border-radius:7px;color:var(--muted)}.pill.demo{color:var(--accent);background:var(--accent-soft)}.agents-bar{display:flex;align-items:center;gap:14px;padding:11px 18px;height:96px;flex-shrink:0;border-bottom:1px solid var(--line);background:var(--bg)}.rail-title{width:167px;flex-shrink:0;font-size:10px;letter-spacing:.1em;color:var(--muted)}.rail-title span{display:block;letter-spacing:0;margin-top:5px;font-size:14px;font-weight:700;color:var(--text)}.agent-strip{display:flex;overflow:auto;gap:8px;width:100%;padding:3px}.agent-card{min-width:155px;max-width:190px;flex-shrink:0;display:flex;align-items:flex-start;text-align:left;gap:8px;padding:9px 10px;min-height:68px}.agent-code{display:inline-grid;place-items:center;font-size:10px;flex-shrink:0;border:1px solid var(--line);background:var(--accent-soft);border-radius:7px;min-width:27px;height:27px;color:var(--accent);font-weight:700}.agent-card strong{font-size:11px;display:block;margin:1px 0 4px}.agent-card small{font-size:10px;color:var(--muted);display:block;max-width:145px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}.finished{opacity:1}.finished strong{color:var(--muted)}.selected{border-color:var(--accent)!important;background:var(--accent-soft)!important}main{display:flex;flex:1;min-height:0}.orchestrators{width:192px;flex-shrink:0;border-right:1px solid var(--line);padding:18px 12px 12px;overflow:auto;display:flex;flex-direction:column}.section-label{letter-spacing:.09em;font-size:10px;color:var(--muted);margin:0 2px 13px}.orch{width:100%;margin-bottom:9px;text-align:left;padding:10px}.orch-top{display:flex;align-items:center;gap:8px}.orch strong{font-size:11px}.children{margin:8px 0 0 33px;display:flex;gap:4px;flex-wrap:wrap}.children i{font-style:normal;font-size:9px;border:1px solid var(--line);padding:2px 4px;border-radius:4px;color:var(--muted)}.outside{margin-top:18px;text-align:left}.outside span{float:right;background:var(--accent-soft);padding:0 5px;border-radius:4px}.rail-footer{margin-top:auto;padding:28px 4px 0;color:var(--muted);font-size:10px;line-height:1.7}.workspace{flex:1;min-width:0;display:flex;flex-direction:column;position:relative}.toolbar{height:57px;display:flex;align-items:center;padding:8px 16px;gap:8px;border-bottom:1px solid var(--line);background:var(--panel);flex-shrink:0}.toolbar-end{display:flex;align-items:center;gap:6px;margin-left:auto}.crumbs{display:flex;align-items:center;gap:3px;min-width:0;overflow:auto}.crumbs button{background:none;border-color:transparent;white-space:nowrap;max-width:170px;overflow:hidden;text-overflow:ellipsis}.crumbs span{color:var(--muted)}#zoom{min-width:54px;font-size:11px}#up{font-size:17px;padding:2px 10px}.viewport{flex:1;overflow:hidden;position:relative;background-image:radial-gradient(var(--line) .8px,transparent .8px);background-size:22px 22px;cursor:grab;touch-action:none}.viewport.dragging{cursor:grabbing;user-select:none}#world{position:absolute;transform-origin:0 0;will-change:transform}#edges{position:absolute;left:0;top:0;width:12000px;height:12000px;overflow:visible;pointer-events:none}.edge{fill:none;stroke:var(--wait);stroke-width:1.6;pointer-events:stroke;cursor:pointer}.edge-hit{stroke:transparent;stroke-width:18;fill:none;pointer-events:stroke;cursor:pointer}.edge.selected-edge{stroke:var(--accent);stroke-width:2.6}.edge-dot{fill:var(--panel);stroke:var(--accent);cursor:pointer;pointer-events:all}.edge-caption{fill:var(--accent);font-size:12px;text-anchor:middle;pointer-events:none}.node{position:absolute;width:var(--node);height:387px;border:1px solid var(--line);border-radius:13px;background:var(--panel);box-shadow:var(--shadow);cursor:default;transition:opacity .12s,border-color .12s}.node.highlight{border:2px solid var(--accent);box-shadow:0 0 0 6px var(--accent-soft),var(--shadow)}.node.dim{opacity:.42}.node.ghost{border-style:dashed;opacity:.76}.test-row{height:29px;border-bottom:1px solid var(--line);display:flex;align-items:center;padding:0 13px;gap:5px;border-radius:13px 13px 0 0;background:var(--surface)}.test-row button{padding:0;min-height:0;border:none;background:transparent;display:flex;align-items:center;gap:5px}.lamp{display:inline-flex;align-items:center;justify-content:center;width:11px;height:11px;border:1px solid var(--wait);border-radius:4px;color:var(--wait);font-size:8px}.lamp.passed{background:var(--pass);border-color:var(--pass);color:var(--panel)}.lamp.failed,.lamp.error{background:var(--fail);border-color:var(--fail);color:var(--panel)}.lamp.stale{opacity:.4}.test-count{font-size:10px;color:var(--muted);margin-left:auto}.node-head{display:flex;align-items:center;gap:6px;padding:13px 15px 10px;height:78px}.node-head .title{flex:1;min-width:0}.node-id{font-size:10px;color:var(--muted);letter-spacing:.05em}.node h3{margin:5px 0 0;font-size:15px;line-height:1.2;font-weight:700}.node-head button{padding:2px 7px;min-height:25px;font-size:13px}.node .messages{height:235px;overflow:auto;overscroll-behavior:contain;margin:0 12px;background:var(--surface);border-radius:9px;padding:8px;scrollbar-width:thin;scrollbar-color:var(--line) transparent;cursor:text;touch-action:pan-y}.message{padding:10px;background:var(--chat);border-radius:7px;margin-bottom:7px;font-size:13px;line-height:1.6;overflow-wrap:anywhere;white-space:pre-wrap}.message:last-child{margin-bottom:0}.message-meta{display:flex;align-items:center;gap:8px;font-size:10px;color:var(--muted);margin-bottom:6px;white-space:normal}.message-meta b{color:var(--accent);font-size:10px}.message-kind{margin-left:auto;font-size:9px;color:var(--muted)}.empty-message{height:100%;min-height:90px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:11px;text-align:center;padding:20px;line-height:1.7}.node-status{height:43px;padding:6px 12px;display:flex;align-items:center;gap:8px}.node-status button.status-label{border:none;background:none;padding:0;min-height:22px;font-size:11px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:200px}.status-icon{width:8px;height:8px;background:var(--wait);border-radius:50%;flex-shrink:0}.status-icon.running{width:11px;height:11px;border:2px solid var(--accent-soft);border-top-color:var(--accent);background:none;animation:spin 1.1s linear infinite}.status-icon.done{background:var(--pass)}@keyframes spin{to{transform:rotate(360deg)}}.node-actors{margin-left:auto;display:flex;gap:4px}.node-actors button{padding:1px 4px;min-height:20px;max-width:35px;font-size:9px;border-radius:5px;color:var(--accent)}.node-tab{position:absolute;top:109px;height:123px;width:25px;min-height:0;padding:7px 4px;writing-mode:vertical-rl;font-size:9px;letter-spacing:.05em;background:var(--accent-soft);color:var(--muted);border:1px solid var(--line)}.node-tab.assignment{left:-26px;border-radius:6px 0 0 6px;transform:rotate(180deg)}.node-tab.acceptance{right:-26px;border-radius:0 6px 6px 0}.node .show-all{font-size:10px;min-height:25px;padding:3px 8px;margin-top:4px}.overview .messages{visibility:hidden}.overview .node{box-shadow:none}.overview .node:after{content:'⋯';position:absolute;top:175px;left:150px;font-size:25px;color:var(--muted)}.overview .node-tab{display:none}.map-note{position:absolute;bottom:15px;left:20px;font-size:11px;color:var(--muted);max-width:650px;background:var(--panel);padding:6px 10px;border-radius:6px;pointer-events:none}#empty{position:absolute;inset:80px 25px;pointer-events:none;color:var(--muted)}.inspector{position:absolute;right:0;top:57px;bottom:0;width:385px;background:var(--panel);border-left:1px solid var(--line);box-shadow:-12px 0 35px #0001;z-index:20;display:flex;flex-direction:column}.inspector[hidden]{display:none}.inspector>header{display:flex;align-items:flex-start;justify-content:space-between;padding:20px 20px 12px}.inspector header span{font-size:11px;color:var(--muted)}.inspector h2{margin:7px 0 4px;font-size:19px;line-height:1.3}.inspector #tabs{display:flex;gap:0;border-bottom:1px solid var(--line);padding:0 14px;overflow:auto}.inspector #tabs button{border:none;border-radius:0;white-space:nowrap;background:transparent;font-size:11px;padding:10px 7px;min-height:38px;border-bottom:2px solid transparent}.inspector #tabs button.current{border-bottom-color:var(--accent);color:var(--accent)}#inspector-body{overflow:auto;overscroll-behavior:contain;padding:18px 20px;line-height:1.7}#inspector-body h4{font-size:11px;color:var(--muted);margin:18px 0 7px}#inspector-body h4:first-child{margin-top:0}.prose{white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px}.criterion{padding:9px 0;border-bottom:1px solid var(--line);font-size:12px;display:flex;gap:10px}.criterion b{font-size:10px;color:var(--muted);min-width:28px}.result-block{padding:13px;background:var(--surface);border-radius:9px;margin-bottom:12px;white-space:pre-wrap;font-size:12px}.related{display:block;width:100%;text-align:left;margin-bottom:7px;font-size:12px}.result-tag{font-size:10px;color:var(--muted);display:block;margin-top:5px}.diff-row{padding:10px;border:1px solid var(--line);border-radius:7px;margin-bottom:8px;font-size:11px;overflow-wrap:anywhere}.diff-row code{display:block;color:var(--accent);margin-bottom:5px}.diff-row pre{white-space:pre-wrap;margin:4px 0;font:inherit}.checkline{display:flex;align-items:center;gap:9px;padding:10px 0;border-bottom:1px solid var(--line);font-size:12px}.checkline small{display:block;color:var(--muted);font-size:10px}footer{height:34px;display:flex;align-items:center;gap:20px;padding:0 20px;border-top:1px solid var(--line);background:var(--panel);font-size:10px;flex-shrink:0}footer #summary{margin-left:auto;color:var(--muted)}footer button{min-height:22px;padding:1px 7px;font-size:10px}#notice{position:fixed;left:50%;bottom:50px;transform:translateX(-50%);background:var(--text);color:var(--panel);padding:11px 16px;z-index:99;border-radius:10px;max-width:80vw;font-size:12px}.small-note{font-size:11px;color:var(--muted)}.progress-hint{display:block;font-size:10px;color:var(--muted);padding:9px}.source-warning{color:var(--fail)!important}.version-note{color:var(--accent);font-size:10px}.more{width:100%;margin:8px 0}.modal-empty{padding:20px;color:var(--muted)}#reset-selection{white-space:nowrap}@media(max-width:1100px){.project-title{display:none}.orchestrators{width:154px}.rail-title{width:128px}.brand{min-width:134px}.toolbar{padding:8px}.toolbar input{width:110px}.inspector{width:340px}.toolbar-end{gap:3px}}@media(max-width:760px){.orchestrators{display:none}.rail-title{display:none}.top{padding:0 10px;gap:8px}.brand{min-width:auto}.brand strong{display:none}.top select{max-width:160px}.toolbar #search{display:none}.inspector{width:min(100%,385px)}.crumbs button{max-width:95px}.toolbar #version{max-width:83px}.toolbar #full{display:none}footer .muted{display:none}}
+/* Reader state belongs to each window; notifications never resize its 235px chat. */
+.messages,#inspector-body{overflow-anchor:none}.new-messages{position:absolute;right:21px;top:306px;z-index:2;max-width:calc(100% - 42px);min-height:28px;padding:4px 9px;font-size:10px;background:var(--panel);color:var(--accent);border-color:var(--accent);box-shadow:var(--shadow)}.new-messages[hidden],.older-messages[hidden]{display:none}.inspector-latest{position:sticky;top:auto;bottom:0;right:auto;max-width:100%;margin:9px 0 0}.copy-id{font-size:10px;min-height:26px;margin-bottom:10px}.message-origin{display:block;max-width:100%;overflow-wrap:anywhere;font-size:9px;color:var(--muted);margin-top:3px}.cross-scope{position:absolute;left:15px;top:12px;display:flex;flex-direction:column;gap:4px;max-width:310px;max-height:140px;overflow:auto;z-index:3}.scope-link{font-size:10px;min-height:25px;text-align:left;background:var(--panel)}.title[role=button]{cursor:pointer}.title[role=button]:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}.inspector-messages{min-height:60px}.inspector .scope-toggle{font-size:11px}
+</style></head>
+<body>
+<header class="top"><div class="brand"><b class="mark">W</b><strong>WAYPOINT</strong></div><span class="project-title">Карта работ</span><select id="project" aria-label="Проект"></select><span id="connection" class="pill">Локально</span><button id="theme" aria-label="Изменить цветовую схему">◐ <span>Терракота</span></button></header>
+<section class="agents-bar"><div class="rail-title">АГЕНТЫ <span id="active-count"></span></div><div id="agents" class="agent-strip"></div></section>
+<main><aside class="orchestrators"><div class="section-label">ОРКЕСТРАТОРЫ</div><div id="orchestrators"></div><button id="outside" class="outside">Вне карты <span id="outside-count">0</span></button><div class="rail-footer">Наблюдение, не управление</div></aside>
+<section class="workspace">
+<div class="toolbar"><div id="crumbs" class="crumbs"></div><button id="up" title="На уровень выше" aria-label="На уровень выше">↑</button><div class="toolbar-end"><input id="search" placeholder="Найти блок…" aria-label="Найти блок"><select id="version" aria-label="Версия плана"></select><button id="diff" title="Изменения плана">Δ</button><button id="fit" title="Вписать карту">⛶</button><button id="minus" aria-label="Уменьшить масштаб">−</button><button id="zoom" title="Масштаб 100%">100%</button><button id="plus" aria-label="Увеличить масштаб">+</button><button id="full" title="На весь экран">↗</button></div></div>
+<div id="viewport" class="viewport" tabindex="0" aria-label="Граф работ. Перетаскивайте пустое место, колесо меняет масштаб."><div id="world"><svg id="edges" aria-label="Зависимости"></svg><div id="nodes"></div></div><div id="empty"></div><div id="map-note" class="map-note"></div></div>
+<aside id="inspector" class="inspector" hidden><header><div><span id="inspector-id"></span><h2 id="inspector-title"></h2></div><button id="close" aria-label="Закрыть подробности">×</button></header><nav id="tabs"></nav><div id="inspector-body"></div></aside>
+</section></main>
+<footer><span id="foot-status">Ожидание локального сервиса</span><span id="summary"></span><button id="reset-selection" hidden>Снять выделение</button><span class="muted">Колесо · масштаб / чат</span></footer>
+<div id="notice" role="status" hidden></div>
+<script>window.WAYPOINT_DEMO={"current": "v-a47a4b4f98ec4fde", "versions": [{"version": "v-a47a4b4f98ec4fde", "ordinal": 1, "parent": null, "hash": "f647aa3e1b60489b36b72db316212da57f528def0c46b6cc34a1ced4450f50a4", "at": "2026-10-17T05:51:45.815273+00:00"}], "states": {"v-a47a4b4f98ec4fde": {"version": "v-a47a4b4f98ec4fde", "ordinal": 1, "parent": null, "at": "2026-10-17T05:51:45.815273+00:00", "hash": "f647aa3e1b60489b36b72db316212da57f528def0c46b6cc34a1ced4450f50a4", "plan": {"edges": {"E-WPT-C01--WPT-C02": {"from": "WPT-C01", "label": "Требует результата", "to": "WPT-C02"}, "E-WPT-C01--WPT-C03": {"from": "WPT-C01", "label": "Требует результата", "to": "WPT-C03"}, "E-WPT-C01--WPT-C04": {"from": "WPT-C01", "label": "Требует результата", "to": "WPT-C04"}, "E-WPT-C01--WPT-R00": {"from": "WPT-C01", "label": "Требует результата", "to": "WPT-R00"}, "E-WPT-C02--WPT-R00": {"from": "WPT-C02", "label": "Требует результата", "to": "WPT-R00"}, "E-WPT-C03--WPT-R00": {"from": "WPT-C03", "label": "Требует результата", "to": "WPT-R00"}, "E-WPT-C04--WPT-R00": {"from": "WPT-C04", "label": "Требует результата", "to": "WPT-R00"}, "E-WPT-C05--WPT-C07": {"from": "WPT-C05", "label": "Требует результата", "to": "WPT-C07"}, "E-WPT-C05.1--WPT-C05.2": {"from": "WPT-C05.1", "label": "Требует результата", "to": "WPT-C05.2"}, "E-WPT-C05.2--WPT-C05.3": {"from": "WPT-C05.2", "label": "Требует результата", "to": "WPT-C05.3"}, "E-WPT-C05.3--WPT-C05.4": {"from": "WPT-C05.3", "label": "Требует результата", "to": "WPT-C05.4"}, "E-WPT-C05.3--WPT-C06.3": {"from": "WPT-C05.3", "label": "Требует результата", "to": "WPT-C06.3"}, "E-WPT-C06--WPT-C07": {"from": "WPT-C06", "label": "Требует результата", "to": "WPT-C07"}, "E-WPT-C06.1--WPT-C06.2": {"from": "WPT-C06.1", "label": "Требует результата", "to": "WPT-C06.2"}, "E-WPT-C06.2--WPT-C06.3": {"from": "WPT-C06.2", "label": "Требует результата", "to": "WPT-C06.3"}, "E-WPT-C07.1--WPT-C07.2": {"from": "WPT-C07.1", "label": "Требует результата", "to": "WPT-C07.2"}, "E-WPT-C07.1--WPT-C07.3": {"from": "WPT-C07.1", "label": "Требует результата", "to": "WPT-C07.3"}, "E-WPT-C07.2--WPT-C07.4": {"from": "WPT-C07.2", "label": "Требует результата", "to": "WPT-C07.4"}, "E-WPT-C07.3--WPT-C07.4": {"from": "WPT-C07.3", "label": "Требует результата", "to": "WPT-C07.4"}, "E-WPT-R00--WPT-C05": {"from": "WPT-R00", "label": "Требует результата", "to": "WPT-C05"}, "E-WPT-R00--WPT-C06": {"from": "WPT-R00", "label": "Требует результата", "to": "WPT-C06"}}, "nodes": {"WPT-BASE": {"acceptance": {"A-01": {"text": "Исходный архив совпадает с указанным SHA-256 и файловым манифестом."}, "A-02": {"text": "DONE относится к поставке исходников; целевая установка и живая приёмка не приписаны этой группе."}}, "assignment": "C01–C04 уже написаны в завершённом дизайн-пакете. Это основание следующих работ, не новая очередь реализации. Раскрой блок для границ каждого результата.\n\nТочное чтение (пути от roadmap/):\n../waypoint/evidence/RESULTS.md\n../waypoint/SESSION.json", "layout": {"x": 70, "y": 400}, "parent": null, "source_refs": [{"label": "evidence/RESULTS.md", "uri": "../waypoint/evidence/RESULTS.md"}, {"label": "SESSION.json", "uri": "../waypoint/SESSION.json"}], "tests": {}, "title": "Поставленная исходная база", "x_roadmap": {"avoid_paths": [], "eligible_alternative": null, "escalation": "", "kind": "group", "owned_paths": [], "preferred_executor": "NONE", "read_set": [{"label": "evidence/RESULTS.md", "uri": "../waypoint/evidence/RESULTS.md"}, {"label": "SESSION.json", "uri": "../waypoint/SESSION.json"}], "safe_alternate_work": "", "source_capsule": null, "wave": null}}, "WPT-C01": {"acceptance": {"A-01": {"text": "Перечисленные исходники присутствуют и сохраняются как стартовая база."}, "A-02": {"text": "Свидетельства прочитаны в их настоящем объёме: локальные тесты/макеты не заменяют живую приёмку."}}, "assignment": "Переиспользовать готовый исходный результат «Local domain, plan and event contracts». Не заказывать повторную реализацию этого объёма. Остаточные целевые доработки перечислены в C05–C07.\n\nТочное чтение (пути от roadmap/):\n../waypoint/design/WORK_PACKETS.md — раздел WPT-C01\n../waypoint/evidence/RESULTS.md", "layout": {"x": 80, "y": 80}, "parent": "WPT-BASE", "source_refs": [{"label": "design/WORK_PACKETS.md", "section": "WPT-C01", "uri": "../waypoint/design/WORK_PACKETS.md"}, {"label": "evidence/RESULTS.md", "uri": "../waypoint/evidence/RESULTS.md"}], "tests": {}, "title": "Ядро, хранилище и API", "x_roadmap": {"avoid_paths": [], "delivered_source": {"design_session_id": "WAYPOINT-DESIGN-20261016-1312895b", "evidence": "../waypoint/evidence/RESULTS.md", "paths": ["waypoint/domain.py", "waypoint/store.py", "waypoint/server.py", "waypoint/security.py", "waypoint/spool.py", "waypoint/client.py", "schemas/", "tests/test_core.py"], "state": "SOURCE_DELIVERED", "target_acceptance": "NOT_RUN"}, "eligible_alternative": null, "escalation": "", "kind": "source", "owned_paths": [], "preferred_executor": "NONE", "read_set": [{"label": "design/WORK_PACKETS.md", "section": "WPT-C01", "uri": "../waypoint/design/WORK_PACKETS.md"}, {"label": "evidence/RESULTS.md", "uri": "../waypoint/evidence/RESULTS.md"}], "safe_alternate_work": "", "source_capsule": "WPT-C01", "wave": null}}, "WPT-C02": {"acceptance": {"A-01": {"text": "Перечисленные исходники присутствуют и сохраняются как стартовая база."}, "A-02": {"text": "Свидетельства прочитаны в их настоящем объёме: локальные тесты/макеты не заменяют живую приёмку."}}, "assignment": "Переиспользовать готовый исходный результат «Observed native source reference». Не заказывать повторную реализацию этого объёма. Остаточные целевые доработки перечислены в C05–C07.\n\nТочное чтение (пути от roadmap/):\n../waypoint/design/WORK_PACKETS.md — раздел WPT-C02\n../waypoint/evidence/RESULTS.md", "layout": {"x": 610, "y": 80}, "parent": "WPT-BASE", "source_refs": [{"label": "design/WORK_PACKETS.md", "section": "WPT-C02", "uri": "../waypoint/design/WORK_PACKETS.md"}, {"label": "evidence/RESULTS.md", "uri": "../waypoint/evidence/RESULTS.md"}], "tests": {}, "title": "Исходный адаптер Codex", "x_roadmap": {"avoid_paths": [], "delivered_source": {"design_session_id": "WAYPOINT-DESIGN-20261016-1312895b", "evidence": "../waypoint/evidence/RESULTS.md", "paths": ["waypoint/adapters/", "waypoint/collector.py", "tests/test_adapters.py"], "state": "SOURCE_DELIVERED", "target_acceptance": "NOT_RUN"}, "eligible_alternative": null, "escalation": "", "kind": "source", "owned_paths": [], "preferred_executor": "NONE", "read_set": [{"label": "design/WORK_PACKETS.md", "section": "WPT-C02", "uri": "../waypoint/design/WORK_PACKETS.md"}, {"label": "evidence/RESULTS.md", "uri": "../waypoint/evidence/RESULTS.md"}], "safe_alternate_work": "", "source_capsule": "WPT-C02", "wave": null}}, "WPT-C03": {"acceptance": {"A-01": {"text": "Перечисленные исходники присутствуют и сохраняются как стартовая база."}, "A-02": {"text": "Свидетельства прочитаны в их настоящем объёме: локальные тесты/макеты не заменяют живую приёмку."}}, "assignment": "Переиспользовать готовый исходный результат «Shared visual reader base». Не заказывать повторную реализацию этого объёма. Остаточные целевые доработки перечислены в C05–C07.\n\nТочное чтение (пути от roadmap/):\n../waypoint/design/WORK_PACKETS.md — раздел WPT-C03\n../waypoint/evidence/RESULTS.md", "layout": {"x": 610, "y": 630}, "parent": "WPT-BASE", "source_refs": [{"label": "design/WORK_PACKETS.md", "section": "WPT-C03", "uri": "../waypoint/design/WORK_PACKETS.md"}, {"label": "evidence/RESULTS.md", "uri": "../waypoint/evidence/RESULTS.md"}], "tests": {}, "title": "Браузерный читатель карты", "x_roadmap": {"avoid_paths": [], "delivered_source": {"design_session_id": "WAYPOINT-DESIGN-20261016-1312895b", "evidence": "../waypoint/evidence/RESULTS.md", "paths": ["waypoint/web/", "waypoint/demo.py", "tests/browser_check.py"], "state": "SOURCE_DELIVERED", "target_acceptance": "NOT_RUN"}, "eligible_alternative": null, "escalation": "", "kind": "source", "owned_paths": [], "preferred_executor": "NONE", "read_set": [{"label": "design/WORK_PACKETS.md", "section": "WPT-C03", "uri": "../waypoint/design/WORK_PACKETS.md"}, {"label": "evidence/RESULTS.md", "uri": "../waypoint/evidence/RESULTS.md"}], "safe_alternate_work": "", "source_capsule": "WPT-C03", "wave": null}}, "WPT-C04": {"acceptance": {"A-01": {"text": "Перечисленные исходники присутствуют и сохраняются как стартовая база."}, "A-02": {"text": "Свидетельства прочитаны в их настоящем объёме: локальные тесты/макеты не заменяют живую приёмку."}}, "assignment": "Переиспользовать готовый исходный результат «Low-overhead agent workflow and handoff». Не заказывать повторную реализацию этого объёма. Остаточные целевые доработки перечислены в C05–C07.\n\nТочное чтение (пути от roadmap/):\n../waypoint/design/WORK_PACKETS.md — раздел WPT-C04\n../waypoint/evidence/RESULTS.md", "layout": {"x": 80, "y": 630}, "parent": "WPT-BASE", "source_refs": [{"label": "design/WORK_PACKETS.md", "section": "WPT-C04", "uri": "../waypoint/design/WORK_PACKETS.md"}, {"label": "evidence/RESULTS.md", "uri": "../waypoint/evidence/RESULTS.md"}], "tests": {}, "title": "CLI, скилы и передача", "x_roadmap": {"avoid_paths": [], "delivered_source": {"design_session_id": "WAYPOINT-DESIGN-20261016-1312895b", "evidence": "../waypoint/evidence/RESULTS.md", "paths": ["waypoint/cli.py", "skills/", "design/OPERATIONS.md"], "state": "SOURCE_DELIVERED", "target_acceptance": "NOT_RUN"}, "eligible_alternative": null, "escalation": "", "kind": "source", "owned_paths": [], "preferred_executor": "NONE", "read_set": [{"label": "design/WORK_PACKETS.md", "section": "WPT-C04", "uri": "../waypoint/design/WORK_PACKETS.md"}, {"label": "evidence/RESULTS.md", "uri": "../waypoint/evidence/RESULTS.md"}], "safe_alternate_work": "", "source_capsule": "WPT-C04", "wave": null}}, "WPT-C05": {"acceptance": {"A-01": {"text": "Установленный профиль и отдельный payload.id подтверждены; общий session_id не склеивает агентов."}, "A-02": {"text": "Источник не получает команды запуска/остановки/resume/approval; сбой Waypoint не останавливает Codex."}, "A-03": {"text": "Старые и неоднозначные сообщения не присваиваются новому focus; подтверждение ревизии не опережает durable commit."}, "A-04": {"text": "C06 получает индексированный и совместимый read-контракт; ограничения живой проверки явно возвращены."}}, "assignment": "Довести существующий адаптер до проверенного приёма живых событий и точного связывания с блоками. IPC и JSONL остаются входами одного Store/API/UI.\n\nРабота:\n1. Выполнить C05.1–C05.4, сохраняя исходные алгоритмы дизайна: verified caller binding, watermark, indexed normalization, coalescing и durable acknowledgement.\n2. Единолично владеть изменениями Store/API/миграции, включая индекс item_targets для C06. Передать потребителю проверенный read-контракт; не позволять двум веткам менять store.py одновременно.\n3. Проверить свой новый адаптер на естественной активности существующего Codex, а не повторять весь P00–P11 и не запускать новый App Server вместо владельца.\n\nОбласть изменений: waypoint/adapters/; waypoint/collector.py; waypoint/store.py (единственный писатель); waypoint/server.py (только необходимый совместимый read-контракт); waypoint/cli.py (только verified binding seam); tests/test_adapters.py; tests/test_core.py (атрибуция/индекс/миграция).\n\nНе изменять: waypoint/web/; tests/browser_check.py; Глобальные настройки и управление реальным Codex.\n\nТочное чтение (пути от roadmap/):\n../waypoint/design/WORK_PACKETS.md — раздел WPT-C05\n../waypoint/design/IMPLEMENTATION_MAP.md — раздел Required hardening\n../waypoint/design/CONTRACTS.md — раздел 1. Identity; 4. Observation; 5. Attribution; 7. Private IPC\n../waypoint/design/ACCEPTANCE.md — раздел Target sequence\n\nРежим MIXED. Предпочтительный исполнитель: CODEX. Исполнитель выбирает безопасный порядок внутри согласованного участка; назначение не сделано.\n\nОстановить только затронутое действие и эскалировать: профиль несовместим или неизвестна идентичность вызывающего агента; сохранить доказательство, не угадывать и не строить второй observer.\n\nПри ожидании: пока естественное событие не пришло — локальные контрактные проверки C05.2/C05.3; C06.1/C06.2 могут идти независимо.", "layout": {"x": 1220, "y": 100}, "parent": null, "source_refs": [{"label": "design/WORK_PACKETS.md", "section": "WPT-C05", "uri": "../waypoint/design/WORK_PACKETS.md"}, {"label": "design/IMPLEMENTATION_MAP.md", "section": "Required hardening", "uri": "../waypoint/design/IMPLEMENTATION_MAP.md"}, {"label": "design/CONTRACTS.md", "section": "1. Identity; 4. Observation; 5. Attribution; 7. Private IPC", "uri": "../waypoint/design/CONTRACTS.md"}, {"label": "design/ACCEPTANCE.md", "section": "Target sequence", "uri": "../waypoint/design/ACCEPTANCE.md"}], "tests": {"T-01": {"evidence_level": "contract + target", "invalidated_by": "Binding, watermark, merge источников, schema metadata.", "label": "Идентичность и атрибуция", "procedure": "Фокус до/после hydration, straddling item, одинаковый session_id у разных payload.id. Сверка исторического и живого источника без выдачи fixtures за live."}, "T-02": {"evidence_level": "component", "invalidated_by": "Normalizer, patch parser, store transaction, cursor или coalescing.", "label": "Поток и приём в БД", "procedure": "Повтор/пропуск/конфликт revision, отказ sink, reconnect и terminal flush; receipt после транзакции."}, "T-03": {"evidence_level": "live target", "invalidated_by": "Версия расширения, профиль IPC, runtime config или адаптер.", "label": "Целевая естественная активность", "procedure": "Одна или несколько реальных операций совпадают по ID/типу/тексту локально; в отчёте только безопасные равенства и типы."}}, "title": "Живой источник и точные привязки", "x_roadmap": {"avoid_paths": ["waypoint/web/", "tests/browser_check.py", "Глобальные настройки и управление реальным Codex"], "eligible_alternative": null, "escalation": "профиль несовместим или неизвестна идентичность вызывающего агента; сохранить доказательство, не угадывать и не строить второй observer.", "kind": "packet", "owned_paths": ["waypoint/adapters/", "waypoint/collector.py", "waypoint/store.py (единственный писатель)", "waypoint/server.py (только необходимый совместимый read-контракт)", "waypoint/cli.py (только verified binding seam)", "tests/test_adapters.py", "tests/test_core.py (атрибуция/индекс/миграция)"], "preferred_executor": "CODEX", "read_set": [{"label": "design/WORK_PACKETS.md", "section": "WPT-C05", "uri": "../waypoint/design/WORK_PACKETS.md"}, {"label": "design/IMPLEMENTATION_MAP.md", "section": "Required hardening", "uri": "../waypoint/design/IMPLEMENTATION_MAP.md"}, {"label": "design/CONTRACTS.md", "section": "1. Identity; 4. Observation; 5. Attribution; 7. Private IPC", "uri": "../waypoint/design/CONTRACTS.md"}, {"label": "design/ACCEPTANCE.md", "section": "Target sequence", "uri": "../waypoint/design/ACCEPTANCE.md"}], "safe_alternate_work": "пока естественное событие не пришло — локальные контрактные проверки C05.2/C05.3; C06.1/C06.2 могут идти независимо.", "source_capsule": "WPT-C05", "wave": "RW-01"}}, "WPT-C05.1": {"acceptance": {"A-01": {"text": "Разные payload.id с одним session_id остаются разными агентами."}, "A-02": {"text": "Две области и ребро могут быть связаны с одним исполнителем; область может быть общей."}, "A-03": {"text": "Старое сообщение не получает текущий focus после позднего импорта; исправление item.link сохраняет историю."}}, "assignment": "Связать редкий focus-сигнал с настоящим отдельным исполнителем и границей уже наблюдённых сообщений.\n\nРабота:\n1. Использовать payload.id, parent_thread_id, agent_path и forked_from_id по отдельности. Сопоставить native caller в текущем клиенте; не наследовать WP_AGENT родителя вслепую.\n2. Зафиксировать committed revision/item watermark при scope.set. Уже связанные items сохраняют цель; историческая hydration и неоднозначное пересечение focus остаются непривязанными до явного item.link.\n3. Сохранить node/edge many-to-many, пустой scope и неизвестные block ID как допустимые наблюдения; нельзя превращать focus в эксклюзивный lock.\n\nОбласть изменений: waypoint/cli.py (привязка); waypoint/collector.py (source boundary); waypoint/store.py (атрибуция); tests/test_core.py.\n\nНе изменять: web assets.\n\nТочное чтение (пути от roadmap/):\n../waypoint/design/IMPLEMENTATION_MAP.md — раздел Required hardening\n../waypoint/design/CONTRACTS.md — раздел 5. Attribution\n../waypoint/waypoint/cli.py\n../waypoint/waypoint/store.py\n../waypoint/tests/test_core.py\n\nРежим MIXED. Предпочтительный исполнитель: CODEX. Исполнитель выбирает безопасный порядок внутри согласованного участка; назначение не сделано.\n\nПри ожидании: продолжить локальную проверку атрибуции; неизвестный caller не маскировать удобным ID.", "layout": {"x": 80, "y": 80}, "parent": "WPT-C05", "source_refs": [{"label": "design/IMPLEMENTATION_MAP.md", "section": "Required hardening", "uri": "../waypoint/design/IMPLEMENTATION_MAP.md"}, {"label": "design/CONTRACTS.md", "section": "5. Attribution", "uri": "../waypoint/design/CONTRACTS.md"}, {"label": "waypoint/cli.py", "uri": "../waypoint/waypoint/cli.py"}, {"label": "waypoint/store.py", "uri": "../waypoint/waypoint/store.py"}, {"label": "tests/test_core.py", "uri": "../waypoint/tests/test_core.py"}], "tests": {"T-01": {"evidence_level": "contract", "invalidated_by": "cli binding, scope projection, native watermark.", "label": "Граничные сообщения", "procedure": "Добавить к существующим focus/historical тестам подтверждённый watermark, поздний сигнал и неоднозначную границу."}}, "title": "Исполнитель и граница рабочего участка", "x_roadmap": {"avoid_paths": ["web assets"], "eligible_alternative": null, "escalation": "", "kind": "stage", "owned_paths": ["waypoint/cli.py (привязка)", "waypoint/collector.py (source boundary)", "waypoint/store.py (атрибуция)", "tests/test_core.py"], "preferred_executor": "CODEX", "read_set": [{"label": "design/IMPLEMENTATION_MAP.md", "section": "Required hardening", "uri": "../waypoint/design/IMPLEMENTATION_MAP.md"}, {"label": "design/CONTRACTS.md", "section": "5. Attribution", "uri": "../waypoint/design/CONTRACTS.md"}, {"label": "waypoint/cli.py", "uri": "../waypoint/waypoint/cli.py"}, {"label": "waypoint/store.py", "uri": "../waypoint/waypoint/store.py"}, {"label": "tests/test_core.py", "uri": "../waypoint/tests/test_core.py"}], "safe_alternate_work": "продолжить локальную проверку атрибуции; неизвестный caller не маскировать удобным ID.", "source_capsule": "WPT-C05", "wave": null}}, "WPT-C05.2": {"acceptance": {"A-01": {"text": "Один patch одного item не вызывает обход всей истории в нормальном случае."}, "A-02": {"text": "Одинаковый повтор идемпотентен; конфликт одинаковой ревизии и gap различимы, не скрыты."}, "A-03": {"text": "Отключение sink оставляет источник неполностью подтверждённым; replay не создаёт вторую переписку."}, "A-04": {"text": "Terminal update не теряется из-за coalescing; защитные лимиты измерены и описаны без фиктивного SLA."}}, "assignment": "Довести нормализацию уже реализованного IPC-потока, не сканируя полный длинный диалог на каждой правке.\n\nРабота:\n1. Первый snapshot индексирует известные history roots и item paths. Patch нормализует только dirty items; изменение контейнера инвалидирует только его поддерево.\n2. Неизвестная структурная правка даёт ограниченный rebuild нужного root и диагностику. Хранить ограниченный cache (revision, change hash): точный повтор без эффекта, другая правка на той же ревизии — resync.\n3. Объединять промежуточные текстовые ревизии в малом настраиваемом интервале; terminal flush немедленно. Текст не пересказывать моделью.\n4. Подтверждать source revision после всех необходимых записей/проекций/cursor в БД; ошибка sink не продвигает acknowledgement. Большой snapshot до финального барьера остаётся hydrating.\n\nОбласть изменений: waypoint/adapters/; waypoint/collector.py; tests/test_adapters.py.\n\nНе изменять: web assets.\n\nТочное чтение (пути от roadmap/):\n../waypoint/design/IMPLEMENTATION_MAP.md — раздел Required hardening; Recent-revision consistency\n../waypoint/waypoint/adapters/patches.py\n../waypoint/waypoint/adapters/codex.py\n../waypoint/waypoint/adapters/ipc.py\n../waypoint/waypoint/collector.py\n../waypoint/tests/test_adapters.py\n\nРежим MIXED. Предпочтительный исполнитель: CODEX. Исполнитель выбирает безопасный порядок внутри согласованного участка; назначение не сделано.", "layout": {"x": 80, "y": 650}, "parent": "WPT-C05", "source_refs": [{"label": "design/IMPLEMENTATION_MAP.md", "section": "Required hardening; Recent-revision consistency", "uri": "../waypoint/design/IMPLEMENTATION_MAP.md"}, {"label": "waypoint/adapters/patches.py", "uri": "../waypoint/waypoint/adapters/patches.py"}, {"label": "waypoint/adapters/codex.py", "uri": "../waypoint/waypoint/adapters/codex.py"}, {"label": "waypoint/adapters/ipc.py", "uri": "../waypoint/waypoint/adapters/ipc.py"}, {"label": "waypoint/collector.py", "uri": "../waypoint/waypoint/collector.py"}, {"label": "tests/test_adapters.py", "uri": "../waypoint/tests/test_adapters.py"}], "tests": {"T-01": {"evidence_level": "component + limited live", "invalidated_by": "Parser/index/coalescing/ack boundary.", "label": "Patch, cache, coalescing, commit", "procedure": "Локальный synthetic Unix peer: точные/конфликтующие повторы, gap, terminal flush и искусственный отказ sink; затем один естественный live patch."}}, "title": "Инкрементальный поток и durable receipt", "x_roadmap": {"avoid_paths": ["web assets"], "eligible_alternative": null, "escalation": "", "kind": "stage", "owned_paths": ["waypoint/adapters/", "waypoint/collector.py", "tests/test_adapters.py"], "preferred_executor": "CODEX", "read_set": [{"label": "design/IMPLEMENTATION_MAP.md", "section": "Required hardening; Recent-revision consistency", "uri": "../waypoint/design/IMPLEMENTATION_MAP.md"}, {"label": "waypoint/adapters/patches.py", "uri": "../waypoint/waypoint/adapters/patches.py"}, {"label": "waypoint/adapters/codex.py", "uri": "../waypoint/waypoint/adapters/codex.py"}, {"label": "waypoint/adapters/ipc.py", "uri": "../waypoint/waypoint/adapters/ipc.py"}, {"label": "waypoint/collector.py", "uri": "../waypoint/waypoint/collector.py"}, {"label": "tests/test_adapters.py", "uri": "../waypoint/tests/test_adapters.py"}], "safe_alternate_work": "", "source_capsule": "WPT-C05", "wave": null}}, "WPT-C05.3": {"acceptance": {"A-01": {"text": "Откат транзакции не оставляет индекс и проекцию в разных состояниях."}, "A-02": {"text": "Поиск по блоку/ребру/потомкам не сканирует тела всех сообщений."}, "A-03": {"text": "Позднее item.link и reopen/rebuild восстанавливают тот же порядок и набор связей."}, "A-04": {"text": "Контракт принят C06 до его насыщенных интеграционных измерений."}}, "assignment": "Ввести выбранный дизайном индекс item_targets и передать C06 совместимый контракт чтения; это общая точка интеграции с единственным писателем.\n\nРабота:\n1. Добавить явную миграцию item_targets(project,agent,item,target_kind,target_id,first_seq); обновлять индекс в одной транзакции с item projection и item.link.\n2. Выбирать цели до загрузки тел сообщений; descendant IDs разбивать на ограниченные SQL-порции и объединять по first_seq. Не вводить зависимость от необязательных SQLite JSON-функций.\n3. Зафиксировать cursor/порядок/revision read-ответов для C06; сохранить существующие routes. Если требуется обратно совместимое дополнительное поле — обновить schema/документ и сообщить интегратору.\n\nОбласть изменений: waypoint/store.py; waypoint/server.py (совместимые read поля); Миграция БД и её тесты (новые при необходимости); schemas/ (только синхронизация с изменённым контрактом).\n\nНе изменять: waypoint/web/.\n\nТочное чтение (пути от roadmap/):\n../waypoint/design/IMPLEMENTATION_MAP.md — раздел Required completion\n../waypoint/waypoint/store.py\n../waypoint/waypoint/server.py\n../waypoint/design/CONTRACTS.md — раздел 6. Read API\n../waypoint/tests/test_core.py\n\nРежим MIXED. Предпочтительный исполнитель: CODEX. Исполнитель выбирает безопасный порядок внутри согласованного участка; назначение не сделано.\n\nПри ожидании: передать C06 контракт и fixture; не ждать окончания всей C05 ради независимой UI-подготовки.", "layout": {"x": 620, "y": 650}, "parent": "WPT-C05", "source_refs": [{"label": "design/IMPLEMENTATION_MAP.md", "section": "Required completion", "uri": "../waypoint/design/IMPLEMENTATION_MAP.md"}, {"label": "waypoint/store.py", "uri": "../waypoint/waypoint/store.py"}, {"label": "waypoint/server.py", "uri": "../waypoint/waypoint/server.py"}, {"label": "design/CONTRACTS.md", "section": "6. Read API", "uri": "../waypoint/design/CONTRACTS.md"}, {"label": "tests/test_core.py", "uri": "../waypoint/tests/test_core.py"}], "tests": {"T-01": {"evidence_level": "database + contract", "invalidated_by": "Schema migration, indexed query, item link, pagination.", "label": "Индекс и миграция", "procedure": "БД из предыдущей schema → миграция → query/link/reopen/rebuild; сравнение с ожидаемыми связями и порядок по first_seq."}}, "title": "Индекс сообщений и граница read API", "x_roadmap": {"avoid_paths": ["waypoint/web/"], "eligible_alternative": null, "escalation": "", "kind": "stage", "owned_paths": ["waypoint/store.py", "waypoint/server.py (совместимые read поля)", "Миграция БД и её тесты (новые при необходимости)", "schemas/ (только синхронизация с изменённым контрактом)"], "preferred_executor": "CODEX", "read_set": [{"label": "design/IMPLEMENTATION_MAP.md", "section": "Required completion", "uri": "../waypoint/design/IMPLEMENTATION_MAP.md"}, {"label": "waypoint/store.py", "uri": "../waypoint/waypoint/store.py"}, {"label": "waypoint/server.py", "uri": "../waypoint/waypoint/server.py"}, {"label": "design/CONTRACTS.md", "section": "6. Read API", "uri": "../waypoint/design/CONTRACTS.md"}, {"label": "tests/test_core.py", "uri": "../waypoint/tests/test_core.py"}], "safe_alternate_work": "передать C06 контракт и fixture; не ждать окончания всей C05 ради независимой UI-подготовки.", "source_capsule": "WPT-C05", "wave": null}}, "WPT-C05.4": {"acceptance": {"A-01": {"text": "Совпадение сообщения/действия подтверждено на новой реализации без пересказа и новых turns ради счётчика."}, "A-02": {"text": "Ни одна отправленная команда не управляет исполнителем; закрытие Waypoint не завершает детей."}, "A-03": {"text": "Непроверенные жизненные циклы явно названы; в возврате нет реальных текстов/секретов."}}, "assignment": "Проверить не старые пробы, а текущую реализацию на существующей выбранной сессии.\n\nРабота:\n1. Соединиться с тем же фактическим owner IPC; установить allowlist и закрыть свои подписки после опыта. Историю читать только в выбранном семействе.\n2. Локально сравнить доступный native message/tool и результат карты. Различить активного родителя и исторических потомков; не выдавать прошлое дерево за одновременный live-run.\n3. Прервать только observer/свой socket и проверить продолжение Codex, health, resync и восстановление receipt. Зафиксировать payload sizes и реально измеренную задержку с n.\n\nОбласть изменений: Тесты нового адаптера; Приватные диагностики и безопасный отчёт C05.\n\nНе изменять: Чужие процессы и их execution state.\n\nТочное чтение (пути от roadmap/):\n../waypoint/design/ACCEPTANCE.md — раздел Target sequence\n../waypoint/design/OPERATIONS.md — раздел Remaining target acceptance\n../waypoint/sources/feasibility-evidence-v3.zip\n\nРежим MIXED. Предпочтительный исполнитель: CODEX. Исполнитель выбирает безопасный порядок внутри согласованного участка; назначение не сделано.\n\nОстановить только затронутое действие и эскалировать: нужный реальный случай не возник: NOT_RUN для этого утверждения; запросить узкий опыт только если он нужен для обещаемой возможности.", "layout": {"x": 1160, "y": 650}, "parent": "WPT-C05", "source_refs": [{"label": "design/ACCEPTANCE.md", "section": "Target sequence", "uri": "../waypoint/design/ACCEPTANCE.md"}, {"label": "design/OPERATIONS.md", "section": "Remaining target acceptance", "uri": "../waypoint/design/OPERATIONS.md"}, {"label": "Только при конкретной непонятной детали P09", "uri": "../waypoint/sources/feasibility-evidence-v3.zip"}], "tests": {"T-01": {"evidence_level": "live target", "invalidated_by": "Нативный профиль, parser/collector/binding, источник/версия расширения.", "label": "Реальный owner и восстановление", "procedure": "Провести target steps 2–5 из ACCEPTANCE.md; переиспользовать сохраняющее применимость свидетельство в C07, не повторять ради ритуала."}}, "title": "Проверка нового адаптера на Codex", "x_roadmap": {"avoid_paths": ["Чужие процессы и их execution state"], "eligible_alternative": null, "escalation": "нужный реальный случай не возник: NOT_RUN для этого утверждения; запросить узкий опыт только если он нужен для обещаемой возможности.", "kind": "stage", "owned_paths": ["Тесты нового адаптера", "Приватные диагностики и безопасный отчёт C05"], "preferred_executor": "CODEX", "read_set": [{"label": "design/ACCEPTANCE.md", "section": "Target sequence", "uri": "../waypoint/design/ACCEPTANCE.md"}, {"label": "design/OPERATIONS.md", "section": "Remaining target acceptance", "uri": "../waypoint/design/OPERATIONS.md"}, {"label": "Только при конкретной непонятной детали P09", "uri": "../waypoint/sources/feasibility-evidence-v3.zip"}], "safe_alternate_work": "", "source_capsule": "WPT-C05", "wave": null}}, "WPT-C06": {"acceptance": {"A-01": {"text": "Текущий чат и открытый инспектор обновляются без потери выбранного места и выделения текста."}, "A-02": {"text": "Навигация через три уровня и возврат к родителю восстанавливают camera; нет неработающих декоративных breadcrumbs."}, "A-03": {"text": "Перерисовываются затронутые элементы; насыщенная карта измерена на целевой машине."}, "A-04": {"text": "Показанный статус, тесты и health независимы; UI не диктует агенту приёмку и маршрут."}}, "assignment": "Довести общий браузерный клиент до удобного чтения живых сообщений и больших карт, не меняя архитектуру и не добавляя управление агентами.\n\nРабота:\n1. Выполнить C06.1–C06.3. UI-подготовка C06.1/C06.2 может идти рядом с C05 на стабильном API/fixtures.\n2. Не менять store.py/server.py из frontend-ветки. Индексированные запросы и изменения общего контракта получает от C05.3; только насыщенная C06.3 ждёт эту границу.\n3. Сохранить 235px или больше на масштабе чтения, темы Терракота/Обсидиан и быстрый доступ к заданию/приёмке.\n\nОбласть изменений: waypoint/web/; tests/browser_check.py; UI/performance fixtures (новые при необходимости).\n\nНе изменять: waypoint/store.py; waypoint/server.py; waypoint/collector.py; waypoint/adapters/.\n\nТочное чтение (пути от roadmap/):\n../waypoint/design/WORK_PACKETS.md — раздел WPT-C06\n../waypoint/design/IMPLEMENTATION_MAP.md — раздел Required completion\n../waypoint/design/ARCHITECTURE.md — раздел 8. UI contract\n../waypoint/waypoint/web/app.js\n../waypoint/waypoint/web/style.css\n../waypoint/tests/browser_check.py\n\nРежим MIXED. Предпочтительный исполнитель: CODEX. Изолированная Chat/Pro-подготовка UI допустима в MIXED при отдельном владении файлами. Если её результата нет, Codex продолжает этот же пакет; не ждёт обязательной капсулы и не создаёт второй интерфейс.\n\nОстановить только затронутое действие и эскалировать: общий API нужно изменить: передать конкретный контракт C05/интегратору до записи; при browser policy denial не обходить запрет.\n\nПри ожидании: пока C05.3 не принят — C06.1/C06.2 и проверка fixtures, но не объявления production-производительности.", "layout": {"x": 1220, "y": 760}, "parent": null, "source_refs": [{"label": "design/WORK_PACKETS.md", "section": "WPT-C06", "uri": "../waypoint/design/WORK_PACKETS.md"}, {"label": "design/IMPLEMENTATION_MAP.md", "section": "Required completion", "uri": "../waypoint/design/IMPLEMENTATION_MAP.md"}, {"label": "design/ARCHITECTURE.md", "section": "8. UI contract", "uri": "../waypoint/design/ARCHITECTURE.md"}, {"label": "waypoint/web/app.js", "uri": "../waypoint/waypoint/web/app.js"}, {"label": "waypoint/web/style.css", "uri": "../waypoint/waypoint/web/style.css"}, {"label": "tests/browser_check.py", "uri": "../waypoint/tests/browser_check.py"}], "tests": {"T-01": {"evidence_level": "browser integration", "invalidated_by": "Состояние читателя, DOM patching, messages query.", "label": "Поток и позиция чтения", "procedure": "Настоящие события локального сервиса обновляют карточку/инспектор; старое окно остаётся на месте, новый текст обозначен."}, "T-02": {"evidence_level": "browser input", "invalidated_by": "UI handlers, размеры узла, маршрутизация браузера.", "label": "Навигация и две темы", "procedure": "Три уровня, ↑, предки, browser back, pan/zoom/chat wheel и выделение текста."}, "T-03": {"evidence_level": "target measurement", "invalidated_by": "Layout, virtualization, indexed query или среда.", "label": "Насыщенная карта", "procedure": "100/300 репрезентативных карточек с реальной плотностью чатов/рёбер, долгий поток; machine/DOM/sample count фиксируются."}}, "title": "Непрерывное чтение живой карты", "x_roadmap": {"avoid_paths": ["waypoint/store.py", "waypoint/server.py", "waypoint/collector.py", "waypoint/adapters/"], "eligible_alternative": "Изолированная Chat/Pro-подготовка UI допустима в MIXED при отдельном владении файлами. Если её результата нет, Codex продолжает этот же пакет; не ждёт обязательной капсулы и не создаёт второй интерфейс.", "escalation": "общий API нужно изменить: передать конкретный контракт C05/интегратору до записи; при browser policy denial не обходить запрет.", "kind": "packet", "owned_paths": ["waypoint/web/", "tests/browser_check.py", "UI/performance fixtures (новые при необходимости)"], "preferred_executor": "CODEX", "read_set": [{"label": "design/WORK_PACKETS.md", "section": "WPT-C06", "uri": "../waypoint/design/WORK_PACKETS.md"}, {"label": "design/IMPLEMENTATION_MAP.md", "section": "Required completion", "uri": "../waypoint/design/IMPLEMENTATION_MAP.md"}, {"label": "design/ARCHITECTURE.md", "section": "8. UI contract", "uri": "../waypoint/design/ARCHITECTURE.md"}, {"label": "waypoint/web/app.js", "uri": "../waypoint/waypoint/web/app.js"}, {"label": "waypoint/web/style.css", "uri": "../waypoint/waypoint/web/style.css"}, {"label": "tests/browser_check.py", "uri": "../waypoint/tests/browser_check.py"}], "safe_alternate_work": "пока C05.3 не принят — C06.1/C06.2 и проверка fixtures, но не объявления production-производительности.", "source_capsule": "WPT-C06", "wave": "RW-01"}}, "WPT-C06.1": {"acceptance": {"A-01": {"text": "Открытый инспектор видит новое сообщение без повторного открытия."}, "A-02": {"text": "Чтение старых строк не перескакивает; возврат к хвосту явный."}, "A-03": {"text": "Фильтр потомков не копирует тексты и не выдаёт их за прямые сообщения родителя."}}, "assignment": "Отделить данные потока от положения читателя в каждом окне сообщений.\n\nРабота:\n1. Хранить per-node/per-inspector read window. Внизу — следовать новым данным; выше — сохранять окно/scroll и показывать небольшой индикатор новых сообщений.\n2. Обновлять revisions существующих items и добавлять новые без потери текстового выделения. Не разворачивать 500 DOM-строк в каждом узле.\n3. Дать переключатель parent+descendants / direct-only и корректно сбрасывать scope при выборе другого узла, не смешивая переписки.\n\nОбласть изменений: waypoint/web/app.js; tests/browser_check.py; UI fixtures.\n\nНе изменять: store.py/server.py.\n\nТочное чтение (пути от roadmap/):\n../waypoint/design/IMPLEMENTATION_MAP.md — раздел Required completion\n../waypoint/waypoint/web/app.js\n../waypoint/tests/browser_check.py\n../waypoint/design/CONTRACTS.md — раздел 6. Read API\n\nРежим MIXED. Предпочтительный исполнитель: CODEX or CHAT-PREPARATION. Исполнитель выбирает безопасный порядок внутри согласованного участка; назначение не сделано.", "layout": {"x": 80, "y": 80}, "parent": "WPT-C06", "source_refs": [{"label": "design/IMPLEMENTATION_MAP.md", "section": "Required completion", "uri": "../waypoint/design/IMPLEMENTATION_MAP.md"}, {"label": "waypoint/web/app.js", "uri": "../waypoint/waypoint/web/app.js"}, {"label": "tests/browser_check.py", "uri": "../waypoint/tests/browser_check.py"}, {"label": "design/CONTRACTS.md", "section": "6. Read API", "uri": "../waypoint/design/CONTRACTS.md"}], "tests": {"T-01": {"evidence_level": "browser", "invalidated_by": "Reader state, keyed item rendering, pagination.", "label": "Read windows", "procedure": "Fixture поток с append и revision: позиция сверху/снизу, инспектор, direct/deep. Затем тот же опыт через локальный HTTP."}}, "title": "Чат и инспектор без прыжков прокрутки", "x_roadmap": {"avoid_paths": ["store.py/server.py"], "eligible_alternative": null, "escalation": "", "kind": "stage", "owned_paths": ["waypoint/web/app.js", "tests/browser_check.py", "UI fixtures"], "preferred_executor": "CODEX or CHAT-PREPARATION", "read_set": [{"label": "design/IMPLEMENTATION_MAP.md", "section": "Required completion", "uri": "../waypoint/design/IMPLEMENTATION_MAP.md"}, {"label": "waypoint/web/app.js", "uri": "../waypoint/waypoint/web/app.js"}, {"label": "tests/browser_check.py", "uri": "../waypoint/tests/browser_check.py"}, {"label": "design/CONTRACTS.md", "section": "6. Read API", "uri": "../waypoint/design/CONTRACTS.md"}], "safe_alternate_work": "", "source_capsule": "WPT-C06", "wave": null}}, "WPT-C06.2": {"acceptance": {"A-01": {"text": "Правка одного item не пересоздаёт всю видимую карту и все чаты."}, "A-02": {"text": "Переходы вниз/вверх не теряют масштаб, положение и доступ к родительской переписке."}, "A-03": {"text": "Удаление узла в новой версии не скрывает связанную незавершённую работу."}}, "assignment": "Сделать карту устойчивой к живым изменениям топологии и сообщений, не теряя ориентиры пользователя.\n\nРабота:\n1. Инвалидировать отдельный item/card/actor по committed event; plan.changed меняет топологию. Сохранить footprint дальнего масштаба и viewport culling.\n2. Проверить ↑, каждый предок и browser back на трёх уровнях; хранить camera отдельно на уровень. Сделать понятные cross-scope edges и копирование native/block ID.\n3. Сохранить off-map drawer, ghost активного удалённого узла и большой чат в обеих темах. Красный акцент темы не равен красному исходу теста.\n\nОбласть изменений: waypoint/web/; tests/browser_check.py.\n\nНе изменять: store.py/server.py.\n\nТочное чтение (пути от roadmap/):\n../waypoint/design/ARCHITECTURE.md — раздел 8. UI contract\n../waypoint/waypoint/web/\n../waypoint/tests/browser_check.py\n\nРежим MIXED. Предпочтительный исполнитель: CODEX or CHAT-PREPARATION. Исполнитель выбирает безопасный порядок внутри согласованного участка; назначение не сделано.", "layout": {"x": 80, "y": 650}, "parent": "WPT-C06", "source_refs": [{"label": "design/ARCHITECTURE.md", "section": "8. UI contract", "uri": "../waypoint/design/ARCHITECTURE.md"}, {"label": "Визуальные assets", "uri": "../waypoint/waypoint/web/"}, {"label": "tests/browser_check.py", "uri": "../waypoint/tests/browser_check.py"}], "tests": {"T-01": {"evidence_level": "browser", "invalidated_by": "Navigation/render topology, semantic zoom, ghost resolution.", "label": "Топология и действия", "procedure": "Три уровня/предки/back, selected block, удаление активного узла, неизвестный блок и source disconnect; реальные mouse/keyboard события."}}, "title": "Выборочное обновление и вложенность", "x_roadmap": {"avoid_paths": ["store.py/server.py"], "eligible_alternative": null, "escalation": "", "kind": "stage", "owned_paths": ["waypoint/web/", "tests/browser_check.py"], "preferred_executor": "CODEX or CHAT-PREPARATION", "read_set": [{"label": "design/ARCHITECTURE.md", "section": "8. UI contract", "uri": "../waypoint/design/ARCHITECTURE.md"}, {"label": "Визуальные assets", "uri": "../waypoint/waypoint/web/"}, {"label": "tests/browser_check.py", "uri": "../waypoint/tests/browser_check.py"}], "safe_alternate_work": "", "source_capsule": "WPT-C06", "wave": null}}, "WPT-C06.3": {"acceptance": {"A-01": {"text": "Использован настоящий локальный HTTP, а не только set_content."}, "A-02": {"text": "Измерения описывают фактический rich fixture и окружение; долгий чат не монтируется целиком в каждом узле."}, "A-03": {"text": "Выводы о приемлемом budget основаны на измерениях, непроверенные свойства не названы PASS."}}, "assignment": "Оценить цельный путь Browser→API→индекс на представительном, а не декоративно упрощённом графе.\n\nРабота:\n1. После C05.3 использовать согласованный индекс/пагинацию. Прогнать 100 и 300 богатых узлов с чатами, рёбрами, вложенными scopes и длительным потоком.\n2. Записать реальный browser/OS/hardware, DOM, число измерений, размеры истории/снимков, время ответа и память. Не переносить 0.5мс из старого одиночного опыта в обещание сервиса.\n3. Проверить клавиатуру, читаемость и contrast тем; технический отчёт отделить от ещё не полученной человеческой оценки.\n\nОбласть изменений: tests/browser_check.py; Новые performance fixtures и отчёт C06.\n\nНе изменять: Store/API — изменения только через владельца C05.\n\nТочное чтение (пути от roadmap/):\n../waypoint/design/IMPLEMENTATION_MAP.md — раздел Required completion\n../waypoint/design/ACCEPTANCE.md — раздел Target sequence\n../waypoint/tests/browser_check.py\n\nРежим MIXED. Предпочтительный исполнитель: CODEX. Исполнитель выбирает безопасный порядок внутри согласованного участка; назначение не сделано.", "layout": {"x": 640, "y": 650}, "parent": "WPT-C06", "source_refs": [{"label": "design/IMPLEMENTATION_MAP.md", "section": "Required completion", "uri": "../waypoint/design/IMPLEMENTATION_MAP.md"}, {"label": "design/ACCEPTANCE.md", "section": "Target sequence", "uri": "../waypoint/design/ACCEPTANCE.md"}, {"label": "tests/browser_check.py", "uri": "../waypoint/tests/browser_check.py"}], "tests": {"T-01": {"evidence_level": "target performance + UI", "invalidated_by": "Store index/read contract, UI virtualizer, runtime environment.", "label": "Rich-map report", "procedure": "Один набор representative fixtures, прогрев и несколько измерений если дешёво; вернуть выборку, не выдуманный процент готовности."}}, "title": "Насыщенная карта через настоящий сервис", "x_roadmap": {"avoid_paths": ["Store/API — изменения только через владельца C05"], "eligible_alternative": null, "escalation": "", "kind": "stage", "owned_paths": ["tests/browser_check.py", "Новые performance fixtures и отчёт C06"], "preferred_executor": "CODEX", "read_set": [{"label": "design/IMPLEMENTATION_MAP.md", "section": "Required completion", "uri": "../waypoint/design/IMPLEMENTATION_MAP.md"}, {"label": "design/ACCEPTANCE.md", "section": "Target sequence", "uri": "../waypoint/design/ACCEPTANCE.md"}, {"label": "tests/browser_check.py", "uri": "../waypoint/tests/browser_check.py"}], "safe_alternate_work": "", "source_capsule": "WPT-C06", "wave": null}}, "WPT-C07": {"acceptance": {"A-01": {"text": "Собранная новая реализация читает обычный Codex владельца и показывает работу на этой карте."}, "A-02": {"text": "Карта, сгенерированная здесь, импортируется/экспортируется/обновляется без ручного переноса и потери полей; старые IDs остаются стабильны."}, "A-03": {"text": "Пройдена одна составная целевая последовательность либо точно названы непроверенные/непринятые свойства."}, "A-04": {"text": "Секреты и реальные переписки не попали в возврат; установка/публикация/приёмка отражены отдельно."}}, "assignment": "Собрать один принятый Waypoint из завершённых C05/C06, проверить его на текущем окружении и закрепить передачу карт из ChatGPT без ручного пересоздания.\n\nРабота:\n1. Выполнить C07.1–C07.4 одним локальным интегратором после остановки пересекающихся писателей.\n2. Использовать эту ROADMAP.plan.json как первую реальную дорожную карту самого Waypoint и шаблон как переносимый пример другого проекта.\n3. Включить в возврат реальные изменения/проверки/ограничения, состояние публикации и точный следующий шаг. Не запускать повторное общее проектирование.\n\nОбласть изменений: Packaging/lock для фактического Python; Настройки только Waypoint; Составные интеграционные тесты; roadmap/ при следующей согласованной версии; skills publication proposal.\n\nНе изменять: Чужие активные ветки/изменения; Глобальные скилы без отдельного согласования; Автоматическая публичная публикация или смена лицензии.\n\nТочное чтение (пути от roadmap/):\n../waypoint/design/WORK_PACKETS.md — раздел WPT-C07\n../waypoint/design/OPERATIONS.md\n../waypoint/design/ACCEPTANCE.md\nFORMAT.md\nRUNNER_WAVES.md\n\nРежим MIXED. Предпочтительный исполнитель: CODEX. Исполнитель выбирает безопасный порядок внутри согласованного участка; назначение не сделано.\n\nОстановить только затронутое действие и эскалировать: провал конкретного release-условия, конкурирующая база или неразрешённая внешняя публикация. Сохранить успехи остальных частей.\n\nПри ожидании: подготовить чистый отчёт и пакет установки, пока идёт действительно независимая длительная проверка; не запускать её повторно ради статуса.", "layout": {"x": 1820, "y": 400}, "parent": null, "source_refs": [{"label": "design/WORK_PACKETS.md", "section": "WPT-C07", "uri": "../waypoint/design/WORK_PACKETS.md"}, {"label": "design/OPERATIONS.md", "uri": "../waypoint/design/OPERATIONS.md"}, {"label": "design/ACCEPTANCE.md", "uri": "../waypoint/design/ACCEPTANCE.md"}, {"label": "Один исходный граф", "uri": "FORMAT.md"}, {"label": "Проекция волн", "uri": "RUNNER_WAVES.md"}], "tests": {"T-01": {"evidence_level": "target integration", "invalidated_by": "Состав сборки, общие контракты, окружение.", "label": "Один собранный продукт", "procedure": "Приёмка design/ACCEPTANCE.md с отчётами C05/C06; переиспользовать действующие свидетельства, повторять только инвалидированные границы."}, "T-02": {"evidence_level": "interchange + target", "invalidated_by": "Plan schema, serialization, authoring profile, importer.", "label": "Карта является исходным планом", "procedure": "Round-trip этой карты и независимого шаблона, stale base conflict и disjoint update; проверить x_roadmap и чтение через packet."}, "T-03": {"evidence_level": "delivery", "invalidated_by": "Файлы релиза, настройки, разрешения публикации.", "label": "Передача и секреты", "procedure": "MANIFEST, воспроизводимый запуск/удаление собственного service, sanitized report и явное состояние global skills/registry."}}, "title": "Сквозная приёмка и передача", "x_roadmap": {"avoid_paths": ["Чужие активные ветки/изменения", "Глобальные скилы без отдельного согласования", "Автоматическая публичная публикация или смена лицензии"], "eligible_alternative": null, "escalation": "провал конкретного release-условия, конкурирующая база или неразрешённая внешняя публикация. Сохранить успехи остальных частей.", "kind": "packet", "owned_paths": ["Packaging/lock для фактического Python", "Настройки только Waypoint", "Составные интеграционные тесты", "roadmap/ при следующей согласованной версии", "skills publication proposal"], "preferred_executor": "CODEX", "read_set": [{"label": "design/WORK_PACKETS.md", "section": "WPT-C07", "uri": "../waypoint/design/WORK_PACKETS.md"}, {"label": "design/OPERATIONS.md", "uri": "../waypoint/design/OPERATIONS.md"}, {"label": "design/ACCEPTANCE.md", "uri": "../waypoint/design/ACCEPTANCE.md"}, {"label": "Один исходный граф", "uri": "FORMAT.md"}, {"label": "Проекция волн", "uri": "RUNNER_WAVES.md"}], "safe_alternate_work": "подготовить чистый отчёт и пакет установки, пока идёт действительно независимая длительная проверка; не запускать её повторно ради статуса.", "source_capsule": "WPT-C07", "wave": "RW-02"}}, "WPT-C07.1": {"acceptance": {"A-01": {"text": "Одна сборка содержит C05/C06, её точная ревизия/manifest известны."}, "A-02": {"text": "Отдельные ключи и Host/Origin граница сохраняются; UI assets входят в пакет."}}, "assignment": "Принять результаты C05/C06 и получить единую запускаемую рабочую версию.\n\nРабота:\n1. Сопоставить bases и receipts обеих веток; интеграционные конфликты разрешает один владелец. Не затирать чужие изменения.\n2. Проверить миграции, package assets и фактический Python; выбрать/зафиксировать зависимости после smoke на целевой среде. Грамматика Python 3.10 не равна runtime-приёмке 3.10.\n3. Поднять private data dir/loopback UI с read-only browser capability; write credential не отдавать браузеру.\n\nОбласть изменений: Упаковка/lock; Интеграционные исправления только после завершения остальных писателей.\n\nНе изменять: Глобальное окружение машины.\n\nТочное чтение (пути от roadmap/):\n../waypoint/pyproject.toml\n../waypoint/design/OPERATIONS.md\n../waypoint/tools/verify_http.py\n../waypoint/design/IMPLEMENTATION_MAP.md\n\nРежим MIXED. Предпочтительный исполнитель: CODEX. Исполнитель выбирает безопасный порядок внутри согласованного участка; назначение не сделано.", "layout": {"x": 80, "y": 80}, "parent": "WPT-C07", "source_refs": [{"label": "pyproject.toml", "uri": "../waypoint/pyproject.toml"}, {"label": "design/OPERATIONS.md", "uri": "../waypoint/design/OPERATIONS.md"}, {"label": "tools/verify_http.py", "uri": "../waypoint/tools/verify_http.py"}, {"label": "design/IMPLEMENTATION_MAP.md", "uri": "../waypoint/design/IMPLEMENTATION_MAP.md"}], "tests": {"T-01": {"evidence_level": "assembled local/target", "invalidated_by": "Merge shared files, dependency lock, migration.", "label": "Сборка, миграция, smoke", "procedure": "Нужные unit/contract suites после интеграции, verify_http и проверка assets/entrypoint на выбранном интерпретаторе."}}, "title": "Одна сборка и совместимые зависимости", "x_roadmap": {"avoid_paths": ["Глобальное окружение машины"], "eligible_alternative": null, "escalation": "", "kind": "stage", "owned_paths": ["Упаковка/lock", "Интеграционные исправления только после завершения остальных писателей"], "preferred_executor": "CODEX", "read_set": [{"label": "pyproject.toml", "uri": "../waypoint/pyproject.toml"}, {"label": "design/OPERATIONS.md", "uri": "../waypoint/design/OPERATIONS.md"}, {"label": "tools/verify_http.py", "uri": "../waypoint/tools/verify_http.py"}, {"label": "design/IMPLEMENTATION_MAP.md", "uri": "../waypoint/design/IMPLEMENTATION_MAP.md"}], "safe_alternate_work": "", "source_capsule": "WPT-C07", "wave": null}}, "WPT-C07.2": {"acceptance": {"A-01": {"text": "Наблюдается новый код, а не только работоспособность старого P09."}, "A-02": {"text": "Текущий блок/чат/инспектор и реальное действие согласуются без дополнительных отчётов модели."}, "A-03": {"text": "Сбой наблюдателя не убивает исполнителя; источник unknown не показан как done."}}, "assignment": "Доказать пользовательский цикл собранной реализации на естественной работе Codex и настоящем браузере.\n\nРабота:\n1. Импортировать текущую карту, указать существующую сессию и проверить verified focus/сообщение/инструмент/тест/результат на правильном блоке.\n2. Проверить оригинальный текст локально, многоблочную область, потомков, изменение плана и независимые статусы/лампы. Историческое родство честно обозначать историческим.\n3. Перезапустить только Waypoint collector/service; работа Codex продолжается. Replay/outbox/cursor и health восстанавливаются.\n\nОбласть изменений: Составные тесты и санитарный отчёт; Настройки Waypoint в private directory.\n\nНе изменять: Настройки/жизненный цикл Codex.\n\nТочное чтение (пути от roadmap/):\n../waypoint/design/ACCEPTANCE.md\n../waypoint/design/OPERATIONS.md — раздел Failure and recovery\n../waypoint/reports/RETURN_TO_CHAT_RU.md\n\nРежим MIXED. Предпочтительный исполнитель: CODEX. Исполнитель выбирает безопасный порядок внутри согласованного участка; назначение не сделано.", "layout": {"x": 80, "y": 650}, "parent": "WPT-C07", "source_refs": [{"label": "design/ACCEPTANCE.md", "uri": "../waypoint/design/ACCEPTANCE.md"}, {"label": "design/OPERATIONS.md", "section": "Failure and recovery", "uri": "../waypoint/design/OPERATIONS.md"}, {"label": "reports/RETURN_TO_CHAT_RU.md", "uri": "../waypoint/reports/RETURN_TO_CHAT_RU.md"}], "tests": {"T-01": {"evidence_level": "live target + browser", "invalidated_by": "Собранные adapter/binding/API/UI, конфигурация клиента.", "label": "Сквозная целевая приёмка", "procedure": "Целевая последовательность ACCEPTANCE.md, с повтором только инвалидированных C05/C06 свидетельств."}}, "title": "Карта → агент → события → браузер", "x_roadmap": {"avoid_paths": ["Настройки/жизненный цикл Codex"], "eligible_alternative": null, "escalation": "", "kind": "stage", "owned_paths": ["Составные тесты и санитарный отчёт", "Настройки Waypoint в private directory"], "preferred_executor": "CODEX", "read_set": [{"label": "design/ACCEPTANCE.md", "uri": "../waypoint/design/ACCEPTANCE.md"}, {"label": "design/OPERATIONS.md", "section": "Failure and recovery", "uri": "../waypoint/design/OPERATIONS.md"}, {"label": "reports/RETURN_TO_CHAT_RU.md", "uri": "../waypoint/reports/RETURN_TO_CHAT_RU.md"}], "safe_alternate_work": "", "source_capsule": "WPT-C07", "wave": null}}, "WPT-C07.3": {"acceptance": {"A-01": {"text": "Нет отдельного ручного преобразования human plan → Waypoint; Markdown и Runner waves воспроизводятся из исходного plan JSON."}, "A-02": {"text": "Независимый проект меняет только свои поля, а не ядро формата; schema остаётся waypoint.plan/1."}, "A-03": {"text": "Одинаковый request_id с одинаковым телом идемпотентен, конфликтующий body не проходит; новая ревизия не теряет agent changes."}, "A-04": {"text": "Изменения глобального пайплайна подготовлены или опубликованы с проверенным разрешением; это разные состояния, не условный скрытый запуск."}}, "assignment": "Сделать входом Waypoint именно наши дорожные карты; не создавать независимый технический backlog рядом с человеческим планом.\n\nРабота:\n1. Проверить импорт/экспорт этой карты и templates/PROJECT.plan.json. Все заданные поля, IDs, зависимости и x_roadmap должны сохраниться.\n2. После локальных изменений экспортировать актуальный base_version, подготовить snapshot в чате и принять его с merge. Проверить disjoint update, конфликт одного acceptance и удаление узла с новой ссылкой; не переписывать concurrent head.\n3. Сверить короткий AUTHORING_PROFILE.md и предложение изменения build-implementation-roadmap с фактической канонической библиотекой. Передавать только нужный скил и packet.\n4. Глобальную регистрацию waypoint-map/observe и изменение общего скила выполнять только отдельной согласованной публикацией по AGENTS.md; до неё вернуть точный кандидат/статус, не говорить «установлено».\n\nОбласть изменений: Текущая карта/профиль и шаблон; Кандидаты скилов и отчёт о регистрации.\n\nНе изменять: Канонические скилы/расписания без согласованного scope.\n\nТочное чтение (пути от roadmap/):\nFORMAT.md\nAUTHORING_PROFILE.md\nSKILL_INTEGRATION_PROPOSAL.md\n../waypoint/skills/INTEGRATION.md\n../waypoint/design/CONTRACTS.md — раздел 2. Plan; 3. Atomic update\n\nРежим MIXED. Предпочтительный исполнитель: CODEX. Исполнитель выбирает безопасный порядок внутри согласованного участка; назначение не сделано.", "layout": {"x": 640, "y": 80}, "parent": "WPT-C07", "source_refs": [{"label": "Контракт roadmap", "uri": "FORMAT.md"}, {"label": "Авторство следующих карт", "uri": "AUTHORING_PROFILE.md"}, {"label": "Точечное предложение интеграции", "uri": "SKILL_INTEGRATION_PROPOSAL.md"}, {"label": "skills/INTEGRATION.md", "uri": "../waypoint/skills/INTEGRATION.md"}, {"label": "design/CONTRACTS.md", "section": "2. Plan; 3. Atomic update", "uri": "../waypoint/design/CONTRACTS.md"}], "tests": {"T-01": {"evidence_level": "interchange", "invalidated_by": "Schema/domain/Store, authoring tools/profile.", "label": "Round-trip и согласованная правка", "procedure": "Текущий importer/exporter/packet на двух project_id; disjoint/conflict/delete cases; детерминированная генерация views."}, "T-02": {"evidence_level": "source review / installation if authorized", "invalidated_by": "Canonical skill revision или runtime binding.", "label": "Интеграция скилов", "procedure": "Проверка точечного предложения относительно AGENTS/nav/build skill; при отдельно разрешённой публикации — validator и readback."}}, "title": "Переносимые карты и стандарт авторства", "x_roadmap": {"avoid_paths": ["Канонические скилы/расписания без согласованного scope"], "eligible_alternative": null, "escalation": "", "kind": "stage", "owned_paths": ["Текущая карта/профиль и шаблон", "Кандидаты скилов и отчёт о регистрации"], "preferred_executor": "CODEX", "read_set": [{"label": "Контракт roadmap", "uri": "FORMAT.md"}, {"label": "Авторство следующих карт", "uri": "AUTHORING_PROFILE.md"}, {"label": "Точечное предложение интеграции", "uri": "SKILL_INTEGRATION_PROPOSAL.md"}, {"label": "skills/INTEGRATION.md", "uri": "../waypoint/skills/INTEGRATION.md"}, {"label": "design/CONTRACTS.md", "section": "2. Plan; 3. Atomic update", "uri": "../waypoint/design/CONTRACTS.md"}], "safe_alternate_work": "", "source_capsule": "WPT-C07", "wave": null}}, "WPT-C07.4": {"acceptance": {"A-01": {"text": "RETURN_TO_CHAT_RU.md различает source-written, tested, observed-live, installed, published, accepted."}, "A-02": {"text": "Все ссылки/артефакты результата разрешимы; отсутствуют выдуманные commits/версии/получатели."}, "A-03": {"text": "Пакет пригоден для восстановления и повторного чтения без всего разговора; новые исполнения сами не запускаются."}}, "assignment": "Передать проверенный результат, воспроизводимые инструкции и честный список остаточных ограничений.\n\nРабота:\n1. Собрать санитизированный отчёт из результатов C05/C06/C07 и описать expected/actual diff. Сохранить текущую карту через export с реальной версией, не редактировать сгенерированный Markdown отдельно.\n2. Проверить manifest/архив, инструкции install/uninstall только собственного service и источник lock. Не включать auth, полный HOME, реальные тексты, SQLite с перепиской или приватные ключи.\n3. Для Udot использовать существующий реестр/inbox и реальные текущие версии с защитой записи; не заменять их копией из пакета. Применённые/неприменённые уведомления отмечать отдельно.\n\nОбласть изменений: reports/ и финальный архив; Санитизированные receipts; Публикация в существующий канал при доступной защищённой записи.\n\nНе изменять: Единственные recoverable копии; Чужие строки реестра/inbox.\n\nТочное чтение (пути от roadmap/):\n../waypoint/reports/RETURN_TO_CHAT_RU.md\n../waypoint/design/OPERATIONS.md — раздел Security and output handling\nhandoff/PUBLICATION.md\n\nРежим MIXED. Предпочтительный исполнитель: CODEX. Исполнитель выбирает безопасный порядок внутри согласованного участка; назначение не сделано.", "layout": {"x": 1160, "y": 650}, "parent": "WPT-C07", "source_refs": [{"label": "reports/RETURN_TO_CHAT_RU.md", "uri": "../waypoint/reports/RETURN_TO_CHAT_RU.md"}, {"label": "design/OPERATIONS.md", "section": "Security and output handling", "uri": "../waypoint/design/OPERATIONS.md"}, {"label": "Безопасная публикация", "uri": "handoff/PUBLICATION.md"}], "tests": {"T-01": {"evidence_level": "delivery", "invalidated_by": "Состав пакета, refs, runtime data, authorization.", "label": "Санитарная передача", "procedure": "Проверить включённые пути и содержимое, checksums, команды запуска/возврата и реальный receipt публикации при её выполнении."}}, "title": "Пакет результата и возврат владельцу", "x_roadmap": {"avoid_paths": ["Единственные recoverable копии", "Чужие строки реестра/inbox"], "eligible_alternative": null, "escalation": "", "kind": "stage", "owned_paths": ["reports/ и финальный архив", "Санитизированные receipts", "Публикация в существующий канал при доступной защищённой записи"], "preferred_executor": "CODEX", "read_set": [{"label": "reports/RETURN_TO_CHAT_RU.md", "uri": "../waypoint/reports/RETURN_TO_CHAT_RU.md"}, {"label": "design/OPERATIONS.md", "section": "Security and output handling", "uri": "../waypoint/design/OPERATIONS.md"}, {"label": "Безопасная публикация", "uri": "handoff/PUBLICATION.md"}], "safe_alternate_work": "", "source_capsule": "WPT-C07", "wave": null}}, "WPT-R00": {"acceptance": {"A-01": {"text": "Фактическая база установлена: путь/ветка/commit либо честно «новая распакованная копия», локальные изменения сохранены."}, "A-02": {"text": "Карта принята текущим сервером; все ID, parent, assignment, acceptance, tests, edges и x_roadmap сохранены."}, "A-03": {"text": "Короткий packet достаточен для начала выбранного участка; нет подмены roadmap демонстрацией WhoRules."}, "A-04": {"text": "C05/C06 могут начать независимую работу после этого пакета; канал Runner не считается подключённым без проверки существующего протокола."}}, "assignment": "Подготовить подтверждённую рабочую копию и импортировать ROADMAP.plan.json через настоящий Waypoint. Не перепроектировать готовый код и не менять пользовательские проекты.\n\nРабота:\n1. Сверить архив и манифест. Найти фактическую рабочую папку/ветку; при наличии более нового кода сопоставить изменения, не распаковывать поверх него вслепую. Зафиксировать основание в рабочем receipt, а не выдумывать git SHA.\n2. В изолированном окружении проверить запуск базы и один импорт этой карты. При новой БД использовать base_version:null; при существующей карте сначала экспортировать её актуальную версию и согласовать изменения.\n3. Проверить native packet для C05/C06, вложенность, требования, приёмку и список проверок. Исторические исходные результаты импортировать только при первичном создании этой карты, без зелёных лампочек за будущие тесты.\n4. Назначить одного интегратора и владельца Store/API C05; развести C05/C06 по файлам/worktree. Не запускать параллельного писателя общих файлов.\n\nОбласть изменений: Новая рабочая копия и локальное окружение Waypoint; Приватный журнал интеграционных receipts.\n\nНе изменять: Чужие репозитории/изменения; Глобальная конфигурация Codex, hooks и секреты; ROADMAP.plan.json поверх неизвестного нового head.\n\nТочное чтение (пути от roadmap/):\n../waypoint/START_HERE.md\n../waypoint/design/IMPLEMENTATION_MAP.md\nFORMAT.md\nCODEX_START.md\n\nРежим MIXED. Предпочтительный исполнитель: CODEX. Исполнитель выбирает безопасный порядок внутри согласованного участка; назначение не сделано.\n\nОстановить только затронутое действие и эскалировать: несовпадающая локальная база, неразрешённый конфликт или отказ доступа. Новую архитектуру из этого не выводить.\n\nПри ожидании: офлайн прочитать пакет C05 или подготовить fixtures C06 без изменения непроверенной рабочей базы.", "layout": {"x": 630, "y": 400}, "parent": null, "source_refs": [{"label": "START_HERE.md", "uri": "../waypoint/START_HERE.md"}, {"label": "Граница готового кода", "uri": "../waypoint/design/IMPLEMENTATION_MAP.md"}, {"label": "Формат единой карты", "uri": "FORMAT.md"}, {"label": "Запуск по карте", "uri": "CODEX_START.md"}], "tests": {"T-01": {"evidence_level": "structure", "invalidated_by": "Изменение базового архива или ROADMAP.plan.json.", "label": "Целостность и совместимость карты", "procedure": "Из waypoint/: python tools/verify_package.py; из roadmap/: python tools/roadmap.py validate. Проверяет поставленные файлы/граф, не установленный источник."}, "T-02": {"evidence_level": "local integration", "invalidated_by": "Изменения schema/domain/store/API или базовой карты.", "label": "Первый импорт и чтение packet", "procedure": "В приватной Waypoint БД импортировать карту и получить packet WPT-C05/WPT-C06. Сравнить поля с исходным JSON."}, "T-03": {"evidence_level": "target inspection", "invalidated_by": "Изменение рабочей базы, ветки, незакоммиченных правок или исполнителей.", "label": "Безопасная рабочая копия", "procedure": "Сопоставить существующий рабочий каталог/Git и установить непересекающееся владение C05/C06."}}, "title": "Принять базу и открыть эту карту", "x_roadmap": {"avoid_paths": ["Чужие репозитории/изменения", "Глобальная конфигурация Codex, hooks и секреты", "ROADMAP.plan.json поверх неизвестного нового head"], "eligible_alternative": null, "escalation": "несовпадающая локальная база, неразрешённый конфликт или отказ доступа. Новую архитектуру из этого не выводить.", "kind": "packet", "owned_paths": ["Новая рабочая копия и локальное окружение Waypoint", "Приватный журнал интеграционных receipts"], "preferred_executor": "CODEX", "read_set": [{"label": "START_HERE.md", "uri": "../waypoint/START_HERE.md"}, {"label": "Граница готового кода", "uri": "../waypoint/design/IMPLEMENTATION_MAP.md"}, {"label": "Формат единой карты", "uri": "FORMAT.md"}, {"label": "Запуск по карте", "uri": "CODEX_START.md"}], "safe_alternate_work": "офлайн прочитать пакет C05 или подготовить fixtures C06 без изменения непроверенной рабочей базы.", "source_capsule": null, "wave": "RW-00"}}}, "project_id": "waypoint", "schema": "waypoint.plan/1", "title": "Waypoint · от исходной реализации к рабочему наблюдателю", "x_roadmap": {"basis": "Completed design package and its source code; current owner workspace, installed service and remote code are not observed in this planning pass.", "created_at": "2026-10-16T16:48:03+00:00", "definition": "ROADMAP.plan.json", "design_session_id": "WAYPOINT-DESIGN-20261016-1312895b", "initial_frontier_note": "WPT-R00 is eligible to start after the owner hands this package to a local executor. No executor is assigned or started by this file.", "initial_supplied_ids": ["WPT-C01", "WPT-C02", "WPT-C03", "WPT-C04"], "input_package": {"extracted_root": "../waypoint", "integrity": "75 manifest members verified; 76 ZIP members", "name": "waypoint-design-package-2026-10-16.zip", "sha256": "034ac6f6392a11b9ac38f3ed1e9fcb75b90132cc783e410e82a74bffa6199dce", "size_bytes": 5546508}, "local_delivery": {"date": "2026-10-17", "mode": "MIXED", "observer_only": true, "report": "../waypoint/reports/RETURN_TO_CHAT_RU.md", "source": "existing C01-C04; C05-C07 local integration"}, "planning_decisions": [{"basis": "build-implementation-roadmap requires observed starting-state assumptions and safe handoff.", "decision": "Add WPT-R00 as a short integration-readiness packet, not a new architecture stage.", "id": "RP-01"}, {"basis": "design/WORK_PACKETS.md and implementation boundaries.", "decision": "Refine existing C05–C07 into stages without creating replacement capsule identities.", "id": "RP-02"}, {"basis": "design/IMPLEMENTATION_MAP.md and C06 shared-file restriction; parallelism must have physical ownership.", "decision": "Give C05 ownership of the item-target index and all shared Store/API/migration edits; make C06.3 wait for C05.3 only.", "id": "RP-03"}, {"basis": "Owner explicitly requires roadmaps authored here to be the input for Waypoint.", "decision": "Validate this real roadmap through the current Waypoint schema, Store and packet API; use it for the later target acceptance.", "id": "RP-04"}, {"basis": "skills/INTEGRATION.md publication boundary.", "decision": "Ship a reusable authoring profile and bounded canonical-skill integration proposal. Do not silently install/change global skills.", "id": "RP-05"}], "profile": "waypoint.roadmap-authoring/1", "publication_at_build": {"global_registry": "NOT_CHANGED", "task_dispatch": "NOT_REQUESTED", "udot_inbox": "NOT_CHANGED"}, "reference_roots": {"design": "../waypoint", "roadmap": "."}, "resource_policy": "MIXED", "revision": "2026-10-16-r1", "scope_rules": ["One work graph. Markdown packets, Runner waves and offline preview are generated views, never independently edited plans.", "C01–C04 are delivered source, not installed/production-accepted functionality. Do not implement them again.", "Graph dependencies express engineering prerequisites, not observer-enforced permissions. Free statuses and off-map work remain valid.", "No agent launches, live observation, task claims, global skill changes or Git pushes are performed by preparing this roadmap.", "Read only the chosen packet and named source sections. Prefer focused tests and reuse evidence until relevant changes invalidate it.", "Keep one integrator for shared Store/API/migration files. Parallel frontend preparation does not edit those files.", "On machine return reconcile real local/Git/integrated state before applying pending preparation. Runner protocol must be read from its installed source, not invented here."], "skills_used": [{"blob_sha": "ae1d3cdb1246ef35a519ad14ed6c3d3e82b5aaf3", "path": "skills/chatgpt/build-implementation-roadmap/SKILL.md", "repository": "ViskyG/agent-skills", "version": "2.0.0"}, {"blob_sha": "e2dc1f18f60db23c8f864b42f8236a01ab400436", "path": "skills/shared/evidence-driven-validation/SKILL.md", "repository": "ViskyG/agent-skills", "version": "2.0.0"}, {"blob_sha": "37e304ffa7bceb9db53295eb33dab075a2c88c43", "path": "skills/shared/workflow-state-and-transit/SKILL.md", "repository": "ViskyG/agent-skills", "version": "2.0.3"}], "source_context": "https://docs.google.com/document/d/19xpj5t9d92nqir3x2FmqWmyK5_eT0G9MNjsb7dShcgs/edit", "views_are_generated": true, "waves": {"RW-00": {"integration_boundary": "Рабочая база подтверждена; карта импортирована без потери полей.", "title": "Рабочая копия и первый импорт"}, "RW-01": {"integration_boundary": "C05 и C06 готовы к сборке; C06.3 использует принятый индекс C05.3.", "title": "Источник и интерфейс"}, "RW-02": {"integration_boundary": "Собранный продукт, переносимый граф и проверенный возврат результатов.", "title": "Одна сквозная приёмка и передача"}}}}, "current_version": "v-a47a4b4f98ec4fde", "agents": [], "scopes": [], "node_states": [{"agent_id": null, "at": "2026-10-16T16:21:50.298004+00:00", "estimate": null, "explanation": "Производная сводка поставки C01–C04. Группа не является новой задачей и не означает установленный продукт.", "id": "WPT-BASE", "last_seq": 10, "status": "Исходники поставлены"}, {"agent_id": null, "at": "2026-10-16T16:21:50.298004+00:00", "estimate": null, "explanation": "Декларация поставки завершённого дизайн-пакета. Не установка, не приёмка живого источника.", "id": "WPT-C01", "last_seq": 3, "result": {"basis": "completed design package 034ac6f6392a11b9ac38f3ed1e9fcb75b90132cc783e410e82a74bffa6199dce", "difference": "Целевая доводка/приёмка осталась в WPT-C05–WPT-C07.", "evidence_ref": "../waypoint/evidence/RESULTS.md", "plan_version": "v-a47a4b4f98ec4fde", "summary": "Ядро, хранилище и API — исходный результат поставлен."}, "status": "Исходники готовы"}, {"agent_id": null, "at": "2026-10-16T16:21:50.298004+00:00", "estimate": null, "explanation": "Декларация поставки завершённого дизайн-пакета. Не установка, не приёмка живого источника.", "id": "WPT-C02", "last_seq": 5, "result": {"basis": "completed design package 034ac6f6392a11b9ac38f3ed1e9fcb75b90132cc783e410e82a74bffa6199dce", "difference": "Целевая доводка/приёмка осталась в WPT-C05–WPT-C07.", "evidence_ref": "../waypoint/evidence/RESULTS.md", "plan_version": "v-a47a4b4f98ec4fde", "summary": "Исходный адаптер Codex — исходный результат поставлен."}, "status": "Исходники готовы"}, {"agent_id": null, "at": "2026-10-16T16:21:50.298004+00:00", "estimate": null, "explanation": "Декларация поставки завершённого дизайн-пакета. Не установка, не приёмка живого источника.", "id": "WPT-C03", "last_seq": 7, "result": {"basis": "completed design package 034ac6f6392a11b9ac38f3ed1e9fcb75b90132cc783e410e82a74bffa6199dce", "difference": "Целевая доводка/приёмка осталась в WPT-C05–WPT-C07.", "evidence_ref": "../waypoint/evidence/RESULTS.md", "plan_version": "v-a47a4b4f98ec4fde", "summary": "Браузерный читатель карты — исходный результат поставлен."}, "status": "Исходники готовы"}, {"agent_id": null, "at": "2026-10-16T16:21:50.298004+00:00", "estimate": null, "explanation": "Декларация поставки завершённого дизайн-пакета. Не установка, не приёмка живого источника.", "id": "WPT-C04", "last_seq": 9, "result": {"basis": "completed design package 034ac6f6392a11b9ac38f3ed1e9fcb75b90132cc783e410e82a74bffa6199dce", "difference": "Целевая доводка/приёмка осталась в WPT-C05–WPT-C07.", "evidence_ref": "../waypoint/evidence/RESULTS.md", "plan_version": "v-a47a4b4f98ec4fde", "summary": "CLI, скилы и передача — исходный результат поставлен."}, "status": "Исходники готовы"}], "checks": [], "items": [], "ghosts": {}, "sources": [], "cursor": 10, "warnings": []}}};</script>
+<script>/* Waypoint's one UI: online read model or an explicitly fictional offline fixture.
+   All provider/user strings go through textContent. No execution controls exist. */
+(() => {
+    'use strict';
+    const $ = s => document.querySelector(s);
+    const el = (tag, cls, text) => { const x = document.createElement(tag); if (cls)
+        x.className = cls; if (text !== undefined)
+        x.textContent = String(text); return x; };
+    const btn = (text, action, cls = '') => { const b = el('button', cls, text); b.type = 'button'; b.onclick = action; return b; };
+    const svg = (tag, attrs = {}) => { const x = document.createElementNS('http://www.w3.org/2000/svg', tag); for (const [k, v] of Object.entries(attrs))
+        x.setAttribute(k, v); return x; };
+    const demo = window.WAYPOINT_DEMO || null;
+    const ui = { project: 'demo', state: null, versions: [], scope: null, selected: null, actor: null, inspector: null, version: null, planMode: false, camera: { x: 60, y: 35, z: .82 }, cameras: {}, drag: null, cursor: 0, busy: false };
+    const readers = new Map();
+    let key = '', online = false, stopped = false;
+    try {
+        key = sessionStorage.getItem('waypoint-read-key') || '';
+    }
+    catch { }
+    const initialHash = new URLSearchParams(location.hash.slice(1));
+    if (initialHash.has('key')) {
+        key = initialHash.get('key');
+        try {
+            sessionStorage.setItem('waypoint-read-key', key);
+        }
+        catch { }
+        history.replaceState(null, '', location.pathname + location.search);
+    }
+    try {
+        document.documentElement.dataset.theme = localStorage.getItem('waypoint-theme') || 'terracotta';
+    }
+    catch { }
+    function themeLabel() { $('#theme span').textContent = document.documentElement.dataset.theme === 'obsidian' ? 'Обсидиан' : 'Терракота'; }
+    themeLabel();
+    $('#theme').onclick = () => { document.documentElement.dataset.theme = document.documentElement.dataset.theme === 'obsidian' ? 'terracotta' : 'obsidian'; themeLabel(); try {
+        localStorage.setItem('waypoint-theme', document.documentElement.dataset.theme);
+    }
+    catch { } };
+    function notice(text) { const n = $('#notice'); n.textContent = text; n.hidden = false; clearTimeout(n.timer); n.timer = setTimeout(() => n.hidden = true, 5500); }
+    async function api(path) { const r = await fetch(path, { headers: { Authorization: 'Bearer ' + key }, cache: 'no-store' }); if (!r.ok) {
+        const e = await r.json().catch(() => ({}));
+        throw Error(e.message || e.error || `HTTP ${r.status}`);
+    } return r.json(); }
+    const base = () => '/api/p/' + encodeURIComponent(ui.project);
+    function nodeName(id) { return ui.state?.plan.nodes[id]?.title || ui.state?.ghosts?.[id]?.title || id; }
+    function nodesWithGhosts() { return { ...ui.state.plan.nodes, ...ui.state.ghosts }; }
+    function agentName(id) { return ui.state.agents.find(a => a.id === id)?.name || id; }
+    function agentCode(id) { return /^A\d+$/.test(id) ? id : String(id).split('/').pop().slice(0, 6); }
+    function childNodes(id) { const result = new Set([id]); let changed = true; while (changed) {
+        changed = false;
+        for (const [key, n] of Object.entries(ui.state.plan.nodes)) {
+            if (result.has(n.parent) && !result.has(key)) {
+                result.add(key);
+                changed = true;
+            }
+        }
+    } return result; }
+    function childAgents(id) { const result = new Set([id]); let changed = true; while (changed) {
+        changed = false;
+        for (const a of ui.state.agents) {
+            if (result.has(a.parent_id) && !result.has(a.id)) {
+                result.add(a.id);
+                changed = true;
+            }
+        }
+    } return result; }
+    function parents(id) { const result = [], seen = new Set(), nodes = ui.state.plan.nodes; while (id && nodes[id] && !seen.has(id)) {
+        seen.add(id);
+        result.unshift(id);
+        id = nodes[id].parent;
+    } return result; }
+    function actorActive(a) { if (a?.activity_historical) return false; if (!['running', 'active'].includes(a?.activity))
+        return false; if (demo || a.activity_source === 'demo')
+        return true; const src = ui.state.sources.find(s => s.source_key === a.activity_source); return src && src.state === 'connected' && Date.now() - Date.parse(src.at) < 25000; }
+    function visibleNodeFor(id) { const nodes = nodesWithGhosts(), seen = new Set(); while (id && nodes[id] && !seen.has(id)) {
+        seen.add(id);
+        if ((nodes[id].parent || null) === ui.scope)
+            return id;
+        id = nodes[id].parent;
+    } return null; }
+    function workActors(node) { const ids = new Set(); for (const scope of ui.state.scopes) {
+        for (const id of scope.node_ids) {
+            if (visibleNodeFor(id) === node)
+                ids.add(scope.agent_id);
+        }
+    } return ui.state.agents.filter(a => ids.has(a.id)); }
+    function nodeStatus(id) { return ui.state.node_states.find(s => s.id === id) || {}; }
+    function nodeMessages(id, deep = true) { const ids = deep ? childNodes(id) : new Set([id]); return ui.state.items.filter(i => i.node_ids?.some(n => ids.has(n))); }
+    function fmtTime(t) { const d = new Date(t); return Number.isFinite(+d) ? d.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' }) : '—'; }
+    function kindLabel(k) { return { agentMessage: '', userMessage: 'пользователь', reasoning: 'пояснение', commandExecution: 'команда', mcpToolCall: 'инструмент', fileChange: 'файлы' }[k] ?? k; }
+    const itemKey = item => JSON.stringify([item.agent_id || '', item.id]);
+    function hasSelection(box) { const selection = window.getSelection(); return selection && !selection.isCollapsed && (box.contains(selection.anchorNode) || box.contains(selection.focusNode)); }
+    function patchMessage(box, item) {
+        const signature = JSON.stringify(item);
+        if (box._signature === signature) return;
+        // Keep the actual selected DOM text intact while the reader is copying it.
+        if (hasSelection(box)) { box._pendingItem = item; return; }
+        box._pendingItem = null; box._signature = signature;
+        const next = message(item);
+        if (box.textContent !== next.textContent) box.replaceChildren(...next.childNodes);
+        box.title = next.title;
+    }
+    function message(item) { const box = el('div', 'message'); box.dataset.item = item.id; box.dataset.itemKey = itemKey(item); box._signature = JSON.stringify(item); const meta = el('div', 'message-meta'); meta.append(el('b', '', agentCode(item.agent_id || '?')), el('span', '', fmtTime(item.at))); if (kindLabel(item.type))
+        meta.append(el('span', 'message-kind', kindLabel(item.type))); box.append(meta); if (item.node_ids?.length || item.edge_ids?.length) box.append(el('small', 'message-origin', [...(item.node_ids || []), ...(item.edge_ids || [])].join(' · '))); box.append(el('div', 'message-text', item.text || (item.type === 'subAgentActivity' ? ['Событие подагента', item.kind, item.agent_thread_id, item.agent_path].filter(Boolean).join(' · ') : 'Без текстового содержимого'))); if (item.truncated)
+        box.append(el('small', 'source-warning', 'Длинное содержимое ограничено; оригинал остаётся у источника.')); if (item.attribution === 'unassigned')
+        box.title = 'Привязка к блоку не установлена'; return box; }
+    document.addEventListener('selectionchange', () => { for (const box of document.querySelectorAll('.message')) if (box._pendingItem && !hasSelection(box)) patchMessage(box, box._pendingItem); });
+    function readerFor(channel, kind, id, deep = true) {
+        const key = JSON.stringify([ui.project, ui.version, channel, kind, id, deep]);
+        if (!readers.has(key)) readers.set(key, { key, kind, id, deep, channel, limit: channel === 'card' ? 24 : 100, items: [], latest: [], pending: new Set(), follow: true, top: 0, needsRefresh: true, hasMore: false });
+        return readers.get(key);
+    }
+    function detachReader(reader) { if (!reader?.scroll) return; reader.top = reader.scroll.scrollTop; reader.scroll = reader.list = reader.button = reader.more = null; }
+    function bindReader(reader, list, scroll, button, more = null) {
+        if (reader.scroll && reader.scroll !== scroll) detachReader(reader);
+        reader.list = list; reader.scroll = scroll; reader.button = button; reader.more = more;
+        scroll.onscroll = () => { reader.top = scroll.scrollTop; if (!reader.pending.size) reader.follow = scroll.scrollHeight - scroll.scrollTop - scroll.clientHeight < 12; else if (scroll.scrollHeight - scroll.scrollTop - scroll.clientHeight >= 12) reader.follow = false; };
+        button.onclick = () => { reader.follow = true; reader.items = reader.latest.slice(-reader.limit); reader.pending.clear(); paintReader(reader); };
+        if (more) more.onclick = () => loadReader(reader, true);
+        paintReader(reader); if (reader.needsRefresh && !reader.loading) loadReader(reader);
+    }
+    function paintReader(reader, prepend = false) {
+        if (!reader.list || !reader.scroll?.isConnected) return;
+        const { list, scroll } = reader, oldHeight = scroll.scrollHeight, oldTop = scroll.scrollTop;
+        const existing = new Map([...list.children].filter(x => x.dataset.itemKey).map(x => [x.dataset.itemKey, x]));
+        const keys = new Set(reader.items.map(itemKey));
+        for (const child of [...list.children]) if (!keys.has(child.dataset.itemKey)) child.remove();
+        let previous = null;
+        for (const item of reader.items) { const key = itemKey(item); let box = existing.get(key); if (box) patchMessage(box, item); else box = message(item); const target = previous ? previous.nextSibling : list.firstChild; if (target !== box) list.insertBefore(box, target); previous = box; }
+        if (!reader.items.length && !list.children.length) list.append(el('div', 'empty-message', 'Пока нет сообщений'));
+        reader.button.hidden = !reader.pending.size;
+        reader.button.textContent = `Новые сообщения: ${reader.pending.size} · К последним ↓`;
+        if (reader.more) { reader.more.hidden = !reader.hasMore; reader.more.disabled = !!reader.loading; }
+        scroll.scrollTop = reader.follow ? scroll.scrollHeight : prepend ? oldTop + scroll.scrollHeight - oldHeight : reader.top;
+        reader.top = scroll.scrollTop;
+    }
+    function updateReader(reader, items, result) {
+        const old = new Map(reader.items.map(i => [itemKey(i), i]));
+        reader.latest = items.slice(-reader.limit);
+        const atTail = !reader.scroll || reader.scroll.scrollHeight - reader.scroll.scrollTop - reader.scroll.clientHeight < 12;
+        if (reader.follow && atTail) { reader.items = reader.latest.slice(); reader.pending.clear(); if (result) { reader.before = result.before; reader.hasMore = result.has_more; } }
+        else {
+            reader.follow = false;
+            for (const item of items) if (!old.has(itemKey(item)) && (!reader.items.length || (item.first_seq || 0) > (reader.items.at(-1).first_seq || 0))) reader.pending.add(itemKey(item));
+            const revisions = new Map(items.map(i => [itemKey(i), i]));
+            reader.items = reader.items.map(i => revisions.get(itemKey(i)) || i);
+        }
+        paintReader(reader);
+    }
+    async function loadReader(reader, older = false) {
+        if (reader.loading) return;
+        reader.loading = true;
+        const generation = reader.generation || 0;
+        try {
+            const result = await stream(reader.kind, reader.id, reader.deep, older ? reader.before : null, reader.limit);
+            if (!older && !reader.follow && reader.items.length) {
+                const window = await stream(reader.kind, reader.id, reader.deep, Math.max(...reader.items.map(item => item.first_seq || 0)) + 1, Math.min(200, reader.items.length));
+                const revisions = new Map(window.items.map(item => [itemKey(item), item]));
+                reader.items = reader.items.map(item => revisions.get(itemKey(item)) || item);
+            }
+            if (older) { reader.follow = false; const combined = new Map([...result.items, ...reader.items].map(i => [itemKey(i), i])); reader.items = [...combined.values()].slice(0, 200); reader.before = result.before; reader.hasMore = result.has_more; paintReader(reader, true); }
+            else { updateReader(reader, result.items, result); reader.needsRefresh = generation !== (reader.generation || 0); }
+        } catch (e) { notice(e.message); }
+        finally { reader.loading = false; if (reader.more) reader.more.disabled = false; if (reader.needsRefresh && generation !== (reader.generation || 0) && reader.scroll?.isConnected) setTimeout(() => loadReader(reader), 0); }
+    }
+    function invalidateReaders(events = null, previousState = null) {
+        for (const reader of readers.values()) {
+            const affected = !events || events.some(event => {
+                if (event.kind === 'plan.changed' || event.kind === 'scope.set') return true;
+                if (!['item.upsert', 'item.link', 'item.identity_corrected'].includes(event.kind)) return false;
+                if (reader.kind === 'agent') { const actors = [event.agent_id, event.payload?.previous_agent_id].filter(Boolean); return actors.some(actor => reader.deep ? childAgents(reader.id).has(actor) : reader.id === actor); }
+                if (reader.kind === 'outside') return true;
+                const projections = [previousState, ui.state].flatMap(state => (state?.items || []).filter(item => item.id === event.payload?.item_id && [event.agent_id, event.payload?.previous_agent_id].includes(item.agent_id)));
+                // The native envelope can be empty: attribution lives in Store, not in the source.
+                // An older item outside both bounded snapshots must invalidate conservatively.
+                if (!projections.length) return true;
+                if (reader.kind === 'edge') return projections.some(item => item.edge_ids?.includes(reader.id)) || event.edge_ids?.includes(reader.id);
+                const targets = reader.deep ? childNodes(reader.id) : new Set([reader.id]);
+                return projections.some(item => item.node_ids?.some(id => targets.has(id))) || event.node_ids?.some(id => targets.has(id));
+            });
+            if (!affected) continue;
+            reader.generation = (reader.generation || 0) + 1;
+            reader.needsRefresh = true;
+            if (reader.scroll?.isConnected) loadReader(reader);
+        }
+    }
+    function selectActor(id) { ui.actor = ui.actor === id ? null : id; ui.selected = null; renderActors(); renderMap(); if (ui.actor)
+        openInspector('agent', id, 'messages');
+    else
+        closeInspector(); }
+    function keyedChildren(parent, children) {
+        const keep = new Set(children);
+        for (const child of [...parent.children]) if (!keep.has(child)) child.remove();
+        children.forEach((child, index) => { if (parent.children[index] !== child) parent.insertBefore(child, parent.children[index] || null); });
+    }
+    function renderActors() {
+        const strip = $('#agents'), rail = $('#orchestrators');
+        const oldActors = new Map([...strip.children].map(card => [card.dataset.actor, card]));
+        const oldRails = new Map([...rail.children].map(card => [card.dataset.actor, card]));
+        const actorCards = [], railCards = [];
+        const selected = ui.actor ? childAgents(ui.actor) : new Set();
+        $('#active-count').textContent = ui.state.agents.filter(actorActive).length + ' в работе';
+        const sorted = [...ui.state.agents].sort((a, b) => Number(actorActive(b)) - Number(actorActive(a)) || a.id.localeCompare(b.id));
+        for (const actor of sorted) {
+            const scopes = ui.state.scopes.find(scope => scope.agent_id === actor.id)?.node_ids || [];
+            const signature = JSON.stringify([actor, scopes, selected.has(actor.id)]);
+            let card = oldActors.get(actor.id);
+            if (!card || card._signature !== signature) {
+                card = btn('', () => selectActor(actor.id), 'agent-card');
+                card.dataset.actor = actor.id; card._signature = signature;
+                if (['completed', 'done'].includes(actor.activity)) card.classList.add('finished');
+                if (selected.has(actor.id)) card.classList.add('selected');
+                card.title = actor.id + (actor.activity_historical ? '\nИстория · ' + (actor.activity_reported_by || actor.activity_source || '') + ' · ' + (actor.activity_at || '') : '');
+                const text = el('div');
+                text.append(el('strong', '', actor.name || agentCode(actor.id)), el('small', '', scopes.join(' · ') || 'Вне карты'));
+                if (actor.activity_historical) text.append(el('small', 'activity-provenance', 'История · ' + (actor.activity_reported_by || 'источник')));
+                card.append(el('span', 'agent-code', agentCode(actor.id)), text);
+            }
+            actorCards.push(card);
+            const children = ui.state.agents.filter(child => child.parent_id === actor.id);
+            if (children.length) {
+                const signature = JSON.stringify([actor.id, actor.name, ui.actor === actor.id, children.map(child => child.id)]);
+                let card = oldRails.get(actor.id);
+                if (!card || card._signature !== signature) {
+                    card = btn('', () => selectActor(actor.id), 'orch' + (ui.actor === actor.id ? ' selected' : ''));
+                    card.dataset.actor = actor.id; card._signature = signature;
+                    const top = el('div', 'orch-top'); top.append(el('span', 'agent-code', agentCode(actor.id)), el('strong', '', actor.name || agentCode(actor.id)));
+                    const tags = el('div', 'children'); children.forEach(child => tags.append(el('i', '', agentCode(child.id))));
+                    card.append(top, tags);
+                }
+                railCards.push(card);
+            }
+        }
+        keyedChildren(strip, actorCards); keyedChildren(rail, railCards);
+        const outside = ui.state.items.filter(item => !item.node_ids?.length && !item.edge_ids?.length || item.node_ids?.some(id => !ui.state.plan.nodes[id] && !ui.state.ghosts[id]));
+        $('#outside-count').textContent = outside.length;
+        $('#reset-selection').hidden = !ui.actor && !ui.selected;
+    }
+    function renderToolbar() { const crumbs = $('#crumbs'); crumbs.replaceChildren(btn('Карта', () => enter(null))); for (const id of parents(ui.scope)) {
+        crumbs.append(el('span', '', '›'), btn(id, () => enter(id)));
+    } $('#up').disabled = !ui.scope; $('#up').onclick = () => enter(ui.state.plan.nodes[ui.scope]?.parent || null); $('#zoom').textContent = Math.round(ui.camera.z * 100) + '%'; $('#version').replaceChildren(); for (const v of ui.versions) {
+        const option = el('option', '', `План ${v.ordinal}`);
+        option.value = v.version;
+        option.selected = v.version === ui.state.version;
+        $('#version').append(option);
+    } $('#map-note').textContent = ui.state.version !== ui.state.current_version ? 'Старый план · активность показана текущая' : ui.state.warnings?.length ? 'В плане есть циклические зависимости; работа не заблокирована' : ui.scope ? `Внутри ${ui.scope} · общий поток доступен по названию блока` : ''; }
+    function lamp(check) { const span = el('span', 'lamp ' + (check?.outcome || 'not_run') + (check?.freshness === 'stale' ? ' stale' : ''), check?.outcome === 'passed' ? '✓' : ['failed', 'error'].includes(check?.outcome) ? '×' : ''); span.setAttribute('aria-label', check?.outcome || 'не запускался'); return span; }
+    function renderNode(id, node, simple = false) {
+        const card = el('article', 'node');
+        card.dataset.node = id;
+        const x = node.layout?.x ?? 0, y = node.layout?.y ?? 0;
+        card.style.left = x + 'px';
+        card.style.top = y + 'px';
+        if (node.retired || node.absent_from_view)
+            card.classList.add('ghost');
+        let related = false;
+        if (ui.actor) {
+            const actors = childAgents(ui.actor);
+            related = workActors(id).some(a => actors.has(a.id));
+            card.classList.add(related ? 'highlight' : 'dim');
+        }
+        else if (ui.selected === id)
+            card.classList.add('highlight');
+        const test = el('div', 'test-row'), testBtn = btn('', () => openInspector('node', id, 'tests'));
+        let passed = 0;
+        const tests = Object.entries(node.tests || {});
+        for (const [tid, def] of tests.slice(0, 16)) {
+            const check = ui.state.checks.find(c => c.node_id === id && c.test_id === tid);
+            if (check?.outcome === 'passed')
+                passed++;
+            const light = lamp(check);
+            light.title = (def.label || tid) + ': ' + (check?.outcome || 'не запускался') + (check?.freshness !== 'current' ? ' · актуальность не подтверждена' : '');
+            testBtn.append(light);
+        }
+        test.append(testBtn, el('span', 'test-count', `${passed}/${tests.length}`));
+        const head = el('div', 'node-head'), title = el('div', 'title');
+        title.append(el('span', 'node-id', id + (node.retired ? ' · прежний план' : node.absent_from_view ? ' · вне версии' : '')), el('h3', '', node.title));
+        title.tabIndex = 0; title.setAttribute('role', 'button'); title.setAttribute('aria-label', 'Сообщения ' + id); title.onkeydown = e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); title.click(); } };
+        title.onclick = () => { ui.selected = id; renderMap(); openInspector('node', id, 'messages'); };
+        head.append(title);
+        const hasChild = Object.values(ui.state.plan.nodes).some(n => n.parent === id);
+        if (hasChild) {
+            const down = btn('↘', () => enter(id));
+            down.title = 'Раскрыть внутренний граф';
+            down.setAttribute('aria-label', 'Раскрыть ' + id);
+            head.append(down);
+        }
+        const detail = btn('⋯', () => openInspector('node', id, 'assignment'));
+        detail.title = 'Подробности';
+        head.append(detail);
+        const chat = el('div', 'messages');
+        chat.dataset.chat = id;
+        chat.append(el('div', 'empty-message', ui.planMode ? node.assignment : ''));
+        const status = el('div', 'node-status'), state = nodeStatus(id), agents = workActors(id);
+        const running = agents.some(actorActive);
+        status.append(el('span', 'status-icon' + (running ? ' running' : state.status === 'done' ? ' done' : '')), btn(state.status || 'Запланировано', () => openInspector('node', id, 'status'), 'status-label'));
+        const names = el('div', 'node-actors');
+        for (const a of agents.slice(0, 4))
+            names.append(btn(agentCode(a.id), () => selectActor(a.id)));
+        status.append(names);
+        const req = btn('ЗАДАНИЕ', () => openInspector('node', id, 'assignment'), 'node-tab assignment'), accept = btn('ПРИЁМКА', () => openInspector('node', id, 'acceptance'), 'node-tab acceptance');
+        const latest = btn('', null, 'new-messages'); latest.hidden = true;
+        card.append(test, head, chat, status, req, accept, latest);
+        card.ondblclick = e => { if (hasChild && !e.target.closest('.messages,button'))
+            enter(id); };
+        return card;
+    }
+    function renderMap() {
+        if (!ui.state)
+            return;
+        const world = $('#world');
+        world.style.transform = `translate(${ui.camera.x}px, ${ui.camera.y}px) scale(${ui.camera.z})`;
+        world.classList.toggle('overview', ui.camera.z < .55);
+        const all = nodesWithGhosts(), current = Object.entries(all).filter(([, n]) => (n.parent || null) === ui.scope), vp = $('#viewport').getBoundingClientRect();
+        const onScreen = current.filter(([, n]) => { const x = (n.layout?.x || 0) * ui.camera.z + ui.camera.x, y = (n.layout?.y || 0) * ui.camera.z + ui.camera.y; return x + 370 * ui.camera.z > -120 && y + 410 * ui.camera.z > -120 && x < vp.width + 120 && y < vp.height + 120; });
+        const ns = $('#nodes');
+        const mounted = new Map([...ns.children].map(card => [card.dataset.node, card]));
+        const visible = new Set(onScreen.slice(0, 1000).map(([id]) => id));
+        for (const [id, card] of mounted) if (!visible.has(id)) { detachReader(card._reader); card.remove(); }
+        onScreen.slice(0, 1000).forEach(([id, node]) => {
+            let card = mounted.get(id);
+            const signature = JSON.stringify([node, nodeStatus(id), ui.state.checks.filter(c => c.node_id === id), workActors(id), ui.actor, ui.selected]);
+            if (!card) { card = renderNode(id, node); ns.append(card); }
+            else if (card._signature !== signature) {
+                const next = renderNode(id, node);
+                card.className = next.className; card.style.cssText = next.style.cssText;
+                for (const child of [...next.children]) if (!child.classList.contains('messages') && !child.classList.contains('new-messages')) {
+                    const old = [...card.children].find(x => x.className === child.className);
+                    if (old) old.replaceWith(child); else card.append(child);
+                }
+            }
+            card._signature = signature;
+            const chat = card.querySelector('.messages');
+            if (ui.camera.z >= .55 && !ui.planMode) {
+                const reader = readerFor('card', 'node', id);
+                if (card._reader !== reader || reader.scroll !== chat) { detachReader(card._reader); card._reader = reader; bindReader(reader, chat, chat, card.querySelector('.new-messages')); }
+                else if (reader.needsRefresh && !reader.loading) loadReader(reader);
+            }
+        });
+        const ed = $('#edges');
+        const edgeSignature = JSON.stringify([ui.scope, ui.state.plan.edges, current.map(([id, n]) => [id, n.layout]), ui.state.items.filter(i => i.edge_ids?.length).map(i => [itemKey(i), i.edge_ids])]);
+        if (ed._signature !== edgeSignature) {
+        ed._signature = edgeSignature;
+        ed.replaceChildren();
+        const defs = svg('defs'), marker = svg('marker', { id: 'arrow', markerWidth: 8, markerHeight: 8, refX: 6, refY: 3, orient: 'auto', markerUnits: 'strokeWidth' });
+        marker.append(svg('path', { d: 'M0,0 L6,3 L0,6', fill: 'none', stroke: 'var(--wait)', 'stroke-width': 1 }));
+        defs.append(marker);
+        ed.append(defs);
+        const groups = new Map();
+        for (const [eid, edge] of Object.entries(ui.state.plan.edges)) {
+            const a = visibleNodeFor(edge.from), b = visibleNodeFor(edge.to);
+            if (!a || !b || a === b)
+                continue;
+            const k = a + '|' + b;
+            const g = groups.get(k) || { a, b, ids: [] };
+            g.ids.push(eid);
+            groups.set(k, g);
+        }
+        for (const { a, b, ids } of groups.values()) {
+            const p = all[a].layout || {}, q = all[b].layout || {};
+            let x1 = (p.x || 0) + 356, y1 = (p.y || 0) + 190, x2 = (q.x || 0) - 26, y2 = (q.y || 0) + 190;
+            let d;
+            if (x2 > x1)
+                d = `M${x1},${y1} C${x1 + 70},${y1} ${x2 - 70},${y2} ${x2},${y2}`;
+            else {
+                x1 = (p.x || 0) + 165;
+                y1 = (p.y || 0) + 387;
+                x2 = (q.x || 0) + 165;
+                y2 = (q.y || 0);
+                d = `M${x1},${y1} C${x1},${y1 + 70} ${x2},${y2 - 70} ${x2},${y2}`;
+            }
+            const group = svg('g');
+            const path = svg('path', { d, class: 'edge', 'marker-end': 'url(#arrow)' }), hit = svg('path', { d, class: 'edge-hit', tabindex: 0, role: 'button', 'aria-label': 'Связь ' + ids.join(', ') });
+            const open = () => openInspector('edge', ids[0], 'messages');
+            hit.onclick = open;
+            hit.onkeydown = e => { if (e.key === 'Enter')
+                open(); };
+            group.append(path, hit);
+            const msgs = ui.state.items.filter(i => i.edge_ids?.some(id => ids.includes(id))).length;
+            if (msgs) {
+                const cx = (x1 + x2) / 2, cy = (y1 + y2) / 2;
+                const dot = svg('circle', { cx, cy, r: 11, class: 'edge-dot' });
+                dot.onclick = open;
+                const label = svg('text', { x: cx, y: cy + 4, class: 'edge-caption' });
+                label.textContent = String(msgs);
+                group.append(dot, label);
+            }
+            ed.append(group);
+        }
+        }
+        renderCrossScope();
+        $('#empty').textContent = !current.length ? 'На этом уровне пока нет блоков' : '';
+        $('#summary').textContent = `${current.length} блоков · ${Object.keys(ui.state.plan.edges).length} связей`;
+        $('#zoom').textContent = Math.round(ui.camera.z * 100) + '%';
+        if (onScreen.length > 1000)
+            $('#map-note').textContent = 'Показано 1000 видимых блоков · приблизьте интересующий участок';
+    }
+    function renderCrossScope() {
+        let links = $('#cross-scope');
+        if (!links) { links = el('div', 'cross-scope'); links.id = 'cross-scope'; $('#viewport').append(links); }
+        const external = Object.entries(ui.state.plan.edges).filter(([, edge]) => !!visibleNodeFor(edge.from) !== !!visibleNodeFor(edge.to));
+        const signature = JSON.stringify([ui.scope, external]);
+        if (links._signature === signature) return;
+        links._signature = signature; links.replaceChildren();
+        for (const [id, edge] of external.slice(0, 12)) links.append(btn(`${visibleNodeFor(edge.from) ? '→' : '←'} ${id} · ${visibleNodeFor(edge.from) ? edge.to : edge.from} (другой уровень)`, () => openInspector('edge', id), 'scope-link'));
+    }
+    async function copyId(value) { try { await navigator.clipboard.writeText(value); notice('Идентификатор скопирован'); } catch { notice(value); } }
+    function enter(scope, writeHash = true) { if (scope && !ui.state.plan.nodes[scope])
+        return; for (const card of $('#nodes').children) detachReader(card._reader); ui.cameras[ui.scope || '$root'] = { ...ui.camera }; ui.scope = scope; ui.camera = { ...(ui.cameras[scope || '$root'] || { x: 60, y: 30, z: .82 }) }; ui.selected = null; ui.actor = null; closeInspector(); if (writeHash) {
+        const h = new URLSearchParams();
+        h.set('project', ui.project);
+        if (scope)
+            h.set('scope', scope);
+        history.pushState(null, '', '#' + h.toString());
+    } renderToolbar(); renderActors(); renderMap(); }
+    function cameraZoom(z, point) { const rect = $('#viewport').getBoundingClientRect(); const p = point || { x: rect.width / 2, y: rect.height / 2 }; z = Math.max(.12, Math.min(1.8, z)); const ratio = z / ui.camera.z; ui.camera.x = p.x - (p.x - ui.camera.x) * ratio; ui.camera.y = p.y - (p.y - ui.camera.y) * ratio; ui.camera.z = z; renderMap(); }
+    function focusNode(id) { const node = nodesWithGhosts()[id]; if (!node)
+        return notice('Блок не найден'); if ((node.parent || null) !== ui.scope)
+        enter(node.parent || null); ui.selected = id; ui.actor = null; const rect = $('#viewport').getBoundingClientRect(); ui.camera.z = .92; ui.camera.x = rect.width * .38 - ((node.layout?.x || 0) + 165) * ui.camera.z; ui.camera.y = 40 - (node.layout?.y || 0) * ui.camera.z; renderMap(); renderActors(); }
+    $('#plus').onclick = () => cameraZoom(ui.camera.z * 1.18);
+    $('#minus').onclick = () => cameraZoom(ui.camera.z / 1.18);
+    $('#zoom').onclick = () => cameraZoom(1);
+    $('#fit').onclick = () => { const nodes = Object.values(nodesWithGhosts()).filter(n => (n.parent || null) === ui.scope); if (!nodes.length)
+        return; const left = Math.min(...nodes.map(n => n.layout?.x || 0)) - 30, top = Math.min(...nodes.map(n => n.layout?.y || 0)), right = Math.max(...nodes.map(n => (n.layout?.x || 0) + 360)), bottom = Math.max(...nodes.map(n => (n.layout?.y || 0) + 390)); const r = $('#viewport').getBoundingClientRect(), z = Math.min(1, (r.width - 70) / (right - left), (r.height - 60) / (bottom - top)); ui.camera = { x: 35 - left * z, y: 30 - top * z, z: Math.max(.12, z) }; renderMap(); };
+    $('#full').onclick = async () => { try {
+        if (document.fullscreenElement)
+            await document.exitFullscreen();
+        else
+            await document.documentElement.requestFullscreen();
+    }
+    catch {
+        notice('Полноэкранный режим недоступен в этой среде');
+    } };
+    const viewport = $('#viewport');
+    viewport.addEventListener('wheel', e => { if (e.target.closest('.messages') && ui.camera.z >= .55 && !e.ctrlKey)
+        return; e.preventDefault(); const r = viewport.getBoundingClientRect(); cameraZoom(ui.camera.z * Math.exp(-e.deltaY * .0015), { x: e.clientX - r.left, y: e.clientY - r.top }); }, { passive: false });
+    viewport.addEventListener('keydown', e => { if (e.target !== viewport || e.altKey || e.ctrlKey || e.metaKey) return; const delta = { ArrowLeft: [70, 0], ArrowRight: [-70, 0], ArrowUp: [0, 70], ArrowDown: [0, -70] }[e.key]; if (delta) { e.preventDefault(); ui.camera.x += delta[0]; ui.camera.y += delta[1]; renderMap(); } else if (e.key === '+' || e.key === '=') { e.preventDefault(); cameraZoom(ui.camera.z * 1.18); } else if (e.key === '-') { e.preventDefault(); cameraZoom(ui.camera.z / 1.18); } });
+    viewport.addEventListener('pointerdown', e => { if (e.button !== 1 && (e.button !== 0 || e.target.closest('.node,button,.edge-hit,.edge-dot')))
+        return; e.preventDefault(); ui.drag = { x: e.clientX, y: e.clientY, camera: { ...ui.camera } }; viewport.setPointerCapture(e.pointerId); viewport.classList.add('dragging'); });
+    viewport.addEventListener('pointermove', e => { if (!ui.drag)
+        return; ui.camera.x = ui.drag.camera.x + e.clientX - ui.drag.x; ui.camera.y = ui.drag.camera.y + e.clientY - ui.drag.y; renderMap(); });
+    function endDrag() { ui.drag = null; viewport.classList.remove('dragging'); }
+    viewport.addEventListener('pointerup', endDrag);
+    viewport.addEventListener('pointercancel', endDrag);
+    $('#search').addEventListener('keydown', e => { if (e.key !== 'Enter')
+        return; const q = e.target.value.trim().toLowerCase(); const found = Object.entries(nodesWithGhosts()).find(([id, n]) => id.toLowerCase() === q) || Object.entries(nodesWithGhosts()).find(([id, n]) => (id + ' ' + n.title).toLowerCase().includes(q)); if (found) {
+        focusNode(found[0]);
+        openInspector('node', found[0], 'messages');
+    }
+    else
+        notice('Нет подходящего блока'); });
+    $('#reset-selection').onclick = () => { ui.actor = ui.selected = null; renderMap(); renderActors(); closeInspector(); };
+    $('#outside').onclick = () => openInspector('outside', null, 'messages');
+    $('#close').onclick = closeInspector;
+    function closeInspector() { if (ui.inspector?.reader) detachReader(ui.inspector.reader); $('#inspector').hidden = true; ui.inspector = null; }
+    function blockSection(body, title, content) { body.append(el('h4', '', title), el('div', 'prose', content)); }
+    async function stream(kind, id, deep = true, before = null, limit = 100) {
+        if (demo) {
+            let items = ui.state.items;
+            if (kind === 'node') {
+                const ids = deep ? childNodes(id) : new Set([id]);
+                items = items.filter(i => i.node_ids.some(n => ids.has(n)));
+            }
+            else if (kind === 'agent')
+                items = items.filter(i => deep ? childAgents(id).has(i.agent_id) : i.agent_id === id);
+            else if (kind === 'edge')
+                items = items.filter(i => i.edge_ids.includes(id));
+            else if (kind === 'outside')
+                items = items.filter(i => !i.node_ids.length && !i.edge_ids.length || i.node_ids.some(n => !ui.state.plan.nodes[n] && !ui.state.ghosts[n]));
+            const eligible = before ? items.filter(i => i.first_seq < before) : items; const page = eligible.slice(-limit); return { items: page, has_more: eligible.length > limit, before: page[0]?.first_seq };
+        }
+        if (kind === 'outside')
+            return { items: ui.state.items.filter(i => !i.node_ids.length && !i.edge_ids.length || i.node_ids.some(n => !ui.state.plan.nodes[n] && !ui.state.ghosts[n])), has_more: false };
+        const q = new URLSearchParams({ limit, deep: String(deep), version: ui.state.version });
+        q.set(kind, id);
+        if (before)
+            q.set('before', before);
+        return api(base() + '/items?' + q);
+    }
+    function inspectorSignature(kind, id, tab) {
+        const node = nodesWithGhosts()[id], actor = ui.state.agents.find(actor => actor.id === id);
+        if (kind === 'node') {
+            if (tab === 'assignment') return JSON.stringify([node, ui.state.plan.edges]);
+            if (tab === 'acceptance') return JSON.stringify([node?.acceptance, nodeStatus(id).result]);
+            if (tab === 'tests') return JSON.stringify([node?.tests, ui.state.checks.filter(check => check.node_id === id)]);
+            if (tab === 'status') return JSON.stringify([nodeStatus(id), workActors(id)]);
+        }
+        if (kind === 'agent') return JSON.stringify([actor, ui.state.scopes.filter(scope => scope.agent_id === id)]);
+        return null;
+    }
+    function refreshInspectorDetails() {
+        const inspector = ui.inspector;
+        if (!inspector || inspector.tab === 'messages' || inspector.kind === 'diff' || inspector.signature === inspectorSignature(inspector.kind, inspector.id, inspector.tab)) return;
+        if (hasSelection($('#inspector-body'))) { inspector.needsRefresh = true; return; }
+        const top = $('#inspector-body').scrollTop;
+        openInspector(inspector.kind, inspector.id, inspector.tab, inspector.deep).then(() => { $('#inspector-body').scrollTop = top; });
+    }
+    document.addEventListener('selectionchange', () => { if (ui.inspector?.needsRefresh) refreshInspectorDetails(); });
+    async function openInspector(kind, id, tab = 'messages', deep = true) {
+        if (ui.inspector?.reader) detachReader(ui.inspector.reader);
+        if (kind === 'agent') deep = false;
+        const state = { kind, id, tab, deep, signature: inspectorSignature(kind, id, tab) };
+        ui.inspector = state;
+        const inspector = $('#inspector'), body = $('#inspector-body'), tabs = $('#tabs');
+        inspector.hidden = false;
+        body.replaceChildren();
+        tabs.replaceChildren();
+        $('#inspector-id').textContent = id || 'Непривязанная работа';
+        $('#inspector-title').textContent = kind === 'node' ? nodeName(id) : kind === 'agent' ? agentName(id) : kind === 'edge' ? 'На переходе' : 'Вне карты';
+        const choices = kind === 'node' ? [['assignment', 'Задание'], ['acceptance', 'Приёмка'], ['messages', 'Сообщения'], ['tests', 'Тесты'], ['status', 'Статус']] : kind === 'agent' ? [['messages', 'Сообщения'], ['work', 'Работы']] : [['messages', 'Сообщения']];
+        for (const [value, name] of choices)
+            tabs.append(btn(name, () => openInspector(kind, id, value, deep), value === tab ? 'current' : ''));
+        if (kind === 'agent') { const actor = ui.state.agents.find(actor => actor.id === id); if (actor?.activity_historical) body.append(el('p', 'small-note activity-provenance', 'История · ' + (actor.activity_reported_by || actor.activity_source || '') + ' · ' + actor.activity_at)); }
+        if (id) body.append(btn(kind === 'agent' ? 'Копировать native/block ID' : 'Копировать ID блока/связи', () => copyId(id), 'copy-id'));
+        if (kind === 'edge') {
+            const edge = ui.state.plan.edges[id];
+            if (edge) { body.append(el('p', 'small-note', 'Исходные концы связи, включая другие уровни карты:')); for (const endpoint of [edge.from, edge.to]) body.append(btn(endpoint + ' · ' + nodeName(endpoint), () => focusNode(endpoint), 'related')); }
+        }
+        if (tab === 'messages') {
+            if (kind === 'node' && childNodes(id).size > 1)
+                body.append(btn(deep ? 'С подблоками ✓' : 'Только этот блок', () => openInspector(kind, id, tab, !deep), 'more scope-toggle'));
+            if (kind === 'node' && deep) body.append(el('p', 'small-note', 'Общий поток блока и подблоков; исходные сообщения сохранены один раз.'));
+            const more = btn('Более ранние сообщения', null, 'more older-messages'); more.hidden = true;
+            const list = el('div', 'inspector-messages'), latest = btn('', null, 'new-messages inspector-latest'); latest.hidden = true;
+            body.append(more, list, latest);
+            state.reader = readerFor('inspector', kind, id, deep);
+            bindReader(state.reader, list, body, latest, more);
+            return;
+        }
+        if (kind === 'agent' && tab === 'work') {
+            const scopes = ui.state.scopes.filter(s => s.agent_id === id);
+            body.append(el('p', 'small-note', 'Фактическая область работы, не очередь обязательных заданий.'));
+            for (const s of scopes)
+                for (const n of s.node_ids)
+                    body.append(btn(n + ' · ' + nodeName(n), () => focusNode(n), 'related'));
+            const a = ui.state.agents.find(a => a.id === id);
+            blockSection(body, 'Родитель', a?.parent_id ? agentName(a.parent_id) : 'Не указан');
+            blockSection(body, 'Идентификатор агента', id);
+            blockSection(body, 'Контейнер сессии', a?.session_id || 'Неизвестен');
+            return;
+        }
+        const node = nodesWithGhosts()[id];
+        if (!node)
+            return;
+        const status = nodeStatus(id);
+        if (tab === 'assignment') {
+            blockSection(body, 'Задание', node.assignment);
+            for (const r of node.source_refs || []) {
+                body.append(el('h4', '', r.label || 'Источник'));
+                if (/^https?:\/\//.test(r.uri || '')) {
+                    const a = el('a', 'prose', r.uri);
+                    a.href = r.uri;
+                    a.rel = 'noreferrer noopener';
+                    a.target = '_blank';
+                    body.append(a);
+                }
+                else
+                    body.append(el('div', 'prose', r.uri || ''));
+            }
+            const edgeEntries = Object.entries(ui.state.plan.edges).filter(([, e]) => e.to === id || e.from === id);
+            if (edgeEntries.length)
+                body.append(el('h4', '', 'Связи'));
+            for (const [, e] of edgeEntries) {
+                const other = e.to === id ? e.from : e.to;
+                body.append(btn((e.to === id ? '← ' : '→ ') + other + ' · ' + nodeName(other), () => focusNode(other), 'related'));
+            }
+        }
+        else if (tab === 'acceptance') {
+            body.append(el('h4', '', 'Ожидалось'));
+            for (const [aid, a] of Object.entries(node.acceptance || {})) {
+                const row = el('div', 'criterion');
+                row.append(el('b', '', aid), el('span', '', a.text || a.label || ''));
+                body.append(row);
+            }
+            body.append(el('h4', '', 'Получено'), el('div', 'result-block', status.result?.summary || 'Результат ещё не описан'));
+            body.append(el('h4', '', 'Расхождения с ожиданиями'), el('div', 'result-block', status.result?.difference || 'Не указаны. Это не доказательство отсутствия расхождений.'));
+            if (status.result?.plan_version)
+                body.append(el('div', 'result-tag', 'Результат относительно ' + status.result.plan_version));
+        }
+        else if (tab === 'tests') {
+            for (const [tid, t] of Object.entries(node.tests || {})) {
+                const check = ui.state.checks.find(c => c.node_id === id && c.test_id === tid);
+                const row = el('div', 'checkline'), text = el('div');
+                text.append(el('div', '', t.label || tid), el('small', '', `${tid} · ${check?.outcome || 'не запускался'} · ${check?.freshness === 'current' ? 'актуальность заявлена исполнителем' : 'актуальность не подтверждена'}`));
+                row.append(lamp(check), text);
+                body.append(row);
+            }
+            body.append(el('p', 'small-note', 'Успешные тесты, актуальность результата и статус задачи — отдельные сведения. Карта не меняет статус исполнителя.'));
+        }
+        else if (tab === 'status') {
+            blockSection(body, 'Сообщённый статус', status.status || 'Не указан');
+            blockSection(body, 'Пояснение', status.explanation || 'Не указано');
+            blockSection(body, 'Последнее сообщение о статусе', status.at || 'Нет');
+            for (const a of workActors(id))
+                body.append(btn(agentName(a.id) + ' · ' + a.activity, () => openInspector('agent', a.id, 'messages'), 'related'));
+        }
+        if (Object.values(ui.state.plan.nodes).some(n => n.parent === id))
+            body.append(btn('Открыть внутренний граф ↘', () => enter(id), 'more'));
+        body.append(btn('Копировать адрес блока', async () => { const link = location.origin + location.pathname + '#project=' + encodeURIComponent(ui.project) + '&scope=' + encodeURIComponent(node.parent || '') + '&node=' + encodeURIComponent(id); try {
+            await navigator.clipboard.writeText(link);
+            notice('Адрес скопирован');
+        }
+        catch {
+            notice('Блок: ' + id);
+        } }, 'more'));
+    }
+    $('#diff').onclick = async () => { const index = ui.versions.findIndex(v => v.version === ui.state.version), previous = ui.versions[index + 1]; if (!previous)
+        return notice('Предыдущей версии нет'); openInspector('diff', null, 'diff'); $('#inspector-title').textContent = 'Изменения плана'; const body = $('#inspector-body'); body.replaceChildren(); try {
+        let changes;
+        if (demo) {
+            const before = demo.states[previous.version].plan, after = ui.state.plan;
+            changes = objectDiff(before, after);
+        }
+        else
+            changes = (await api(base() + '/diff?' + new URLSearchParams({ before: previous.version, after: ui.state.version }))).changes;
+        for (const c of changes) {
+            const row = el('div', 'diff-row');
+            row.append(el('code', '', c.op + ' · ' + c.path.join('/')));
+            if (c.before !== undefined)
+                row.append(el('pre', '', '− ' + JSON.stringify(c.before)));
+            if (c.after !== undefined)
+                row.append(el('pre', '', '+ ' + JSON.stringify(c.after)));
+            body.append(row);
+        }
+        if (!changes.length)
+            body.append(el('p', '', 'Структура не менялась'));
+    }
+    catch (e) {
+        notice(e.message);
+    } };
+    function objectDiff(a, b, path = []) { if (JSON.stringify(a) === JSON.stringify(b))
+        return []; if (a && b && !Array.isArray(a) && !Array.isArray(b) && typeof a === 'object' && typeof b === 'object') {
+        return [...new Set([...Object.keys(a), ...Object.keys(b)])].flatMap(k => objectDiff(a[k], b[k], [...path, k]));
+    } return [{ path, op: a === undefined ? 'add' : b === undefined ? 'remove' : 'replace', before: a, after: b }]; }
+    $('#version').onchange = async (e) => { ui.version = e.target.value; await refresh(true); };
+    $('#project').onchange = async (e) => { closeInspector(); for (const reader of readers.values()) detachReader(reader); readers.clear(); $('#nodes').replaceChildren(); ui.project = e.target.value; ui.cursor = 0; ui.version = null; ui.scope = null; ui.camera = { x: 60, y: 35, z: .82 }; await refresh(true); };
+    async function refresh(includeVersions = false, events = null) { if (ui.busy)
+        return; ui.busy = true; try {
+        let state;
+        if (demo) {
+            state = demo.states[ui.version || demo.current];
+            ui.versions = demo.versions;
+        }
+        else {
+            state = await api(base() + '/state' + (ui.version ? '?version=' + encodeURIComponent(ui.version) : ''));
+            if (includeVersions)
+                ui.versions = await api(base() + '/versions');
+        }
+        const previousState = ui.state;
+        ui.state = state;
+        invalidateReaders(events && (state.cursor || 0) <= ui.cursor ? events : null, previousState);
+        ui.cursor = Math.max(ui.cursor, state.cursor || 0);
+        if (ui.scope && !state.plan.nodes[ui.scope]) {
+            ui.scope = null;
+            notice('Этот блок отсутствует в выбранной версии. История сохранена.');
+        }
+        $('.project-title').textContent = 'Карта исполнения';
+        renderToolbar();
+        renderActors();
+        renderMap();
+        online = true;
+        $('#foot-status').classList.remove('source-warning');
+        $('#foot-status').textContent = demo || ui.project === 'demo' ? 'Снимок плана · исполнение не запускалось' : 'Локальный сервис · тексты не отправляются в облако';
+        refreshInspectorDetails();
+    }
+    catch (e) {
+        online = false;
+        $('#foot-status').textContent = 'Нет связи · показаны последние полученные данные';
+        $('#foot-status').classList.add('source-warning');
+        notice(e.message);
+    }
+    finally {
+        ui.busy = false;
+    } }
+    async function watch() { while (!stopped && !demo) {
+        try {
+            const requestedProject = ui.project;
+            const reply = await api(base() + '/events?' + new URLSearchParams({ after: ui.cursor, wait: 12, limit: 200 }));
+            if (ui.project !== requestedProject)
+                continue;
+            if (reply.events.length) {
+                ui.cursor = reply.cursor;
+                await refresh(reply.events.some(e => e.kind === 'plan.changed'), reply.events);
+            }
+            else if (!online)
+                await refresh(true);
+        }
+        catch {
+            online = false;
+            $('#foot-status').textContent = 'Связь прервана · исполнители не остановлены';
+            $('#foot-status').classList.add('source-warning');
+            await new Promise(r => setTimeout(r, 1800));
+        }
+    } }
+    async function boot() { try {
+        const projects = demo ? [{ project_id: 'waypoint', title: 'Waypoint · дорожная карта реализации' }] : await api('/api/projects');
+        if (!projects.length) {
+            $('#empty').textContent = 'Пока нет карт. Импортируйте план через wp plan-import.';
+            return;
+        }
+        const hash = new URLSearchParams(location.hash.slice(1));
+        ui.project = projects.some(p => p.project_id === hash.get('project')) ? hash.get('project') : projects[0].project_id;
+        $('#project').replaceChildren();
+        for (const p of projects) {
+            const o = el('option', '', p.title);
+            o.value = p.project_id;
+            o.selected = p.project_id === ui.project;
+            $('#project').append(o);
+        }
+        $('#connection').textContent = demo ? 'План' : 'Локально';
+        $('#connection').classList.toggle('demo', !!demo);
+        await refresh(true);
+        if (hash.get('scope'))
+            enter(hash.get('scope'), false);
+        if (hash.get('node'))
+            focusNode(hash.get('node'));
+        watch();
+    }
+    catch (e) {
+        $('#empty').textContent = 'Откройте локальный адрес из команды wp url. Ключ доступа хранится только в этой вкладке.';
+        $('#foot-status').textContent = e.message;
+    } }
+    window.addEventListener('popstate', () => { if (!ui.state)
+        return; const p = new URLSearchParams(location.hash.slice(1)); enter(p.get('scope') || null, false); if (p.get('node'))
+        focusNode(p.get('node')); });
+    window.addEventListener('resize', () => renderMap());
+    window.addEventListener('beforeunload', () => { stopped = true; });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape')
+        closeInspector(); if (e.altKey && e.key === 'ArrowUp' && ui.scope) {
+        e.preventDefault();
+        enter(ui.state.plan.nodes[ui.scope]?.parent || null);
+    } });
+    // Developer diagnostic is read-only and does not expose credentials.
+    window.waypointView = () => ({ scope: ui.scope, camera: { ...ui.camera }, visibleNodes: document.querySelectorAll('.node').length, version: ui.state?.version, project: ui.project });
+    boot();
+})();
+</script>
+</body></html>

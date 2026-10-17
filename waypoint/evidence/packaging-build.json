@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "build": "pip wheel --no-deps --no-build-isolation .",
+  "wheel": "waypoint_observer_local-0.1.0-py3-none-any.whl",
+  "required_assets": [
+    "waypoint/web/index.html",
+    "waypoint/web/app.js",
+    "waypoint/web/style.css",
+    "waypoint/cli.py",
+    "waypoint/collector.py"
+  ],
+  "entrypoint": "wp = waypoint.cli:main",
+  "wheel_crc_ok": true,
+  "target_installation": "NOT_RUN"
+}

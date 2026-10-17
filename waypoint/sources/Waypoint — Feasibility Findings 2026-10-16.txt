@@ -1,0 +1,79 @@
+WAYPOINT — FEASIBILITY FINDINGS REVISION 3 (2026-10-16)
+PRIMARY EVIDENCE: user supplied two revised sanitized archives. RESULTS 33 entries; SHA256 6976f93c46fb926c09594cd37a12dee00a1cc6a2446574db21f4c5581df7db87. EVIDENCE 53 entries; SHA256 51fa3627053ea6c9e5e75046401274d08d0d069a806620ad75d57d1028960698. Both ZIP CRC checks passed, filenames and code reviewed. On this ChatGPT host only artifact inspection was performed; the live Codex runtime was NOT independently reproduced. Full source proof statements are in reports/FOLLOWUP_REAL_SESSION_RU.md, P09_direct_ipc.json, P10_freshness.json, P11_real_lineage.json and experiments/live_observation/*.py within the uploaded evidence ZIP.
+
+P09 REAL PARTIAL / EXISTING CLIENT OBSERVATION
+- Current Codex app-server owner via VS Code/process HUD: stdio process, no general Unix/WS listener. Existing app-server-control.sock rejected connect ECONNREFUSED; existence of socket path does NOT prove active service.
+- Separate current user IPC under VS Code's 'code' process: private little-endian length-prefixed JSON, extension openai.chatgpt-26.930.61225-linux-x64. Observe client initialized with new client ID; read-only thread-owner-discovery, following=True and thread-follower-load-complete-history succeeded, followed by following=False and disconnection.
+- In 50.67s, 11 target thread-stream-state-changed events (three snapshots, eight patches), 0 detected patch gaps; reconstructed state item types: 19 agentMessage, 3 userMessage, 39 commandExecution, 15 mcpToolCall, 19 fileChange. These counts are state object counts, not 95 newly executed actions. No turn/start/steer/resume/approval commands. 'Readonly' is a behavior enforced by observer's command allowlist, not a provider-issued read-only token. Subscription toggles following state.
+- Outcome: live observation through existing INTERNAL IPC is proven on this client's current version. Generic official App Server multi-reader subscription remains NOT_TESTED for this stdio process; this is not a negative conclusion about other launch configurations.
+
+P10 REAL PASS / FRESHNESS, ONE MATCHED COMPLETED ITEM
+- Compared same terminal item in in-place rollout JSONL, active IPC push and owner history snapshot/revision: id, normalized type and terminal status all matched. +0.528896ms IPC−JSONL and +47.420817ms owner API−JSONL at first observer detection (positive means observed after JSONL).
+- n=1; tail/select step <=50ms, API read interval floor 500ms, owner API request roundtrip ~33.79 and 46.39ms. A separate generic ID match within archive indicated IPC could surface progress before terminal JSONL; excluded from comparable terminal metric. Do NOT call either delta 'Codex delivery latency' or infer p50/p95/SLA.
+- Frozen SQLite copy was not used for this experiment. Direct official thread/turns/list freshness was NOT measured.
+
+P11 REAL PASS / PERSISTED SECOND-LEVEL LINEAGE
+- Examined only existing local own-user rollouts (1047). 952 with explicit parent_thread_id, 293 two-edge chains with all 3 files, 13 strict explicit root→depth1→depth2 chains, maximum observed parent hops 4. These are sample counts, not system limits.
+- Verified one R0→A1→A2 real historical path. For both descendants, payload.parent_thread_id equals preceding payload.id and source.subagent.thread_spawn.parent_thread_id agrees; source.depth = 1/2. Two parents contained actual spawn_agent outputs with output.task_name matching child agent_path. Spawn output did NOT include child UUID in these examples.
+- Child payload.session_id may equal root container session_id. Correct distinct thread identity from observed format = payload.id, not session_id. forked_from_id and agent_path are other fields, not a substitute for parent lineage.
+- No NEW live three-agent simultaneous run was observed. No new measurement inference calls/subagents reported.
+
+COST, RISK, NEXT CHECKS
+Evidence strongly supports designing ONE observer and ONE common graph/state contract with adapter inputs, not duplicating systems around an unverified negative capability. Current private IPC is undocumented and version-coupled; require runtime capability check, careful size/backpressure/reconnect policy, and no executing RPCs. Existing public field report https://github.com/openai/codex/issues/20781 describes exceptionally large private IPC full snapshots causing CPU load, not a measured problem in this user's run.
+Optional bounded verification during implementation: observe normal long-thread snapshot sizes, source rotation/restart and reconciliation with rollout, and live agent-child transitions whenever they occur. No extra model turns solely to produce benchmarking data unless authorized. Do not delay design for unbounded speculative tests.
+Keep original P00–P08 reports and prior revision addenda below as historical evidence. Report statuses P00–P08 remain 6 PASS, 3 PARTIAL, 0 BLOCKED after rev2; new P09–P11 results are additional and should not be forced into the original denominator.
+ 
+============================================================
+HISTORICAL ADDENDA BELOW — revisions 2 then 1.
+
+REVISION 2 — CURRENT EVIDENCE (2026-10-16; supersedes historical original below)
+New uploaded results ZIP: 24 files, ZIP CRC OK, SHA256 5ab44479013ce1ba90d7d8c70f1477bfddae46ae765f33c841f50ddec5503279. New evidence ZIP: 39 files, ZIP CRC OK, SHA256 dc82384adb807b773440fffb0d35c8025fc200faf6fc4d1f7c52a5ccc70aca68. Report statuses now 6 PASS, 3 PARTIAL, 0 BLOCKED. Codex 0.153.4. No additional inference-turns or experimental subagents reported for the measurements.
+P02 REAL/PARTIAL: isolated writable CODEX_HOME, SQLite backup, read-only linked rollouts. Successful handshake, two pages of thread/list (2 records each), thread/read, thread/turns/list and thread/loaded/list. A full persisted turn projection had 11 items: userMessage 1, agentMessage 3, mcpToolCall 2, fileChange 5; recorded status interrupted. thread/items/list returned -32601 not supported for this history store. This is a store-specific result, not failure to initialize the server.
+The originating active Codex client's rollout grew 1,416,090 → 1,426,066 bytes (+9,976), prefix unchanged; the separate test server still saw thread.status notLoaded, no loaded threads, no thread/turn/item notifications, unchanged 11-item interrupted projection. The code in experiments/P02/read_api.py uses an RPC allowlist, a copied point-in-time SQLite index and an independent stdio app-server instance. It never connected to the originating client's live app-server endpoint nor issued a subscribe/resume operation. Therefore it did not test a true shared live subscription. Process-local notLoaded is expected; it says nothing definitive about activity in the originating executor. Persisted-read API success does not demonstrate freshness for active conversations, especially with a frozen SQLite index.
+P07 PASS with real headless Chrome 154, synthetic UI data. Native pan, semantic zoom, scroll inside chat without zooming canvas, nested graph, agent/orchestrator highlighting, historical v1/v2, edge message, 100→500 chat lazy load were exercised; JS errors 0. Interaction defects involving pointer click capture and overlapping edge hit boxes were repaired and retested. Single 100- and 300-simplified-block runs each measured next-rAF render 15.40 ms and DOM descendants 601/1801; 30-frame mean rAF interval 16.67ms is not production GPU FPS. No real React Flow or human ergonomic test.
+P01 remains limited real stored-rollout reading. P03/P04/P05/P06/P08 remain synthetic on available evidence. The report's zero extra inference-turns is not proof of zero instrumentation cost during actual production use.
+NEAREST DECISIVE EXPERIMENT: On existing naturally occurring real Codex work, measure event appearance/latency in append-only rollout and any real child metadata. Compare it with up-to-date persisted API reads. Verify whether the user's existing client exposes a same-app-server socket for a second read-only connection. Do not assume an independent app-server with a copied index can receive originating live notifications. Distinguish unsupported same-process subscriber from not-tested if the endpoint is inaccessible. Preserve actual negative results.
+No core hypothesis has been conclusively refuted; neither confirm nor reject a primary implementation without decisive observations. Keep the old baseline below only as historical evidence.
+
+WAYPOINT — FEASIBILITY FINDINGS / EVIDENCE ADDENDUM
+Date reviewed: 2026-10-16. Linked governing context: “Waypoint — Design Context (discovery)”.
+Source: user-supplied sanitized archives WAYPOINT_CODEX_RESULTS_SANITIZED.zip and WAYPOINT_EVIDENCE_SANITIZED.zip, with README-style summary in the chat. Files were read directly; they are not stored in this Google Doc and are not claimed to have been uploaded to Drive.
+Archive integrity: ZIP decompression checks passed; 21 entries in results ZIP, 34 entries in evidence ZIP.
+SHA-256 RESULTS: b11b7173998ff6ba487d9f6951a8ed1e4e6f2ecc861f781e1449cc29eb5a2594
+SHA-256 EVIDENCE: 65dcdebd82ba4f6a662e88d6213ed14e856d6a6a6c4e61ea76767417d24e015b
+
+ORIGINAL CODEX REPORT, BOUNDED RESULTS (historical; superseded)
+P00 PASS / REAL — CLI and environment inventory, codex-cli 0.153.4; flags alone do not confirm API functionality.
+P01 PARTIAL / REAL — passive read of most-recent own 58-line, 250210-byte JSONL rollout; repeat fixed-byte-prefix observation yielded no additional events. Does not prove live tail, cross-client subscription, all event identities or parent links.
+P02 BLOCKED / REAL — isolated stdio app-server ended exit 1 before handshake; SQLite state failed to initialize with read-only HOME. No thread/list, thread/read, turn/item page, or subscription actually executed.
+P03 PASS / SYNTHETIC — 17 unique events, nested orchestrator tree, many-to-many work relation and retained unknown agent.
+P04 PASS / SYNTHETIC — local JSONL worker using SQLite, 1000 requests; original p50 7.45 ms and p95 12.85 ms. Model token cost was not measured. A command referring to an unknown block was rejected; off-map observations must still remain visible.
+P05 PASS / SYNTHETIC — Git plan v1/v2, +W-06, -W-03/-W-03.1, changed W-02 acceptance, four modified edges. Independent node-field merges and explicit acceptance conflicts. No general concurrent delete/edge merge.
+P06 PASS / SYNTHETIC — idempotent replay with duplicated and partial lines, explicit gaps, unknown events, parent stop with active child; original single bulk ingestion 10000 events / 56.74ms. Non-marked missing events cannot be inferred; no proven exactly-once on real rollout rotation.
+P07 PARTIAL / SYNTHETIC — HTML/SVG only, syntax checked by Codex; no browser test on its host. See independent supplementary browser test below.
+P08 PARTIAL / SYNTHETIC — locally fabricated hook inputs and subprocess measurements. No real Codex hooks. Real Stop/SubagentStop may require JSON stdout, unlike this prototype's empty stdout.
+
+INDEPENDENT FOLLOW-UP BY REVIEWER (SAME DATE)
+Extracted the evidence archive into an isolated temporary directory and reviewed experiment source code. Re-executed tools/check_fixtures.py, Python compilation, then P03, P04, P05, P06 and P08 in sequence. All script assertions completed successfully in this separate environment. Performance numbers from this other host were not treated as validation of the original machine's benchmarks. P01 and P02 could not be reproduced because their original private Codex runtime/sessions are unavailable in this reviewer host.
+A headless Chromium 144.0.7559.96 browser was available to the reviewer. Loaded bundled P07 HTML directly using browser set_content (file URL navigation was blocked by container policy). Confirmed no JS page errors; all 7 in-page smoke conditions true; nested W-02 opened to 2 child nodes; v2 hid obsolete W-03 while explicitly flagging old active work; real pointer drag changed the map transform, wheel zoom changed semantic scale; mouse wheel over W-02 chat scrolled from 0 to 380px without changing zoom. It is a real headless browser interaction check, NOT end-user visual acceptance.
+Browser simplified-node samples (two executions each in one session): 100 nodes (601 DOM descendants): render 10.1–11.0ms; 300 nodes (1801 DOM descendants): render 21.1–26.5ms. 30 requestAnimationFrame samples per run had mean approx 16.1–16.7ms; these are timing observations on one browser/host, not a frame-rate guarantee. 100/300 large modes intentionally omit per-node chats, many edges and real nested complexity; never extrapolate to React Flow or full Waypoint.
+Screenshot generated in chat as waypoint-p07-independent-browser-check.png, not uploaded to this Drive document.
+
+IMPORTANT EXTERNAL CROSS-CHECK
+Official Codex environment documentation https://learn.chatgpt.com/docs/config-file/environment-variables says CODEX_HOME controls state and should be writable, with CODEX_SQLITE_HOME for SQLite location. The Codex team clarified in https://github.com/openai/codex/issues/51293 that read-only CODEX_HOME can fail initialization even if sqlite/log paths are redirected; runtime writes including installation_id remain necessary. Thus P02's error is consistent with a known environmental prerequisite. App Server read APIs and cross-client live subscription remain unverified.
+Documentation also confirms that Stop/SubagentStop hooks expect valid JSON on stdout when ending with exit code 0: https://developers.openai.com/de-DE/docs/hooks . The synthetic hook returning empty stdout must NOT be installed unchanged.
+Official App Server documentation: https://learn.chatgpt.com/docs/app-server .
+
+DESIGN CONSEQUENCES, EVIDENCE WEIGHT
+SUPPORTED in limited scope: passive reading of one existing rollout; local SQLite protocol and event replay on synthetic fixtures; Git plan checkpoints and node-field conflict on synthetic fixtures; limited P07 browser interactions and simplified 100/300-node rendering.
+INCONCLUSIVE / NOT_TESTED: actual live delay; observing another client's existing active session with App Server; stable nested subagent parent IDs in real data; complete raw reasoning; exactly-once during real log rotation; genuine hook contract/async impact; complete nested chart usability and full-graph performance; token overhead and production durability.
+The report's “zero new model turns / zero new experimental subagents” is about additional runs for measurement. It is not proof that instrumenting actual task work is token-free, nor evidence of total experiment cost.
+
+FOLLOW-UP EXPERIMENT TRIAGE
+1) Highest relevance: read-only tail of an already occurring real Codex session's next natural events, without creating turns for a benchmark; collect only schema/timing and safely find true child-parent metadata if present. Determine whether passive logs suffice for useful v1 activity.
+2) Independently, initialize App Server under its required writable state on a disposable controlled CODEX_HOME; exercise read-only methods only; distinguish persisted-read from separate-client live subscriptions. Do not weaken existing global sandbox or alter user HOME just to make this pass.
+3) Evaluate actual hooks only when they become necessary for missing events, with correct JSON contracts, explicit authorization and fail-open behavior; avoid injecting token-consuming context.
+4) Defer generalized graph merge and full React Flow performance to focused design/implementation tests, not additional broad feasibility probing.
+
+NO MANDATORY NEW USER DECISIONS FROM THESE RESULTS
+Keep earlier optional UX alternatives as explicitly unapproved hypotheses. Existing agreed functionality is not overridden by the outcome of any one probe.

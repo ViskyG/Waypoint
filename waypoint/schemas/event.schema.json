@@ -1,0 +1,259 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Waypoint observation 1",
+  "type": "object",
+  "required": [
+    "event_id",
+    "project_id",
+    "source",
+    "kind",
+    "at"
+  ],
+  "properties": {
+    "schema": {
+      "const": "waypoint.event/1"
+    },
+    "event_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@/\\-]{0,199}$"
+    },
+    "project_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@\\-]{0,199}$"
+    },
+    "source": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@/\\-]{0,199}$"
+    },
+    "kind": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@/\\-]{0,199}$"
+    },
+    "agent_id": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@/\\-]{0,199}$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "node_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@/\\-]{0,199}$"
+      },
+      "maxItems": 1000
+    },
+    "edge_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@/\\-]{0,199}$"
+      },
+      "maxItems": 1000
+    },
+    "payload": {
+      "type": "object"
+    }
+  },
+  "additionalProperties": true,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "enum": [
+              "node.status"
+            ]
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "node_ids",
+          "payload"
+        ],
+        "properties": {
+          "payload": {
+            "type": "object",
+            "required": [
+              "status"
+            ],
+            "properties": {
+              "status": {
+                "type": "string",
+                "maxLength": 240
+              },
+              "explanation": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "enum": [
+              "test.result"
+            ]
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "node_ids",
+          "payload"
+        ],
+        "properties": {
+          "payload": {
+            "type": "object",
+            "required": [
+              "test_id",
+              "run_id",
+              "outcome"
+            ],
+            "properties": {
+              "test_id": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@/\\-]{0,199}$"
+              },
+              "run_id": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@/\\-]{0,199}$"
+              },
+              "outcome": {
+                "enum": [
+                  "passed",
+                  "failed",
+                  "skipped",
+                  "error",
+                  "not_run"
+                ]
+              },
+              "freshness": {
+                "enum": [
+                  "current",
+                  "stale",
+                  "unknown"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "enum": [
+              "scope.set",
+              "agent.upsert",
+              "agent.activity",
+              "item.upsert",
+              "item.link",
+              "item.identity_corrected"
+            ]
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "agent_id"
+        ],
+        "properties": {
+          "agent_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@/\\-]{0,199}$"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "enum": [
+              "item.upsert",
+              "item.link"
+            ]
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "payload"
+        ],
+        "properties": {
+          "payload": {
+            "type": "object",
+            "required": [
+              "item_id"
+            ],
+            "properties": {
+              "item_id": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@/\\-]{0,199}$"
+              },
+              "text": {
+                "type": "string",
+                "maxLength": 2000000
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "enum": [
+              "item.identity_corrected"
+            ]
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "payload"
+        ],
+        "properties": {
+          "payload": {
+            "type": "object",
+            "required": [
+              "item_id",
+              "previous_agent_id",
+              "basis"
+            ],
+            "properties": {
+              "item_id": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@/\\-]{0,199}$"
+              },
+              "previous_agent_id": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@/\\-]{0,199}$"
+              },
+              "basis": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "fixture": "SYNTHETIC",
+  "transport": "real localhost HTTP",
+  "live_codex_tested": false,
+  "checks": [
+    "Unrelated event preserves assignment DOM and selection",
+    "Relevant plan update is deferred while assignment text is selected",
+    "Assignment updates after selection clears and preserves scroll",
+    "Unrelated event preserves structural diff inspector"
+  ],
+  "check_count": 4
+}

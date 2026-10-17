@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "plan_version_preserved": true,
+  "old_statuses_preserved": true,
+  "prior_native_item_keys_retained_or_explicitly_corrected": true,
+  "explicit_identity_corrections": 3,
+  "duplicate_native_keys": 0,
+  "root_revision_after_recovery": 313,
+  "source_hydrating": false,
+  "only_waypoint_processes_restarted": true,
+  "source_remained_working": true,
+  "data_permissions_octal": "0o700",
+  "db_permissions_octal": "0o600"
+}

@@ -1,0 +1,35 @@
+{
+  "schema": "waypoint.roadmap-publication-request/1",
+  "status": "PREPARED_NOT_APPLIED",
+  "project_id": "waypoint",
+  "kind": "planning_handoff",
+  "resource_policy": "MIXED",
+  "design_session_id": "WAYPOINT-DESIGN-20261016-1312895b",
+  "graph_ref": {
+    "archive_expected_library_path": "/WorkBelt/artifacts/waypoint/roadmap-20261016-r1/waypoint-roadmap-package-2026-10-16.zip",
+    "member": "waypoint-roadmap-2026-10-16/roadmap/ROADMAP.plan.json"
+  },
+  "preserve_source_delivery_ids": [
+    "WPT-C01",
+    "WPT-C02",
+    "WPT-C03",
+    "WPT-C04"
+  ],
+  "existing_remaining_capsule_ids": [
+    "WPT-C05",
+    "WPT-C06",
+    "WPT-C07"
+  ],
+  "entry_task": "WPT-R00",
+  "target_registry_path": "/WorkBelt/handoff/CAPSULE_REGISTRY.json",
+  "target_inbox_path": "/WorkBelt/handoff/DOT_RESULTS_INBOX.json",
+  "constraints": [
+    "Resolve the actual final archive Library ID after upload/readback.",
+    "Fresh full registry/inbox reads and genuine version guard before any write.",
+    "Preserve unrelated entries and existing live claims.",
+    "Map packet IDs remain the design IDs; children refine them, not duplicate dispatches.",
+    "Do not schedule or start any executor solely from this metadata record."
+  ],
+  "applied": false,
+  "dispatcher_started": false
+}

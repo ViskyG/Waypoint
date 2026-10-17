@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="ru" data-theme="terracotta">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Waypoint · Карта работ</title><link rel="stylesheet" href="/static/style.css"></head>
+<body>
+<header class="top"><div class="brand"><b class="mark">W</b><strong>WAYPOINT</strong></div><span class="project-title">Карта работ</span><select id="project" aria-label="Проект"></select><span id="connection" class="pill">Локально</span><button id="theme" aria-label="Изменить цветовую схему">◐ <span>Терракота</span></button></header>
+<section class="agents-bar"><div class="rail-title">АГЕНТЫ <span id="active-count"></span></div><div id="agents" class="agent-strip"></div></section>
+<main><aside class="orchestrators"><div class="section-label">ОРКЕСТРАТОРЫ</div><div id="orchestrators"></div><button id="outside" class="outside">Вне карты <span id="outside-count">0</span></button><div class="rail-footer">Наблюдение, не управление</div></aside>
+<section class="workspace">
+<div class="toolbar"><div id="crumbs" class="crumbs"></div><button id="up" title="На уровень выше" aria-label="На уровень выше">↑</button><div class="toolbar-end"><input id="search" placeholder="Найти блок…" aria-label="Найти блок"><select id="version" aria-label="Версия плана"></select><button id="diff" title="Изменения плана">Δ</button><button id="fit" title="Вписать карту">⛶</button><button id="minus" aria-label="Уменьшить масштаб">−</button><button id="zoom" title="Масштаб 100%">100%</button><button id="plus" aria-label="Увеличить масштаб">+</button><button id="full" title="На весь экран">↗</button></div></div>
+<div id="viewport" class="viewport" tabindex="0" aria-label="Граф работ. Перетаскивайте пустое место, колесо меняет масштаб."><div id="world"><svg id="edges" aria-label="Зависимости"></svg><div id="nodes"></div></div><div id="empty"></div><div id="map-note" class="map-note"></div></div>
+<aside id="inspector" class="inspector" hidden><header><div><span id="inspector-id"></span><h2 id="inspector-title"></h2></div><button id="close" aria-label="Закрыть подробности">×</button></header><nav id="tabs"></nav><div id="inspector-body"></div></aside>
+</section></main>
+<footer><span id="foot-status">Ожидание локального сервиса</span><span id="summary"></span><button id="reset-selection" hidden>Снять выделение</button><span class="muted">Колесо · масштаб / чат</span></footer>
+<div id="notice" role="status" hidden></div>
+<script src="/static/app.js" defer></script>
+</body></html>

@@ -1,0 +1,20 @@
+{
+  "stage": "WPT-R00",
+  "status": "passed",
+  "base": "fresh unpacked copy",
+  "archive_sha256": "6c5c77322e79d56df988a5954830353d2493c6400750f87d040e62a054f40da6",
+  "plan_version": "v-dbf4fffa0d9949cc",
+  "node_count": 20,
+  "edge_count": 21,
+  "baseline_tests": 36,
+  "http_checks": 5,
+  "roadmap_checks": 135,
+  "source_integrity_files": 75,
+  "integrator": "root",
+  "ownership": {
+    "root": "Store/API/CLI and integration",
+    "codex_adapter": "adapters/collector/adapter tests",
+    "browser_ui": "web/browser tests"
+  },
+  "git_commit": null
+}

@@ -1,0 +1,19 @@
+{
+  "status": "PASS",
+  "method": "WCAG relative luminance of opaque CSS semantic tokens",
+  "ratios": {
+    "terracotta": {
+      "normal_text_on_panel": 12.861,
+      "muted_on_panel": 5.311,
+      "muted_on_surface": 4.553,
+      "accent_on_surface": 4.785
+    },
+    "obsidian": {
+      "normal_text_on_panel": 13.92,
+      "muted_on_panel": 7.526,
+      "muted_on_surface": 6.699,
+      "accent_on_surface": 4.897
+    }
+  },
+  "scope": "Normal reading states; not a whole-page accessibility audit or human review."
+}

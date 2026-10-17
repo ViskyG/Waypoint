@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "waypoint-observer-local"
+version = "0.1.0"
+description = "Local hierarchical work map and passive Codex observability"
+requires-python = ">=3.10"
+dependencies = ["fastapi==0.128.2", "uvicorn==0.48.0"]
+
+[project.optional-dependencies]
+test = ["pytest==9.0.2", "httpx==0.28.1", "jsonschema>=4,<5"]
+browser = ["playwright==1.57.0"]
+
+[project.scripts]
+wp = "waypoint.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["waypoint*"]
+
+[tool.setuptools.package-data]
+waypoint = ["web/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

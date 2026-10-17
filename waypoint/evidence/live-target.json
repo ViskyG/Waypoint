@@ -1,0 +1,183 @@
+{
+  "evidence": "actual_selected_owner_rollout_compared_to_current_waypoint_database",
+  "family_count": 8,
+  "family_agents_projected": 8,
+  "genealogy_edges_equal": 7,
+  "source_complete_native_items_by_type": {
+    "reasoning": 49,
+    "agentMessage": 52,
+    "subAgentActivity": 3,
+    "userMessage": 15
+  },
+  "native_id_type_and_original_text_equal_by_type": {
+    "agentMessage": 52,
+    "userMessage": 15
+  },
+  "native_id_type_equal_by_type": {
+    "agentMessage": 52,
+    "subAgentActivity": 3,
+    "userMessage": 15
+  },
+  "subagent_activity_original_metadata_equal": 3,
+  "source_items_not_yet_projected_by_type": {},
+  "unequal_counts": {},
+  "excluded_without_visible_text": {
+    "reasoning_without_provider_visible_text": 49
+  },
+  "source_types_outside_supported_adapter_profile": {},
+  "projected_item_count": 334,
+  "duplicate_native_key_count": 0,
+  "source_bytes_read_selected_family": 7149677,
+  "native_receipt_count": 1,
+  "native_receipts_not_hydrating": 1,
+  "native_receipt_revisions": [
+    287
+  ],
+  "rollout_normalization_versions": [
+    "3"
+  ],
+  "source_health_states": [
+    {
+      "state": "connected",
+      "detail": "Connection present; silence is not agent completion"
+    },
+    {
+      "state": "connected",
+      "detail": "revision_committed"
+    }
+  ],
+  "cli_versions": [
+    "0.160.1"
+  ],
+  "installed_vscode_codex_extension_versions": [
+    "26.930.61225"
+  ],
+  "os": "Linux",
+  "kernel": "6.8.0-138-generic",
+  "family_ipc_activity_states": {
+    "running": 1
+  },
+  "latest_native_turn_lifecycle_equal_states": {
+    "idle": 5,
+    "running": 3
+  },
+  "latest_native_turn_lifecycle_unequal_states": {},
+  "family_activity_provenance": {
+    "historical:event_msg.task_complete": 3,
+    "current:event_msg.task_complete": 2,
+    "current:threadRuntimeStatus": 1,
+    "historical:event_msg.task_started": 2
+  },
+  "rollout_cursor_native_identity_equal": 8,
+  "rollout_cursor_native_identity_unequal": 0,
+  "family_relationship_evidence": "selected-session metadata; runtime activity only where separate IPC activity records exist",
+  "latency": {
+    "status": "NOT_MEASURED",
+    "samples": 0,
+    "reason": "No provider-receive and projection-receive monotonic timestamp pair captured."
+  },
+  "private_text_exported": false,
+  "source_mutated": false,
+  "limitations": [
+    "Concurrent source/collector activity may leave a tail pending; equality assertions cover completed native items only.",
+    "This comparison does not itself prove simultaneous live child lifecycle or browser behavior."
+  ],
+  "actual_owner_ipc": {
+    "subscription_cleanup_sent": true,
+    "connection_closed": true,
+    "owner_found": true,
+    "methods": [
+      "initialize",
+      "thread-follower-load-complete-history",
+      "thread-owner-discovery",
+      "thread-stream-following-changed"
+    ],
+    "snapshot_frame_bytes": 947704,
+    "snapshot_samples": 2,
+    "source_control_commands": 0,
+    "source_item_types": {
+      "subAgentActivity": 36,
+      "reasoning": 100,
+      "commandExecution": 83,
+      "fileChange": 5,
+      "agentMessage": 12,
+      "mcpToolCall": 1,
+      "userMessage": 1
+    },
+    "native_id_type_equal": {
+      "subAgentActivity": 36,
+      "commandExecution": 83,
+      "fileChange": 5,
+      "agentMessage": 12,
+      "mcpToolCall": 1,
+      "userMessage": 1
+    },
+    "native_id_type_original_text_equal": {
+      "commandExecution": 83,
+      "agentMessage": 12,
+      "userMessage": 1
+    },
+    "not_yet_projected": {},
+    "unequal": {},
+    "excluded_without_visible_text": {
+      "reasoning_without_provider_visible_text": 100
+    },
+    "inflight_command_text_excluded": {},
+    "exact_comparison_scope": "provider-visible messages, reasoning and terminal command text; other types compare native identity/type only"
+  },
+  "bounded_settling_followup": {
+    "reason": "Resolve one concurrent rollout message and one lifecycle transition observed during independent actual owner snapshot.",
+    "prior_native_receipt_revision": [
+      277
+    ],
+    "settled_native_receipt_revision": [
+      287
+    ],
+    "prior_unprojected_rollout_items": {
+      "agentMessage": 1
+    },
+    "prior_lifecycle_unequal_states": {
+      "idle": 1
+    },
+    "settled_unprojected_rollout_items": {},
+    "settled_lifecycle_unequal_states": {},
+    "second_ipc_snapshot_requested": false
+  },
+  "collector_callback_to_durable_receipt": {
+    "status": "MEASURED",
+    "fixture": false,
+    "method": "time.monotonic from actual Follower callback entry through normalizer/coalescing to completed HTTP durable receipt",
+    "scope": "selected existing Codex family; actual product Collector",
+    "samples": [
+      {
+        "ms": 86.09308799896098,
+        "initial_hydration": true
+      },
+      {
+        "ms": 13.216638000812964,
+        "initial_hydration": true
+      },
+      {
+        "ms": 235.99245299919858,
+        "initial_hydration": false
+      }
+    ],
+    "n": 3,
+    "median_ms": 86.09308799896098,
+    "max_ms": 235.99245299919858,
+    "provider_emission_to_browser_latency_measured": false,
+    "native_execution_commands": 0
+  },
+  "audited_identity_correction": {
+    "status": "PASS",
+    "corrected_items": 3,
+    "types": {
+      "agentMessage": 3
+    },
+    "exact_retry_idempotent": true,
+    "old_ledger_rewritten": false,
+    "source_mutated": false,
+    "basis": "explicit verified native provenance, no text inference",
+    "first_receipt_order_preserved": true
+  }
+}
