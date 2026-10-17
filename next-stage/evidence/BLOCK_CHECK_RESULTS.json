@@ -1,0 +1,768 @@
+{
+  "schema": "waypoint.block-check-audit/1",
+  "audit_at": "2026-10-17T10:57:43.231037+00:00",
+  "audit_mode": "RETROSPECTIVE_MAPPING_PLUS_THREE_EXECUTED_TARGET_REGRESSIONS",
+  "scope": "WPT-N00–WPT-N08, all47authoredcriteria",
+  "plan_file": "roadmap/ROADMAP.plan.json",
+  "rules_ru": [
+    "Ниdone, ни наличие тестового файла не считаются passed.",
+    "Выполненные доказательства взяты из сохранённых implementation receipts и отчётов, а не из проектных моделей архива.",
+    "Ссылки на исходники уточняют проверенное утверждение и не заменяют отсутствующее runtime доказательство.",
+    "audit_at — время аудита, не время старых запусков; точное время отдельных запусков неизвестно и не синтезировано.",
+    "Поздняя регистрация результата не означает, что он был связан с блоком во время исполнения.",
+    "История и исходные сообщения не изменены.",
+    "N09исключён из47: отсутствует подтверждённый третий референс, визуальнаяприёмка всех3тем открыта."
+  ],
+  "summary": {
+    "passed": 47,
+    "not_run": 0
+  },
+  "checks": [
+    {
+      "node_id": "WPT-N00",
+      "test_id": "T01",
+      "criterion": "Записаны фактическая база кода, состояние рабочей копии, схема данных и версия карты; сброса изменений не было.",
+      "outcome": "passed",
+      "evidence_levels": [
+        "source_inspection",
+        "actual_local_database"
+      ],
+      "evidence_refs": [
+        "next-stage/reports/N00.json"
+      ],
+      "basis_ru": "N00 записал фактический Git base c36e2e9, схему2, старую и новую версии плана. Резервная копия проверена; сброса исходников не заявлено."
+    },
+    {
+      "node_id": "WPT-N00",
+      "test_id": "T02",
+      "criterion": "Резервная копия и экспорт читаются; приватные ссылки сохранены локально; старые события и идентификаторы не изменены.",
+      "outcome": "passed",
+      "evidence_levels": [
+        "actual_local_database"
+      ],
+      "evidence_refs": [
+        "next-stage/reports/N00.json",
+        "next-stage/evidence/N01-migration.json"
+      ],
+      "basis_ru": "backup_integrity=ok; последующая проверка реального backup сохранила ledger, plans, requests, cursors и event_plan побайтно. Приватный backup не экспортирован."
+    },
+    {
+      "node_id": "WPT-N00",
+      "test_id": "T03",
+      "criterion": "Кандидат объединяет прежние и новые блоки без конфликтов ID; импорт не объявлен состоявшимся до подтверждения.",
+      "outcome": "passed",
+      "evidence_levels": [
+        "actual_local_service"
+      ],
+      "evidence_refs": [
+        "next-stage/reports/N00.json",
+        "next-stage/evidence/N07-authoring-import.json"
+      ],
+      "basis_ru": "Подтверждён receipt v-e3363063b40e4d41, 12 новых узлов; старые ID/content сохранены. Последующий authoring-import тоже подтверждён сервисом."
+    },
+    {
+      "node_id": "WPT-N00",
+      "test_id": "T04",
+      "criterion": "Codex не перезапускался, модельные вызовы ради замеров не создавались; старый эпизод объясняется только доступными фактами.",
+      "outcome": "passed",
+      "evidence_levels": [
+        "actual_Codex",
+        "source_inspection"
+      ],
+      "evidence_refs": [
+        "next-stage/reports/N00.json",
+        "next-stage/evidence/N08-rollout.json",
+        "next-stage/evidence/N08-native.json"
+      ],
+      "basis_ru": "N00 native_execution_state_changed=false; фактический rollout Codex не перезапускал, контрольных команд0. Старый эпизод честно INCIDENT_NOT_RECONSTRUCTED; замеры синтетические без модельного heartbeat."
+    },
+    {
+      "node_id": "WPT-N01",
+      "test_id": "T01",
+      "criterion": "Импорт и экспорт сохраняют неизвестные расширения, прежние задания, идентификаторы и свидетельства.",
+      "outcome": "passed",
+      "evidence_levels": [
+        "pytest",
+        "actual_local_database"
+      ],
+      "evidence_refs": [
+        "next-stage/evidence/IMPLEMENTED_TESTS.txt",
+        "waypoint/tests/test_observability.py::test_unknown_extensions_preserved_and_executor_assignment_untouched",
+        "next-stage/evidence/N01-migration.json",
+        "next-stage/evidence/N07-authoring-import.json"
+      ],
+      "basis_ru": "Выполненные profile/Store проверки и реальный import/backup подтверждают сохранность extensions, assignments, ID и принятой истории."
+    },
+    {
+      "node_id": "WPT-N01",
+      "test_id": "T02",
+      "criterion": "Старые карты открываются; отсутствие человеческого описания видно явно, а не заполняется выдуманным текстом.",
+      "outcome": "passed",
+      "evidence_levels": [
+        "pytest",
+        "browser_mocked_API"
+      ],
+      "evidence_refs": [
+        "next-stage/evidence/IMPLEMENTED_TESTS.txt",
+        "waypoint/tests/test_observability.py::test_legacy_missing_intent_is_explicit_and_not_fabricated",
+        "next-stage/reports/N03_N06.md"
+      ],
+      "basis_ru": "Проверка legacy intent и автономного интерфейса явно оставляет отсутствующее описание; старые планы проходят native validator."
+    },
+    {
+      "node_id": "WPT-N01",
+      "test_id": "T03",
+      "criterion": "Ошибочные ссылки новых результатов и алгоритмов дают конкретную диагностику; условия не исполняются как произвольный код.",
+      "outcome": "passed",
+      "evidence_levels": [
+        "pytest",
+        "source_inspection"
+      ],
+      "evidence_refs": [
+        "next-stage/evidence/IMPLEMENTED_TESTS.txt",
+        "waypoint/tests/test_observability.py::test_claimed_profile_error_has_precise_path",
+        "waypoint/waypoint/observability.py",
+        "waypoint/waypoint/dependencies.py"
+      ],
+      "basis_ru": "Параметризованные диагностики output/revision/algorithm выполнены; условия представлены данными, путей eval/exec нет. Это не исполнение пользовательского кода."
+    },
+    {
+      "node_id": "WPT-N01",
+      "test_id": "T04",
+      "criterion": "Прерванная миграция откатывается; повтор, открытие базы и восстановление проекций сохраняют принятые события.",
+      "outcome": "passed",
+      "evidence_levels": [
+        "pytest",
+        "actual_local_database"
+      ],
+      "evidence_refs": [
+        "next-stage/evidence/IMPLEMENTED_TESTS.txt",
+        "waypoint/tests/test_stage2_store_api.py::test_interrupted_schema2_migration_rolls_back_and_retry_preserves_input",
+        "next-stage/evidence/N01-migration.json",
+        "next-stage/evidence/N08-recovery.json"
+      ],
+      "basis_ru": "Искусственное прерывание миграции откатило схему и ledger, retry успешен. Реальные backups прошли reopen/rebuild с равными immutable records."
+    },
+    {
+      "node_id": "WPT-N01",
+      "test_id": "T05",
+      "criterion": "Программа различает умение хранить новые поля и реально поддерживаемые возможности.",
+      "outcome": "passed",
+      "evidence_levels": [
+        "pytest",
+        "actual_local_service"
+      ],
+      "evidence_refs": [
+        "next-stage/evidence/IMPLEMENTED_TESTS.txt",
+        "waypoint/tests/test_stage2_store_api.py::test_new_routes_preserve_auth_origin_and_observer_boundary",
+        "next-stage/evidence/N08-rollout.json"
+      ],
+      "basis_ru": "Health реально объявляет пять реализованных capabilities; API fixture проверил их отдельно от пассивного сохранения неизвестных полей."
+    },
+    {
+      "node_id": "WPT-N02",
+      "test_id": "T01",
+      "criterion": "Задание API, расчёт доступных работ и данные интерфейса показывают одинаковые предпосылки при одинаковых входах.",
+      "outcome": "passed",
+      "evidence_levels": [
+        "pytest"
+      ],
+      "evidence_refs": [
+        "next-stage/evidence/IMPLEMENTED_TESTS.txt",
+        "waypoint/tests/test_stage2_store_api.py::test_api_shared_dependencies_late_evidence_conflict_workspace_and_rebuild",
+        "waypoint/tests/test_dependencies.py::test_frontier_uses_exact_resolver_and_explicit_receipts_never_completion_status",
+        "next-stage/reports/N01_N02.md"
+      ],
+      "basis_ru": "API packet/state/prerequisites сравниваются целиком с общим basis; отдельный выполненный frontier regression использует тот же resolver и receipts."
+    },
+    {
+      "node_id": "WPT-N02",
+      "test_id": "T02",
+      "criterion": "Зависимость от поддерева предка учитывается; связь только с одним узлом и рекомендуемый порядок не создают лишних блокеров.",
+      "outcome": "passed",
+      "evidence_levels": [
+        "pytest"
+      ],
+      "evidence_refs": [
+        "next-stage/evidence/IMPLEMENTED_TESTS.txt",
+        "waypoint/tests/test_dependencies.py::test_one_resolver_inherits_actual_ancestor_and_preserves_true_endpoints",
+        "waypoint/tests/test_dependencies.py::test_order_is_visible_but_not_a_hard_requirement_and_finish_is_separate",
+        "next-stage/reports/N01_N02.md"
+      ],
+      "basis_ru": "Выполнены синтетические contract regressions наследования по реальной иерархии, node/subtree, order и start/finish; доказательство относится к правилам resolver."
+    },
+    {
+      "node_id": "WPT-N02",
+      "test_id": "T03",
+      "criterion": "Изменение нужного результата делает старое свидетельство неприменимым; перестановка блоков — нет. Чужая рабочая база не считается подходящей.",
+      "outcome": "passed",
+      "evidence_levels": [
+        "pytest"
+      ],
+      "evidence_refs": [
+        "next-stage/evidence/IMPLEMENTED_TESTS.txt",
+        "waypoint/tests/test_dependencies.py::test_definition_changes_invalidate_but_whitespace_layout_and_intent_do_not",
+        "waypoint/tests/test_dependencies.py::test_workspace_basis_is_explicit_and_project_policy_has_its_own_scope",
+        "waypoint/tests/test_stage2_store_api.py::test_api_shared_dependencies_late_evidence_conflict_workspace_and_rebuild"
+      ],
+      "basis_ru": "Выполнены проверки semantic/cosmetic fingerprint и чужой рабочей базы; API возвращает unknown для another-base."
+    },
+    {
+      "node_id": "WPT-N02",
+      "test_id": "T04",
+      "criterion": "Циклы после наследования и зависимость от самого себя выявляются; вход в подблок не требует заранее завершить его родителя.",
+      "outcome": "passed",
+      "evidence_levels": [
+        "pytest"
+      ],
+      "evidence_refs": [
+        "next-stage/evidence/IMPLEMENTED_TESTS.txt",
+        "waypoint/tests/test_dependencies.py::test_expanded_hidden_self_cycle_rejected_but_no_parent_completion_invented",
+        "waypoint/tests/test_dependencies.py::test_cycle_members_exclude_downstream_and_legacy_cycle_remains_displayable"
+      ],
+      "basis_ru": "Проверены расширенные циклы/самозависимость и отсутствие выдуманного требования завершить родителя для входа в ребёнка."
+    },
+    {
+      "node_id": "WPT-N02",
+      "test_id": "T05",
+      "criterion": "Реальная ранняя активность сохраняется и отображается; позднее свидетельство не подменяет достоверную историю.",
+      "outcome": "passed",
+      "evidence_levels": [
+        "actual_browser_http_synthetic_fixture"
+      ],
+      "evidence_refs": [
+        "next-stage/evidence/COMPLETION_REGRESSIONS.json"
+      ],
+      "basis_ru": "Предупреждение HTTP/Store сценария с синтетическими событиями видно в Плане, Задании и Статусе после позднего подтверждения. Исторический инцидент не реконструировался.",
+      "missing_ru": "Не найдено сохранённого доказательства реального раннего события плюс браузерной отрисовки исторического предупреждения. В проверенной UI версии dependency_warnings не отрисовывались; старый инцидент не реконструирован.",
+      "prior_outcome": "not_run"
+    },
+    {
+      "node_id": "WPT-N03",
+      "test_id": "T01",
+      "criterion": "Краткая суть совпадает в плане и задании блока; команды для исполнителя находятся в отдельной подвкладке.",
+      "outcome": "passed",
+      "evidence_levels": [
+        "browser_HTTP_synthetic",
+        "actual_Codex_browser"
+      ],
+      "evidence_refs": [
+        "next-stage/evidence/N08-browser.json",
+        "next-stage/evidence/N08-live-browser.json"
+      ],
+      "basis_ru": "Настоящий Chromium/HTTP проверил human Task и отдельную вкладку executor; установленный сервис показал authored intent и исходный assignment."
+    },
+    {
+      "node_id": "WPT-N03",
+      "test_id": "T02",
+      "criterion": "Одно событие блока обновляет карту и план без дополнительной записи агента.",
+      "outcome": "passed",
+      "evidence_levels": [
+        "actual_Codex_browser"
+      ],
+      "evidence_refs": [
+        "next-stage/evidence/N08-live-browser.json"
+      ],
+      "basis_ru": "Один настоящий status event обновил Plan и Map без второй записи; 16-check live-browser receipt PASS."
+    },
+    {
+      "node_id": "WPT-N03",
+      "test_id": "T03",
+      "criterion": "Каталог содержит краткие данные и назначение проектов, не загружает полные переписки.",
+      "outcome": "passed",
+      "evidence_levels": [
+        "pytest",
+        "browser_HTTP_synthetic"
+      ],
+      "evidence_refs": [
+        "next-stage/evidence/IMPLEMENTED_TESTS.txt",
+        "waypoint/tests/test_stage2_store_api.py::test_project_summary_deduplicates_active_agents_and_never_loads_transcripts",
+        "next-stage/evidence/N08-browser.json"
+      ],
+      "basis_ru": "Store.items запрещён monkeypatch, SQL trace не читает items/facets; настоящий HTTP catalogue возвращает только метаданные и purpose."
+    },
+    {
+      "node_id": "WPT-N03",
+      "test_id": "T04",
+      "criterion": "Запоздалый ответ другого проекта не меняет открытый проект; возврат сохраняет положение просмотра.",
+      "outcome": "passed",
+      "evidence_levels": [
+        "browser_mocked_API"
+      ],
+      "evidence_refs": [
+        "waypoint/evidence/stage2-ui-synthetic.json",
+        "next-stage/reports/N03_N06.md"
+      ],
+      "basis_ru": "Выполненные Chromium race fixtures задерживали state/versions/items/events/algorithms/catalogue прошлого проекта; ответ не менял новый проект. Возврат сохранял expanded Plan context. Это mocked transport, не Codex."
+    },
+    {
+      "node_id": "WPT-N03",
+      "test_id": "T05",
+      "criterion": "У ожидающего родителя видна работа потомков; родитель и дети не учитываются как лишние завершённые задачи.",
+      "outcome": "passed",
+      "evidence_levels": [
+        "pytest",
+        "browser_HTTP_synthetic"
+      ],
+      "evidence_refs": [
+        "next-stage/evidence/IMPLEMENTED_TESTS.txt",
+        "waypoint/tests/test_stage2_store_api.py::test_project_summary_deduplicates_active_agents_and_never_loads_transcripts",
+        "next-stage/evidence/N08-browser.json"
+      ],
+      "basis_ru": "Waiting parent и active child отображены раздельно; synthetic catalogue считает2агента и1конечный блок, без двойного счёта parent+leaf."
+    },
+    {
+      "node_id": "WPT-N03",
+      "test_id": "T06",
+      "criterion": "Для старой структуры явно подписаны текущие наблюдения; историческое воспроизведение не имитируется.",
+      "outcome": "passed",
+      "evidence_levels": [
+        "source_inspection",
+        "pytest"
+      ],
+      "evidence_refs": [
+        "waypoint/waypoint/web/plan.js",
+        "waypoint/waypoint/web/app.js",
+        "next-stage/evidence/IMPLEMENTED_TESTS.txt",
+        "waypoint/tests/test_stage2_store_api.py::test_outside_query_is_bound_to_resolved_plan_membership"
+      ],
+      "basis_ru": "Прочитаны явные подписи старой версии: текущие наблюдения поверх старой структуры, без исторического воспроизведения. API проверил membership старой версии. Отдельный browser assertion именно этой подписи не заявляется."
+    },
+    {
+      "node_id": "WPT-N04",
+      "test_id": "T01",
+      "criterion": "Нужное старое сообщение находится даже за тысячей неподходящих; «ничего», «все» и «прочее» различаются.",
+      "outcome": "passed",
+      "evidence_levels": [
+        "actual_browser_http_synthetic_fixture"
+      ],
+      "evidence_refs": [
+        "next-stage/evidence/COMPLETION_REGRESSIONS.json"
+      ],
+      "basis_ru": "Через HTTP найдена редкая запись за 1200 более новыми командами в том же блоке; различены All/None/Other.",
+      "missing_ru": "Буквальный порог более1000неподходящих в одном целевом scope и отдельная проверка категории Other в актуальном Store не обнаружены в сохранённых implementation receipts. Модели из архива не подменяют реализацию.",
+      "prior_outcome": "not_run"
+    },
+    {
+      "node_id": "WPT-N04",
+      "test_id": "T02",
+      "criterion": "Старый курсор при смене фильтра, области или проекта отклоняется либо явно заменяется новым окном.",
+      "outcome": "passed",
+      "evidence_levels": [
+        "pytest",
+        "browser_HTTP_synthetic",
+        "source_inspection"
+      ],
+      "evidence_refs": [
+        "next-stage/evidence/IMPLEMENTED_TESTS.txt",
+        "waypoint/tests/test_stage2_store_api.py::test_item_cursor_total_order_scope_binding_and_page_corrections",
+        "next-stage/evidence/N08-browser.json",
+        "waypoint/waypoint/item_types.py"
+      ],
+      "basis_ru": "Курсор отклонён при смене categories,node,deep,agent,outside,errors,before. Project входит в query hash; два HTTP проекта с одинаковыми ID изолированы."
+    },
+    {
+      "node_id": "WPT-N04",
+      "test_id": "T03",
+      "criterion": "Сообщение, связанное с несколькими потомками, видно один раз; исправления типа и привязки обновляют индексы атомарно.",
+      "outcome": "passed",
+      "evidence_levels": [
+        "pytest"
+      ],
+      "evidence_refs": [
+        "next-stage/evidence/IMPLEMENTED_TESTS.txt",
+        "waypoint/tests/test_stage2_store_api.py::test_item_cursor_total_order_scope_binding_and_page_corrections",
+        "waypoint/tests/test_stage2_store_api.py::test_facet_indexes_and_identity_link_rebuild_are_consistent"
+      ],
+      "basis_ru": "Deep multi-target вернул каждую identity один раз; смена type/owner/link обновляет facets/targets и сохраняется при rebuild."
+    },
+    {
+      "node_id": "WPT-N04",
+      "test_id": "T04",
+      "criterion": "Составная команда с результатом остаётся одним событием; недоступные рассуждения и результаты тестов не выдумываются.",
+      "outcome": "passed",
+      "evidence_levels": [
+        "actual_Codex",
+        "pytest"
+      ],
+      "evidence_refs": [
+        "next-stage/evidence/N08-native.json",
+        "waypoint/tests/test_adapters.py::test_snapshot_filters_settings_and_encrypted_reasoning",
+        "next-stage/reports/IMPLEMENTED_RU.md"
+      ],
+      "basis_ru": "Реальная сверка179commandExecution сохранила native ID/type и полный доступный terminal text без расщепления.212скрытых reasoning исключены как не предоставленные источником; результаты тестов из текста не выдумываются."
+    },
+    {
+      "node_id": "WPT-N04",
+      "test_id": "T05",
+      "criterion": "Новые сообщения не сбрасывают выделение и место чтения; скрытые типы не увеличивают счётчик видимых новых сообщений.",
+      "outcome": "passed",
+      "evidence_levels": [
+        "actual_browser_http_synthetic_fixture"
+      ],
+      "evidence_refs": [
+        "next-stage/evidence/COMPLETION_REGRESSIONS.json"
+      ],
+      "basis_ru": "Chromium потребил скрытый тип без роста счётчика; видимое контрольное сообщение дало ровно +1, выделение и прокрутка сохранены.",
+      "missing_ru": "Не найден выполненный assertion, что новое сообщение скрытого типа не увеличивает visible-new counter. Источник кода сам по себе не доказывает этот runtime случай.",
+      "prior_outcome": "not_run"
+    },
+    {
+      "node_id": "WPT-N04",
+      "test_id": "T06",
+      "criterion": "Существующие клиенты CLI/API без фильтра сохраняют прежнее поведение.",
+      "outcome": "passed",
+      "evidence_levels": [
+        "pytest",
+        "source_inspection"
+      ],
+      "evidence_refs": [
+        "next-stage/reports/IMPLEMENTED_RU.md",
+        "next-stage/evidence/IMPLEMENTED_TESTS.txt",
+        "waypoint/waypoint/store.py",
+        "waypoint/waypoint/server.py"
+      ],
+      "basis_ru": "Первый интегрированный набор95passed включал существующие проверки; старые параметры и поля сохранены, отсутствие categories означает All. Последующие адресные проверки не суммируются с95."
+    },
+    {
+      "node_id": "WPT-N05",
+      "test_id": "T01",
+      "criterion": "У общего алгоритма одна идентичность в нескольких блоках и в проектном реестре.",
+      "outcome": "passed",
+      "evidence_levels": [
+        "pytest",
+        "actual_local_service",
+        "actual_Codex_browser"
+      ],
+      "evidence_refs": [
+        "next-stage/evidence/IMPLEMENTED_TESTS.txt",
+        "waypoint/tests/test_algorithm_evidence.py::Algorithms::test_distinct_associations_and_planned_states",
+        "next-stage/evidence/N05-reconciled-inventory.json",
+        "next-stage/evidence/N08-live-browser.json"
+      ],
+      "basis_ru": "Dedup общего ID/associations проверен; выявленные8записей исправлены на4канонических ALG-ID и подтверждены live browser. Старые версии сохранены."
+    },
+    {
+      "node_id": "WPT-N05",
+      "test_id": "T02",
+      "criterion": "Пометка блока открывает справа связанные алгоритмы; реестр не заполняется одними названиями технологий.",
+      "outcome": "passed",
+      "evidence_levels": [
+        "browser_HTTP_synthetic",
+        "actual_Codex_browser"
+      ],
+      "evidence_refs": [
+        "next-stage/evidence/N08-browser.json",
+        "next-stage/evidence/N08-live-browser.json",
+        "next-stage/reports/N05_N07.md"
+      ],
+      "basis_ru": "HTTP браузер открывал node-associated algorithms и right-inspector detail; live browser подтвердил4реальных механизма, а не список технологий."
+    },
+    {
+      "node_id": "WPT-N05",
+      "test_id": "T03",
+      "criterion": "Планируемая логика, наличие кода, проверка и измерение показаны раздельно.",
+      "outcome": "passed",
+      "evidence_levels": [
+        "pytest",
+        "browser_HTTP_synthetic"
+      ],
+      "evidence_refs": [
+        "next-stage/evidence/IMPLEMENTED_TESTS.txt",
+        "waypoint/tests/test_algorithm_evidence.py::Algorithms::test_distinct_associations_and_planned_states",
+        "waypoint/tests/test_algorithm_evidence.py::Algorithms::test_freshness_and_integration_separate",
+        "next-stage/evidence/N08-browser.json"
+      ],
+      "basis_ru": "Выполнены раздельные planned/not_run,correctness,measurement,installed состояния. Наличие кода/ссылки теста не выдаётся за выполненный тест."
+    },
+    {
+      "node_id": "WPT-N05",
+      "test_id": "T04",
+      "criterion": "Новая реализация делает прежние свидетельства устаревшими; неуспешная проверка корректности не превращается в успешную оптимизацию.",
+      "outcome": "passed",
+      "evidence_levels": [
+        "pytest"
+      ],
+      "evidence_refs": [
+        "next-stage/evidence/IMPLEMENTED_TESTS.txt",
+        "waypoint/tests/test_algorithm_evidence.py::Algorithms::test_freshness_and_integration_separate",
+        "waypoint/tests/test_algorithm_evidence.py::Algorithms::test_failed_current_evidence_never_looks_passed",
+        "waypoint/tests/test_algorithm_evidence.py::Algorithms::test_comparison_guards_and_regressions"
+      ],
+      "basis_ru": "Изменение implementation revision помечает старое evidence stale, текущая failed остаётся failed, correctness failure запрещает вывод об улучшении."
+    },
+    {
+      "node_id": "WPT-N05",
+      "test_id": "T05",
+      "criterion": "Несовместимые данные, единицы и методы помечаются несопоставимыми; у измерения указаны выборка и среда.",
+      "outcome": "passed",
+      "evidence_levels": [
+        "pytest",
+        "browser_HTTP_synthetic",
+        "source_inspection"
+      ],
+      "evidence_refs": [
+        "next-stage/evidence/IMPLEMENTED_TESTS.txt",
+        "waypoint/tests/test_algorithm_evidence.py::Algorithms::test_comparison_guards_and_regressions",
+        "waypoint/waypoint/algorithm_evidence.py",
+        "next-stage/evidence/N08-performance.json"
+      ],
+      "basis_ru": "Выполнено несовпадениеunit и correctness/constraints, прочитан общий guard method/env/dataset/workload/semantics. Реальные замеры синтетических историй содержат n,метод,среду и полную выборку."
+    },
+    {
+      "node_id": "WPT-N05",
+      "test_id": "T06",
+      "criterion": "Код и ссылки безопасно отображаются; карточка не запускает команды и не читает произвольные локальные файлы.",
+      "outcome": "passed",
+      "evidence_levels": [
+        "browser_HTTP_synthetic",
+        "source_inspection"
+      ],
+      "evidence_refs": [
+        "next-stage/evidence/N08-browser.json",
+        "waypoint/waypoint/web/algorithm_panel.js",
+        "waypoint/waypoint/server.py"
+      ],
+      "basis_ru": "HTTP browser injection fixture не создал img/script и не исполнил строку; опасные ссылки не стали anchors. UI использует textContent, backend не добавляет произвольный file/command endpoint."
+    },
+    {
+      "node_id": "WPT-N06",
+      "test_id": "T01",
+      "criterion": "Реестр расширяемый; двоичный переключатель двух тем заменён.",
+      "outcome": "passed",
+      "evidence_levels": [
+        "browser_HTTP_synthetic",
+        "source_inspection"
+      ],
+      "evidence_refs": [
+        "next-stage/evidence/N08-browser.json",
+        "waypoint/waypoint/web/themes.js"
+      ],
+      "basis_ru": "Фактически3слота реестра:2готовых и1disabled missing reference. Темы выбираются registry, не двоичным переключателем."
+    },
+    {
+      "node_id": "WPT-N06",
+      "test_id": "T02",
+      "criterion": "Оба известных оформления соответствуют сохранённым референсам; выбор переживает перезагрузку.",
+      "outcome": "passed",
+      "evidence_levels": [
+        "browser_mocked_API",
+        "actual_Codex_browser",
+        "source_inspection"
+      ],
+      "evidence_refs": [
+        "waypoint/evidence/stage2-ui-synthetic.json",
+        "next-stage/evidence/N08-live-browser.json",
+        "next-stage/reports/N03_N06.md"
+      ],
+      "basis_ru": "Известные tokens/references сохранены; Chromium проверил обе темы и сохранение выбора послеreload. Новая визуальная приёмка владельцем этим не заявляется."
+    },
+    {
+      "node_id": "WPT-N06",
+      "test_id": "T03",
+      "criterion": "Смысл ошибок и результатов тестов не зависит только от декоративного цвета.",
+      "outcome": "passed",
+      "evidence_levels": [
+        "source_inspection",
+        "browser_HTTP_synthetic"
+      ],
+      "evidence_refs": [
+        "waypoint/waypoint/web/app.js",
+        "next-stage/evidence/N08-browser.json"
+      ],
+      "basis_ru": "Карточки проверок имеют title с outcome и полное текстовое outcome во вкладкеТесты; Only errors опирается на machine facet. Смысл сохранён независимо от декоративной палитры. Проверка доступности для всех нарушений зрения не заявляется."
+    },
+    {
+      "node_id": "WPT-N06",
+      "test_id": "T04",
+      "criterion": "Третье оформление остаётся ожидающим референса; оно не блокирует другую работу и не объявляется готовым дублем.",
+      "outcome": "passed",
+      "evidence_levels": [
+        "browser_HTTP_synthetic",
+        "actual_Codex_browser"
+      ],
+      "evidence_refs": [
+        "next-stage/evidence/N08-browser.json",
+        "next-stage/evidence/N08-live-browser.json",
+        "next-stage/evidence/FINAL_STATE.json"
+      ],
+      "basis_ru": "Третий слот disabled awaiting reference, N09 остаётся открытым; два оформления проверены без объявления трёх принятых."
+    },
+    {
+      "node_id": "WPT-N07",
+      "test_id": "T01",
+      "criterion": "Шаблон нового проекта не копирует идентификаторы Waypoint и его ресурсные разрешения.",
+      "outcome": "passed",
+      "evidence_levels": [
+        "pytest"
+      ],
+      "evidence_refs": [
+        "next-stage/reports/N05_N07.md",
+        "waypoint/tests/test_authoring_next_stage.py::test_second_project_template_roundtrip_and_policy",
+        "roadmap/PROJECT.plan.json"
+      ],
+      "basis_ru": "Выполнен portable second-project roundtrip: project_id неwaypoint, узлы неWPT, resource_policy UNSELECTED, пустой каталог алгоритмов."
+    },
+    {
+      "node_id": "WPT-N07",
+      "test_id": "T02",
+      "criterion": "Текст, задания и план формируются из одного графа; статусы не переносятся вручную.",
+      "outcome": "passed",
+      "evidence_levels": [
+        "actual_local_store",
+        "source_inspection"
+      ],
+      "evidence_refs": [
+        "next-stage/evidence/N07-roadmap.json",
+        "roadmap/tools/roadmap.py"
+      ],
+      "basis_ru": "279проверок включают generated_views_match_single_authoring_source, Store roundtrip,stable IDs,idempotency. Статусы runtime не копируются в authoring JSON вручную."
+    },
+    {
+      "node_id": "WPT-N07",
+      "test_id": "T03",
+      "criterion": "Весь проект можно выполнить без ChatGPT-капсул; обязательного ожидания чата не появляется.",
+      "outcome": "passed",
+      "evidence_levels": [
+        "source_inspection",
+        "pytest"
+      ],
+      "evidence_refs": [
+        "next-stage/reports/N05_N07.md",
+        "next-stage/skills/candidates/STAGING.json",
+        "waypoint/tests/test_authoring_next_stage.py::test_second_project_template_roundtrip_and_policy",
+        "next-stage/skills/candidates/agent-skills/skills/codex/execute-roadmap-efficiently/SKILL.md"
+      ],
+      "basis_ru": "Прочитанные ограниченные skill changes сохраняют optional capsule и возможность выполнить проект Codex без обязательного ожидания ChatGPT; template не закрепляет исполнителя за чатом. Это проверка политики, не новый модельный прогон проекта."
+    },
+    {
+      "node_id": "WPT-N07",
+      "test_id": "T04",
+      "criterion": "Правки затрагивают только проверенные участки скилов, сохраняя остальные инструкции.",
+      "outcome": "passed",
+      "evidence_levels": [
+        "pytest",
+        "source_inspection"
+      ],
+      "evidence_refs": [
+        "next-stage/reports/N05_N07.md",
+        "next-stage/skills/candidates/STAGING.json",
+        "waypoint/tests/test_authoring_next_stage.py::test_skill_candidates_are_bounded_source_preserving",
+        "next-stage/skills/RECONCILED_BASE.json"
+      ],
+      "basis_ru": "7кандидатов подготовлены по проверенным blob/anchors; выполненные bounded tests сохраняют остальные инструкции. Отличие реальной2.0.0от supplied2.0.1 согласовано локально, глобальных записей нет."
+    },
+    {
+      "node_id": "WPT-N07",
+      "test_id": "T05",
+      "criterion": "Публикация, проверка исходников и установка сообщаются отдельно; отсутствие записи GitHub не маскируется успехом.",
+      "outcome": "passed",
+      "evidence_levels": [
+        "source_inspection"
+      ],
+      "evidence_refs": [
+        "next-stage/skills/candidates/STAGING.json",
+        "next-stage/reports/N05_N07.md",
+        "next-stage/reports/IMPLEMENTED_RU.md"
+      ],
+      "basis_ru": "PREPARED_NOT_PUBLISHED_NOT_INSTALLED явно отделяет подготовку/проверку/публикацию/установку. Публикация проекта GitHub не названа глобальной установкой скилов."
+    },
+    {
+      "node_id": "WPT-N08",
+      "test_id": "T01",
+      "criterion": "Одно живое событие статуса обновляет карту и план без второго сообщения агента.",
+      "outcome": "passed",
+      "evidence_levels": [
+        "actual_Codex_browser"
+      ],
+      "evidence_refs": [
+        "next-stage/evidence/N08-live-browser.json"
+      ],
+      "basis_ru": "Фактический installed browser receipt зафиксировал одно status event→Plan и то жеevent→Map без второго write."
+    },
+    {
+      "node_id": "WPT-N08",
+      "test_id": "T02",
+      "criterion": "Проверен настоящий путь браузер → HTTP → сервис; отдельные модульные тесты не выданы за эту проверку.",
+      "outcome": "passed",
+      "evidence_levels": [
+        "actual_Codex_browser",
+        "browser_HTTP_synthetic"
+      ],
+      "evidence_refs": [
+        "next-stage/evidence/N08-live-browser.json",
+        "next-stage/evidence/N08-browser.json"
+      ],
+      "basis_ru": "Два отдельных доказательства: реальныйChromium→installedservice→currentCodex и изолированныйChromium→HTTP→Store со syntheticданными. Mock/API unit results явно отделены."
+    },
+    {
+      "node_id": "WPT-N08",
+      "test_id": "T03",
+      "criterion": "Миграция, повтор и восстановление сохраняют ID, статусы, историю и неизвестные поля.",
+      "outcome": "passed",
+      "evidence_levels": [
+        "actual_local_database",
+        "actual_local_service",
+        "pytest"
+      ],
+      "evidence_refs": [
+        "next-stage/evidence/N01-migration.json",
+        "next-stage/evidence/N08-recovery.json",
+        "next-stage/evidence/N08-restart.json",
+        "next-stage/evidence/N08-rollout.json",
+        "next-stage/evidence/IMPLEMENTED_TESTS.txt"
+      ],
+      "basis_ru": "Реальные миграция2→3,reopen,rebuild,restart сохранили immutableledger,ID,версии/requests/курсоры; принятый поток продолжился. Interrupted rollback отдельно pytest."
+    },
+    {
+      "node_id": "WPT-N08",
+      "test_id": "T04",
+      "criterion": "Не добавлены команды управления агентом, модельный heartbeat, скрытие работы или широкая перезапись.",
+      "outcome": "passed",
+      "evidence_levels": [
+        "actual_Codex",
+        "source_inspection"
+      ],
+      "evidence_refs": [
+        "next-stage/evidence/N08-native.json",
+        "next-stage/evidence/N08-rollout.json",
+        "waypoint/waypoint/server.py",
+        "next-stage/reports/IMPLEMENTED_RU.md"
+      ],
+      "basis_ru": "source_control_commands0, codex_restartedfalse, observer_onlytrue; реальная база не заменена. Прочитанные новые маршруты read-only; модельный heartbeat не добавлен."
+    },
+    {
+      "node_id": "WPT-N08",
+      "test_id": "T05",
+      "criterion": "Представительные фильтрованные наборы измерены с указанной выборкой; универсальная скорость и FPS не обещаются.",
+      "outcome": "passed",
+      "evidence_levels": [
+        "browser_HTTP_synthetic"
+      ],
+      "evidence_refs": [
+        "next-stage/evidence/N08-performance.json",
+        "next-stage/reports/IMPLEMENTED_RU.md"
+      ],
+      "basis_ru": "Измерены100/300блоков и4043/10243сообщения черезChromium/HTTP с указанными машиной,прогревом,n3,размерамиответов. Универсальнаяскорость/FPS/токеннаялатентность не заявляются."
+    },
+    {
+      "node_id": "WPT-N08",
+      "test_id": "T06",
+      "criterion": "В отчёте разделены код, интеграция, целевые проверки, публикация и установка; при открытом N09 все три темы не объявляются принятыми.",
+      "outcome": "passed",
+      "evidence_levels": [
+        "source_inspection"
+      ],
+      "evidence_refs": [
+        "next-stage/reports/IMPLEMENTED_RU.md",
+        "next-stage/skills/candidates/STAGING.json",
+        "next-stage/evidence/FINAL_STATE.json"
+      ],
+      "basis_ru": "Итог явно разделяет код, интеграцию, реальные и synthetic проверки, публикацию/установку. N09awaiting reference; приёмка всех3тем открыта."
+    }
+  ],
+  "registered_at": "2026-10-17T11:01:48.376642+00:00",
+  "plan_version": "v-bf38547210f5492c",
+  "initial_audit": "next-stage/evidence/BLOCK_CHECK_AUDIT.json",
+  "target_regression_receipt": "next-stage/evidence/COMPLETION_REGRESSIONS.json"
+}

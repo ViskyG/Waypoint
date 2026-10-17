@@ -1,0 +1,19 @@
+{
+  "status": "PASS",
+  "plan_version": "v-bf38547210f5492c",
+  "scope": "N00–N08 criterion results registered with evidence; color and history fixes",
+  "criterion_counts": {
+    "WPT-N00": 4,
+    "WPT-N01": 5,
+    "WPT-N02": 5,
+    "WPT-N03": 6,
+    "WPT-N04": 6,
+    "WPT-N05": 6,
+    "WPT-N06": 4,
+    "WPT-N07": 5,
+    "WPT-N08": 6
+  },
+  "N09": "awaiting reference",
+  "no_historical_message_reassignment": true,
+  "source": "actual installed Store"
+}

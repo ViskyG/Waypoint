@@ -1,0 +1,19 @@
+{
+  "status": "PASS",
+  "fixture": false,
+  "method": "Actual installed Chromium → HTTP → current Store, read-only",
+  "checks": [
+    "obsidian: saved completion color, Russian label and actual check count",
+    "obsidian: result and per-check evidence visible without synthetic chat",
+    "obsidian: Plan distinguishes done and awaiting reference",
+    "terracotta: saved completion color, Russian label and actual check count",
+    "terracotta: result and per-check evidence visible without synthetic chat",
+    "terracotta: Plan distinguishes done and awaiting reference"
+  ],
+  "browser": "143.0.7499.4",
+  "reported_checks": 71,
+  "empty_block_stayed_empty": true,
+  "page_errors": 0,
+  "private_text_exported": false,
+  "screenshots": "N00 only: authored plan and proof labels; no conversation bodies"
+}

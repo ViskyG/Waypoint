@@ -1,0 +1,37 @@
+{
+  "status": "PASS",
+  "started_at": "2026-10-17T11:00:04.934345+00:00",
+  "completed_at": "2026-10-17T11:00:06.390492+00:00",
+  "fixture": "SYNTHETIC isolated project and observations",
+  "transport": "Actual Chromium → localhost HTTP → current schema3 Store → event polling",
+  "live_codex_tested": false,
+  "production_data_modified": false,
+  "target_criteria": [
+    "WPT-N02/T05",
+    "WPT-N04/T01",
+    "WPT-N04/T05"
+  ],
+  "checks": [
+    "Inherited early scope accepted with original unresolved requirement",
+    "Late matching receipt satisfies current input without rewriting historical warning",
+    "Rare message returned before limit behind 1200 newer commands in the same exact scope",
+    "All None and Other are distinct through current HTTP Store",
+    "Plan displays retained early-work warning after input is now available",
+    "Task displays same historical early-work warning after matching receipt",
+    "Status displays historical warning separately from current satisfied input",
+    "Hidden-type event consumed by polling and filtered HTTP reader without visible new count",
+    "Visible message positive control increments visible count exactly once without resetting selection or scroll",
+    "No browser application errors"
+  ],
+  "check_count": 10,
+  "browser": "143.0.7499.4",
+  "same_scope_newer_command_count": 1200,
+  "long_visible_messages": 24,
+  "hidden_event_cursor": 1230,
+  "visible_positive_control_cursor": 1231,
+  "plan_version": "v-f0e749e01aac4cb1",
+  "limitations": [
+    "Controlled early-work regression uses synthetic events; the old owner incident remains INCIDENT_NOT_RECONSTRUCTED.",
+    "This run does not establish native Codex connectivity or reconstruct past message attribution."
+  ]
+}

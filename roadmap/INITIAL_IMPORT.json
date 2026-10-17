@@ -1,7 +1,7 @@
 {
   "warning": "FOR A NEW EMPTY STORE ONLY. Do not apply to an installed project; export its current head first.",
   "initialization_only": true,
-  "request_id": "roadmap-empty-store-e5d0d46fac7e8da66d8531cc",
+  "request_id": "roadmap-empty-store-2f7ac1cd86633cfa6cef618e",
   "base_version": null,
   "merge": false,
   "plan": {
@@ -3832,7 +3832,7 @@
           }
         },
         "ALG-READ": {
-          "definition_revision": 2,
+          "definition_revision": 3,
           "edge_cases": [
             "Смена фильтра.",
             "Изменение категории уже видимого сообщения."
@@ -3850,7 +3850,7 @@
               }
             ],
             "repository": "https://github.com/ViskyG/Waypoint",
-            "revision": "worktree-sha256:f6ccdb8febbe63e136dc00331087dd5c34e91fc4788c9650ff99bbec868ad8d8"
+            "revision": "worktree-sha256:22d381ea2a4febf2ab05c67f044f092a798b14ab3a92660a4a87f14c7222f05c"
           },
           "inputs": [
             "current reader",
@@ -3888,11 +3888,11 @@
           },
           "title": "Сохранение места чтения",
           "x_authoring_reconciliation": {
-            "from_revision": 1,
-            "previous_definition_sha256": "ffa1c72e0645ccf49ab2fdc41812e0080129a09238e5e19a4fdf07191fd769d2",
+            "from_revision": 2,
+            "previous_definition_sha256": "49ae5ae26b0b125c722ad0e947dccb2df516141b46b51c1b32768a5713b08630",
             "strategy": "preserve canonical supplied identity and authored meaning; enrich inspected implementation/testability",
             "supplied_definition_sha256": "ffa1c72e0645ccf49ab2fdc41812e0080129a09238e5e19a4fdf07191fd769d2",
-            "to_revision": 2
+            "to_revision": 3
           }
         }
       },

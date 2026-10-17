@@ -7,7 +7,7 @@ import zipfile
 from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[2]
-ARCHIVE=ROOT/'Waypoint-stage2-functional-2026-10-17.zip'
+ARCHIVE=ROOT/'Waypoint-completion-ui-2026-10-17.zip'
 DENIED={'.runtime','.venv','.git','.agents','.codex','.aws','__pycache__','.pytest_cache','build','dist'}
 
 def include(path):

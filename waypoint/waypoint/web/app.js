@@ -138,7 +138,11 @@
         for (const child of [...list.children]) if (!keys.has(child.dataset.itemKey)) child.remove();
         let previous = null;
         for (const item of reader.items) { const key = itemKey(item); let box = existing.get(key); if (box) patchMessage(box, item); else box = message(item); const target = previous ? previous.nextSibling : list.firstChild; if (target !== box) list.insertBefore(box, target); previous = box; }
-        if (!reader.items.length && !list.children.length) list.append(el('div', 'empty-message', 'Пока нет сообщений'));
+        if (!reader.items.length && !list.children.length) {
+            const filtered = reader.query?.only_errors || reader.query?.categories != null;
+            const result = reader.kind === 'node' && modules.resultFor(ui.state,reader.id);
+            list.append(el('div', 'empty-message', filtered ? 'Нет сообщений по выбранному фильтру' : result ? 'Нет привязанных сообщений. Результат и его основания доступны в «Приёмке».' : 'Пока нет привязанных сообщений'));
+        }
         reader.button.hidden = !reader.pending.size;
         reader.button.textContent = `Новые сообщения: ${reader.pending.size} · К последним ↓`;
         if (reader.more) { reader.more.hidden = !reader.hasMore; reader.more.disabled = !!reader.loading; }
@@ -275,17 +279,18 @@
         else if (ui.selected === id)
             card.classList.add('highlight');
         const test = el('div', 'test-row'), testBtn = btn('', () => openInspector('node', id, 'tests'));
-        let passed = 0;
         const tests = Object.entries(node.tests || {});
+        const passed = tests.filter(([tid]) => ui.state.checks.some(c => c.node_id === id && c.test_id === tid && c.outcome === 'passed')).length;
         for (const [tid, def] of tests.slice(0, 16)) {
             const check = ui.state.checks.find(c => c.node_id === id && c.test_id === tid);
-            if (check?.outcome === 'passed')
-                passed++;
             const light = lamp(check);
             light.title = (def.label || tid) + ': ' + (check?.outcome || 'не запускался') + (check?.freshness !== 'current' ? ' · актуальность не подтверждена' : '');
             testBtn.append(light);
         }
-        test.append(testBtn, el('span', 'test-count', `${passed}/${tests.length}`));
+        test.append(testBtn);
+        const result = modules.resultFor(ui.state,id);
+        if (result) { const proof = btn('Результат', () => openInspector('node',id,'acceptance'),'node-result-link'); proof.title = result.evidence_ref || result.summary || 'Основание завершения'; test.append(proof); }
+        const count = el('span', 'test-count', `${passed}/${tests.length}`); count.title = `Подтверждено проверок: ${passed} из ${tests.length}. Подробности — по индикаторам слева.`; test.append(count);
         const head = el('div', 'node-head'), title = el('div', 'title');
         title.append(el('span', 'node-id', id + (node.retired ? ' · прежний план' : node.absent_from_view ? ' · вне версии' : '')), el('h3', '', node.title));
         title.tabIndex = 0; title.setAttribute('role', 'button'); title.setAttribute('aria-label', 'Сообщения ' + id); title.onkeydown = e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); title.click(); } };
@@ -305,8 +310,9 @@
         chat.dataset.chat = id;
         chat.append(el('div', 'empty-message', ui.planMode ? node.assignment : ''));
         const status = el('div', 'node-status'), state = nodeStatus(id), agents = workActors(id);
+        card.dataset.status = state.status;
         const running = agents.some(actorActive);
-        status.append(el('span', 'status-icon' + (running ? ' running' : state.status === 'done' ? ' done' : '')), btn(state.status || 'Запланировано', () => openInspector('node', id, 'status'), 'status-label'));
+        status.append(el('span', 'status-icon' + (running ? ' running' : state.status === 'done' ? ' done' : '')), btn(modules.statusLabel(state.status) || 'Запланировано', () => openInspector('node', id, 'status'), 'status-label'));
         const descendantActivity = modules.activityText(modules.nodeView(ui.state,id)); if (descendantActivity) { status.title = descendantActivity; status.append(el('small','descendant-badge',descendantActivity)); }
         const names = el('div', 'node-actors');
         for (const a of agents.slice(0, 4))
@@ -605,6 +611,9 @@
                 body.append(row);
             }
             body.append(el('h4', '', 'Получено'), el('div', 'result-block', status.result?.summary || 'Результат ещё не описан'));
+            if (status.result?.evidence_ref) blockSection(body,'Основание результата',status.result.evidence_ref);
+            if (status.result?.evidence_revision) blockSection(body,'Сохранённая ревизия доказательства',status.result.evidence_revision);
+            if (status.result?.commit) blockSection(body,'Коммит',status.result.commit);
             body.append(el('h4', '', 'Расхождения с ожиданиями'), el('div', 'result-block', status.result?.difference || 'Не указаны. Это не доказательство отсутствия расхождений.'));
             if (status.result?.plan_version)
                 body.append(el('div', 'result-tag', 'Результат относительно ' + status.result.plan_version));
@@ -616,6 +625,9 @@
                 text.append(el('div', '', t.label || tid), el('small', '', `${tid} · ${check?.outcome || 'не запускался'} · ${check?.freshness === 'current' ? 'актуальность заявлена исполнителем' : 'актуальность не подтверждена'}`));
                 row.append(lamp(check), text);
                 body.append(row);
+                if (check?.basis) blockSection(body,'Основание проверки',check.basis);
+                if (check?.evidence_refs?.length) blockSection(body,'Доказательства',check.evidence_refs.join('\n'));
+                if (check?.registered_from_existing_evidence) body.append(el('p','small-note','Результат внесён из сохранённых доказательств; это не новый запуск теста.'));
             }
             body.append(el('p', 'small-note', 'Успешные тесты, актуальность результата и статус задачи — отдельные сведения. Карта не меняет статус исполнителя.'));
         }
