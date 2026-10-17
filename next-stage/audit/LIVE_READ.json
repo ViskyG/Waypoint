@@ -1,0 +1,79 @@
+{
+  "health": {
+    "service": "waypoint",
+    "version": "0.2.0",
+    "observer_only": true,
+    "outbox_error": null,
+    "capabilities": [
+      "observability_profile_1",
+      "effective_dependencies_1",
+      "typed_items_1",
+      "project_summary_1",
+      "algorithm_evidence_1"
+    ]
+  },
+  "projects": [
+    {
+      "project_id": "waypoint",
+      "title": "Waypoint · от исходной реализации к рабочему наблюдателю",
+      "version": "v-bf38547210f5492c",
+      "purpose": "Понимать ход нескольких проектов, реальные причины ожидания и изменения собственной алгоритмической логики.",
+      "distinct_active_agents": 1,
+      "distinct_active_blocks": 1,
+      "last_observed_at": "2026-10-17T11:08:07.544413+00:00",
+      "source_health": {
+        "state": "connected",
+        "sources": [
+          {
+            "source_key": "codex-ipc/4b26f8b18dfb",
+            "state": "connected",
+            "at": "2026-10-17T11:07:58.936587+00:00"
+          },
+          {
+            "source_key": "codex-rollout/4b26f8b18dfb",
+            "state": "connected",
+            "at": "2026-10-17T10:09:06.346409+00:00"
+          },
+          {
+            "source_key": "ipc:waypoint:01a14856-3f21-78c3-846f-c876180f8d67",
+            "state": "connected",
+            "at": "2026-10-17T11:08:04.039926+00:00"
+          }
+        ]
+      }
+    }
+  ],
+  "basis": {
+    "plan_version": "v-bf38547210f5492c",
+    "cursor": 12296,
+    "projection_version": "observability/1",
+    "workspace_ref": {
+      "consumer": "waypoint/local-working-copy",
+      "project": "waypoint/local-working-copy"
+    }
+  },
+  "nodes": 32,
+  "agents": 22,
+  "checks": 71,
+  "sources": [
+    {
+      "source_key": "codex-ipc/4b26f8b18dfb",
+      "state": "connected",
+      "at": "2026-10-17T11:07:58.936587+00:00",
+      "detail": "Connection present; silence is not agent completion"
+    },
+    {
+      "source_key": "codex-rollout/4b26f8b18dfb",
+      "state": "connected",
+      "at": "2026-10-17T10:09:06.346409+00:00",
+      "detail": "Selected-family rollout round committed"
+    },
+    {
+      "source_key": "ipc:waypoint:01a14856-3f21-78c3-846f-c876180f8d67",
+      "state": "connected",
+      "at": "2026-10-17T11:08:04.039926+00:00",
+      "detail": "revision_committed"
+    }
+  ],
+  "private_messages_exported": false
+}

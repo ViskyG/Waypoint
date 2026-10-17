@@ -1,0 +1,1789 @@
+{
+  "schema": "waypoint.audit.workflow/1",
+  "captured_at": "2026-10-17T11:10:48.294320+00:00",
+  "event_cutoff_seq": 12280,
+  "read_only": true,
+  "no_native_text_exported": true,
+  "no_model_or_source_control_commands": true,
+  "limitations": [
+    "Chronology and projections use root immutable audit snapshot .runtime/conformance-audit/current.sqlite at12280. Item bodies were not exported or semantically relabeled.",
+    "No new product tests, live IPC reads, browser actions, API writes or production mutations performed by this subaudit.",
+    "Passed receipts and saved reports are evidence at their stated level; actual past execution cannot be reconstructed beyond stored artifacts.",
+    "Artifact hash audit compares currently accessible files to recorded pins; it does not recover missing past bytes or prove historical file contents beyond those pins."
+  ],
+  "head": "v-bf38547210f5492c",
+  "event_kind_counts": {
+    "plan.changed": 6,
+    "node.status": 48,
+    "node.result": 36,
+    "agent.upsert": 978,
+    "item.upsert": 2419,
+    "source.health": 7366,
+    "agent.activity": 1323,
+    "scope.set": 5,
+    "test.result": 71,
+    "item.identity_corrected": 3,
+    "dependency.observation": 18,
+    "algorithm.observation": 7
+  },
+  "accepted_plan_versions": [
+    {
+      "version": "v-dbf4fffa0d9949cc",
+      "ordinal": 1,
+      "parent": null,
+      "at": "2026-10-17T05:32:09.247220+00:00"
+    },
+    {
+      "version": "v-55e4a40332434c53",
+      "ordinal": 2,
+      "parent": "v-dbf4fffa0d9949cc",
+      "at": "2026-10-17T05:37:40.686210+00:00"
+    },
+    {
+      "version": "v-e3363063b40e4d41",
+      "ordinal": 3,
+      "parent": "v-55e4a40332434c53",
+      "at": "2026-10-17T09:48:57.848279+00:00"
+    },
+    {
+      "version": "v-97d3f60f3b04408f",
+      "ordinal": 4,
+      "parent": "v-e3363063b40e4d41",
+      "at": "2026-10-17T10:07:06.196062+00:00"
+    },
+    {
+      "version": "v-bdcf9899dc6647c7",
+      "ordinal": 5,
+      "parent": "v-97d3f60f3b04408f",
+      "at": "2026-10-17T10:14:16.382645+00:00"
+    },
+    {
+      "version": "v-bf38547210f5492c",
+      "ordinal": 6,
+      "parent": "v-bdcf9899dc6647c7",
+      "at": "2026-10-17T11:01:20.653793+00:00"
+    }
+  ],
+  "node_count": 32,
+  "edge_count": 38,
+  "scopes": [
+    {
+      "seq": 236,
+      "node_ids": [
+        "WPT-C05",
+        "WPT-C07.2"
+      ],
+      "at": "2026-10-17T05:36:58.722269+00:00",
+      "has_source_boundary": true
+    },
+    {
+      "seq": 414,
+      "node_ids": [
+        "WPT-C05",
+        "WPT-C07.2"
+      ],
+      "at": "2026-10-17T05:38:17.780735+00:00",
+      "has_source_boundary": true
+    },
+    {
+      "seq": 2010,
+      "node_ids": [],
+      "at": "2026-10-17T05:55:32.124481+00:00",
+      "has_source_boundary": true
+    },
+    {
+      "seq": 8958,
+      "node_ids": [
+        "WPT-N08"
+      ],
+      "at": "2026-10-17T10:08:30.871063+00:00",
+      "has_source_boundary": true
+    },
+    {
+      "seq": 11180,
+      "node_ids": [
+        "WPT-N03"
+      ],
+      "at": "2026-10-17T10:56:48.381327+00:00",
+      "has_source_boundary": true
+    }
+  ],
+  "distinct_scope_reporters": 1,
+  "projected_item_counts": {
+    "total": 868,
+    "distinct_agents": 18,
+    "with_node_targets": 182,
+    "without_node_targets": 686,
+    "with_any_targets": 182,
+    "sources": {
+      "codex-rollout/4b26f8b18dfb": 481,
+      "codex-ipc/4b26f8b18dfb": 386,
+      "agent-signal": 1
+    }
+  },
+  "node_chronology": [
+    {
+      "node_id": "WPT-BASE",
+      "status": "Исходники поставлены",
+      "status_seq": 10,
+      "done_first_seq": null,
+      "result_seqs": [],
+      "scope_declaration_seqs": [],
+      "planned_test_count": 0,
+      "test_receipt_count": 0,
+      "latest_passed_count": 0,
+      "test_receipts": [],
+      "checks_registered_after_first_done": null,
+      "direct_projected_item_count_first_seen_at_or_before_cut": 0,
+      "direct_projected_agents": 0,
+      "interpretation": "source-delivery-only, not target installation"
+    },
+    {
+      "node_id": "WPT-C01",
+      "status": "Исходники готовы",
+      "status_seq": 2,
+      "done_first_seq": null,
+      "result_seqs": [
+        3
+      ],
+      "scope_declaration_seqs": [],
+      "planned_test_count": 0,
+      "test_receipt_count": 0,
+      "latest_passed_count": 0,
+      "test_receipts": [],
+      "checks_registered_after_first_done": null,
+      "direct_projected_item_count_first_seen_at_or_before_cut": 0,
+      "direct_projected_agents": 0,
+      "interpretation": "source-delivery-only, not target installation"
+    },
+    {
+      "node_id": "WPT-C02",
+      "status": "Исходники готовы",
+      "status_seq": 4,
+      "done_first_seq": null,
+      "result_seqs": [
+        5
+      ],
+      "scope_declaration_seqs": [],
+      "planned_test_count": 0,
+      "test_receipt_count": 0,
+      "latest_passed_count": 0,
+      "test_receipts": [],
+      "checks_registered_after_first_done": null,
+      "direct_projected_item_count_first_seen_at_or_before_cut": 0,
+      "direct_projected_agents": 0,
+      "interpretation": "source-delivery-only, not target installation"
+    },
+    {
+      "node_id": "WPT-C03",
+      "status": "Исходники готовы",
+      "status_seq": 6,
+      "done_first_seq": null,
+      "result_seqs": [
+        7
+      ],
+      "scope_declaration_seqs": [],
+      "planned_test_count": 0,
+      "test_receipt_count": 0,
+      "latest_passed_count": 0,
+      "test_receipts": [],
+      "checks_registered_after_first_done": null,
+      "direct_projected_item_count_first_seen_at_or_before_cut": 0,
+      "direct_projected_agents": 0,
+      "interpretation": "source-delivery-only, not target installation"
+    },
+    {
+      "node_id": "WPT-C04",
+      "status": "Исходники готовы",
+      "status_seq": 8,
+      "done_first_seq": null,
+      "result_seqs": [
+        9
+      ],
+      "scope_declaration_seqs": [],
+      "planned_test_count": 0,
+      "test_receipt_count": 0,
+      "latest_passed_count": 0,
+      "test_receipts": [],
+      "checks_registered_after_first_done": null,
+      "direct_projected_item_count_first_seen_at_or_before_cut": 0,
+      "direct_projected_agents": 0,
+      "interpretation": "source-delivery-only, not target installation"
+    },
+    {
+      "node_id": "WPT-C05",
+      "status": "done",
+      "status_seq": 1910,
+      "done_first_seq": 1910,
+      "result_seqs": [
+        1911
+      ],
+      "scope_declaration_seqs": [
+        236,
+        414
+      ],
+      "planned_test_count": 3,
+      "test_receipt_count": 3,
+      "latest_passed_count": 3,
+      "test_receipts": [
+        {
+          "test_id": "T-01",
+          "seq": 1925,
+          "outcome": "passed",
+          "freshness_label": "current",
+          "plan_version": "v-55e4a40332434c53",
+          "retrospective_registration": false
+        },
+        {
+          "test_id": "T-02",
+          "seq": 1926,
+          "outcome": "passed",
+          "freshness_label": "current",
+          "plan_version": "v-55e4a40332434c53",
+          "retrospective_registration": false
+        },
+        {
+          "test_id": "T-03",
+          "seq": 1927,
+          "outcome": "passed",
+          "freshness_label": "current",
+          "plan_version": "v-55e4a40332434c53",
+          "retrospective_registration": false
+        }
+      ],
+      "checks_registered_after_first_done": 3,
+      "direct_projected_item_count_first_seen_at_or_before_cut": 44,
+      "direct_projected_agents": 1,
+      "interpretation": "ledger status is declared; evidence scope must be read separately"
+    },
+    {
+      "node_id": "WPT-C05.1",
+      "status": "done",
+      "status_seq": 415,
+      "done_first_seq": 415,
+      "result_seqs": [
+        416
+      ],
+      "scope_declaration_seqs": [],
+      "planned_test_count": 1,
+      "test_receipt_count": 1,
+      "latest_passed_count": 1,
+      "test_receipts": [
+        {
+          "test_id": "T-01",
+          "seq": 1921,
+          "outcome": "passed",
+          "freshness_label": "current",
+          "plan_version": "v-55e4a40332434c53",
+          "retrospective_registration": false
+        }
+      ],
+      "checks_registered_after_first_done": 1,
+      "direct_projected_item_count_first_seen_at_or_before_cut": 0,
+      "direct_projected_agents": 0,
+      "interpretation": "ledger status is declared; evidence scope must be read separately"
+    },
+    {
+      "node_id": "WPT-C05.2",
+      "status": "done",
+      "status_seq": 417,
+      "done_first_seq": 417,
+      "result_seqs": [
+        418
+      ],
+      "scope_declaration_seqs": [],
+      "planned_test_count": 1,
+      "test_receipt_count": 1,
+      "latest_passed_count": 1,
+      "test_receipts": [
+        {
+          "test_id": "T-01",
+          "seq": 1922,
+          "outcome": "passed",
+          "freshness_label": "current",
+          "plan_version": "v-55e4a40332434c53",
+          "retrospective_registration": false
+        }
+      ],
+      "checks_registered_after_first_done": 1,
+      "direct_projected_item_count_first_seen_at_or_before_cut": 0,
+      "direct_projected_agents": 0,
+      "interpretation": "ledger status is declared; evidence scope must be read separately"
+    },
+    {
+      "node_id": "WPT-C05.3",
+      "status": "done",
+      "status_seq": 419,
+      "done_first_seq": 419,
+      "result_seqs": [
+        420
+      ],
+      "scope_declaration_seqs": [],
+      "planned_test_count": 1,
+      "test_receipt_count": 1,
+      "latest_passed_count": 1,
+      "test_receipts": [
+        {
+          "test_id": "T-01",
+          "seq": 1923,
+          "outcome": "passed",
+          "freshness_label": "current",
+          "plan_version": "v-55e4a40332434c53",
+          "retrospective_registration": false
+        }
+      ],
+      "checks_registered_after_first_done": 1,
+      "direct_projected_item_count_first_seen_at_or_before_cut": 0,
+      "direct_projected_agents": 0,
+      "interpretation": "ledger status is declared; evidence scope must be read separately"
+    },
+    {
+      "node_id": "WPT-C05.4",
+      "status": "done",
+      "status_seq": 1908,
+      "done_first_seq": 1908,
+      "result_seqs": [
+        1909
+      ],
+      "scope_declaration_seqs": [],
+      "planned_test_count": 1,
+      "test_receipt_count": 1,
+      "latest_passed_count": 1,
+      "test_receipts": [
+        {
+          "test_id": "T-01",
+          "seq": 1924,
+          "outcome": "passed",
+          "freshness_label": "current",
+          "plan_version": "v-55e4a40332434c53",
+          "retrospective_registration": false
+        }
+      ],
+      "checks_registered_after_first_done": 1,
+      "direct_projected_item_count_first_seen_at_or_before_cut": 0,
+      "direct_projected_agents": 0,
+      "interpretation": "ledger status is declared; evidence scope must be read separately"
+    },
+    {
+      "node_id": "WPT-C06",
+      "status": "done",
+      "status_seq": 1025,
+      "done_first_seq": 1025,
+      "result_seqs": [
+        1026
+      ],
+      "scope_declaration_seqs": [],
+      "planned_test_count": 3,
+      "test_receipt_count": 3,
+      "latest_passed_count": 3,
+      "test_receipts": [
+        {
+          "test_id": "T-01",
+          "seq": 1030,
+          "outcome": "passed",
+          "freshness_label": "current",
+          "plan_version": "v-55e4a40332434c53",
+          "retrospective_registration": false
+        },
+        {
+          "test_id": "T-02",
+          "seq": 1031,
+          "outcome": "passed",
+          "freshness_label": "current",
+          "plan_version": "v-55e4a40332434c53",
+          "retrospective_registration": false
+        },
+        {
+          "test_id": "T-03",
+          "seq": 1032,
+          "outcome": "passed",
+          "freshness_label": "current",
+          "plan_version": "v-55e4a40332434c53",
+          "retrospective_registration": false
+        }
+      ],
+      "checks_registered_after_first_done": 3,
+      "direct_projected_item_count_first_seen_at_or_before_cut": 0,
+      "direct_projected_agents": 0,
+      "interpretation": "ledger status is declared; evidence scope must be read separately"
+    },
+    {
+      "node_id": "WPT-C06.1",
+      "status": "done",
+      "status_seq": 1019,
+      "done_first_seq": 1019,
+      "result_seqs": [
+        1020
+      ],
+      "scope_declaration_seqs": [],
+      "planned_test_count": 1,
+      "test_receipt_count": 1,
+      "latest_passed_count": 1,
+      "test_receipts": [
+        {
+          "test_id": "T-01",
+          "seq": 1027,
+          "outcome": "passed",
+          "freshness_label": "current",
+          "plan_version": "v-55e4a40332434c53",
+          "retrospective_registration": false
+        }
+      ],
+      "checks_registered_after_first_done": 1,
+      "direct_projected_item_count_first_seen_at_or_before_cut": 0,
+      "direct_projected_agents": 0,
+      "interpretation": "ledger status is declared; evidence scope must be read separately"
+    },
+    {
+      "node_id": "WPT-C06.2",
+      "status": "done",
+      "status_seq": 1021,
+      "done_first_seq": 1021,
+      "result_seqs": [
+        1022
+      ],
+      "scope_declaration_seqs": [],
+      "planned_test_count": 1,
+      "test_receipt_count": 1,
+      "latest_passed_count": 1,
+      "test_receipts": [
+        {
+          "test_id": "T-01",
+          "seq": 1028,
+          "outcome": "passed",
+          "freshness_label": "current",
+          "plan_version": "v-55e4a40332434c53",
+          "retrospective_registration": false
+        }
+      ],
+      "checks_registered_after_first_done": 1,
+      "direct_projected_item_count_first_seen_at_or_before_cut": 0,
+      "direct_projected_agents": 0,
+      "interpretation": "ledger status is declared; evidence scope must be read separately"
+    },
+    {
+      "node_id": "WPT-C06.3",
+      "status": "done",
+      "status_seq": 1023,
+      "done_first_seq": 1023,
+      "result_seqs": [
+        1024
+      ],
+      "scope_declaration_seqs": [],
+      "planned_test_count": 1,
+      "test_receipt_count": 1,
+      "latest_passed_count": 1,
+      "test_receipts": [
+        {
+          "test_id": "T-01",
+          "seq": 1029,
+          "outcome": "passed",
+          "freshness_label": "current",
+          "plan_version": "v-55e4a40332434c53",
+          "retrospective_registration": false
+        }
+      ],
+      "checks_registered_after_first_done": 1,
+      "direct_projected_item_count_first_seen_at_or_before_cut": 0,
+      "direct_projected_agents": 0,
+      "interpretation": "ledger status is declared; evidence scope must be read separately"
+    },
+    {
+      "node_id": "WPT-C07",
+      "status": "done",
+      "status_seq": 2004,
+      "done_first_seq": 2004,
+      "result_seqs": [
+        2005
+      ],
+      "scope_declaration_seqs": [],
+      "planned_test_count": 3,
+      "test_receipt_count": 3,
+      "latest_passed_count": 3,
+      "test_receipts": [
+        {
+          "test_id": "T-01",
+          "seq": 2007,
+          "outcome": "passed",
+          "freshness_label": "current",
+          "plan_version": "v-55e4a40332434c53",
+          "retrospective_registration": false
+        },
+        {
+          "test_id": "T-02",
+          "seq": 2008,
+          "outcome": "passed",
+          "freshness_label": "current",
+          "plan_version": "v-55e4a40332434c53",
+          "retrospective_registration": false
+        },
+        {
+          "test_id": "T-03",
+          "seq": 2009,
+          "outcome": "passed",
+          "freshness_label": "current",
+          "plan_version": "v-55e4a40332434c53",
+          "retrospective_registration": false
+        }
+      ],
+      "checks_registered_after_first_done": 3,
+      "direct_projected_item_count_first_seen_at_or_before_cut": 0,
+      "direct_projected_agents": 0,
+      "interpretation": "ledger status is declared; evidence scope must be read separately"
+    },
+    {
+      "node_id": "WPT-C07.1",
+      "status": "done",
+      "status_seq": 1912,
+      "done_first_seq": 1912,
+      "result_seqs": [
+        1913
+      ],
+      "scope_declaration_seqs": [],
+      "planned_test_count": 1,
+      "test_receipt_count": 1,
+      "latest_passed_count": 1,
+      "test_receipts": [
+        {
+          "test_id": "T-01",
+          "seq": 1928,
+          "outcome": "passed",
+          "freshness_label": "current",
+          "plan_version": "v-55e4a40332434c53",
+          "retrospective_registration": false
+        }
+      ],
+      "checks_registered_after_first_done": 1,
+      "direct_projected_item_count_first_seen_at_or_before_cut": 0,
+      "direct_projected_agents": 0,
+      "interpretation": "ledger status is declared; evidence scope must be read separately"
+    },
+    {
+      "node_id": "WPT-C07.2",
+      "status": "done",
+      "status_seq": 1914,
+      "done_first_seq": 1914,
+      "result_seqs": [
+        1915
+      ],
+      "scope_declaration_seqs": [
+        236,
+        414
+      ],
+      "planned_test_count": 1,
+      "test_receipt_count": 1,
+      "latest_passed_count": 1,
+      "test_receipts": [
+        {
+          "test_id": "T-01",
+          "seq": 1929,
+          "outcome": "passed",
+          "freshness_label": "current",
+          "plan_version": "v-55e4a40332434c53",
+          "retrospective_registration": false
+        }
+      ],
+      "checks_registered_after_first_done": 1,
+      "direct_projected_item_count_first_seen_at_or_before_cut": 44,
+      "direct_projected_agents": 1,
+      "interpretation": "ledger status is declared; evidence scope must be read separately"
+    },
+    {
+      "node_id": "WPT-C07.3",
+      "status": "done",
+      "status_seq": 1916,
+      "done_first_seq": 1916,
+      "result_seqs": [
+        1917
+      ],
+      "scope_declaration_seqs": [],
+      "planned_test_count": 2,
+      "test_receipt_count": 2,
+      "latest_passed_count": 2,
+      "test_receipts": [
+        {
+          "test_id": "T-01",
+          "seq": 1930,
+          "outcome": "passed",
+          "freshness_label": "current",
+          "plan_version": "v-55e4a40332434c53",
+          "retrospective_registration": false
+        },
+        {
+          "test_id": "T-02",
+          "seq": 1931,
+          "outcome": "passed",
+          "freshness_label": "current",
+          "plan_version": "v-55e4a40332434c53",
+          "retrospective_registration": false
+        }
+      ],
+      "checks_registered_after_first_done": 2,
+      "direct_projected_item_count_first_seen_at_or_before_cut": 0,
+      "direct_projected_agents": 0,
+      "interpretation": "ledger status is declared; evidence scope must be read separately"
+    },
+    {
+      "node_id": "WPT-C07.4",
+      "status": "done",
+      "status_seq": 2002,
+      "done_first_seq": 2002,
+      "result_seqs": [
+        2003
+      ],
+      "scope_declaration_seqs": [],
+      "planned_test_count": 1,
+      "test_receipt_count": 1,
+      "latest_passed_count": 1,
+      "test_receipts": [
+        {
+          "test_id": "T-01",
+          "seq": 2006,
+          "outcome": "passed",
+          "freshness_label": "current",
+          "plan_version": "v-55e4a40332434c53",
+          "retrospective_registration": false
+        }
+      ],
+      "checks_registered_after_first_done": 1,
+      "direct_projected_item_count_first_seen_at_or_before_cut": 1,
+      "direct_projected_agents": 1,
+      "interpretation": "ledger status is declared; evidence scope must be read separately"
+    },
+    {
+      "node_id": "WPT-INPUT-T3",
+      "status": "awaiting reference",
+      "status_seq": 10420,
+      "done_first_seq": null,
+      "result_seqs": [],
+      "scope_declaration_seqs": [],
+      "planned_test_count": 0,
+      "test_receipt_count": 0,
+      "latest_passed_count": 0,
+      "test_receipts": [],
+      "checks_registered_after_first_done": null,
+      "direct_projected_item_count_first_seen_at_or_before_cut": 0,
+      "direct_projected_agents": 0,
+      "interpretation": "open confirmed reference required"
+    },
+    {
+      "node_id": "WPT-N00",
+      "status": "done",
+      "status_seq": 8755,
+      "done_first_seq": 4006,
+      "result_seqs": [
+        8754
+      ],
+      "scope_declaration_seqs": [],
+      "planned_test_count": 4,
+      "test_receipt_count": 4,
+      "latest_passed_count": 4,
+      "test_receipts": [
+        {
+          "test_id": "T01",
+          "seq": 11508,
+          "outcome": "passed",
+          "freshness_label": "current",
+          "plan_version": "v-bf38547210f5492c",
+          "retrospective_registration": true
+        },
+        {
+          "test_id": "T02",
+          "seq": 11509,
+          "outcome": "passed",
+          "freshness_label": "current",
+          "plan_version": "v-bf38547210f5492c",
+          "retrospective_registration": true
+        },
+        {
+          "test_id": "T03",
+          "seq": 11510,
+          "outcome": "passed",
+          "freshness_label": "current",
+          "plan_version": "v-bf38547210f5492c",
+          "retrospective_registration": true
+        },
+        {
+          "test_id": "T04",
+          "seq": 11511,
+          "outcome": "passed",
+          "freshness_label": "current",
+          "plan_version": "v-bf38547210f5492c",
+          "retrospective_registration": true
+        }
+      ],
+      "checks_registered_after_first_done": 4,
+      "direct_projected_item_count_first_seen_at_or_before_cut": 0,
+      "direct_projected_agents": 0,
+      "interpretation": "ledger status is declared; evidence scope must be read separately"
+    },
+    {
+      "node_id": "WPT-N01",
+      "status": "done",
+      "status_seq": 8762,
+      "done_first_seq": 6613,
+      "result_seqs": [
+        6612,
+        8761
+      ],
+      "scope_declaration_seqs": [],
+      "planned_test_count": 5,
+      "test_receipt_count": 5,
+      "latest_passed_count": 5,
+      "test_receipts": [
+        {
+          "test_id": "T01",
+          "seq": 11512,
+          "outcome": "passed",
+          "freshness_label": "current",
+          "plan_version": "v-bf38547210f5492c",
+          "retrospective_registration": true
+        },
+        {
+          "test_id": "T02",
+          "seq": 11513,
+          "outcome": "passed",
+          "freshness_label": "current",
+          "plan_version": "v-bf38547210f5492c",
+          "retrospective_registration": true
+        },
+        {
+          "test_id": "T03",
+          "seq": 11514,
+          "outcome": "passed",
+          "freshness_label": "current",
+          "plan_version": "v-bf38547210f5492c",
+          "retrospective_registration": true
+        },
+        {
+          "test_id": "T04",
+          "seq": 11515,
+          "outcome": "passed",
+          "freshness_label": "current",
+          "plan_version": "v-bf38547210f5492c",
+          "retrospective_registration": true
+        },
+        {
+          "test_id": "T05",
+          "seq": 11516,
+          "outcome": "passed",
+          "freshness_label": "current",
+          "plan_version": "v-bf38547210f5492c",
+          "retrospective_registration": true
+        }
+      ],
+      "checks_registered_after_first_done": 5,
+      "direct_projected_item_count_first_seen_at_or_before_cut": 0,
+      "direct_projected_agents": 0,
+      "interpretation": "ledger status is declared; evidence scope must be read separately"
+    },
+    {
+      "node_id": "WPT-N02",
+      "status": "done",
+      "status_seq": 8766,
+      "done_first_seq": 8766,
+      "result_seqs": [
+        8765,
+        11814
+      ],
+      "scope_declaration_seqs": [],
+      "planned_test_count": 5,
+      "test_receipt_count": 5,
+      "latest_passed_count": 5,
+      "test_receipts": [
+        {
+          "test_id": "T01",
+          "seq": 11517,
+          "outcome": "passed",
+          "freshness_label": "current",
+          "plan_version": "v-bf38547210f5492c",
+          "retrospective_registration": true
+        },
+        {
+          "test_id": "T02",
+          "seq": 11518,
+          "outcome": "passed",
+          "freshness_label": "current",
+          "plan_version": "v-bf38547210f5492c",
+          "retrospective_registration": true
+        },
+        {
+          "test_id": "T03",
+          "seq": 11519,
+          "outcome": "passed",
+          "freshness_label": "current",
+          "plan_version": "v-bf38547210f5492c",
+          "retrospective_registration": true
+        },
+        {
+          "test_id": "T04",
+          "seq": 11520,
+          "outcome": "passed",
+          "freshness_label": "current",
+          "plan_version": "v-bf38547210f5492c",
+          "retrospective_registration": true
+        },
+        {
+          "test_id": "T05",
+          "seq": 11521,
+          "outcome": "passed",
+          "freshness_label": "current",
+          "plan_version": "v-bf38547210f5492c",
+          "retrospective_registration": true
+        }
+      ],
+      "checks_registered_after_first_done": 5,
+      "direct_projected_item_count_first_seen_at_or_before_cut": 0,
+      "direct_projected_agents": 0,
+      "interpretation": "ledger status is declared; evidence scope must be read separately"
+    },
+    {
+      "node_id": "WPT-N03",
+      "status": "done",
+      "status_seq": 8779,
+      "done_first_seq": 6615,
+      "result_seqs": [
+        6614,
+        8778,
+        11813
+      ],
+      "scope_declaration_seqs": [
+        11180
+      ],
+      "planned_test_count": 6,
+      "test_receipt_count": 6,
+      "latest_passed_count": 6,
+      "test_receipts": [
+        {
+          "test_id": "T01",
+          "seq": 11522,
+          "outcome": "passed",
+          "freshness_label": "current",
+          "plan_version": "v-bf38547210f5492c",
+          "retrospective_registration": true
+        },
+        {
+          "test_id": "T02",
+          "seq": 11523,
+          "outcome": "passed",
+          "freshness_label": "current",
+          "plan_version": "v-bf38547210f5492c",
+          "retrospective_registration": true
+        },
+        {
+          "test_id": "T03",
+          "seq": 11524,
+          "outcome": "passed",
+          "freshness_label": "current",
+          "plan_version": "v-bf38547210f5492c",
+          "retrospective_registration": true
+        },
+        {
+          "test_id": "T04",
+          "seq": 11525,
+          "outcome": "passed",
+          "freshness_label": "current",
+          "plan_version": "v-bf38547210f5492c",
+          "retrospective_registration": true
+        },
+        {
+          "test_id": "T05",
+          "seq": 11526,
+          "outcome": "passed",
+          "freshness_label": "current",
+          "plan_version": "v-bf38547210f5492c",
+          "retrospective_registration": true
+        },
+        {
+          "test_id": "T06",
+          "seq": 11527,
+          "outcome": "passed",
+          "freshness_label": "current",
+          "plan_version": "v-bf38547210f5492c",
+          "retrospective_registration": true
+        }
+      ],
+      "checks_registered_after_first_done": 6,
+      "direct_projected_item_count_first_seen_at_or_before_cut": 55,
+      "direct_projected_agents": 1,
+      "interpretation": "ledger status is declared; evidence scope must be read separately"
+    },
+    {
+      "node_id": "WPT-N04",
+      "status": "done",
+      "status_seq": 8769,
+      "done_first_seq": 8769,
+      "result_seqs": [
+        8768,
+        11815
+      ],
+      "scope_declaration_seqs": [],
+      "planned_test_count": 6,
+      "test_receipt_count": 6,
+      "latest_passed_count": 6,
+      "test_receipts": [
+        {
+          "test_id": "T01",
+          "seq": 11528,
+          "outcome": "passed",
+          "freshness_label": "current",
+          "plan_version": "v-bf38547210f5492c",
+          "retrospective_registration": true
+        },
+        {
+          "test_id": "T02",
+          "seq": 11529,
+          "outcome": "passed",
+          "freshness_label": "current",
+          "plan_version": "v-bf38547210f5492c",
+          "retrospective_registration": true
+        },
+        {
+          "test_id": "T03",
+          "seq": 11530,
+          "outcome": "passed",
+          "freshness_label": "current",
+          "plan_version": "v-bf38547210f5492c",
+          "retrospective_registration": true
+        },
+        {
+          "test_id": "T04",
+          "seq": 11531,
+          "outcome": "passed",
+          "freshness_label": "current",
+          "plan_version": "v-bf38547210f5492c",
+          "retrospective_registration": true
+        },
+        {
+          "test_id": "T05",
+          "seq": 11532,
+          "outcome": "passed",
+          "freshness_label": "current",
+          "plan_version": "v-bf38547210f5492c",
+          "retrospective_registration": true
+        },
+        {
+          "test_id": "T06",
+          "seq": 11533,
+          "outcome": "passed",
+          "freshness_label": "current",
+          "plan_version": "v-bf38547210f5492c",
+          "retrospective_registration": true
+        }
+      ],
+      "checks_registered_after_first_done": 6,
+      "direct_projected_item_count_first_seen_at_or_before_cut": 0,
+      "direct_projected_agents": 0,
+      "interpretation": "ledger status is declared; evidence scope must be read separately"
+    },
+    {
+      "node_id": "WPT-N05",
+      "status": "done",
+      "status_seq": 10155,
+      "done_first_seq": 8772,
+      "result_seqs": [
+        8771,
+        10154
+      ],
+      "scope_declaration_seqs": [],
+      "planned_test_count": 6,
+      "test_receipt_count": 6,
+      "latest_passed_count": 6,
+      "test_receipts": [
+        {
+          "test_id": "T01",
+          "seq": 11534,
+          "outcome": "passed",
+          "freshness_label": "current",
+          "plan_version": "v-bf38547210f5492c",
+          "retrospective_registration": true
+        },
+        {
+          "test_id": "T02",
+          "seq": 11535,
+          "outcome": "passed",
+          "freshness_label": "current",
+          "plan_version": "v-bf38547210f5492c",
+          "retrospective_registration": true
+        },
+        {
+          "test_id": "T03",
+          "seq": 11536,
+          "outcome": "passed",
+          "freshness_label": "current",
+          "plan_version": "v-bf38547210f5492c",
+          "retrospective_registration": true
+        },
+        {
+          "test_id": "T04",
+          "seq": 11537,
+          "outcome": "passed",
+          "freshness_label": "current",
+          "plan_version": "v-bf38547210f5492c",
+          "retrospective_registration": true
+        },
+        {
+          "test_id": "T05",
+          "seq": 11538,
+          "outcome": "passed",
+          "freshness_label": "current",
+          "plan_version": "v-bf38547210f5492c",
+          "retrospective_registration": true
+        },
+        {
+          "test_id": "T06",
+          "seq": 11539,
+          "outcome": "passed",
+          "freshness_label": "current",
+          "plan_version": "v-bf38547210f5492c",
+          "retrospective_registration": true
+        }
+      ],
+      "checks_registered_after_first_done": 6,
+      "direct_projected_item_count_first_seen_at_or_before_cut": 0,
+      "direct_projected_agents": 0,
+      "interpretation": "ledger status is declared; evidence scope must be read separately"
+    },
+    {
+      "node_id": "WPT-N06",
+      "status": "done",
+      "status_seq": 8776,
+      "done_first_seq": 6617,
+      "result_seqs": [
+        6616,
+        8775
+      ],
+      "scope_declaration_seqs": [],
+      "planned_test_count": 4,
+      "test_receipt_count": 4,
+      "latest_passed_count": 4,
+      "test_receipts": [
+        {
+          "test_id": "T01",
+          "seq": 11540,
+          "outcome": "passed",
+          "freshness_label": "current",
+          "plan_version": "v-bf38547210f5492c",
+          "retrospective_registration": true
+        },
+        {
+          "test_id": "T02",
+          "seq": 11541,
+          "outcome": "passed",
+          "freshness_label": "current",
+          "plan_version": "v-bf38547210f5492c",
+          "retrospective_registration": true
+        },
+        {
+          "test_id": "T03",
+          "seq": 11542,
+          "outcome": "passed",
+          "freshness_label": "current",
+          "plan_version": "v-bf38547210f5492c",
+          "retrospective_registration": true
+        },
+        {
+          "test_id": "T04",
+          "seq": 11543,
+          "outcome": "passed",
+          "freshness_label": "current",
+          "plan_version": "v-bf38547210f5492c",
+          "retrospective_registration": true
+        }
+      ],
+      "checks_registered_after_first_done": 4,
+      "direct_projected_item_count_first_seen_at_or_before_cut": 0,
+      "direct_projected_agents": 0,
+      "interpretation": "ledger status is declared; evidence scope must be read separately"
+    },
+    {
+      "node_id": "WPT-N07",
+      "status": "done",
+      "status_seq": 8931,
+      "done_first_seq": 8931,
+      "result_seqs": [
+        8930
+      ],
+      "scope_declaration_seqs": [],
+      "planned_test_count": 5,
+      "test_receipt_count": 5,
+      "latest_passed_count": 5,
+      "test_receipts": [
+        {
+          "test_id": "T01",
+          "seq": 11544,
+          "outcome": "passed",
+          "freshness_label": "current",
+          "plan_version": "v-bf38547210f5492c",
+          "retrospective_registration": true
+        },
+        {
+          "test_id": "T02",
+          "seq": 11545,
+          "outcome": "passed",
+          "freshness_label": "current",
+          "plan_version": "v-bf38547210f5492c",
+          "retrospective_registration": true
+        },
+        {
+          "test_id": "T03",
+          "seq": 11546,
+          "outcome": "passed",
+          "freshness_label": "current",
+          "plan_version": "v-bf38547210f5492c",
+          "retrospective_registration": true
+        },
+        {
+          "test_id": "T04",
+          "seq": 11547,
+          "outcome": "passed",
+          "freshness_label": "current",
+          "plan_version": "v-bf38547210f5492c",
+          "retrospective_registration": true
+        },
+        {
+          "test_id": "T05",
+          "seq": 11548,
+          "outcome": "passed",
+          "freshness_label": "current",
+          "plan_version": "v-bf38547210f5492c",
+          "retrospective_registration": true
+        }
+      ],
+      "checks_registered_after_first_done": 5,
+      "direct_projected_item_count_first_seen_at_or_before_cut": 0,
+      "direct_projected_agents": 0,
+      "interpretation": "ledger status is declared; evidence scope must be read separately"
+    },
+    {
+      "node_id": "WPT-N08",
+      "status": "done",
+      "status_seq": 10400,
+      "done_first_seq": 10400,
+      "result_seqs": [
+        10399,
+        10652
+      ],
+      "scope_declaration_seqs": [
+        8958
+      ],
+      "planned_test_count": 6,
+      "test_receipt_count": 6,
+      "latest_passed_count": 6,
+      "test_receipts": [
+        {
+          "test_id": "T01",
+          "seq": 11549,
+          "outcome": "passed",
+          "freshness_label": "current",
+          "plan_version": "v-bf38547210f5492c",
+          "retrospective_registration": true
+        },
+        {
+          "test_id": "T02",
+          "seq": 11550,
+          "outcome": "passed",
+          "freshness_label": "current",
+          "plan_version": "v-bf38547210f5492c",
+          "retrospective_registration": true
+        },
+        {
+          "test_id": "T03",
+          "seq": 11551,
+          "outcome": "passed",
+          "freshness_label": "current",
+          "plan_version": "v-bf38547210f5492c",
+          "retrospective_registration": true
+        },
+        {
+          "test_id": "T04",
+          "seq": 11552,
+          "outcome": "passed",
+          "freshness_label": "current",
+          "plan_version": "v-bf38547210f5492c",
+          "retrospective_registration": true
+        },
+        {
+          "test_id": "T05",
+          "seq": 11553,
+          "outcome": "passed",
+          "freshness_label": "current",
+          "plan_version": "v-bf38547210f5492c",
+          "retrospective_registration": true
+        },
+        {
+          "test_id": "T06",
+          "seq": 11554,
+          "outcome": "passed",
+          "freshness_label": "current",
+          "plan_version": "v-bf38547210f5492c",
+          "retrospective_registration": true
+        }
+      ],
+      "checks_registered_after_first_done": 6,
+      "direct_projected_item_count_first_seen_at_or_before_cut": 82,
+      "direct_projected_agents": 1,
+      "interpretation": "ledger status is declared; evidence scope must be read separately"
+    },
+    {
+      "node_id": "WPT-N09",
+      "status": "awaiting reference",
+      "status_seq": 10419,
+      "done_first_seq": null,
+      "result_seqs": [],
+      "scope_declaration_seqs": [],
+      "planned_test_count": 4,
+      "test_receipt_count": 0,
+      "latest_passed_count": 0,
+      "test_receipts": [],
+      "checks_registered_after_first_done": null,
+      "direct_projected_item_count_first_seen_at_or_before_cut": 0,
+      "direct_projected_agents": 0,
+      "interpretation": "open confirmed reference required"
+    },
+    {
+      "node_id": "WPT-NEXT",
+      "status": "functional verified; N09 awaiting reference",
+      "status_seq": 10418,
+      "done_first_seq": null,
+      "result_seqs": [],
+      "scope_declaration_seqs": [],
+      "planned_test_count": 0,
+      "test_receipt_count": 0,
+      "latest_passed_count": 0,
+      "test_receipts": [],
+      "checks_registered_after_first_done": null,
+      "direct_projected_item_count_first_seen_at_or_before_cut": 0,
+      "direct_projected_agents": 0,
+      "interpretation": "ledger status is declared; evidence scope must be read separately"
+    },
+    {
+      "node_id": "WPT-R00",
+      "status": "done",
+      "status_seq": 11,
+      "done_first_seq": 11,
+      "result_seqs": [
+        12
+      ],
+      "scope_declaration_seqs": [],
+      "planned_test_count": 3,
+      "test_receipt_count": 3,
+      "latest_passed_count": 3,
+      "test_receipts": [
+        {
+          "test_id": "T-01",
+          "seq": 1918,
+          "outcome": "passed",
+          "freshness_label": "current",
+          "plan_version": "v-55e4a40332434c53",
+          "retrospective_registration": false
+        },
+        {
+          "test_id": "T-02",
+          "seq": 1919,
+          "outcome": "passed",
+          "freshness_label": "current",
+          "plan_version": "v-55e4a40332434c53",
+          "retrospective_registration": false
+        },
+        {
+          "test_id": "T-03",
+          "seq": 1920,
+          "outcome": "passed",
+          "freshness_label": "current",
+          "plan_version": "v-55e4a40332434c53",
+          "retrospective_registration": false
+        }
+      ],
+      "checks_registered_after_first_done": 3,
+      "direct_projected_item_count_first_seen_at_or_before_cut": 0,
+      "direct_projected_agents": 0,
+      "interpretation": "ledger status is declared; evidence scope must be read separately"
+    }
+  ],
+  "dependency_artifact_pins": [
+    {
+      "seq": 8752,
+      "edge_id": "WPT-NEXT-E-01",
+      "consumer_id": "WPT-N01",
+      "availability": "available",
+      "ref": "next-stage/reports/N00.json",
+      "recorded_revision": "sha256:616723a2c8be901c1135ddb7bf383b43edbcba4296e0d3693ea9a17ded7dc82c",
+      "current_file_revision": "sha256:616723a2c8be901c1135ddb7bf383b43edbcba4296e0d3693ea9a17ded7dc82c",
+      "bytes_match": true,
+      "later_same_reporter_edge_receipt": false
+    },
+    {
+      "seq": 8753,
+      "edge_id": "WPT-NEXT-E-06",
+      "consumer_id": "WPT-N06",
+      "availability": "available",
+      "ref": "next-stage/reports/N00.json",
+      "recorded_revision": "sha256:616723a2c8be901c1135ddb7bf383b43edbcba4296e0d3693ea9a17ded7dc82c",
+      "current_file_revision": "sha256:616723a2c8be901c1135ddb7bf383b43edbcba4296e0d3693ea9a17ded7dc82c",
+      "bytes_match": true,
+      "later_same_reporter_edge_receipt": false
+    },
+    {
+      "seq": 8756,
+      "edge_id": "WPT-NEXT-E-02",
+      "consumer_id": "WPT-N02",
+      "availability": "available",
+      "ref": "next-stage/evidence/N01-migration.json",
+      "recorded_revision": "sha256:c3bbaf1e474c68170e2d3abd292bb29c6bde68ff5e85eca57bba0692867d9ac9",
+      "current_file_revision": "sha256:c3bbaf1e474c68170e2d3abd292bb29c6bde68ff5e85eca57bba0692867d9ac9",
+      "bytes_match": true,
+      "later_same_reporter_edge_receipt": false
+    },
+    {
+      "seq": 8757,
+      "edge_id": "WPT-NEXT-E-03",
+      "consumer_id": "WPT-N03",
+      "availability": "available",
+      "ref": "next-stage/evidence/N01-migration.json",
+      "recorded_revision": "sha256:c3bbaf1e474c68170e2d3abd292bb29c6bde68ff5e85eca57bba0692867d9ac9",
+      "current_file_revision": "sha256:c3bbaf1e474c68170e2d3abd292bb29c6bde68ff5e85eca57bba0692867d9ac9",
+      "bytes_match": true,
+      "later_same_reporter_edge_receipt": false
+    },
+    {
+      "seq": 8758,
+      "edge_id": "WPT-NEXT-E-04",
+      "consumer_id": "WPT-N04",
+      "availability": "available",
+      "ref": "next-stage/evidence/N01-migration.json",
+      "recorded_revision": "sha256:c3bbaf1e474c68170e2d3abd292bb29c6bde68ff5e85eca57bba0692867d9ac9",
+      "current_file_revision": "sha256:c3bbaf1e474c68170e2d3abd292bb29c6bde68ff5e85eca57bba0692867d9ac9",
+      "bytes_match": true,
+      "later_same_reporter_edge_receipt": false
+    },
+    {
+      "seq": 8759,
+      "edge_id": "WPT-NEXT-E-05",
+      "consumer_id": "WPT-N05",
+      "availability": "available",
+      "ref": "next-stage/evidence/N01-migration.json",
+      "recorded_revision": "sha256:c3bbaf1e474c68170e2d3abd292bb29c6bde68ff5e85eca57bba0692867d9ac9",
+      "current_file_revision": "sha256:c3bbaf1e474c68170e2d3abd292bb29c6bde68ff5e85eca57bba0692867d9ac9",
+      "bytes_match": true,
+      "later_same_reporter_edge_receipt": false
+    },
+    {
+      "seq": 8760,
+      "edge_id": "WPT-NEXT-E-07",
+      "consumer_id": "WPT-N07",
+      "availability": "available",
+      "ref": "next-stage/evidence/N01-migration.json",
+      "recorded_revision": "sha256:c3bbaf1e474c68170e2d3abd292bb29c6bde68ff5e85eca57bba0692867d9ac9",
+      "current_file_revision": "sha256:c3bbaf1e474c68170e2d3abd292bb29c6bde68ff5e85eca57bba0692867d9ac9",
+      "bytes_match": true,
+      "later_same_reporter_edge_receipt": false
+    },
+    {
+      "seq": 8763,
+      "edge_id": "WPT-NEXT-E-08",
+      "consumer_id": "WPT-N03",
+      "availability": "available",
+      "ref": "next-stage/evidence/IMPLEMENTED_TESTS.txt",
+      "recorded_revision": "sha256:06883ba286e8b0d95dc9b30d118fd988c2c5962095c2985140e0566defaa6873",
+      "current_file_revision": "sha256:06883ba286e8b0d95dc9b30d118fd988c2c5962095c2985140e0566defaa6873",
+      "bytes_match": true,
+      "later_same_reporter_edge_receipt": false
+    },
+    {
+      "seq": 8764,
+      "edge_id": "WPT-NEXT-E-09",
+      "consumer_id": "WPT-N08",
+      "availability": "available",
+      "ref": "next-stage/evidence/IMPLEMENTED_TESTS.txt",
+      "recorded_revision": "sha256:06883ba286e8b0d95dc9b30d118fd988c2c5962095c2985140e0566defaa6873",
+      "current_file_revision": "sha256:06883ba286e8b0d95dc9b30d118fd988c2c5962095c2985140e0566defaa6873",
+      "bytes_match": true,
+      "later_same_reporter_edge_receipt": false
+    },
+    {
+      "seq": 8767,
+      "edge_id": "WPT-NEXT-E-11",
+      "consumer_id": "WPT-N08",
+      "availability": "available",
+      "ref": "next-stage/evidence/N08-performance.json",
+      "recorded_revision": "sha256:ded1014442b8cf75d6918ef52bb9ba3ba717a6292eba774eb48d61b629f43419",
+      "current_file_revision": "sha256:ded1014442b8cf75d6918ef52bb9ba3ba717a6292eba774eb48d61b629f43419",
+      "bytes_match": true,
+      "later_same_reporter_edge_receipt": false
+    },
+    {
+      "seq": 8770,
+      "edge_id": "WPT-NEXT-E-12",
+      "consumer_id": "WPT-N08",
+      "availability": "available",
+      "ref": "next-stage/reports/N05_N07.md",
+      "recorded_revision": "sha256:e357fe0d2bf41a659a67803005945a21341fd5129f1538c9847c9bcba805d865",
+      "current_file_revision": "sha256:cb5f90880ae68fc1b0f2c4f95ef74d9ac25e586400418f0839f0ae7cf5f5063a",
+      "bytes_match": false,
+      "later_same_reporter_edge_receipt": true
+    },
+    {
+      "seq": 8773,
+      "edge_id": "WPT-NEXT-E-13",
+      "consumer_id": "WPT-N08",
+      "availability": "available",
+      "ref": "next-stage/evidence/N08-browser.json",
+      "recorded_revision": "sha256:f301a7634164507536605841a223ef1ded408c4de75194bdb181227ff036b557",
+      "current_file_revision": "sha256:f301a7634164507536605841a223ef1ded408c4de75194bdb181227ff036b557",
+      "bytes_match": true,
+      "later_same_reporter_edge_receipt": false
+    },
+    {
+      "seq": 8774,
+      "edge_id": "WPT-NEXT-E-15",
+      "consumer_id": "WPT-N09",
+      "availability": "available",
+      "ref": "next-stage/evidence/N08-browser.json",
+      "recorded_revision": "sha256:f301a7634164507536605841a223ef1ded408c4de75194bdb181227ff036b557",
+      "current_file_revision": "sha256:f301a7634164507536605841a223ef1ded408c4de75194bdb181227ff036b557",
+      "bytes_match": true,
+      "later_same_reporter_edge_receipt": false
+    },
+    {
+      "seq": 8777,
+      "edge_id": "WPT-NEXT-E-10",
+      "consumer_id": "WPT-N08",
+      "availability": "available",
+      "ref": "next-stage/evidence/N08-browser.json",
+      "recorded_revision": "sha256:f301a7634164507536605841a223ef1ded408c4de75194bdb181227ff036b557",
+      "current_file_revision": "sha256:f301a7634164507536605841a223ef1ded408c4de75194bdb181227ff036b557",
+      "bytes_match": true,
+      "later_same_reporter_edge_receipt": false
+    },
+    {
+      "seq": 8929,
+      "edge_id": "WPT-NEXT-E-14",
+      "consumer_id": "WPT-N08",
+      "availability": "available",
+      "ref": "next-stage/evidence/N07-roadmap.json",
+      "recorded_revision": "sha256:8644191889867ac6ed328be2b89825c9e503593f045850eda8c5de66afdd0f62",
+      "current_file_revision": "sha256:7beca9308216fd3df703ca606230ea8cc065a82b37c46057958951755191aff1",
+      "bytes_match": false,
+      "later_same_reporter_edge_receipt": false
+    },
+    {
+      "seq": 9992,
+      "edge_id": "WPT-NEXT-E-12",
+      "consumer_id": "WPT-N08",
+      "availability": "missing",
+      "ref": "next-stage/tools/prepare_authoring_revision.py",
+      "recorded_revision": null,
+      "current_file_revision": "sha256:12344d226bd9b8fd46595a6db1e5a06df673ae57847c18340cd4ad1e7fded005",
+      "bytes_match": null,
+      "later_same_reporter_edge_receipt": true
+    },
+    {
+      "seq": 10153,
+      "edge_id": "WPT-NEXT-E-12",
+      "consumer_id": "WPT-N08",
+      "availability": "available",
+      "ref": "next-stage/evidence/N05-reconciled-inventory.json",
+      "recorded_revision": "sha256:6a9b9d18ad9da22f2165f92b7db4cf730158fa8b92085ea0167b88a07e1f4c44",
+      "current_file_revision": "sha256:6a9b9d18ad9da22f2165f92b7db4cf730158fa8b92085ea0167b88a07e1f4c44",
+      "bytes_match": true,
+      "later_same_reporter_edge_receipt": false
+    },
+    {
+      "seq": 10398,
+      "edge_id": "WPT-NEXT-E-17",
+      "consumer_id": "WPT-N09",
+      "availability": "available",
+      "ref": "next-stage/reports/IMPLEMENTED_RU.md",
+      "recorded_revision": "sha256:1bf7005763750195362163f5f3359edf27ace0d89a37c0b92491d7fa5f339833",
+      "current_file_revision": "sha256:1bf7005763750195362163f5f3359edf27ace0d89a37c0b92491d7fa5f339833",
+      "bytes_match": true,
+      "later_same_reporter_edge_receipt": false
+    }
+  ],
+  "algorithm_current_file_checks": [
+    {
+      "algorithm_id": "ALG-DEPS",
+      "definition_revision": 2,
+      "declared_implementation_revision": "worktree-sha256:a1297084e07feb3f0b4602916354c64199e14a09e272f2396470062313163901",
+      "actual_current_bytes_revision": "worktree-sha256:a1297084e07feb3f0b4602916354c64199e14a09e272f2396470062313163901",
+      "implementation_bytes_match": true,
+      "observation_seqs": [
+        10290
+      ],
+      "current_revision_observation_seqs": [
+        10290
+      ]
+    },
+    {
+      "algorithm_id": "ALG-MERGE",
+      "definition_revision": 2,
+      "declared_implementation_revision": "worktree-sha256:5ad4f839196cd2811b04c017764e963d37ccee3bcb96e22109aba82d70e618a9",
+      "actual_current_bytes_revision": "worktree-sha256:5ad4f839196cd2811b04c017764e963d37ccee3bcb96e22109aba82d70e618a9",
+      "implementation_bytes_match": true,
+      "observation_seqs": [
+        10291
+      ],
+      "current_revision_observation_seqs": [
+        10291
+      ]
+    },
+    {
+      "algorithm_id": "ALG-PAGE",
+      "definition_revision": 2,
+      "declared_implementation_revision": "worktree-sha256:84f5af93e1751ba790f2c6d7166af4fe842811ddbd66efcbc292a0bddd5764b7",
+      "actual_current_bytes_revision": "worktree-sha256:84f5af93e1751ba790f2c6d7166af4fe842811ddbd66efcbc292a0bddd5764b7",
+      "implementation_bytes_match": true,
+      "observation_seqs": [
+        10292,
+        10294,
+        10295
+      ],
+      "current_revision_observation_seqs": [
+        10292,
+        10294,
+        10295
+      ]
+    },
+    {
+      "algorithm_id": "ALG-READ",
+      "definition_revision": 3,
+      "declared_implementation_revision": "worktree-sha256:22d381ea2a4febf2ab05c67f044f092a798b14ab3a92660a4a87f14c7222f05c",
+      "actual_current_bytes_revision": "worktree-sha256:22d381ea2a4febf2ab05c67f044f092a798b14ab3a92660a4a87f14c7222f05c",
+      "implementation_bytes_match": true,
+      "observation_seqs": [
+        10293,
+        11812
+      ],
+      "current_revision_observation_seqs": [
+        11812
+      ]
+    }
+  ],
+  "original_delivery_evidence_hashes": [
+    {
+      "path": "waypoint/evidence/RESULTS.md",
+      "original_sha256": "b3a30164daf2539ff5cb92cc9cb7a9f98f4a237e8aecc4c9804f74b6df9a778a",
+      "current_sha256": "b3a30164daf2539ff5cb92cc9cb7a9f98f4a237e8aecc4c9804f74b6df9a778a",
+      "matches_original": true
+    },
+    {
+      "path": "waypoint/evidence/browser-http-limitation.json",
+      "original_sha256": "b29508f820478c895bfbafc88bf85e3bcf788505c10dec5e9a6be321b80ccd68",
+      "current_sha256": "b29508f820478c895bfbafc88bf85e3bcf788505c10dec5e9a6be321b80ccd68",
+      "matches_original": true
+    },
+    {
+      "path": "waypoint/evidence/browser-results.json",
+      "original_sha256": "f1305f39fc1a6d2d57d90030b6fd76ddef003f0aeae0cbd4f82e31f0ec85efb0",
+      "current_sha256": "abee7e729df17a48328d044bbfa58f4a90f5a334408f3b519f25d9619a8167df",
+      "matches_original": false
+    },
+    {
+      "path": "waypoint/evidence/delivery-validation.json",
+      "original_sha256": "bd585e7679e749a69e753c843d29245c0c6717b71fd6e135c5bd1f5cbdc11df6",
+      "current_sha256": "bd585e7679e749a69e753c843d29245c0c6717b71fd6e135c5bd1f5cbdc11df6",
+      "matches_original": true
+    },
+    {
+      "path": "waypoint/evidence/environment.json",
+      "original_sha256": "25fc921ac69450e74779e39fd9edae5ee250edd9750394b40969ff7cd762d6a4",
+      "current_sha256": "25fc921ac69450e74779e39fd9edae5ee250edd9750394b40969ff7cd762d6a4",
+      "matches_original": true
+    },
+    {
+      "path": "waypoint/evidence/http-results.json",
+      "original_sha256": "d601ce7751844c45982c10b95e8f297394b42c700714dc90bb7515cff1d738e1",
+      "current_sha256": "d601ce7751844c45982c10b95e8f297394b42c700714dc90bb7515cff1d738e1",
+      "matches_original": true
+    },
+    {
+      "path": "waypoint/evidence/packaging-build.json",
+      "original_sha256": "57e66e95b9f4cff65d6e26bfe7e59522b26590a15f22d965cfaf56b6f8bf7780",
+      "current_sha256": "57e66e95b9f4cff65d6e26bfe7e59522b26590a15f22d965cfaf56b6f8bf7780",
+      "matches_original": true
+    },
+    {
+      "path": "waypoint/evidence/python-compatibility.json",
+      "original_sha256": "74130817d16822e445ddf503fed7a1c3b8478f1f0ca1c710268dcb5270134833",
+      "current_sha256": "74130817d16822e445ddf503fed7a1c3b8478f1f0ca1c710268dcb5270134833",
+      "matches_original": true
+    },
+    {
+      "path": "waypoint/evidence/ui-nested.png",
+      "original_sha256": "e84f75a7d35e8e36a489547b7058823ba4645cc53e3dbfda758d8c26036eb19b",
+      "current_sha256": "fa1e2adeef7a41b19d872027c154d69de7863eee994f64aad7b185951c16b16d",
+      "matches_original": false
+    },
+    {
+      "path": "waypoint/evidence/ui-obsidian.png",
+      "original_sha256": "36fd486866ac08e3abd75b7ccb8455c859f51b1c54ae9ccd177a860d75cbdb02",
+      "current_sha256": "6e19eda92cf7b7e531cfd30222e863e44083964340ab462ac44fabe493fe51ed",
+      "matches_original": false
+    },
+    {
+      "path": "waypoint/evidence/ui-terracotta.png",
+      "original_sha256": "4c4b0313f06574afad512245e678640a4dc616027a995d831041eebe398489dc",
+      "current_sha256": "13df0ecabddfe96af0bb00fecf26e53bf0f206cc96df78eb6e258c25ab9dcfea",
+      "matches_original": false
+    },
+    {
+      "path": "waypoint/evidence/unit-results.xml",
+      "original_sha256": "ac40892ca765f5f25b784089ff5625c93be3ed39309c9315623cbbeabbaa98df",
+      "current_sha256": "ac40892ca765f5f25b784089ff5625c93be3ed39309c9315623cbbeabbaa98df",
+      "matches_original": true
+    },
+    {
+      "path": "waypoint/evidence/unit-tests.txt",
+      "original_sha256": "2ddc5cd3143f17254258cb4009ce9c311d021371ee9778531d4a61ee61c3d9c5",
+      "current_sha256": "2ddc5cd3143f17254258cb4009ce9c311d021371ee9778531d4a61ee61c3d9c5",
+      "matches_original": true
+    }
+  ],
+  "findings": [
+    {
+      "id": "WF-01",
+      "severity": "high",
+      "topic": "Scope coverage does not match work breakdown",
+      "expected": "Each independent executor declares its packet before producing native items.",
+      "actual": "Only five scope.set events, all by one root executor; no child scopes. N00–N07 implementation interval4006–8958 has no assigned native items.",
+      "why": "Work was implemented/delegated without per-executor declaration. Observer correctly retains unassigned source items and does not guess target from prose.",
+      "evidence_seqs": [
+        236,
+        414,
+        2010,
+        8958,
+        11180
+      ],
+      "impact": "Empty chats and no observed actor per most completed nodes; per-packet execution trace cannot be reconstructed faithfully from existing scope data.",
+      "small_fix": "Declare current scope before future work and clear after handoff; every child uses its own binding. Preserve existing unassigned items, no retrospective guessed relinking."
+    },
+    {
+      "id": "WF-02",
+      "severity": "medium",
+      "topic": "Stale declared scope outlives completion",
+      "expected": "Scope follows the current work, including follow-up audits.",
+      "actual": "After N08 done10400, 29 first-seen projected items stilltarget N08 before scope11180; after completion result11815, subsequent rootitems keep targetingN03. Semantic correctness of each source text was not inferred.",
+      "why": "No scope reset on completion; done status does not close executor scope by design.",
+      "evidence_seqs": [
+        10400,
+        11180,
+        11815
+      ],
+      "impact": "Block streams include later work under the last declaration; this is authentic declared attribution but not independent proof that all contents implement that block.",
+      "small_fix": "Explicitly clear/redeclare scope at handoff. Add a UI warning that done+active scope is a declaration needing review; do not automatically reassign history."
+    },
+    {
+      "id": "WF-03",
+      "severity": "high",
+      "topic": "Completion preceded criterion coverage",
+      "expected": "Before done, packet criteria have concrete per-ID receipts at the actually demonstrated level.",
+      "actual": "All47 N00–N08 test.result events registered only11508–11554, after done4006–10400; three acceptance gaps found later and new regression proof added. N02 history-warning rendering and two N04 scenarios were incomplete at first closure.",
+      "why": "Earlier integration wrote node.result/status referencing broad reports without registering individual checks, and broad suite evidence was overextended to three criteria.",
+      "evidence_seqs": [
+        4006,
+        8766,
+        8769,
+        10400,
+        11508,
+        11554,
+        11814,
+        11815
+      ],
+      "artifacts": [
+        "next-stage/evidence/BLOCK_CHECK_AUDIT.json",
+        "next-stage/evidence/COMPLETION_REGRESSIONS.json",
+        "next-stage/reports/COMPLETION_UI_RU.md"
+      ],
+      "impact": "Initial all-done view overstated demonstrated acceptance; later47 registrations improve current mapping but cannot make original closure timely.",
+      "small_fix": "Keep retrospective labels and actual registration time; require per-ID evidence coverage before future completion. Describe late repairs as late repairs, not historical passes."
+    },
+    {
+      "id": "WF-04",
+      "severity": "high",
+      "topic": "Current N07 artifact no longer matches immutable receipt pin",
+      "expected": "A reviewed output receipt names immutable evidence bytes or is superseded after artifact revision.",
+      "actual": "N07 dependency8929 and result8930 pin an older SHA256 of next-stage/evidence/N07-roadmap.json; currentbytes differ and no replacement sameedge receipt exists. Historical N05 pin8770 also differs but was explicitly replaced10153.",
+      "why": "Evidence file reused by later validation; dependency resolver evaluates declared evidence/fingerprint and does not read arbitrary filesystem paths.",
+      "evidence_seqs": [
+        8929,
+        8930,
+        8770,
+        9992,
+        10153
+      ],
+      "impact": "Current satisfied prerequisite is based on a receipt whose referenced file is mutable; available means declared availability, not current-byteverification.",
+      "small_fix": "Preserve immutable versioned proof artifacts and add a new authenticated receipt for reviewed current N07 output; retain old receipt and original bytes if recoverable."
+    },
+    {
+      "id": "WF-05",
+      "severity": "medium",
+      "topic": "Test current label is not automatic source freshness",
+      "expected": "Readers can distinguish historical pass from fresh validation of current implementation.",
+      "actual": "24 C/R00 testresults retain writer-supplied freshness=current and oldplanv55. Stage2source changed; Store selects latest receipt by seq and does not recompute ordinary test freshness. No plan criterion texts changed across six versions.",
+      "why": "test.result freshness is declared metadata; algorithms have exact implementation revisions, ordinary tests do not.",
+      "evidence_refs": [
+        "waypoint/waypoint/store.py:372",
+        "waypoint/waypoint/store.py:450"
+      ],
+      "impact": "Historical valid passes may look like full current-code validation. This does not invalidate original runs or justify rerunning everything.",
+      "small_fix": "Show run/capture basis and historical scope; compare relevant code/input revision when supplied. Use targeted reruns only for changed mechanisms."
+    },
+    {
+      "id": "WF-06",
+      "severity": "medium",
+      "topic": "Original source delivery evidence paths were reused",
+      "expected": "Original C01–C04 delivery report continues to reference the original23-check browser receipt and original screenshots.",
+      "actual": "RESULTS.md and originalmanifest unchanged, but browser-results.json now holds41 C06 realHTTP synthetic checks; three ui screenshots also differ from original hashes. Original36-test XML remains intact and local62-test XML is separate.",
+      "why": "Later C06 verification reused filenames from the earlier supplied design evidence.",
+      "impact": "Source delivery claims are honestly scoped, but the old report link no longer proves its original browser assertion count/transport.",
+      "small_fix": "Recover original receipt/screens from original archive or Git ifavailable; keep later evidence under distinct revisioned names. If unavailable, annotate precise missing historical evidence without substituting the41-check run."
+    },
+    {
+      "id": "WF-07",
+      "severity": "low",
+      "topic": "One dependency incident generates23 warning records",
+      "expected": "Historical early-start warnings remain after later confirmation; count distinguishes incidents and activity receipts.",
+      "actual": "dependency_starts contains23 records all N08 seq9995–10149, all for missing WPT-NEXT-E-12 and the same missing receipt9992; confirmation10153 later resolves current prerequisite.",
+      "why": "Each observed activity invokes capture and emits another stored warning during same unresolved interval.",
+      "evidence_seqs": [
+        9992,
+        9995,
+        10149,
+        10153
+      ],
+      "impact": "History preserved correctly, but23 records are not23 independent work-start incidents and UI may overemphasize them.",
+      "small_fix": "Group display by scope/requirement unresolved interval or stable incident identity while retaining raw event history."
+    },
+    {
+      "id": "WF-08",
+      "severity": "medium",
+      "topic": "Early stage dependency workflow cannot be proven retrospectively",
+      "expected": "Per-stage prerequisite availability and executor starts can be compared in chronological order.",
+      "actual": "First dependency.observation is8752; N00done4006 and N01/N03/N06firstdone6613/6615/6617 occurred earlier. Most implementation packets have no observedscope/activitytarget. Only laterN08missingalgorithm incident9992–10153 has both availability and attributedactivityhistory.",
+      "why": "Evidence availability was batch-registered later, with no earlier per-executor scopes. Current satisfied dependency view does not reconstruct historical physical availability.",
+      "evidence_seqs": [
+        4006,
+        6613,
+        6615,
+        6617,
+        8752,
+        8958,
+        9992,
+        10153
+      ],
+      "impact": "Cannot assert earlier packet starts respected dependency availability from ledger alone, nor conclude inputs were physically missing. The original unrecorded incident remains unreconstructed; synthetic regressions demonstrate general behavior only.",
+      "small_fix": "Record actual availability when reviewed and declare scopes before futurestarts. Keep missing historical context explicit rather than infer it from presentdone/satisfied statuses."
+    }
+  ],
+  "works_as_planned": [
+    "Six accepted plan versions preserve existing32node IDs and38edges after stage2merge; no criterion/acceptance/assignment/title changes inexisting nodes across versions.",
+    "C01–C04 statuses explicitly source-delivery-only, not falsely named live target acceptance.",
+    "All current47 N00–N08 criterion IDs have passed receipts; retrospective registration explicitly marked instead of inventing execution timestamps.",
+    "N09 and inputT3 remain awaiting reference with no criterion passes; original duplicated image not counted as a third theme.",
+    "Native chats remain original observations; absent scope declarations did not fabricate per-node transcripts.",
+    "Source family collector proof, synthetic HTTP proof and mocked UI proof are separately labeled in savedreports.",
+    "All four current algorithm implementation byte pins match actual referenced source files; ALG-READ oldrevision2 observation remainshistorical while currentrevision3 hasnew11812evidence.",
+    "Missingalgorithm output was explicitly recorded9992, triggering retained historical warnings; afteractualreconciliation10153 it becameavailable without erasinghistoricalabsence."
+  ]
+}

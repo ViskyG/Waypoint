@@ -1,0 +1,21 @@
+{
+  "status": "PASS",
+  "browser": "143.0.7499.4",
+  "target": "installed localhost Waypoint, actual production data, read-only",
+  "head": "v-117764ba5eb64e27",
+  "cursor": 13454,
+  "checks": [
+    "38 nodes visible",
+    "six parents require corrections",
+    "six FIX remain not_started",
+    "N01 done remains green-labelled",
+    "N09 and third-reference input remain awaiting",
+    "N04-FIX T01 failed evidence readable"
+  ],
+  "browser_errors": [],
+  "native_connection_retested": false,
+  "source_mutations": false,
+  "event_writes": false,
+  "capability_exported": false,
+  "limitations": "Read-only verification of audit projection, not remediation acceptance or a new native Codex/restart campaign."
+}

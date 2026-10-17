@@ -112,7 +112,12 @@ def test_skill_candidates_are_bounded_source_preserving():
         section=(ROOT/'next-stage/skills'/section_file).read_text().strip()
         assert candidate.read_text().count(section)==1
         if entry['repository']=='Waypoint':
-            source=(ROOT/entry['path']).read_text()
+            # Historical0.2 proposals stay pinned to supplied0.1 sources, not mutable project drafts.
+            relative=Path(entry['path']).relative_to('waypoint/skills')
+            source=(ROOT/'next-stage/sources/project-skills'/relative).read_text()
+            import hashlib
+            raw=source.encode()
+            assert hashlib.sha1(b'blob '+str(len(raw)).encode()+b'\0'+raw).hexdigest()==entry['base_blob']
             marker=('version: "'+entry['version_from']+'"') if entry['path'].endswith('/SKILL.md') else 'версии '+entry['version_from']
             replacement=('version: "'+entry['version_to']+'"') if entry['path'].endswith('/SKILL.md') else 'версии '+entry['version_to']
             restored=candidate.read_text().replace(section,'').rstrip()+'\n'

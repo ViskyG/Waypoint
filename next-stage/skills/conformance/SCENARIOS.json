@@ -1,0 +1,49 @@
+{
+  "state": "EXECUTED_CONTRACT_CHECKS_AND_REVIEW_ONLY",
+  "product_API_writes": 0,
+  "global_source_writes": 0,
+  "scenarios": [
+    {
+      "scenario": "Independent executor or child starts work",
+      "expected": "Own verified native binding and focus before work; no parent identity reuse",
+      "proof": "Written EN/RU role contract and parser-valid bind/focus templates",
+      "level": "instruction_review_and_CLI_grammar",
+      "not_claimed": "Actual new binding or execution by a future model"
+    },
+    {
+      "scenario": "Packet complete then another task begins",
+      "expected": "Explicit empty focus or nextscope; done doesnotclose scope",
+      "proof": "test_manual_freshness_and_explicit_release_walkthrough invokes actual CLI signals without service",
+      "level": "executable_CLI_contract",
+      "not_claimed": "Automatic scope release productfeature"
+    },
+    {
+      "scenario": "Check was not executed or is older evidence",
+      "expected": "not_run/unknown or explicit retrospective registration; no invented oldtimestamp",
+      "proof": "test_manual_freshness_and_explicit_release_walkthrough and test_retrospective_receipt_keeps_explicit_registration_basis",
+      "level": "executable_CLI_contract",
+      "not_claimed": "Performed producttest or historical proofnotavailable"
+    },
+    {
+      "scenario": "Planner creates hardedge or scenario acceptance",
+      "expected": "Onegraph, separatedintent/assignment; typedoutput revision workspace phase; negativecases and evidencelevel",
+      "proof": "Bounded roadmapaddition and sharedworkflow reviewed against installed contract",
+      "level": "instruction_review",
+      "not_claimed": "New roadmap runtime or requirementvalidator"
+    },
+    {
+      "scenario": "Auditor sees greenchecks despite demonstrated required gap",
+      "expected": "Expected/actual evidencecomparison and linkedFIX or reopenedcompletion; unverified distinguishedfromfailure",
+      "proof": "Bounded auditrules and sharedworkflow explicitconditions",
+      "level": "instruction_review",
+      "not_claimed": "Automatic verdict from47greens"
+    },
+    {
+      "scenario": "Global candidates prepared",
+      "expected": "Exactcurrentcanonicalbase preserved; no publication/installation",
+      "proof": "test_global_candidates_exact_current_source_and_bounded_patches readsactualsource and comparesbytehashes; STAGING global_installationfalse",
+      "level": "source_integrity_and_bounded_patch_check",
+      "not_claimed": "Global skill registration or userpermissionto publish"
+    }
+  ]
+}

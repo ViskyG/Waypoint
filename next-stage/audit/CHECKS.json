@@ -1,0 +1,31 @@
+{
+  "schema": "waypoint.conformance.checks/1",
+  "scope": "Bounded conformance audit and registration; no product repair acceptance",
+  "reused": [
+    "Prior pytest reports, live native ID/text comparison, real service/browser receipts and restart evidence at their original stated scope",
+    "Fixed SQLite snapshot seq12280 rather than repeated native-source campaign"
+  ],
+  "new": [
+    {"ref": "CONTRACT_REPRODUCTION.json", "meaning": "Actual disposable HTTP/Chromium with synthetic data; four demonstrated defects, not native source evidence"},
+    {"ref": "CONTRACT_FINDINGS.json", "meaning": "Seven contract findings, including three source-confirmed missing mechanisms"},
+    {"ref": "WORKFLOW_FINDINGS.json", "meaning": "32-node chronology, scope and artifact identity review at fixed snapshot"},
+    {"ref": "PLAN_VALIDATION.json", "meaning": "38-node/43-edge graph passes 327 authoring/schema/roundtrip assertions, no synthetic execution seeded"},
+    {"ref": "APPLY_RECEIPT.json", "meaning": "Actual guarded import, identical request retry, old nodes/edges and 71 checks preserved; five new failed criteria are audit findings"},
+    {"ref": "APPLIED_BROWSER.json", "meaning": "Read-only installed localhost Chromium confirms updated statuses, open fixes and readable failure evidence"},
+    {"ref": "../skills/conformance/VALIDATION.json", "meaning": "Six distinct skill/CLI contract checks passed at stated scope; not a product pass count"},
+    {"ref": "../skills/conformance/QUICK_VALIDATION.json", "meaning": "Five English skill entrypoints pass skill-creator format validation"}
+  ],
+  "check_harness_corrections": [
+    "System Python lacks jsonschema; authoring validation used existing project venv. No dependency installed.",
+    "Project venv lacks PyYAML; skill format validation used existing system Python. No dependency installed.",
+    "Applied-browser harness initially queried a non-existent diagnostic plan field, then used a CSP-incompatible string predicate. Corrected to existing basis/DOM fields and function predicates, with the actual Tests tab label. Only this bounded check retried; no product defect inferred.",
+    "Receipt harness initially assumed prerequisites response shape and default phase. Corrected to actual requirements and explicit N08 start/N09 finish before writing the final receipt. No second state mutation or repeated event submission."
+  ],
+  "not_claimed": [
+    "A new full-suite run or a new full native Codex/restart verification",
+    "Implementation or acceptance of the six newly planned repairs",
+    "Recovery of missing historical evidence bytes or guessed message attribution",
+    "Global skill installation/publication or proof that future agents obey candidates",
+    "N09 completion without the third confirmed visual reference"
+  ]
+}

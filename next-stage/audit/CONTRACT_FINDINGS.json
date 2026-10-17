@@ -1,0 +1,124 @@
+{
+  "scope": "Accepted stage-2 contracts C1–C6 versus current implementation and existing execution receipts",
+  "source_commit": "d547e2a93ac5aabd6395f9b8072d0ab63d7e5c8a",
+  "production_writes": false,
+  "proof_policy": "New executable checks use synthetic disposable HTTP Store and actual Chromium; they do not claim native Codex evidence. Existing receipts are reused. Static confirmed missing implementation is distinguished from an observed runtime failure.",
+  "new_receipt": "next-stage/audit/CONTRACT_REPRODUCTION.json",
+  "findings": [
+    {
+      "id": "CONTRACT-F01",
+      "classification": "demonstrated_defect",
+      "severity": "high",
+      "packets": ["WPT-N04", "WPT-N08"],
+      "expected": "C5/N04 step 5: an item corrected FROM the selected category invalidates and leaves its previous reader, including a reader browsing old messages.",
+      "actual": "Actual HTTP Store correctly excludes msg-5 after agentMessage→commandExecution. Chromium, scrolled to 300 and filtered to message, consumes event seq43 but retains msg-5 and all 40 rows. No browser exception occurs.",
+      "cause": "Window refresh merges revisions.get(key) || old item. An item absent from a filtered response is never removed; invalidation itself does run.",
+      "evidence": ["CONTRACT_REPRODUCTION.json checks.corrected_from_filter", "waypoint/waypoint/web/app.js:172", "waypoint/waypoint/web/app.js:176", "waypoint/waypoint/web/app.js:161"],
+      "why_previous_checks_missed": "Existing N08 and completion regressions check hidden NEW events and append preservation, rather than an already visible identity leaving the filter during old-message reading.",
+      "suggested_fix": "WPT-N04-FIX: reconcile explicit changed identities against current taxonomy/membership, remove corrected-out identities without treating unreturned arbitrary old rows as deleted; add this bounded HTTP/browser regression."
+    },
+    {
+      "id": "CONTRACT-F02",
+      "classification": "demonstrated_defect",
+      "severity": "medium",
+      "packets": ["WPT-N02", "WPT-N03"],
+      "expected": "C2: ignore order for readiness, keep it in the view. D4: order is dashed, collapsed edges retain true endpoints and mark partial applicability.",
+      "actual": "Typed ORDER with why='Ordering context only' survives raw plan, but shared node prerequisites are empty and Plan displays neither order nor why. Map creates the same edge class for every relation and groups by visible endpoints only.",
+      "cause": "Pure effective_relations/prerequisite_view retains order, while read_models, API packet and authoring packet use effective_requirements, which excludes order. Map renderer ignores relation/phase/target_scope metadata.",
+      "evidence": ["CONTRACT_REPRODUCTION.json checks.order_projection", "CONTRACT_REPRODUCTION.json checks.order_plan_view", "waypoint/waypoint/dependencies.py:70", "waypoint/waypoint/dependencies.py:194", "waypoint/waypoint/read_models.py:25", "waypoint/waypoint/read_models.py:63", "waypoint/waypoint/server.py:141", "waypoint/waypoint/web/app.js:374", "waypoint/waypoint/web/app.js:393", "roadmap/tools/roadmap.py:134"],
+      "why_previous_checks_missed": "Pure test proves order visibility in effective_relations only; shared consumer and browser checks predominantly exercise requires.",
+      "suggested_fix": "WPT-N02-FIX: expose additive classified relations/order in the shared read model and packets; show order/why/phase/true endpoints in Plan/Task and dashed/partial labels in Map. Keep it outside readiness."
+    },
+    {
+      "id": "CONTRACT-F03",
+      "classification": "demonstrated_defect",
+      "severity": "medium",
+      "packets": ["WPT-N01", "WPT-N02"],
+      "expected": "C3–C4: report the applicable consumer workspace/basis used for prerequisite evaluation.",
+      "actual": "GET prerequisites?node=ROOT&workspace=override-base reports basis.workspace_ref.consumer='plan-default'; evaluator uses override-base. Node-local workspace overrides likewise are not represented in the project-wide basis.",
+      "cause": "prerequisite_view receives node/override, basis(store,document) does not. The response combines evaluated data and a different workspace descriptor.",
+      "evidence": ["CONTRACT_REPRODUCTION.json checks.workspace_basis", "waypoint/waypoint/read_models.py:12", "waypoint/waypoint/read_models.py:17", "waypoint/waypoint/read_models.py:24", "waypoint/waypoint/server.py:158"],
+      "why_previous_checks_missed": "Existing API test asserts changed workspace makes state unknown, but does not assert response basis matches that requested workspace.",
+      "suggested_fix": "WPT-N02-FIX: return explicit effective workspace on each requirement/node projection and override-aware prerequisite response metadata, while retaining the common plan/cursor/projection basis."
+    },
+    {
+      "id": "CONTRACT-F04",
+      "classification": "demonstrated_defect",
+      "severity": "medium",
+      "packets": ["WPT-N03"],
+      "expected": "C4/D3: catalogue source health/age must distinguish an actually live source from stale/unknown observation.",
+      "actual": "HTTP catalogue labels source.health='connected' from 2020 as connected. Active agent calculation expires the same source after25seconds, so counts and aggregate health can contradict each other. UI prints raw source JSON, including old time, without age/freshness interpretation.",
+      "cause": "project_summaries checks stored state only; actor_active has separate25second freshness check.",
+      "evidence": ["CONTRACT_REPRODUCTION.json checks.stale_health", "waypoint/waypoint/read_models.py:27", "waypoint/waypoint/read_models.py:80", "waypoint/waypoint/web/projects.js:13"],
+      "why_previous_checks_missed": "Catalogue fixture checked missing source and freshly stamped connected source; no stale-connected heartbeat.",
+      "suggested_fix": "WPT-N03-FIX: share freshness calculation and expose last_reported_state plus effective stale/unknown health and age; show it plainly in the catalogue."
+    },
+    {
+      "id": "CONTRACT-F05",
+      "classification": "missing_requirement",
+      "severity": "medium",
+      "packets": ["WPT-N04"],
+      "expected": "C5: restore anchor item plus pixel offset, not only scrollTop. D5: preserve a separate scroll/selection window per filter query.",
+      "actual": "Reader stores top; paint uses old scrollTop or total height delta. Reader identity omits filter, and filter change clears items/latest/pending, sets follow=true and resets cursor. No item/pixel anchor or old per-query window is saved.",
+      "cause": "The implementation preserves append-with-same-heights and text-selection cases but does not implement the specified anchor/window model.",
+      "evidence": ["waypoint/waypoint/web/app.js:115", "waypoint/waypoint/web/app.js:120", "waypoint/waypoint/web/app.js:126", "waypoint/waypoint/web/app.js:135", "waypoint/waypoint/web/app.js:149", "next-stage/evidence/N08-browser.json"],
+      "proof_level": "Source-confirmed missing mechanism; no newly claimed runtime jump. Prior browser receipt only proves old scroll/text under a new tail event.",
+      "suggested_fix": "WPT-N04-FIX: preserve anchor identity/offset and bounded query windows per filter hash; check prepend/correction-height/filter-return cases with actual Chromium."
+    },
+    {
+      "id": "CONTRACT-F06",
+      "classification": "missing_requirement",
+      "severity": "low",
+      "packets": ["WPT-N04"],
+      "expected": "C5: a global default filter preference seeds new readers, and each existing reader remains independently editable.",
+      "actual": "New reader always starts categories=null, only_errors=false unless that exact reader key already has a localStorage entry. No global default seed/settings is implemented.",
+      "cause": "Per-reader preference storage was implemented, default preference propagation was omitted.",
+      "evidence": ["waypoint/waypoint/web/app.js:115", "waypoint/waypoint/web/app.js:117", "waypoint/waypoint/web/filters.js:6"],
+      "proof_level": "Source-confirmed omission; independent editing itself passed actual HTTP/browser tests.",
+      "suggested_fix": "WPT-N04-FIX: add explicit global default filter preference used only when creating a reader with no saved query."
+    },
+    {
+      "id": "CONTRACT-F07",
+      "classification": "missing_requirement",
+      "severity": "medium",
+      "packets": ["WPT-N05"],
+      "expected": "C4: algorithm detail exposes paged evidence; user can traverse that history without silent truncation.",
+      "actual": "API detail returns last100(default), has_more and before. Inspector requests only version once; panel renders evidence without has_more/count/older control. Project and node registry endpoints instead include all evidence. Thus detail cannot page, while a different view renders an unbounded history.",
+      "cause": "Backend paging seam was added but not consumed by frontend. Detail calls full algorithms(), loading every project's algorithm observation before slicing one algorithm page.",
+      "evidence": ["waypoint/waypoint/read_models.py:83", "waypoint/waypoint/read_models.py:87", "waypoint/waypoint/read_models.py:91", "waypoint/waypoint/store.py:466", "waypoint/waypoint/web/app.js:687", "waypoint/waypoint/web/algorithm_panel.js:33"],
+      "proof_level": "Source-confirmed missing UI paging and unbounded read path. No load failure/latency regression claimed; executed fixture has only short algorithm histories.",
+      "suggested_fix": "WPT-N05-FIX: connect before/has_more to a read-only Older evidence control, use indexed algorithm-specific page selection, and separate bounded summaries from full evidence records."
+    }
+  ],
+  "supported_matches": [
+    {
+      "contract": "C1",
+      "behavior": "Additive profile validation, unknown-extension round trip and executor assignment separation are implemented; incomplete legacy intent is explicit.",
+      "evidence": ["waypoint/tests/test_observability.py:29", "waypoint/tests/test_observability.py:40", "next-stage/evidence/N08-browser.json"]
+    },
+    {
+      "contract": "C2–C3",
+      "behavior": "Pure resolver handles actual parent chain, explicit subtree, start/finish, fingerprint and workspace; availability is not derived from done. Conflict/reporter replacement and historical early warning persist separately.",
+      "evidence": ["waypoint/waypoint/dependencies.py:23", "waypoint/waypoint/dependencies.py:39", "waypoint/waypoint/dependencies.py:124", "waypoint/tests/test_stage2_store_api.py:135", "next-stage/evidence/COMPLETION_REGRESSIONS.json"]
+    },
+    {
+      "contract": "C4",
+      "behavior": "Map and Plan consume server node_views; parent reported status is independent from deduplicated active descendants. Catalogue query does not load transcripts. Old plan runtime values are explicitly labelled current observations over historical structure.",
+      "evidence": ["waypoint/waypoint/read_models.py:35", "waypoint/waypoint/read_models.py:51", "waypoint/waypoint/read_models.py:67", "waypoint/waypoint/web/plan.js:57", "next-stage/evidence/N08-browser.json"]
+    },
+    {
+      "contract": "C5",
+      "behavior": "Server facets filter before limit/body retrieval, deduplicate and bind opaque paging token to query/version; None/All/Other and explicit error metadata work. The new correction reproduction confirms Store is correct even where old browser reader is wrong.",
+      "evidence": ["waypoint/waypoint/store.py:391", "waypoint/waypoint/item_types.py:19", "waypoint/waypoint/item_types.py:42", "next-stage/evidence/N08-performance.json", "next-stage/evidence/COMPLETION_REGRESSIONS.json", "CONTRACT_REPRODUCTION.json"]
+    },
+    {
+      "contract": "C6",
+      "behavior": "Algorithm observation revision mismatch becomes stale; current failed correctness cannot become passed; missing measurement remains absent; incompatible benchmark conditions are not compared. Text and code refs render as data with safe protocol handling.",
+      "evidence": ["waypoint/waypoint/algorithm_evidence.py:116", "waypoint/waypoint/algorithm_evidence.py:156", "waypoint/waypoint/algorithm_evidence.py:192", "waypoint/waypoint/web/algorithm_panel.js:7", "waypoint/tests/test_algorithm_evidence.py:55", "next-stage/evidence/N08-browser.json"]
+    }
+  ],
+  "authorized_deviations": [
+    {"behavior": "Historical plan selection intentionally shows current runtime observations, rather than runtime time travel.", "authority": "next-stage/design/DESIGN.md D3", "implementation": "waypoint/waypoint/web/plan.js:57"},
+    {"behavior": "Source links and local path text suffice; arbitrary source snippet endpoint is intentionally absent.", "authority": "next-stage/design/CONTRACTS.md C4", "implementation": "waypoint/waypoint/web/algorithm_panel.js:7"}
+  ]
+}

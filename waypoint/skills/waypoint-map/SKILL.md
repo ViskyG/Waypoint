@@ -2,7 +2,7 @@
 name: waypoint-map
 description: "Create or revise the user's Waypoint work map as part of an authorized design/roadmap task; preserve requirements, acceptance, identity and cheap executor context."
 metadata:
-  version: "0.1.0"
+  version: "0.3.0"
   status: "draft-candidate"
 ---
 
@@ -17,3 +17,39 @@ For an update, obtain the current plan/base version once at the useful boundary.
 The map follows the work: do not add mandatory approval, status transitions, exclusive claims, test gates or restrictions on delegation. Keep assignments on the left and expected/actual acceptance differences on the right. A status says what the executor reported, not what the UI permits.
 
 Give an executor only `wp --project PROJECT packet NODE` and exact source/contracts needed for that work. Keep explanations reachable, not repeatedly loaded. A chat without local access returns one bounded snapshot/change package; it must not claim the local map was updated.
+
+## Observability profile 1
+Use the owning project's `waypoint.observability/1` contract when supported. Author
+node.x_observability.intent for the human Task/Plan views; keep assignment as the
+technical executor contract. An old viewer retaining these fields does not prove
+it can display them. New typed requires edges declare output, phase, target scope
+and availability basis; order edges do not gate work. Use one effective resolver
+for inherited conditions, not UI geometry or a second local algorithm.
+
+Curate project-level algorithm definitions with block refs only for significant
+custom logic. Link implementation and testability; keep actual evaluations in events.
+Preserve every old ID, assignment, event and unknown extension when migrating from
+a current base. Missing readable intent is visible missing data, not a runtime LLM
+summary. The owner's three selected theme requirement is not reduced by a missing
+reference. Chat capsules remain optional; project/Plan views add no agent reporting.
+
+## Scenario-based handoff and evidence identity
+Use [the project workflow](../../../next-stage/skills/conformance/WAYPOINT_WORKFLOW.md)
+when authoring or revising packets. Keep one graph, stable IDs, readable intent and a
+separate technical assignment. Map acceptance/test IDs to user scenarios, relevant
+negative cases, sufficient evidence level and invalidation conditions. Source review,
+unit checks, synthetic HTTP/browser and real native-source integration establish
+different claims. Planned test definitions are not executed passing results.
+
+Name real prerequisite outputs/revisions, workspace and start/finish phase; keep
+preferred order and containment distinct. Status done is not input availability.
+Require immutable/versioned artifact references in the handoff, preserving earlier
+reports instead of overwriting their paths. Record unavailable historical proof as
+unknown. Explain partial completion and linked fixes rather than making a whole
+product green from a criterion total.
+
+Tell each executor and child to validate its own binding, focus before work, register
+actual criterion outcomes before completion and release scope at handoff. This is
+trace discipline, not an exclusive claim, new approval gate or instruction to send
+agent-control commands. Project and global skill publication/installation remain
+separate from preparing this draft.

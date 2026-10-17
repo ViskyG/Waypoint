@@ -2,6 +2,13 @@
 
 This project profile is the binding between the existing `build-implementation-roadmap` skill and `waypoint.plan/1`. It is a deliverable of this planning pass, **not a newly installed global skill**. The existing skill chooses meaningful work and resource policy; this profile specifies the output shape.
 
+All three roles—roadmap designer, executor and auditor—also follow the project
+[workflow contract](../next-stage/skills/conformance/WAYPOINT_WORKFLOW.md).
+It specifies scenario evidence, immutable proof, each executor's own binding and
+scope, criterion registration before completion, scope release and bounded fixes.
+The latest [conformance audit](../next-stage/audit/CONFORMANCE_RU.md) records the
+current acceptance limits; historical green counts are not a full product verdict.
+
 ## Minimum useful procedure
 
 Read the accepted design, completed source handoff and actual available evidence. Preserve delivered work as source nodes; schedule only adaptation, missing implementation, integration and new evidence. Do not treat a stale design-session checkpoint as the latest release. Obtain the current source/base before revising an already active map.

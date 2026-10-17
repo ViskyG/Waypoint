@@ -1,0 +1,280 @@
+{
+  "schema": "waypoint.conformance.apply/1",
+  "captured_at": "2026-10-17T11:27:24.122065+00:00",
+  "audited_source_commit": "d547e2a93ac5aabd6395f9b8072d0ab63d7e5c8a",
+  "audit_snapshot_cutoff": 12280,
+  "before_version": "v-bf38547210f5492c",
+  "after_version": "v-117764ba5eb64e27",
+  "before_nodes": 32,
+  "after_nodes": 38,
+  "before_edges": 38,
+  "after_edges": 43,
+  "import": {
+    "import": {
+      "version": "v-117764ba5eb64e27",
+      "ordinal": 7,
+      "changed": true,
+      "warnings": []
+    },
+    "retry": {
+      "changed": true,
+      "ordinal": 7,
+      "version": "v-117764ba5eb64e27",
+      "warnings": []
+    },
+    "old_nodes_unchanged": true,
+    "old_edges_unchanged": true
+  },
+  "old_node_definitions_unchanged": true,
+  "old_edges_unchanged": true,
+  "old_checks_unchanged": 71,
+  "new_failed_criteria": 5,
+  "first_audit_event_seq": 13216,
+  "last_audit_event_seq": 13247,
+  "current_statuses": {
+    "WPT-N02": "Требуются исправления",
+    "WPT-N03": "Требуются исправления",
+    "WPT-N04": "Требуются исправления",
+    "WPT-N05": "Требуются исправления",
+    "WPT-N07": "Требуются исправления",
+    "WPT-N08": "Требуются исправления",
+    "WPT-N02-FIX": "not_started",
+    "WPT-N03-FIX": "not_started",
+    "WPT-N04-FIX": "not_started",
+    "WPT-N05-FIX": "not_started",
+    "WPT-N07-FIX": "not_started",
+    "WPT-N08-FIX": "not_started",
+    "WPT-NEXT": "Частичная приёмка; требуется ремонт",
+    "WPT-N09": "awaiting reference"
+  },
+  "dependency_corrections": {
+    "WPT-N08": {
+      "basis": {
+        "plan_version": "v-117764ba5eb64e27",
+        "cursor": 13750,
+        "projection_version": "observability/1",
+        "workspace_ref": {
+          "consumer": "waypoint/local-working-copy",
+          "project": "waypoint/local-working-copy"
+        }
+      },
+      "requirements": [
+        {
+          "edge_id": "WPT-NEXT-E-09",
+          "producer_id": "WPT-N02",
+          "declared_target_id": "WPT-N08",
+          "consumer_id": "WPT-N08",
+          "phase": "start",
+          "inherited": false,
+          "classification": "requires",
+          "target_scope": "node",
+          "why": "Нужен готовый результат этой ветки для сквозной проверки единой функциональной версии.",
+          "output_id": "O-DEPS",
+          "condition_revision": 1,
+          "workspace_policy": "consumer",
+          "requirement_fingerprint": "61c3cbd69da32cc437c9163ca50ef8bab66e3c5ec8b09e81ca87f6b2ac2237c5",
+          "state": "satisfied",
+          "availability": "satisfied",
+          "reason": "matched_evidence",
+          "receipts": [
+            "stage2-ba09a0915cd2a1fef82f38caed34dcd4bbc9108f"
+          ],
+          "stale_receipts": []
+        },
+        {
+          "edge_id": "WPT-NEXT-E-10",
+          "producer_id": "WPT-N03",
+          "declared_target_id": "WPT-N08",
+          "consumer_id": "WPT-N08",
+          "phase": "start",
+          "inherited": false,
+          "classification": "requires",
+          "target_scope": "node",
+          "why": "Нужен готовый результат этой ветки для сквозной проверки единой функциональной версии.",
+          "output_id": "O-UX",
+          "condition_revision": 1,
+          "workspace_policy": "consumer",
+          "requirement_fingerprint": "65abbb18f8fd23ee2e9cff02e4724a7048b7ce2f6dedad6da963a7d3155b9397",
+          "state": "satisfied",
+          "availability": "satisfied",
+          "reason": "matched_evidence",
+          "receipts": [
+            "stage2-c62cf96c8a574ec562a9eab20faa9f3d4f3ef25f"
+          ],
+          "stale_receipts": []
+        },
+        {
+          "edge_id": "WPT-NEXT-E-11",
+          "producer_id": "WPT-N04",
+          "declared_target_id": "WPT-N08",
+          "consumer_id": "WPT-N08",
+          "phase": "start",
+          "inherited": false,
+          "classification": "requires",
+          "target_scope": "node",
+          "why": "Нужен готовый результат этой ветки для сквозной проверки единой функциональной версии.",
+          "output_id": "O-FILTERS",
+          "condition_revision": 1,
+          "workspace_policy": "consumer",
+          "requirement_fingerprint": "052cf5856bda3fcd5b8446f976db9ea38733fe41e08ebb4576f0a6c63287b68b",
+          "state": "satisfied",
+          "availability": "satisfied",
+          "reason": "matched_evidence",
+          "receipts": [
+            "stage2-ee4cabce7af151f88289ef1e2d02753359e7f838"
+          ],
+          "stale_receipts": []
+        },
+        {
+          "edge_id": "WPT-NEXT-E-12",
+          "producer_id": "WPT-N05",
+          "declared_target_id": "WPT-N08",
+          "consumer_id": "WPT-N08",
+          "phase": "start",
+          "inherited": false,
+          "classification": "requires",
+          "target_scope": "node",
+          "why": "Нужен готовый результат этой ветки для сквозной проверки единой функциональной версии.",
+          "output_id": "O-ALGORITHMS",
+          "condition_revision": 1,
+          "workspace_policy": "consumer",
+          "requirement_fingerprint": "087ec45880b6b0977c957c52ff4fd31d303a6307d81c4b2aa32a67b7d9d4e037",
+          "state": "satisfied",
+          "availability": "satisfied",
+          "reason": "matched_evidence",
+          "receipts": [
+            "stage2-f2778e5ed023414c95d3a404100f1c12d2e5b8f4"
+          ],
+          "stale_receipts": [
+            {
+              "event_id": "stage2-e53f254dfa891ecd6fdb99276304e9b3fcd374d5",
+              "source": "stage2-acceptance",
+              "seq": 8770,
+              "reason": "replaced_by_reporter"
+            },
+            {
+              "event_id": "6115105e91a041059b0a704815fe2eb9",
+              "source": "stage2-acceptance",
+              "seq": 9992,
+              "reason": "replaced_by_reporter"
+            }
+          ]
+        },
+        {
+          "edge_id": "WPT-NEXT-E-13",
+          "producer_id": "WPT-N06",
+          "declared_target_id": "WPT-N08",
+          "consumer_id": "WPT-N08",
+          "phase": "start",
+          "inherited": false,
+          "classification": "requires",
+          "target_scope": "node",
+          "why": "Нужен готовый результат этой ветки для сквозной проверки единой функциональной версии.",
+          "output_id": "O-THEMES",
+          "condition_revision": 1,
+          "workspace_policy": "consumer",
+          "requirement_fingerprint": "9aa4660a07b44b325798e07d1154293c80f6c0d5b47aac9a93cf602721d7b0c2",
+          "state": "satisfied",
+          "availability": "satisfied",
+          "reason": "matched_evidence",
+          "receipts": [
+            "stage2-a16a9fbb4d55140dc4fd5f898eb1faec0c3e74cb"
+          ],
+          "stale_receipts": []
+        },
+        {
+          "edge_id": "WPT-NEXT-E-14",
+          "producer_id": "WPT-N07",
+          "declared_target_id": "WPT-N08",
+          "consumer_id": "WPT-N08",
+          "phase": "start",
+          "inherited": false,
+          "classification": "requires",
+          "target_scope": "node",
+          "why": "Нужен готовый результат этой ветки для сквозной проверки единой функциональной версии.",
+          "output_id": "O-AUTHORING",
+          "condition_revision": 1,
+          "workspace_policy": "consumer",
+          "requirement_fingerprint": "fa7cd583c53d592e14b3ed665b4bc785c6a572db0edc35618ef408aaf5cb407d",
+          "state": "missing",
+          "availability": "missing",
+          "reason": "matched_evidence",
+          "receipts": [
+            "audit-fb449ad7ece69a9b2005aee9ccbcbe0cc210ed06"
+          ],
+          "stale_receipts": [
+            {
+              "event_id": "stage2-ec0ce599ef5a0b3d4cbb589ec5a7fad7ab2ae6af",
+              "source": "stage2-acceptance",
+              "seq": 8929,
+              "reason": "replaced_by_reporter"
+            }
+          ]
+        }
+      ]
+    },
+    "WPT-N09": {
+      "basis": {
+        "plan_version": "v-117764ba5eb64e27",
+        "cursor": 13750,
+        "projection_version": "observability/1",
+        "workspace_ref": {
+          "consumer": "waypoint/local-working-copy",
+          "project": "waypoint/local-working-copy"
+        }
+      },
+      "requirements": [
+        {
+          "edge_id": "WPT-NEXT-E-17",
+          "producer_id": "WPT-N08",
+          "declared_target_id": "WPT-N09",
+          "consumer_id": "WPT-N09",
+          "phase": "finish",
+          "inherited": false,
+          "classification": "requires",
+          "target_scope": "node",
+          "why": "Окончательная приёмка темы проверяет её в собранном приложении, а не только в изолированной палитре.",
+          "output_id": "O-INTEGRATED",
+          "condition_revision": 1,
+          "workspace_policy": "consumer",
+          "requirement_fingerprint": "5def33316987cfe8dcd0ee387ab32f378987e921f67e1e9d47112be31c915cde",
+          "state": "missing",
+          "availability": "missing",
+          "reason": "matched_evidence",
+          "receipts": [
+            "audit-4113edc740a99ff4ec9128e85ed72ab7dde26249"
+          ],
+          "stale_receipts": [
+            {
+              "event_id": "stage2-23fbeda16cb9121421f9f6083928d6486b587826",
+              "source": "stage2-acceptance",
+              "seq": 10398,
+              "reason": "replaced_by_reporter"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "runtime_health": {
+    "service": "waypoint",
+    "version": "0.2.0",
+    "observer_only": true,
+    "outbox_error": null,
+    "capabilities": [
+      "observability_profile_1",
+      "effective_dependencies_1",
+      "typed_items_1",
+      "project_summary_1",
+      "algorithm_evidence_1"
+    ]
+  },
+  "root_focus_released_seq": 13007,
+  "full_acceptance": "REMEDIATION_REQUIRED",
+  "core_product_code_changed": false,
+  "repair_implementation_performed": false,
+  "project_skill_drafts": "0.3.0 updated, not globally installed",
+  "global_skills": "3 roles prepared against actual canonical source; NOT_PUBLISHED_NOT_INSTALLED",
+  "audit_report_sha256": "703df28ad86524c18b3d3e96faacab4cebb02b5b9d9bc5f9325d90191a7a9505",
+  "preservation": "Original event ledger, result receipts and six prior plan versions retained. Seven accepted plan versions now exist. No guessed message relinking."
+}

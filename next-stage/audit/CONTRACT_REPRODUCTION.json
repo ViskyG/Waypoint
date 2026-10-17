@@ -1,0 +1,53 @@
+{
+  "fixture": "SYNTHETIC disposable project, no native Codex contact",
+  "production_data_modified": false,
+  "checks": {
+    "stale_health": {
+      "expected": "stale/unknown source, no fresh connection claim",
+      "actual": {
+        "state": "connected",
+        "sources": [
+          {
+            "source_key": "audit",
+            "state": "connected",
+            "at": "2020-01-01T00:00:00.000000+00:00"
+          }
+        ]
+      }
+    },
+    "workspace_basis": {
+      "request_workspace": "override-base",
+      "actual_basis": {
+        "plan_version": "v-d80e07c917c54990",
+        "cursor": 2,
+        "projection_version": "observability/1",
+        "workspace_ref": {
+          "consumer": "plan-default",
+          "project": null
+        }
+      }
+    },
+    "order_projection": {
+      "actual": {
+        "start": [],
+        "finish": []
+      },
+      "raw_edge_present": true
+    },
+    "corrected_from_filter": {
+      "expected": "msg-5 removed from message reader after machine type correction",
+      "server_contains_corrected_item": false,
+      "browser_contains_corrected_item": true,
+      "reader_before_count": 40,
+      "reader_after_count": 40,
+      "scroll_top": 300,
+      "event_seq": 43
+    },
+    "order_plan_view": {
+      "order_reason_visible": false,
+      "root_row": "ROOT · contract-audit ROOT\n\ncontract-audit owner outcome ROOT\n\nСообщено: Не указан\n\nПодтверждено проверок: 0/1\n\n0 активных агентов внутри · 0 активных конечных блоков\n\nКонтекст и изменение\nДля начала\nДля завершения"
+    }
+  },
+  "browser": "143.0.7499.4",
+  "browser_errors": []
+}

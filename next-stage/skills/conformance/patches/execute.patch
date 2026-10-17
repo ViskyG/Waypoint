@@ -1,0 +1,57 @@
+--- a/skills/codex/execute-roadmap-efficiently/SKILL.md
++++ b/skills/codex/execute-roadmap-efficiently/SKILL.md
+@@ -2,7 +2,7 @@
+ name: execute-roadmap-efficiently
+ description: "Execute permitted direct Codex work from a small roadmap frontier, reuse evidence, coordinate incoming chat capsules and switch to safe independent work during waits."
+ metadata:
+-  version: "2.0.0"
++  version: "2.0.1"
+   maturity: "experimental"
+ ---
+ 
+@@ -38,5 +38,45 @@
+ On the machine's return after offline accumulation, do not resume mutations until Udot's synchronization barrier has established the workspace baseline. Apply revised plans only to affected work, preserving unchanged completed code and evidence. Finish with actual implementation/publication/evidence status, not a generic "all green".
+ 
+ 
++
++## Input evidence and observed algorithm changes
++Before dependent work, use the current packet's effective prerequisites and check
++that the required output is available in the relevant workspace. Free status text
++or a collapsed parent arrow alone is insufficient. If an edge is inaccurate,
++revise its bounded contract or record an explained deviation; preserve actual
++work and unknown evidence. The observer is not an execution authority.
++
++At meaningful changes to a registered custom algorithm, update exact implementation
++and affected test/measurement references. Separate authored tests, executed evidence,
++correctness and resource claims. A changed implementation can make evidence stale;
++it does not make an old run fail. Do not declare an optimization measured without
++compatible data/method evidence. Do not maintain a second Plan status document or
++ask the model to summarize streams merely to refresh the UI. These rules preserve
++optional chat supply and the already selected resource permissions.
++
++## Waypoint execution trace and completion evidence
++When Waypoint observation is in scope, follow the owning project's workflow contract.
++Before implementation, validate this executor's own native binding and declare the
++packet scope. Each child does this with its own identity; never copy a parent's
++binding or rely on a shared session ID. A missing binding leaves native messages
++unassigned; resolve it once without inventing attribution or blocking unrelated
++permitted work. Scope is observational, not an exclusive claim or agent control.
++
++At meaningful check boundaries record the actual outcome against existing criterion
++IDs with run ID, immutable evidence reference and applicable revision/environment.
++Register executed checks before reporting the packet complete. Reused evidence
++retains its original run basis; retrospective registration says it is retrospective,
++without an invented past timestamp. Distinguish skipped/not_run, failed/error and
++unverified claims. A manual --current declaration is not automatic verification of
++current code. Empty chat proves neither success nor failure. Never add synthetic
++notes, guessed historical links or repeated tests just to fill the map.
++
++Before done, compare the packet's expected result and criteria with the observed
++result. Record exceptions, missing checks and the smallest remaining fix explicitly;
++partial delivery may be described honestly without calling it accepted. Completion
++records do not close focus automatically: release or redeclare this executor's scope
++at handoff. Preserve original events and IDs. No heartbeat, extra model polling,
++permission gate, global installation or start/resume/stop command is introduced.
++
+ ## Canonical navigation
+ [Workflow map](../../shared/project-workflow/SKILL.md) · [Shared contract](../../shared/workflow-state-and-transit/SKILL.md)

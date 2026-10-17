@@ -1,0 +1,42 @@
+--- a/skills/shared/audit-implementation-against-design/SKILL.md
++++ b/skills/shared/audit-implementation-against-design/SKILL.md
+@@ -2,7 +2,7 @@
+ name: audit-implementation-against-design
+ description: "Perform a bounded milestone or final conformance audit against accepted intent and actual artifacts/evidence; identify deviations and concrete remediation without perpetual self-audit."
+ metadata:
+-  version: "2.0.0"
++  version: "2.0.1"
+   maturity: "experimental"
+ ---
+ 
+@@ -29,5 +29,30 @@
+ Report what was examined, what evidence supports the conclusion, actual unresolved obligations and the next owner/action. A model-only trace is not an integration pass. Completion cannot be claimed merely because the outstanding capsule queue is empty.
+ 
+ 
++
++## Waypoint map-to-evidence conformance
++At the requested boundary compare the accepted graph/version with its status,
++criterion receipts, scope declarations and actual executed scenario evidence. Check
++binding coverage for each executor, declaration-before-work and release-at-handoff;
++empty chats, an active declared scope and done are distinct observations. Preserve
++native attribution. Do not guess missing historical links or infer physical absence
++only because an availability receipt arrived late.
++
++For each claim state expected behavior, observed behavior, evidence level, run/capture
++basis, affected revision/workspace, consequence and concrete cause or uncertainty.
++Verify referenced artifact identity where available. A mutable file at a historical
++path or a writer-supplied current label does not prove fresh current-code validation.
++Treat retrospective criterion registration explicitly; 47 green receipts cannot by
++themselves prove all product scenarios passed. Separate old failed attempts, actual
++repairs, synthetic reproductions and real-source integration.
++
++Reopen or route a linked -FIX when an accepted requirement is demonstrably missing,
++a required claimed check was not run, evidence materially contradicts completion or
++a current required artifact is unavailable. Use an unverified finding when evidence
++is insufficient, not a fabricated failure; optional improvements stay optional.
++Preserve valid passes, original receipts and unexplained historical gaps. Plan the
++smallest targeted proof for the repair; do not rerun every suite or rewrite the plan
++just to remove a warning. No new execution gate or publication permission follows.
++
+ ## Canonical navigation
+ [Workflow map](../project-workflow/SKILL.md) · [Shared contract](../workflow-state-and-transit/SKILL.md)

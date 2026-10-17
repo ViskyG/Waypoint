@@ -1,0 +1,36 @@
+{
+  "state": "PASS_AT_STATED_SCOPE",
+  "captured_at": "2026-10-17T11:20:55.129101+00:00",
+  "scope": "Skill source preservation, proposed instruction contract and existing CLI grammar/signal constructors only",
+  "initial_run": {
+    "selected_tests": 6,
+    "passed": 5,
+    "failed": 1,
+    "reason": "Test expected lexically unchanged ISO timestamp; existing validator normalizes microseconds. Test assertion corrected to compare same instant; no product defect or codechange."
+  },
+  "targeted_followups": [
+    {
+      "test": "test_retrospective_receipt_keeps_explicit_registration_basis",
+      "passed": 1,
+      "command": "PYTHONPATH=waypoint waypoint/.venv/bin/python -m pytest -q next-stage/skills/conformance/test_contracts.py::test_retrospective_receipt_keeps_explicit_registration_basis"
+    },
+    {
+      "test": "test_skill_candidates_are_bounded_source_preserving",
+      "passed": 1,
+      "reason": "Added explicit historicalsource Gitblob assertion after initial compatible-source test passed",
+      "command": "PYTHONPATH=waypoint waypoint/.venv/bin/python -m pytest -q waypoint/tests/test_authoring_next_stage.py::test_skill_candidates_are_bounded_source_preserving"
+    }
+  ],
+  "current_unique_relevant_tests_passing": 6,
+  "test_counts_not_added_to_product_acceptance": true,
+  "canonical_source_modified": false,
+  "installed_or_published": false,
+  "actual_native_binding_tested": false,
+  "live_product_checked": false,
+  "original_product_tests_repeated": false,
+  "files": {
+    "waypoint/tests/test_authoring_next_stage.py": "a4dd1fbec9d2341f39359ec85afad35cb7649c089f7cdb75daeec0023ac42f79",
+    "next-stage/skills/conformance/test_contracts.py": "993478a89d7da74c5c5bbf10f5eec7b0c22b67dc61127928b3c2ed7f43081986",
+    "next-stage/skills/conformance/WAYPOINT_WORKFLOW.md": "18b4810f31d8b82dbbd7ced2c69b6f83b9f82cf497b5229c3c1606c3d3aaf6bf"
+  }
+}

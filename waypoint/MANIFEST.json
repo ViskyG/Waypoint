@@ -1,7 +1,7 @@
 {
   "schema_version": "waypoint-delivery-manifest/1",
   "project_id": "waypoint",
-  "state": "STAGE2_FUNCTIONAL_N09_OPEN_20261017",
+  "state": "CONFORMANCE_AUDIT_REMEDIATION_REQUIRED_20261017",
   "source_archive_sha256": "6c5c77322e79d56df988a5954830353d2493c6400750f87d040e62a054f40da6",
   "next_stage_archive_sha256": "eb9d06b3df05e3afa73b8fe055a94b677a1ffc02dcd3350815510688b46588af",
   "file_count": 131,
@@ -338,23 +338,23 @@
     },
     {
       "path": "skills/waypoint-map/SKILL.md",
-      "size_bytes": 2101,
-      "sha256": "12bad9c1b0c469bd149a2a0fa0bcbdc2f9ae287d0e610e92b0937be8e08dadbc"
+      "size_bytes": 4476,
+      "sha256": "220f4f89b0cd84f78651fc184841c2fc2061fc9f0b65d3c2f629d4ffa1f2ff66"
     },
     {
       "path": "skills/waypoint-map/SKILL.ru.md",
-      "size_bytes": 3400,
-      "sha256": "4d99ae095c36c86c1a2e316e73a0ffd9a331adb0690c1c03644f30a68cb7d5bd"
+      "size_bytes": 7502,
+      "sha256": "abab35812ac0cd850e30302d28b98fcd50e73071ed4ba21fea1cee7a445fa825"
     },
     {
       "path": "skills/waypoint-observe/SKILL.md",
-      "size_bytes": 2237,
-      "sha256": "7a402be58c19206a42aabee410e071712f5a0986cbbeb18fc3f4ae9b57eaf84c"
+      "size_bytes": 4456,
+      "sha256": "5ff7b6708916c3f63802592da6c93c958ac1ebf0559d8fa0adb5e105ff5dd1a7"
     },
     {
       "path": "skills/waypoint-observe/SKILL.ru.md",
-      "size_bytes": 3650,
-      "sha256": "d8dace30488d7967a4a55775f5655caa46b519fb234e76359722ca5092d1ffa9"
+      "size_bytes": 7334,
+      "sha256": "45bf7594b27a74b6e9b04944b4fa3c9f9799b9de23efdba76f2cb83a9605c1c9"
     },
     {
       "path": "sources/INPUTS.md",
@@ -438,8 +438,8 @@
     },
     {
       "path": "tests/test_authoring_next_stage.py",
-      "size_bytes": 7000,
-      "sha256": "8f34a89df54e273e61e550f3bef573e4b55f87a94efcd3ed5faefc1a71170fbd"
+      "size_bytes": 7371,
+      "sha256": "a4dd1fbec9d2341f39359ec85afad35cb7649c089f7cdb75daeec0023ac42f79"
     },
     {
       "path": "tests/test_core.py",
@@ -493,8 +493,8 @@
     },
     {
       "path": "tools/package_local.py",
-      "size_bytes": 3886,
-      "sha256": "de96a960621a75063833ad229ed134e39247b4d951c68c70c45b69a3c5fa8454"
+      "size_bytes": 3914,
+      "sha256": "efd132166d1227fa14f9ad86d84ad5e656793de41832105a2f4ac3cd6c6ad204"
     },
     {
       "path": "tools/verify_completion_ui.py",

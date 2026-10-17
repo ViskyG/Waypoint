@@ -1,0 +1,64 @@
+--- a/skills/chatgpt/build-implementation-roadmap/SKILL.md
++++ b/skills/chatgpt/build-implementation-roadmap/SKILL.md
+@@ -2,7 +2,7 @@
+ name: build-implementation-roadmap
+ description: "Turn the accepted design and actual available artifacts into one economical dependency graph with optional capsule supply and a coherent Runner-wave projection."
+ metadata:
+-  version: "2.0.0"
++  version: "2.0.1"
+   maturity: "experimental"
+ ---
+ 
+@@ -66,5 +66,52 @@
+ Explain the next actual user/system step and chosen budget policy. The roadmap is complete enough when an executor can progress without reopening material design questions; unresolved central design gaps are explicit, not hidden behind a fabricated runnable plan.
+ 
+ 
++
++## Human-readable plans and evidenced dependencies
++For each meaningful node, author its project context, intended change and observable
++outcome separately from the executor assignment. The owner's Plan outline and Task
++view use the same intent; join status from existing node events, never ask an agent
++to maintain a second status summary. Preserve legacy technical assignments.
++
++A hard edge names a required producer output, affected consumer scope, start/finish
++phase and evidence of availability. Keep preferred coding order and containment
++separate. Check inherited dependencies using the SAME resolver in packet/frontier
++and UI projections; collapsed links disclose their actual endpoints. Do not infer
++input availability from free status text alone. The observer preserves early work
++and unknown evidence instead of enforcing an execution gate.
++
++Use the project's compatible machine-readable profile as the common authoring
++source, preserving IDs, version guards and unknown extensions. Add algorithm
++references only for substantial custom logic needing correctness/cost review;
++framework names and trivial wrappers are not inventory entries. Runtime algorithm
++checks/measurements remain evidence, not repeated plan editing.
++
++Chat capsules remain OPTIONAL supply for a node's result. Every roadmap retains a
++permitted non-chat route; absence of chat delivery is not a hard dependency. Existing
++claims and integration ownership still prevent duplicate work. These additions do
++not change the selected resource policy, create schedules or authorize installation.
++
++## Scenario evidence and completion meaning
++For every meaningful packet map acceptance IDs to concrete user scenarios and the
++least costly evidence that establishes each claim. Distinguish source inspection,
++unit/contract checks, synthetic browser-to-HTTP integration, actual installed service
++and actual native-source integration. Include relevant negative cases: unavailable
++or stale input, failure, empty history, late receipt, reconnect and incompatible
++revision where applicable; do not demand every case for unrelated simple work.
++
++Specify output identity/revision, applicable workspace and start/finish phase for a
++real required input; preferred order stays an order edge. Plan availability evidence
++separately from done status. Stable immutable evidence references must survive later
++validation rather than being overwritten under the same historical filename. State
++what invalidates reused evidence and what remains unverified. Do not create fake
++execution history, authored passing tests or runtime summaries in the plan.
++
++The handoff must tell each permitted executor to use its own binding, declare scope
++before work, record actual checks by criterion ID before completion, and release scope
++at handoff. Use one graph, readable intent and a separate technical assignment. A
++completed count alone cannot claim all scenarios or an entire product passed. Keep
++real unresolved work explicit; fix packets link the original issue and preserve valid
++unaffected work. This adds no approval gate, mandatory repeated audit or agent control.
++
+ ## Canonical navigation
+ [Workflow map](../../shared/project-workflow/SKILL.md) · [Shared contract](../../shared/workflow-state-and-transit/SKILL.md)

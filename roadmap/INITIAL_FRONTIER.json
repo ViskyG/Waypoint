@@ -2,7 +2,13 @@
   "meaning": "planning frontier; profile prerequisites use matching evidence, never status/completion alone",
   "completed_receipts": [],
   "ready": [
-    "WPT-N00"
+    "WPT-N00",
+    "WPT-N02-FIX",
+    "WPT-N03-FIX",
+    "WPT-N04-FIX",
+    "WPT-N05-FIX",
+    "WPT-N07-FIX",
+    "WPT-N08-FIX"
   ],
   "waiting": [
     {

@@ -1,7 +1,7 @@
 {
   "warning": "FOR A NEW EMPTY STORE ONLY. Do not apply to an installed project; export its current head first.",
   "initialization_only": true,
-  "request_id": "roadmap-empty-store-2f7ac1cd86633cfa6cef618e",
+  "request_id": "roadmap-empty-store-a79bf83233f50ee1620ff7af",
   "base_version": null,
   "merge": false,
   "plan": {
@@ -110,6 +110,81 @@
         "from": "WPT-R00",
         "label": "Требует результата",
         "to": "WPT-C06"
+      },
+      "WPT-N02-FIX-TO-N08-FIX": {
+        "from": "WPT-N02-FIX",
+        "to": "WPT-N08-FIX",
+        "x_observability": {
+          "condition": {
+            "output_id": "O-FIXED",
+            "revision": 1,
+            "workspace": "project"
+          },
+          "phase": "finish",
+          "relation": "requires",
+          "target_scope": "node",
+          "why": "Для завершения совместной приёмки нужен проверенный результат этого исправления."
+        }
+      },
+      "WPT-N03-FIX-TO-N08-FIX": {
+        "from": "WPT-N03-FIX",
+        "to": "WPT-N08-FIX",
+        "x_observability": {
+          "condition": {
+            "output_id": "O-FIXED",
+            "revision": 1,
+            "workspace": "project"
+          },
+          "phase": "finish",
+          "relation": "requires",
+          "target_scope": "node",
+          "why": "Для завершения совместной приёмки нужен проверенный результат этого исправления."
+        }
+      },
+      "WPT-N04-FIX-TO-N08-FIX": {
+        "from": "WPT-N04-FIX",
+        "to": "WPT-N08-FIX",
+        "x_observability": {
+          "condition": {
+            "output_id": "O-FIXED",
+            "revision": 1,
+            "workspace": "project"
+          },
+          "phase": "finish",
+          "relation": "requires",
+          "target_scope": "node",
+          "why": "Для завершения совместной приёмки нужен проверенный результат этого исправления."
+        }
+      },
+      "WPT-N05-FIX-TO-N08-FIX": {
+        "from": "WPT-N05-FIX",
+        "to": "WPT-N08-FIX",
+        "x_observability": {
+          "condition": {
+            "output_id": "O-FIXED",
+            "revision": 1,
+            "workspace": "project"
+          },
+          "phase": "finish",
+          "relation": "requires",
+          "target_scope": "node",
+          "why": "Для завершения совместной приёмки нужен проверенный результат этого исправления."
+        }
+      },
+      "WPT-N07-FIX-TO-N08-FIX": {
+        "from": "WPT-N07-FIX",
+        "to": "WPT-N08-FIX",
+        "x_observability": {
+          "condition": {
+            "output_id": "O-FIXED",
+            "revision": 1,
+            "workspace": "project"
+          },
+          "phase": "finish",
+          "relation": "requires",
+          "target_scope": "node",
+          "why": "Для завершения совместной приёмки нужен проверенный результат этого исправления."
+        }
       },
       "WPT-NEXT-E-01": {
         "from": "WPT-N00",
@@ -2540,6 +2615,84 @@
           "shared_file_policy": "single integration owner; use isolated contributions before shared merge"
         }
       },
+      "WPT-N02-FIX": {
+        "acceptance": {
+          "A01": {
+            "text": "Связи order видны в packet, Плане и карте как порядок, сохраняя отсутствие блокировки; partial endpoints подписаны."
+          },
+          "A02": {
+            "text": "Основание prerequisites отражает реально использованную рабочую копию, включая node-local и explicit override."
+          }
+        },
+        "assignment": "Ограниченное исправление WPT-N02 по аудиту. Читать из next-stage/: audit/CONFORMANCE_RU.md, audit/CONTRACT_FINDINGS.json, audit/WORKFLOW_FINDINGS.json, skills/conformance/WAYPOINT_WORKFLOW.md. Находки: CONTRACT-F02, CONTRACT-F03. Владение от waypoint/waypoint/: read_models.py, server.py, web/app.js, web/plan.js, roadmap/tools/roadmap.py. Не повторять завершённые пакеты и не перепроектировать систему. Общие файлы интегрирует один владелец; конкурирующие writers не запускаются. Прежние доказательства сохранять. Эта запись планирует ремонт и не утверждает его выполнение.",
+        "layout": {
+          "x": 0,
+          "y": 0
+        },
+        "parent": "WPT-N02",
+        "source_refs": [
+          {
+            "label": "Audit evidence",
+            "uri": "audit/CONFORMANCE_RU.md"
+          },
+          {
+            "label": "Audit evidence",
+            "uri": "audit/CONTRACT_FINDINGS.json"
+          },
+          {
+            "label": "Audit evidence",
+            "uri": "audit/WORKFLOW_FINDINGS.json"
+          },
+          {
+            "label": "Audit evidence",
+            "uri": "skills/conformance/WAYPOINT_WORKFLOW.md"
+          }
+        ],
+        "tests": {
+          "T01": {
+            "invalidated_by": "Изменение соответствующего механизма, запроса, источника или основания.",
+            "label": "Связи order видны в packet, Плане и карте как порядок, сохраняя отсутствие блокировки; partial endpoints подписаны.",
+            "procedure": "Адресный сценарий по указанной находке и сохранение фактического результата с уровнем доказательства."
+          },
+          "T02": {
+            "invalidated_by": "Изменение соответствующего механизма, запроса, источника или основания.",
+            "label": "Основание prerequisites отражает реально использованную рабочую копию, включая node-local и explicit override.",
+            "procedure": "Адресный сценарий по указанной находке и сохранение фактического результата с уровнем доказательства."
+          }
+        },
+        "title": "Сохранить контекст связей и точное основание предпосылок",
+        "x_observability": {
+          "intent": {
+            "change": "Устранить только указанные расхождения, сохранив работающую реализацию и неизменяемую историю.",
+            "context": "Аудит выявил расхождения между принятым контрактом и фактическим поведением или доказательствами.",
+            "summary": "Сохранить контекст связей и точное основание предпосылок"
+          },
+          "outputs": {
+            "O-FIXED": {
+              "definition": "Сохранить контекст связей и точное основание предпосылок; выполненные адресные проверки и проверяемые свидетельства",
+              "revision": 1
+            }
+          }
+        },
+        "x_roadmap": {
+          "audit_findings": [
+            "CONTRACT-F02",
+            "CONTRACT-F03"
+          ],
+          "execution_state_at_authoring": "PLANNED_NOT_EXECUTED",
+          "kind": "packet",
+          "owned_paths": [
+            "read_models.py",
+            "server.py",
+            "web/app.js",
+            "web/plan.js",
+            "roadmap/tools/roadmap.py"
+          ],
+          "preferred_executor": "CODEX",
+          "reference_root": "../next-stage",
+          "shared_file_policy": "one integration owner for overlapping web/API files"
+        }
+      },
       "WPT-N03": {
         "acceptance": {
           "A01": {
@@ -2694,6 +2847,72 @@
           "shared_file_policy": "single integration owner; use isolated contributions before shared merge"
         }
       },
+      "WPT-N03-FIX": {
+        "acceptance": {
+          "A01": {
+            "text": "Давно полученное connected отличается от свежего соединения; возраст и активность согласованы, исходный факт сохранён."
+          }
+        },
+        "assignment": "Ограниченное исправление WPT-N03 по аудиту. Читать из next-stage/: audit/CONFORMANCE_RU.md, audit/CONTRACT_FINDINGS.json, audit/WORKFLOW_FINDINGS.json, skills/conformance/WAYPOINT_WORKFLOW.md. Находки: CONTRACT-F04. Владение от waypoint/waypoint/: read_models.py, web/projects.js. Не повторять завершённые пакеты и не перепроектировать систему. Общие файлы интегрирует один владелец; конкурирующие writers не запускаются. Прежние доказательства сохранять. Эта запись планирует ремонт и не утверждает его выполнение.",
+        "layout": {
+          "x": 0,
+          "y": 0
+        },
+        "parent": "WPT-N03",
+        "source_refs": [
+          {
+            "label": "Audit evidence",
+            "uri": "audit/CONFORMANCE_RU.md"
+          },
+          {
+            "label": "Audit evidence",
+            "uri": "audit/CONTRACT_FINDINGS.json"
+          },
+          {
+            "label": "Audit evidence",
+            "uri": "audit/WORKFLOW_FINDINGS.json"
+          },
+          {
+            "label": "Audit evidence",
+            "uri": "skills/conformance/WAYPOINT_WORKFLOW.md"
+          }
+        ],
+        "tests": {
+          "T01": {
+            "invalidated_by": "Изменение соответствующего механизма, запроса, источника или основания.",
+            "label": "Давно полученное connected отличается от свежего соединения; возраст и активность согласованы, исходный факт сохранён.",
+            "procedure": "Адресный сценарий по указанной находке и сохранение фактического результата с уровнем доказательства."
+          }
+        },
+        "title": "Показывать давность связи с источником",
+        "x_observability": {
+          "intent": {
+            "change": "Устранить только указанные расхождения, сохранив работающую реализацию и неизменяемую историю.",
+            "context": "Аудит выявил расхождения между принятым контрактом и фактическим поведением или доказательствами.",
+            "summary": "Показывать давность связи с источником"
+          },
+          "outputs": {
+            "O-FIXED": {
+              "definition": "Показывать давность связи с источником; выполненные адресные проверки и проверяемые свидетельства",
+              "revision": 1
+            }
+          }
+        },
+        "x_roadmap": {
+          "audit_findings": [
+            "CONTRACT-F04"
+          ],
+          "execution_state_at_authoring": "PLANNED_NOT_EXECUTED",
+          "kind": "packet",
+          "owned_paths": [
+            "read_models.py",
+            "web/projects.js"
+          ],
+          "preferred_executor": "CODEX",
+          "reference_root": "../next-stage",
+          "shared_file_policy": "one integration owner for overlapping web/API files"
+        }
+      },
       "WPT-N04": {
         "acceptance": {
           "A01": {
@@ -2837,6 +3056,91 @@
             "waypoint/waypoint/adapters/codex.py"
           ],
           "shared_file_policy": "single integration owner; use isolated contributions before shared merge"
+        }
+      },
+      "WPT-N04-FIX": {
+        "acceptance": {
+          "A01": {
+            "text": "Исправленное из видимого типа сообщение исчезает из старого отфильтрованного окна; API и DOM согласованы."
+          },
+          "A02": {
+            "text": "Якорь сообщения и смещение сохраняются при изменении высоты и возврате к ранее открытому фильтру."
+          },
+          "A03": {
+            "text": "Общий фильтр по умолчанию задаёт новые окна, сохраняя независимые настройки существующих."
+          }
+        },
+        "assignment": "Ограниченное исправление WPT-N04 по аудиту. Читать из next-stage/: audit/CONFORMANCE_RU.md, audit/CONTRACT_FINDINGS.json, audit/WORKFLOW_FINDINGS.json, skills/conformance/WAYPOINT_WORKFLOW.md. Находки: CONTRACT-F01, CONTRACT-F05, CONTRACT-F06. Владение от waypoint/waypoint/: web/app.js, web/filters.js, focused HTTP/browser regressions. Не повторять завершённые пакеты и не перепроектировать систему. Общие файлы интегрирует один владелец; конкурирующие writers не запускаются. Прежние доказательства сохранять. Эта запись планирует ремонт и не утверждает его выполнение.",
+        "layout": {
+          "x": 0,
+          "y": 0
+        },
+        "parent": "WPT-N04",
+        "source_refs": [
+          {
+            "label": "Audit evidence",
+            "uri": "audit/CONFORMANCE_RU.md"
+          },
+          {
+            "label": "Audit evidence",
+            "uri": "audit/CONTRACT_FINDINGS.json"
+          },
+          {
+            "label": "Audit evidence",
+            "uri": "audit/WORKFLOW_FINDINGS.json"
+          },
+          {
+            "label": "Audit evidence",
+            "uri": "skills/conformance/WAYPOINT_WORKFLOW.md"
+          }
+        ],
+        "tests": {
+          "T01": {
+            "invalidated_by": "Изменение соответствующего механизма, запроса, источника или основания.",
+            "label": "Исправленное из видимого типа сообщение исчезает из старого отфильтрованного окна; API и DOM согласованы.",
+            "procedure": "Адресный сценарий по указанной находке и сохранение фактического результата с уровнем доказательства."
+          },
+          "T02": {
+            "invalidated_by": "Изменение соответствующего механизма, запроса, источника или основания.",
+            "label": "Якорь сообщения и смещение сохраняются при изменении высоты и возврате к ранее открытому фильтру.",
+            "procedure": "Адресный сценарий по указанной находке и сохранение фактического результата с уровнем доказательства."
+          },
+          "T03": {
+            "invalidated_by": "Изменение соответствующего механизма, запроса, источника или основания.",
+            "label": "Общий фильтр по умолчанию задаёт новые окна, сохраняя независимые настройки существующих.",
+            "procedure": "Адресный сценарий по указанной находке и сохранение фактического результата с уровнем доказательства."
+          }
+        },
+        "title": "Исправить согласование и восстановление окон чтения",
+        "x_observability": {
+          "intent": {
+            "change": "Устранить только указанные расхождения, сохранив работающую реализацию и неизменяемую историю.",
+            "context": "Аудит выявил расхождения между принятым контрактом и фактическим поведением или доказательствами.",
+            "summary": "Исправить согласование и восстановление окон чтения"
+          },
+          "outputs": {
+            "O-FIXED": {
+              "definition": "Исправить согласование и восстановление окон чтения; выполненные адресные проверки и проверяемые свидетельства",
+              "revision": 1
+            }
+          }
+        },
+        "x_roadmap": {
+          "audit_findings": [
+            "CONTRACT-F01",
+            "CONTRACT-F05",
+            "CONTRACT-F06"
+          ],
+          "execution_state_at_authoring": "PLANNED_NOT_EXECUTED",
+          "kind": "packet",
+          "owned_paths": [
+            "web/app.js",
+            "web/filters.js",
+            "focused HTTP/browser regressions"
+          ],
+          "preferred_executor": "CODEX",
+          "reference_root": "../next-stage",
+          "shared_file_policy": "one integration owner for overlapping web/API files"
         }
       },
       "WPT-N05": {
@@ -2990,6 +3294,82 @@
             "waypoint/waypoint/web/app.js"
           ],
           "shared_file_policy": "single integration owner; use isolated contributions before shared merge"
+        }
+      },
+      "WPT-N05-FIX": {
+        "acceptance": {
+          "A01": {
+            "text": "Из инспектора доступны все страницы истории без молчаливого ограничения первой сотней."
+          },
+          "A02": {
+            "text": "Страница алгоритма использует индексированный отбор до загрузки тел, а список реестра возвращает ограниченные сводки."
+          }
+        },
+        "assignment": "Ограниченное исправление WPT-N05 по аудиту. Читать из next-stage/: audit/CONFORMANCE_RU.md, audit/CONTRACT_FINDINGS.json, audit/WORKFLOW_FINDINGS.json, skills/conformance/WAYPOINT_WORKFLOW.md. Находки: CONTRACT-F07. Владение от waypoint/waypoint/: read_models.py, store.py, web/app.js, web/algorithm_panel.js. Не повторять завершённые пакеты и не перепроектировать систему. Общие файлы интегрирует один владелец; конкурирующие writers не запускаются. Прежние доказательства сохранять. Эта запись планирует ремонт и не утверждает его выполнение.",
+        "layout": {
+          "x": 0,
+          "y": 0
+        },
+        "parent": "WPT-N05",
+        "source_refs": [
+          {
+            "label": "Audit evidence",
+            "uri": "audit/CONFORMANCE_RU.md"
+          },
+          {
+            "label": "Audit evidence",
+            "uri": "audit/CONTRACT_FINDINGS.json"
+          },
+          {
+            "label": "Audit evidence",
+            "uri": "audit/WORKFLOW_FINDINGS.json"
+          },
+          {
+            "label": "Audit evidence",
+            "uri": "skills/conformance/WAYPOINT_WORKFLOW.md"
+          }
+        ],
+        "tests": {
+          "T01": {
+            "invalidated_by": "Изменение соответствующего механизма, запроса, источника или основания.",
+            "label": "Из инспектора доступны все страницы истории без молчаливого ограничения первой сотней.",
+            "procedure": "Адресный сценарий по указанной находке и сохранение фактического результата с уровнем доказательства."
+          },
+          "T02": {
+            "invalidated_by": "Изменение соответствующего механизма, запроса, источника или основания.",
+            "label": "Страница алгоритма использует индексированный отбор до загрузки тел, а список реестра возвращает ограниченные сводки.",
+            "procedure": "Адресный сценарий по указанной находке и сохранение фактического результата с уровнем доказательства."
+          }
+        },
+        "title": "Подключить ограниченную историю доказательств алгоритма",
+        "x_observability": {
+          "intent": {
+            "change": "Устранить только указанные расхождения, сохранив работающую реализацию и неизменяемую историю.",
+            "context": "Аудит выявил расхождения между принятым контрактом и фактическим поведением или доказательствами.",
+            "summary": "Подключить ограниченную историю доказательств алгоритма"
+          },
+          "outputs": {
+            "O-FIXED": {
+              "definition": "Подключить ограниченную историю доказательств алгоритма; выполненные адресные проверки и проверяемые свидетельства",
+              "revision": 1
+            }
+          }
+        },
+        "x_roadmap": {
+          "audit_findings": [
+            "CONTRACT-F07"
+          ],
+          "execution_state_at_authoring": "PLANNED_NOT_EXECUTED",
+          "kind": "packet",
+          "owned_paths": [
+            "read_models.py",
+            "store.py",
+            "web/app.js",
+            "web/algorithm_panel.js"
+          ],
+          "preferred_executor": "CODEX",
+          "reference_root": "../next-stage",
+          "shared_file_policy": "one integration owner for overlapping web/API files"
         }
       },
       "WPT-N06": {
@@ -3255,6 +3635,103 @@
           "shared_file_policy": "single integration owner; use isolated contributions before shared merge"
         }
       },
+      "WPT-N07-FIX": {
+        "acceptance": {
+          "A01": {
+            "text": "Текущее доказательство N07 совпадает с закреплённой ревизией; новый receipt сохраняет прошлые события."
+          },
+          "A02": {
+            "text": "Исторические браузерные доказательства восстановлены из подлинного источника либо точно отмечены как недоступные."
+          },
+          "A03": {
+            "text": "В ходе обычной ремонтной работы исполнители заявляют собственные области до работы и снимают их при передаче; прошлые сообщения не перепривязаны по догадке."
+          },
+          "A04": {
+            "text": "Дата и основание старых проверок видны отдельно от текущей приёмки; поздняя регистрация не выдаётся за старый запуск."
+          }
+        },
+        "assignment": "Ограниченное исправление WPT-N07 по аудиту. Читать из next-stage/: audit/CONFORMANCE_RU.md, audit/CONTRACT_FINDINGS.json, audit/WORKFLOW_FINDINGS.json, skills/conformance/WAYPOINT_WORKFLOW.md. Находки: WF-01, WF-02, WF-03, WF-04, WF-05, WF-06, WF-08. Владение от waypoint/waypoint/: project-local lifecycle instructions, versioned evidence artifacts, criterion metadata presentation. Не повторять завершённые пакеты и не перепроектировать систему. Общие файлы интегрирует один владелец; конкурирующие writers не запускаются. Прежние доказательства сохранять. Эта запись планирует ремонт и не утверждает его выполнение.",
+        "layout": {
+          "x": 0,
+          "y": 0
+        },
+        "parent": "WPT-N07",
+        "source_refs": [
+          {
+            "label": "Audit evidence",
+            "uri": "audit/CONFORMANCE_RU.md"
+          },
+          {
+            "label": "Audit evidence",
+            "uri": "audit/CONTRACT_FINDINGS.json"
+          },
+          {
+            "label": "Audit evidence",
+            "uri": "audit/WORKFLOW_FINDINGS.json"
+          },
+          {
+            "label": "Audit evidence",
+            "uri": "skills/conformance/WAYPOINT_WORKFLOW.md"
+          }
+        ],
+        "tests": {
+          "T01": {
+            "invalidated_by": "Изменение соответствующего механизма, запроса, источника или основания.",
+            "label": "Текущее доказательство N07 совпадает с закреплённой ревизией; новый receipt сохраняет прошлые события.",
+            "procedure": "Адресный сценарий по указанной находке и сохранение фактического результата с уровнем доказательства."
+          },
+          "T02": {
+            "invalidated_by": "Изменение соответствующего механизма, запроса, источника или основания.",
+            "label": "Исторические браузерные доказательства восстановлены из подлинного источника либо точно отмечены как недоступные.",
+            "procedure": "Адресный сценарий по указанной находке и сохранение фактического результата с уровнем доказательства."
+          },
+          "T03": {
+            "invalidated_by": "Изменение соответствующего механизма, запроса, источника или основания.",
+            "label": "В ходе обычной ремонтной работы исполнители заявляют собственные области до работы и снимают их при передаче; прошлые сообщения не перепривязаны по догадке.",
+            "procedure": "Адресный сценарий по указанной находке и сохранение фактического результата с уровнем доказательства."
+          },
+          "T04": {
+            "invalidated_by": "Изменение соответствующего механизма, запроса, источника или основания.",
+            "label": "Дата и основание старых проверок видны отдельно от текущей приёмки; поздняя регистрация не выдаётся за старый запуск.",
+            "procedure": "Адресный сценарий по указанной находке и сохранение фактического результата с уровнем доказательства."
+          }
+        },
+        "title": "Закрепить доказательства и границы исполнения",
+        "x_observability": {
+          "intent": {
+            "change": "Устранить только указанные расхождения, сохранив работающую реализацию и неизменяемую историю.",
+            "context": "Аудит выявил расхождения между принятым контрактом и фактическим поведением или доказательствами.",
+            "summary": "Закрепить доказательства и границы исполнения"
+          },
+          "outputs": {
+            "O-FIXED": {
+              "definition": "Закрепить доказательства и границы исполнения; выполненные адресные проверки и проверяемые свидетельства",
+              "revision": 1
+            }
+          }
+        },
+        "x_roadmap": {
+          "audit_findings": [
+            "WF-01",
+            "WF-02",
+            "WF-03",
+            "WF-04",
+            "WF-05",
+            "WF-06",
+            "WF-08"
+          ],
+          "execution_state_at_authoring": "PLANNED_NOT_EXECUTED",
+          "kind": "packet",
+          "owned_paths": [
+            "project-local lifecycle instructions",
+            "versioned evidence artifacts",
+            "criterion metadata presentation"
+          ],
+          "preferred_executor": "CODEX",
+          "reference_root": "../next-stage",
+          "shared_file_policy": "one integration owner for overlapping web/API files"
+        }
+      },
       "WPT-N08": {
         "acceptance": {
           "A01": {
@@ -3392,6 +3869,104 @@
             "actual latest plan export"
           ],
           "shared_file_policy": "single integration owner; use isolated contributions before shared merge"
+        }
+      },
+      "WPT-N08-FIX": {
+        "acceptance": {
+          "A01": {
+            "text": "Исправленные отрицательные сценарии пройдены в браузере через HTTP вместе с базовыми сценариями чтения."
+          },
+          "A02": {
+            "text": "Перезапуск сохраняет исправленные состояния и новые события; обычные события настоящего Codex проходят без подмены фикстурой."
+          },
+          "A03": {
+            "text": "Повторные предупреждения одного периода отличимы от независимых инцидентов без удаления raw истории."
+          },
+          "A04": {
+            "text": "Приёмка сообщает оставшийся N09 и недоказанную старую хронологию отдельно; закрыты только подтверждённые исправления."
+          }
+        },
+        "assignment": "Ограниченное исправление WPT-N08 по аудиту. Читать из next-stage/: audit/CONFORMANCE_RU.md, audit/CONTRACT_FINDINGS.json, audit/WORKFLOW_FINDINGS.json, skills/conformance/WAYPOINT_WORKFLOW.md. Находки: CONTRACT-F01, CONTRACT-F02, CONTRACT-F03, CONTRACT-F04, CONTRACT-F05, CONTRACT-F06, CONTRACT-F07, WF-07. Владение от waypoint/waypoint/: integrated target acceptance, grouped historical warning presentation, safe delivery reports. Не повторять завершённые пакеты и не перепроектировать систему. Общие файлы интегрирует один владелец; конкурирующие writers не запускаются. Прежние доказательства сохранять. Эта запись планирует ремонт и не утверждает его выполнение.",
+        "layout": {
+          "x": 0,
+          "y": 0
+        },
+        "parent": "WPT-N08",
+        "source_refs": [
+          {
+            "label": "Audit evidence",
+            "uri": "audit/CONFORMANCE_RU.md"
+          },
+          {
+            "label": "Audit evidence",
+            "uri": "audit/CONTRACT_FINDINGS.json"
+          },
+          {
+            "label": "Audit evidence",
+            "uri": "audit/WORKFLOW_FINDINGS.json"
+          },
+          {
+            "label": "Audit evidence",
+            "uri": "skills/conformance/WAYPOINT_WORKFLOW.md"
+          }
+        ],
+        "tests": {
+          "T01": {
+            "invalidated_by": "Изменение соответствующего механизма, запроса, источника или основания.",
+            "label": "Исправленные отрицательные сценарии пройдены в браузере через HTTP вместе с базовыми сценариями чтения.",
+            "procedure": "Адресный сценарий по указанной находке и сохранение фактического результата с уровнем доказательства."
+          },
+          "T02": {
+            "invalidated_by": "Изменение соответствующего механизма, запроса, источника или основания.",
+            "label": "Перезапуск сохраняет исправленные состояния и новые события; обычные события настоящего Codex проходят без подмены фикстурой.",
+            "procedure": "Адресный сценарий по указанной находке и сохранение фактического результата с уровнем доказательства."
+          },
+          "T03": {
+            "invalidated_by": "Изменение соответствующего механизма, запроса, источника или основания.",
+            "label": "Повторные предупреждения одного периода отличимы от независимых инцидентов без удаления raw истории.",
+            "procedure": "Адресный сценарий по указанной находке и сохранение фактического результата с уровнем доказательства."
+          },
+          "T04": {
+            "invalidated_by": "Изменение соответствующего механизма, запроса, источника или основания.",
+            "label": "Приёмка сообщает оставшийся N09 и недоказанную старую хронологию отдельно; закрыты только подтверждённые исправления.",
+            "procedure": "Адресный сценарий по указанной находке и сохранение фактического результата с уровнем доказательства."
+          }
+        },
+        "title": "Принять исправления на совместной рабочей версии",
+        "x_observability": {
+          "intent": {
+            "change": "Устранить только указанные расхождения, сохранив работающую реализацию и неизменяемую историю.",
+            "context": "Аудит выявил расхождения между принятым контрактом и фактическим поведением или доказательствами.",
+            "summary": "Принять исправления на совместной рабочей версии"
+          },
+          "outputs": {
+            "O-FIXED": {
+              "definition": "Принять исправления на совместной рабочей версии; выполненные адресные проверки и проверяемые свидетельства",
+              "revision": 1
+            }
+          }
+        },
+        "x_roadmap": {
+          "audit_findings": [
+            "CONTRACT-F01",
+            "CONTRACT-F02",
+            "CONTRACT-F03",
+            "CONTRACT-F04",
+            "CONTRACT-F05",
+            "CONTRACT-F06",
+            "CONTRACT-F07",
+            "WF-07"
+          ],
+          "execution_state_at_authoring": "PLANNED_NOT_EXECUTED",
+          "kind": "packet",
+          "owned_paths": [
+            "integrated target acceptance",
+            "grouped historical warning presentation",
+            "safe delivery reports"
+          ],
+          "preferred_executor": "CODEX",
+          "reference_root": "../next-stage",
+          "shared_file_policy": "one integration owner for overlapping web/API files"
         }
       },
       "WPT-N09": {
@@ -3902,6 +4477,13 @@
       "workspace_ref": "waypoint/local-working-copy"
     },
     "x_roadmap": {
+      "audits": {
+        "2026-10-17-conformance": {
+          "base_version": "v-bf38547210f5492c",
+          "implementation_changed_by_audit": false,
+          "report": "../next-stage/audit/CONFORMANCE_RU.md"
+        }
+      },
       "basis": "Completed design package and its source code; current owner workspace, installed service and remote code are not observed in this planning pass.",
       "created_at": "2026-10-16T16:48:03+00:00",
       "definition": "ROADMAP.plan.json",
@@ -4017,7 +4599,8 @@
           "integration_boundary": "Собранный продукт, переносимый граф и проверенный возврат результатов.",
           "title": "Одна сквозная приёмка и передача"
         }
-      }
+      },
+      "workflow_profile": "../next-stage/skills/conformance/WAYPOINT_WORKFLOW.md"
     }
   }
 }
