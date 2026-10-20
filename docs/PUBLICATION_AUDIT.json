@@ -1,0 +1,85 @@
+{
+  "schema": "waypoint.publication-preparation/1",
+  "captured_at": "2026-10-20T12:48:33.559255+00:00",
+  "source_base_commit": "2848aa449fd8cab76ea8d83fdaf8be9e2e4e2576",
+  "status": "PREPARED_PRIVATE_LICENSE_UNSELECTED",
+  "history_scan": {
+    "tool": "installed gitleaks detect --redact --log-opts=--all",
+    "reachable_commits": 6,
+    "reported_findings": 2,
+    "confirmed_credentials": 0,
+    "reviewed_findings": [
+      {
+        "rule": "generic-api-key",
+        "path": "next-stage/evidence/remaining-20261020/SOURCE_FREEZE.json",
+        "line": 12,
+        "commit": "2848aa449fd8cab76ea8d83fdaf8be9e2e4e2576",
+        "classification": "verified_file_sha256_not_credential",
+        "hashed_file": "waypoint/waypoint/client.py",
+        "matches_actual_file": true
+      },
+      {
+        "rule": "generic-api-key",
+        "path": "next-stage/skills/conformance/VALIDATION.json",
+        "line": 32,
+        "commit": "a8370ad40777ba7031bc515f7076810eaeb100f6",
+        "classification": "verified_file_sha256_not_credential",
+        "hashed_file": "waypoint/tests/test_authoring_next_stage.py",
+        "matches_actual_file": true
+      }
+    ],
+    "broad_allowlist_added": false
+  },
+  "prepared_tree_scan": {
+    "tool": "installed gitleaks detect --no-git on explicit source copy",
+    "files_in_copy": 466,
+    "reported_findings": 2,
+    "confirmed_credentials": 0,
+    "reviewed_findings": [
+      {
+        "rule": "generic-api-key",
+        "path": "next-stage/evidence/remaining-20261020/SOURCE_FREEZE.json",
+        "line": 12,
+        "classification": "verified_file_sha256_not_credential",
+        "hashed_file": "waypoint/waypoint/client.py",
+        "matches_actual_file": true
+      },
+      {
+        "rule": "generic-api-key",
+        "path": "next-stage/skills/conformance/VALIDATION.json",
+        "line": 32,
+        "classification": "verified_file_sha256_not_credential",
+        "hashed_file": "waypoint/tests/test_authoring_next_stage.py",
+        "matches_actual_file": true
+      }
+    ],
+    "private_runtime_read_by_gitleaks": false
+  },
+  "known_local_capabilities_check": {
+    "all_reachable_git_blobs": 618,
+    "prepared_files": 466,
+    "archive_members_expanded": 106,
+    "archive_members_skipped": [],
+    "matches": 0,
+    "secret_values_exported": false
+  },
+  "tracked_private_state_files": [],
+  "readme_relative_links_checked": 17,
+  "screenshot": {
+    "path": "docs/images/waypoint-map.png",
+    "byte_identical_to_owner_attachment": true,
+    "width": 1390,
+    "height": 1251,
+    "sha256": "7b66eee78881e614ee92430bb3e2deefde5782f10ebac1108cb8ad25393dc42c"
+  },
+  "application_tests_repeated": false,
+  "runtime_or_global_settings_modified": false,
+  "visibility_changed": false,
+  "license_assigned": false,
+  "limits": [
+    "Pattern scanning does not establish absence of every sensitive detail.",
+    "Known-capability check compares currently available local keys; it cannot identify unknown revoked historical keys.",
+    "Images were visually inspected, not OCR-scanned by gitleaks.",
+    "Public visibility and license remain owner decisions; history was preserved."
+  ]
+}
