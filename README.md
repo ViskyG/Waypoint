@@ -2,7 +2,7 @@
 
 **A local work map for following Codex tasks, agents, and results.**
 
-[Русский](README_RU.md) · [Try the demo](#try-the-demo) · [Connect Codex](#connect-codex) · [Documentation](#documentation)
+[Русский](README_RU.md) · [Project skills](#project-skills-and-trackable-work) · [Try the demo](#try-the-demo) · [Connect Codex](#connect-codex) · [Documentation](#documentation)
 
 Waypoint brings your development roadmap and observed agent activity into one browser view. Follow dependencies, see which task an agent is working on, read the original messages, and inspect the evidence behind a completed task.
 
@@ -34,6 +34,55 @@ As a project grows, the roadmap, agent conversations, and test results can end u
 Message filters help you read long histories. Reader position, text selection, and open detail panels are preserved during supported updates and language changes. The interface offers **English and Russian**, plus **Terracotta and Obsidian** themes.
 
 Waypoint is a **passive observer**. It does not schedule, launch, stop, or approve agent work. Checks and evidence are recorded observations; a green status alone is not proof that a result is available or correct. Unknown attribution and stale evidence remain visible.
+
+## Project skills and trackable work
+
+**A trackable project needs a compatible roadmap and executors who connect their work to it.** The skills below give the planner and agents those instructions. Starting the viewer or connecting an observer does not automatically assign conversations to task cards.
+
+### Included in this repository
+
+| Role | Instructions | Responsibility |
+|---|---|---|
+| Roadmap planner | [waypoint-map](waypoint/skills/waypoint-map/SKILL.md) · [RU](waypoint/skills/waypoint-map/SKILL.ru.md) | Prepare one dependency graph with stable task IDs, readable intent, executor assignments, acceptance/test IDs, prerequisite outputs, and evidence expectations |
+| Executor and every subagent | [waypoint-observe](waypoint/skills/waypoint-observe/SKILL.md) · [RU](waypoint/skills/waypoint-observe/SKILL.ru.md) | Verify the executor's own identity, declare task scope, record actual checks and results, and release scope at handoff |
+| Planner, executor, and reviewer | [WAYPOINT_WORKFLOW.md](next-stage/skills/conformance/WAYPOINT_WORKFLOW.md) | Share the exact CLI protocol, evidence levels, roadmap update rules, and completion discipline |
+
+The two project skills are bundled as **version 0.3.0, `draft-candidate`**. They are available for explicit project-local use; they are not automatically loaded by Waypoint, globally installed, or registered in the external skill library. Reading a skill does not start an agent or grant execution permissions. See the [integration boundary](waypoint/skills/INTEGRATION.md).
+
+### Apply the profile to a project
+
+1. **Prepare the map.** Give the planner `waypoint-map` and the shared workflow. Start from the [project template](roadmap/templates/PROJECT.plan.json), adapting its sample requirements and project ID. Produce one [compatible plan](waypoint/schemas/plan.schema.json), with explicit dependencies and observable acceptance criteria.
+2. **Import and connect.** Import that plan into your local Waypoint and observe the real Codex session as described in [Connect Codex](#connect-codex). The plan defines intended work; the event journal supplies observed activity, status, results, and checks.
+3. **Connect each executor's work.** Give the executor `waypoint-observe` and the shared workflow before work begins. Each agent, including every subagent, verifies its own binding and declares `focus` for the relevant task IDs. Messages observed within that declared scope can then appear in those task cards.
+4. **Record and preserve the result.** Register actual outcomes under the plan's existing test IDs, attach evidence with its run/revision, record the result before completion, then clear or change `focus`. Update an existing map from a fresh export, preserving IDs and history.
+
+For example, explicitly include the following in a planning task. Resolve these paths from your Waypoint checkout:
+
+```text
+Use waypoint/skills/waypoint-map/SKILL.md and
+next-stage/skills/conformance/WAYPOINT_WORKFLOW.md as project-local instructions
+for this project. Produce a Waypoint-compatible roadmap with stable task/test IDs,
+explicit dependencies, and evidence expectations. Keep one source plan.
+```
+
+For an implementation task:
+
+```text
+Use waypoint/skills/waypoint-observe/SKILL.md and the shared WAYPOINT_WORKFLOW.md
+from the Waypoint checkout for this project. Work from the imported task packet.
+Verify your own binding and declare focus before work; every subagent does the same.
+Record actual checks and evidence before completion, then release your scope.
+```
+
+### General roadmap skills
+
+If your workflow uses [ViskyG/agent-skills](https://github.com/ViskyG/agent-skills), pair the project profile with the relevant general skill:
+
+- Planning: [build-implementation-roadmap](https://github.com/ViskyG/agent-skills/blob/main/skills/chatgpt/build-implementation-roadmap/SKILL.md) + `waypoint-map`.
+- Codex implementation: [execute-roadmap-efficiently](https://github.com/ViskyG/agent-skills/blob/main/skills/codex/execute-roadmap-efficiently/SKILL.md) + `waypoint-observe`.
+- Independent review: [audit-implementation-against-design](https://github.com/ViskyG/agent-skills/blob/main/skills/shared/audit-implementation-against-design/SKILL.md) + the shared Waypoint workflow.
+
+These general skills live in a separate repository and may require separate access. [Prepared Waypoint integration amendments](next-stage/skills/conformance/README_RU.md) remain candidates; their presence here does not mean the canonical skills were updated or installed. For project-local use, pass the bundled files explicitly in the relevant task context.
 
 ## Try the demo
 
@@ -122,6 +171,7 @@ Chromium scenarios are in `waypoint/tests/` and require `.[browser]` plus the Pl
 | [Roadmap](roadmap/ROADMAP.md) / [JSON](roadmap/ROADMAP.plan.json) | Work structure and planned criteria; runtime status lives in the journal |
 | [Architecture](waypoint/design/ARCHITECTURE.md) / [contracts](waypoint/design/CONTRACTS.md) | System structure and data formats |
 | [Shared roadmap workflow](next-stage/skills/conformance/WAYPOINT_WORKFLOW.md) | Instructions for designers, executors, and auditors |
+| [Project skills](waypoint/skills/INTEGRATION.md) | Bundled map/observation instructions and their publication/installation status |
 | [Publication preparation](docs/PUBLICATION_RU.md) | Repository preparation, audit scope, and pending owner decisions |
 
 Most detailed engineering documents are in Russian. Existing assignments, reports, and historical IDs are preserved in the repository.
