@@ -1,0 +1,150 @@
+{
+  "schema": "waypoint.prepublication-secret-review/1",
+  "captured_at": "2026-10-20T13:44:45.664992+00:00",
+  "status": "NO_CONFIRMED_SECRET_FINDINGS",
+  "source_head": "3fa55d00f4bc9af0a5af57037356e568e69aa1f9",
+  "source_tree": "d3a376aa4ce9c0ef52e5adfdeb656a1a9d5a8e04",
+  "remote": {
+    "verification": "git ls-remote --heads --tags origin",
+    "main": "3fa55d00f4bc9af0a5af57037356e568e69aa1f9",
+    "other_remote_heads_or_tags_observed": 0,
+    "visibility_changed": false
+  },
+  "scope": {
+    "tracked_files": 489,
+    "reachable_commits_all_local_refs": 10,
+    "unique_git_blobs": 691,
+    "git_blob_bytes": 24194329,
+    "archive_unique_payloads": 1,
+    "archive_members_expanded": 53,
+    "archive_bytes_expanded": 404400,
+    "archive_members_skipped": [],
+    "unique_image_contents_reviewed": 39
+  },
+  "scanner": {
+    "tool": "installed gitleaks detect",
+    "version_output": "version is set by build process",
+    "binary_sha256": "89f247ce81bd4b5fb3e5236e1ee50221eefa251d936248ebf6d3c10e4df8c20b",
+    "configuration": "extend.useDefault=true; no added allowlist or baseline; child process ignores GITLEAKS_CONFIG override",
+    "redaction": true,
+    "runs": [
+      {
+        "scope": "history",
+        "exit_code": 1,
+        "reported_findings": 2
+      },
+      {
+        "scope": "tracked",
+        "exit_code": 1,
+        "reported_findings": 2
+      },
+      {
+        "scope": "objects",
+        "exit_code": 1,
+        "reported_findings": 2
+      },
+      {
+        "scope": "archives",
+        "exit_code": 0,
+        "reported_findings": 0
+      }
+    ]
+  },
+  "reviewed_gitleaks_findings": [
+    {
+      "path": "next-stage/evidence/remaining-20261020/SOURCE_FREEZE.json",
+      "line": 12,
+      "commit": "2848aa449fd8cab76ea8d83fdaf8be9e2e4e2576",
+      "rule": "generic-api-key",
+      "classification": "file_sha256_not_credential",
+      "hashed_file": "waypoint/waypoint/client.py",
+      "matches_file_at_recorded_commit": true,
+      "matches_current_file": true
+    },
+    {
+      "path": "next-stage/skills/conformance/VALIDATION.json",
+      "line": 32,
+      "commit": "a8370ad40777ba7031bc515f7076810eaeb100f6",
+      "rule": "generic-api-key",
+      "classification": "file_sha256_not_credential",
+      "hashed_file": "waypoint/tests/test_authoring_next_stage.py",
+      "matches_file_at_recorded_commit": true,
+      "matches_current_file": true
+    }
+  ],
+  "known_local_capability_check": {
+    "credential_count": 2,
+    "variants": [
+      "literal",
+      "URL-encoded",
+      "base64",
+      "URL-safe base64"
+    ],
+    "targets": "tracked bytes, every reachable Git blob, recursively expanded archive members",
+    "matches": 0,
+    "secret_values_exported": false
+  },
+  "supplemental_patterns": {
+    "categories": [
+      "private key header",
+      "literal capability URL",
+      "literal Bearer credential",
+      "credential-bearing URL",
+      "provider token prefix"
+    ],
+    "reported_occurrences": 4,
+    "reviewed_fixture": {
+      "path": "waypoint/tests/test_stage2_store_api.py",
+      "lines": [
+        18,
+        19
+      ],
+      "classification": "declared_TestClient_fixture_bearer_headers",
+      "distinct_header_values": 2,
+      "appear_in_worktree_and_same_git_blob": true,
+      "equal_live_tokens": false,
+      "production_key_creation": "secrets.token_urlsafe(36) in waypoint/waypoint/security.py"
+    },
+    "unresolved_findings": 0
+  },
+  "private_state_paths": {
+    "tracked_or_historical_credential_env_database_log_paths": [],
+    "runtime_and_actual_key_paths_ignored": true,
+    "archived_jsonl_fixture": "waypoint/sources/feasibility-evidence-v3.zip!fixtures/events.synthetic.jsonl;18 fixture records, not a saved Codex rollout"
+  },
+  "images": {
+    "tracked_paths": 40,
+    "unique_current_contents": 38,
+    "all_unique_contents_reviewed": 39,
+    "metadata_unique_contents_checked": 39,
+    "suspected_or_confirmed_credentials": [],
+    "PNG_text_metadata": "capture software and creation timestamp only in owner screenshot",
+    "trailing_data_after_IEND": 0,
+    "OCR_used": false
+  },
+  "context_disclosure": {
+    "owner_screenshot": "docs/images/waypoint-map.png contains project work messages, local commands, hashes and same-repository URL",
+    "local_paths_and_thread_ids": "present in historical reports and screenshots",
+    "google_document_reference_files": 14,
+    "example_reference_field": "roadmap/ROADMAP.plan.json:x_roadmap.source_context",
+    "external_document_access_permissions_checked": false,
+    "email_pattern_occurrences_in_tracked_text": 0,
+    "assessment": "Context remains in repository; a public repository would expose these references and work records. No credential was identified by the performed checks."
+  },
+  "changes": {
+    "application_code_modified": false,
+    "history_rewritten": false,
+    "access_keys_rotated": false,
+    "global_settings_modified": false,
+    "application_tests_repeated": false,
+    "raw_scan_outputs_committed": false
+  },
+  "limits": [
+    "Pattern scans cannot establish absolute absence of unknown or historical revoked credentials.",
+    "Known-capability comparison covers locally available Waypoint read/write keys only.",
+    "Visual review without OCR can miss small, clipped or obscured content; pixel steganography is outside scope.",
+    "Only the observed local reachable refs and observed remote heads/tags were covered; unreachable/server-only objects, external document permissions and GitHub account secrets/settings were not inspected.",
+    "This is a repository secret/disclosure review, not a penetration test or dependency vulnerability audit.",
+    "Report identifies scanned source commit explicitly; documentation added by this review is checked separately."
+  ]
+}
