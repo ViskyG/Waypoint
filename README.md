@@ -1,30 +1,43 @@
 # Waypoint
 
-**Локальная карта разработки с наблюдением за работой Codex и вложенных агентов.**
+**A local work map for following Codex tasks, agents, and results.**
 
-Waypoint связывает дорожную карту, зависимости, исходные сообщения, результаты и проверки в одном интерфейсе. Можно увидеть, кто работает над задачей, прочитать ход работы и понять, чем подтверждено завершение. Наблюдатель получает события существующей сессии; команды запуска, остановки и управления агентами в нём отсутствуют.
+[Русский](README_RU.md) · [Try the demo](#try-the-demo) · [Connect Codex](#connect-codex) · [Documentation](#documentation)
 
-[Быстрый старт](#быстрый-старт) · [Подключение Codex](#подключение-codex) · [Документация](#документация) · [Состояние проекта](#состояние-проекта)
+Waypoint brings your development roadmap and observed agent activity into one browser view. Follow dependencies, see which task an agent is working on, read the original messages, and inspect the evidence behind a completed task.
 
-![Waypoint наблюдает собственную разработку: граф задач, дерево агентов, сообщения и зелёные отметки завершения](docs/images/waypoint-map.png)
+It is built for developers who work with Codex and parallel subagents and want to keep the plan, the work, and its results connected. Waypoint runs locally and observes an existing session. You continue to launch and direct your agents through your usual tools.
 
-*Настоящая локальная установка: Waypoint показывает работу над самим Waypoint. Скриншот предоставлен владельцем проекта; показан русский интерфейс, доступный через переключатель языка. Внутри блоков видны исходные наблюдения; зелёный статус, результаты проверок и активность агентов отображаются отдельно.*
+![Waypoint observing its own development: a task graph, agent hierarchy, original messages, and completion indicators](docs/images/waypoint-map.png)
 
-## Возможности
+*An actual local installation observing work on Waypoint itself. Screenshot supplied by the project owner. It shows the Russian interface; new browser profiles default to English, with English / Русский available in the header.*
 
-- **Карта и план.** Вложенные задачи, зависимости, переходы между уровнями, версии дорожной карты и явные конфликты при объединении изменений.
-- **Агенты и их области.** Дерево исполнителей с родительскими связями; собственный статус блока отделён от активности его потомков.
-- **Исходный поток.** Сообщения и доступные события инструментов без модельного пересказа. Неизвестная привязка остаётся видна как работа вне карты.
-- **Удобное чтение истории.** Фильтры по типам и ошибкам, общий фильтр для новых окон, восстановление позиции и выделения при обновлениях и смене фильтра.
-- **Проверяемый результат.** Критерии, исходы тестов, run ID, время регистрации и ссылки на доказательства. Статус «Готово» сам по себе не подтверждает доступность результата.
-- **Каталог алгоритмов.** Описание логики, ссылки на код, корректность, измерения и сравнения. История открывается страницами, устаревшие свидетельства сохраняются.
-- **Восстановление.** Локальный журнал SQLite, сохранение идентификаторов и истории после перезапуска, повторная доставка с теми же ID.
-- **Два языка.** English по умолчанию; English / Русский в верхней панели. Выбор сохраняется в браузере, исходные сообщения и задания остаются на своём языке.
-- **Две темы.** Терракота и Обсидиан.
+## Why Waypoint
 
-## Быстрый старт
+As a project grows, the roadmap, agent conversations, and test results can end up in different places. Waypoint gives them a shared context:
 
-Нужны **Python 3.10+** и браузер. Установка и подключение проверены на Linux. Node.js и сборка frontend для запуска не требуются.
+- **Follow parallel work.** See agents, their parent–child relationships, and the tasks they have explicitly declared as their current scope.
+- **Understand progress.** Inspect the original conversation and available tool events attached to a task.
+- **Review completion.** Read the reported result, check outcomes, run IDs, and evidence references together. Completion status, check results, and agent activity are separate signals.
+- **Keep continuity.** Preserve accepted history and plan versions in a local SQLite journal across restarts.
+
+## What you can explore
+
+| View | What it shows |
+|---|---|
+| **Projects** | Project purpose, observed activity, and source health |
+| **Map** | Nested tasks, dependencies, scope navigation, and message streams |
+| **Plan** | Task intent, executor instructions, prerequisites, results, and checks |
+| **Agents** | Agent hierarchy, current scope, and work outside the map |
+| **Algorithms** | Definitions, code references, recorded correctness evidence, measurements, and comparisons |
+
+Message filters help you read long histories. Reader position, text selection, and open detail panels are preserved during supported updates and language changes. The interface offers **English and Russian**, plus **Terracotta and Obsidian** themes.
+
+Waypoint is a **passive observer**. It does not schedule, launch, stop, or approve agent work. Checks and evidence are recorded observations; a green status alone is not proof that a result is available or correct. Unknown attribution and stale evidence remain visible.
+
+## Try the demo
+
+Requirements: **Python 3.10+** and a browser. Local installation and Codex observation have been verified on **Linux**. Running the app requires no Node.js or frontend build step.
 
 ```bash
 git clone https://github.com/ViskyG/Waypoint.git
@@ -35,21 +48,21 @@ python -m pip install -e .
 python -m waypoint --data ../.runtime/demo serve --demo --port 8770
 ```
 
-Сервис напечатает локальную ссылку с ключом **только для чтения**. Откройте её в браузере. Ключ остаётся приватным; ссылку с ним не следует помещать в Git или публичные сообщения.
+Open the local read-only URL printed by the service. Keep its access key private.
 
-Демонстрация использует вымышленные задачи и агентов, отдельную базу и порт `8770`. Подключение к Codex для неё не нужно. `Ctrl+C` завершает этот сервис; повторный запуск с тем же каталогом данных сохраняет состояние.
+The demo uses fictional tasks and agents, its own data directory, and port `8770`. It needs no Codex connection. Stop this foreground service with `Ctrl+C`; restarting with the same data directory retains its state.
 
-Без установки сервиса можно открыть скачанный файл [waypoint/preview.html](waypoint/preview.html) в браузере. Он содержит автономную демонстрацию, без живого источника. [roadmap/PREVIEW.html](roadmap/PREVIEW.html) — отдельный снимок структуры дорожной карты Waypoint, без воспроизведения текущей работы.
+For a preview without installation, download the repository and open [waypoint/preview.html](waypoint/preview.html) in a browser. It is a self-contained fictional demonstration. [roadmap/PREVIEW.html](roadmap/PREVIEW.html) is a separate offline snapshot of Waypoint's own roadmap structure.
 
-## Подключение Codex
+## Connect Codex
 
-Живой проект использует отдельный каталог данных. Из `waypoint/`, с активированным окружением:
+Use a separate data directory for real work. From `waypoint/`, with the virtual environment active, start the local service:
 
 ```bash
 python -m waypoint --data ../.runtime/local serve --port 8769
 ```
 
-В другом терминале импортируйте собственную карту. `project_id` в JSON должен совпадать с `--project`. Значения `my-project`, путей и native ID ниже — примеры для замены:
+In another terminal, from the same directory and virtual environment, import your roadmap and start observing an existing session:
 
 ```bash
 python -m waypoint --data ../.runtime/local --project my-project \
@@ -61,61 +74,58 @@ python -m waypoint --data ../.runtime/local --project my-project observe \
   --rollouts /absolute/path/to/codex/sessions
 ```
 
-Наблюдатель читает выбранную существующую сессию и её подтверждённых потомков через локальный IPC и сохранённые JSONL-журналы. Socket должен принадлежать тому же пользователю. Совместимость с внутренним IPC зависит от клиента Codex; все будущие версии и другие платформы не объявляются проверенными.
+Replace the example paths and native thread ID with your actual local values. The plan's `project_id` must match `--project`. Use the [roadmap template](roadmap/templates/PROJECT.plan.json) as a starting point and replace its sample requirements and project ID.
 
-Чтобы сообщения попадали в конкретные блоки, каждый исполнитель создаёт **собственную проверенную привязку** и объявляет область через `focus`. Связь с родителем не заменяет эту декларацию. При передаче работы область снимается. Пустой чат старого блока не заполняется вымышленными сообщениями.
+The observer reads the selected session and its verified descendants through local IPC and saved JSONL records. The IPC socket must belong to the same user. Compatibility depends on the installed Codex client and its internal formats.
 
-Полный порядок привязки, регистрации критериев и изменения карты — в [общем контракте проектировщика, исполнителя и аудитора](next-stage/skills/conformance/WAYPOINT_WORKFLOW.md). Для новой карты есть [шаблон проекта](roadmap/templates/PROJECT.plan.json). Для существующей установки используйте свежий `plan-export` и guarded `plan-import --base … --merge`, сохраняя историю и ID.
+To attach future observations to tasks, each executor creates its own verified binding and declares its scope with `focus`. Parentage alone does not assign a subagent's work to a task. The [shared workflow](next-stage/skills/conformance/WAYPOINT_WORKFLOW.md) documents binding, scope, result recording, and safe roadmap updates. The [local operation guide](waypoint/LOCAL_RUN_RU.md) covers startup, backup, and recovery; these detailed guides are currently in Russian.
 
-## Как устроен проект
+## Local data and architecture
 
 ```text
-Дорожная карта JSON + редкие сигналы исполнителя
-                       ↓
-Существующий Codex → локальный наблюдатель → журнал SQLite
-                                                 ↓
-                                    локальный HTTP → браузер
+Roadmap JSON + explicit executor signals
+                    ↓
+Existing Codex → local observer → SQLite journal → local HTTP → browser
 ```
 
-Python/FastAPI обслуживает API и статические HTML/CSS/JavaScript. SQLite хранит версии плана, принятые события и производные представления. В браузере используются ограниченные окна сообщений и страницы свидетельств. Waypoint не отправляет переписку в модель и не добавляет модельный heartbeat.
+Python/FastAPI serves the API and static HTML, CSS, and JavaScript. The journal stores plan versions and accepted events; the browser uses bounded message windows and paged evidence histories. Waypoint's observer does not send conversations to a model or add a model heartbeat.
 
-Рабочая база, ключи доступа, binding и исходные журналы Codex относятся к приватному состоянию установки. Каталог `.runtime/` исключён из Git. Сервис слушает loopback; это приложение для локальной работы одного пользователя, без заявленной поддержки публичного многопользовательского размещения. Правила резервного копирования и восстановления: [LOCAL_RUN_RU.md](waypoint/LOCAL_RUN_RU.md).
+Runtime databases, access keys, bindings, and source logs are private installation state. Keep them outside Git; `.runtime/` is ignored. The service binds to loopback and is intended for local, single-user operation. Public multi-user hosting is outside the verified scope.
 
-## Проверки
+## Status and verification
 
-Проверка переключения языка: [отчёт и границы доказательств](next-stage/evidence/i18n-20261020/REPORT_RU.md).
+Current application version: **0.2.0**. The implemented scope includes roadmap editing and versioning, observation, agent hierarchy, reading filters, result evidence, algorithm history, and the bilingual interface. A third visual theme awaits a confirmed design reference.
 
-Для программных проверок, из `waypoint/`:
+The latest recorded unit/contract/API run passed **142 tests**. Browser checks cover the bilingual UI, reader state, the installed local service, and offline previews. Real Codex observation and restart recovery have separate recorded evidence:
+
+- [Current bilingual UI acceptance and limitations](next-stage/evidence/i18n-20261020/REPORT_RU.md)
+- [Functional acceptance and remaining limitations](next-stage/evidence/remaining-20261020/FINAL_RU.md)
+- [Recorded live Codex check after restart](next-stage/evidence/remaining-20261020/LIVE.json)
+
+Synthetic fixtures demonstrate only their stated scenarios; they are not evidence of a real Codex connection. Historical reports describe the source and environment of their recorded runs.
+
+To run the Python checks, from `waypoint/`:
 
 ```bash
 python -m pip install -e '.[test]'
 python -m pytest -q
 ```
 
-Сценарии Chromium находятся в `waypoint/tests/`; для них нужны зависимости `.[browser]` и установленный браузер Playwright. Проверка настоящего Codex требует отдельной локальной установки и не заменяется тестовыми данными.
+Chromium scenarios are in `waypoint/tests/` and require `.[browser]` plus the Playwright browser installation. Live observation checks additionally require your local Codex session.
 
-[Последний отчёт о приёмке](next-stage/evidence/remaining-20261020/FINAL_RU.md) разделяет модульные проверки, Chromium/HTTP на синтетических данных и [живую проверку Codex после перезапуска](next-stage/evidence/remaining-20261020/LIVE.json). В нём также сохранены неудачные попытки и ограничения доказательств.
+## Documentation
 
-## Состояние проекта
-
-Текущая версия — **0.2.0**. Доступный функциональный объём N00–N08 и шесть пакетов ремонта завершены и проверены локально. Реализация продолжает исходную систему C01–C04, сохраняя данные и историю. Дополнительный пакет N10 добавляет английский и русский интерфейс.
-
-Открыт **N09**: третья тема требует отдельного подтверждённого графического референса. Старую неполную хронологию работы агентов нельзя восстановить по одному текущему статусу. Кандидаты скилов подготовлены отдельно и не установлены глобально.
-
-## Документация
-
-| Материал | Для чего |
+| Guide | Purpose |
 |---|---|
-| [Локальный запуск](waypoint/LOCAL_RUN_RU.md) | Сервис, наблюдатель, данные и восстановление |
-| [Текущая точка входа](START_HERE_RU.md) | Состояние разработки и ссылки на актуальные результаты |
-| [Дорожная карта](roadmap/ROADMAP.md) / [JSON](roadmap/ROADMAP.plan.json) | Структура работ и критерии |
-| [Архитектура](waypoint/design/ARCHITECTURE.md) / [контракты](waypoint/design/CONTRACTS.md) | Устройство исходной системы и форматы |
-| [Следующая фаза](next-stage/design/DESIGN.md) | Развитие интерфейса и наблюдаемости |
-| [Порядок работы с картой](next-stage/skills/conformance/WAYPOINT_WORKFLOW.md) | Общие правила для проектировщика, исполнителя и аудитора |
-| [Подготовка публикации](docs/PUBLICATION_RU.md) | Фактические проверки репозитория и оставшиеся решения |
+| [Local operation](waypoint/LOCAL_RUN_RU.md) | Service, observer, private data, backup, and recovery |
+| [Development entry point](START_HERE_RU.md) | Current project state and acceptance references |
+| [Roadmap](roadmap/ROADMAP.md) / [JSON](roadmap/ROADMAP.plan.json) | Work structure and planned criteria; runtime status lives in the journal |
+| [Architecture](waypoint/design/ARCHITECTURE.md) / [contracts](waypoint/design/CONTRACTS.md) | System structure and data formats |
+| [Shared roadmap workflow](next-stage/skills/conformance/WAYPOINT_WORKFLOW.md) | Instructions for designers, executors, and auditors |
+| [Publication preparation](docs/PUBLICATION_RU.md) | Repository preparation, audit scope, and pending owner decisions |
 
-Исходные задания и прежние отчёты сохранены как история; их тогдашние открытые задачи следует сопоставлять с текущей точкой входа.
+Most detailed engineering documents are in Russian. Existing assignments, reports, and historical IDs are preserved in the repository.
 
-## Лицензия
+## License
 
-Публичная лицензия пока не выбрана. Подготовка README и публикации не назначает её автоматически. Лицензии сторонних зависимостей сохраняются за их правообладателями.
+A public license has not yet been selected. This repository does not currently include a `LICENSE` file. Third-party dependencies retain their respective licenses.
