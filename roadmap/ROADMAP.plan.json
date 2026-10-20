@@ -180,6 +180,16 @@
         "why": "Для завершения совместной приёмки нужен проверенный результат этого исправления."
       }
     },
+    "WPT-N08-TO-N10": {
+      "from": "WPT-N08",
+      "to": "WPT-N10",
+      "x_observability": {
+        "phase": "start",
+        "relation": "order",
+        "target_scope": "node",
+        "why": "Развивать принятую рабочую версию без повторной реализации завершённых пакетов."
+      }
+    },
     "WPT-NEXT-E-01": {
       "from": "WPT-N00",
       "to": "WPT-N01",
@@ -4069,6 +4079,84 @@
         "shared_file_policy": "single integration owner; use isolated contributions before shared merge"
       }
     },
+    "WPT-N10": {
+      "acceptance": {
+        "A01": {
+          "text": "English выбран при отсутствии допустимой сохранённой настройки; оба языка доступны и явный выбор сохраняется."
+        },
+        "A02": {
+          "text": "Все элементы интерфейса локализованы; исходное содержимое задач и сообщений не переводится и не исполняется."
+        },
+        "A03": {
+          "text": "Переключение сохраняет проект, рабочую область, фильтры, страницы и позицию чтения; текущая установка и offline views работают."
+        }
+      },
+      "assignment": "Добавить переключатель English / Русский. По умолчанию использовать English, независимо от языка браузера. Сохранять явный выбор пользователя. Локализовать интерфейс, подписи, подсказки и даты; сохранять исходные тексты задач, сообщений и доказательств. Не менять наблюдатель и рабочую историю. Читать ../waypoint/waypoint/web/index.html, ../waypoint/waypoint/web/app.js и ../next-stage/skills/conformance/WAYPOINT_WORKFLOW.md. Общие файлы интегрирует root; независимые UI-модули можно делегировать. Проверить в настоящем локальном браузере и автономных представлениях.",
+      "layout": {
+        "x": 1120,
+        "y": 1230
+      },
+      "parent": "WPT-NEXT",
+      "source_refs": [
+        {
+          "label": "UI",
+          "uri": "../waypoint/waypoint/web/index.html"
+        },
+        {
+          "label": "UI",
+          "uri": "../waypoint/waypoint/web/app.js"
+        },
+        {
+          "label": "Workflow",
+          "uri": "../next-stage/skills/conformance/WAYPOINT_WORKFLOW.md"
+        }
+      ],
+      "tests": {
+        "T01": {
+          "invalidated_by": "Изменение локализации, соответствующего UI-модуля или сохранения состояния.",
+          "label": "English по умолчанию, RU/EN переключение и сохранение; неизвестная настройка и запрет storage.",
+          "procedure": "Адресная проверка в Chromium через настоящий HTTP и отдельно в автономных HTML; сохранить доказательство и границы."
+        },
+        "T02": {
+          "invalidated_by": "Изменение локализации, соответствующего UI-модуля или сохранения состояния.",
+          "label": "Карта, План, Алгоритмы, фильтры, темы, доступность и даты переведены; авторские тексты неизменны.",
+          "procedure": "Адресная проверка в Chromium через настоящий HTTP и отдельно в автономных HTML; сохранить доказательство и границы."
+        },
+        "T03": {
+          "invalidated_by": "Изменение локализации, соответствующего UI-модуля или сохранения состояния.",
+          "label": "Фильтры, якорь, выделение, навигация и страницы сохраняются; реальная установка и offline views проверены.",
+          "procedure": "Адресная проверка в Chromium через настоящий HTTP и отдельно в автономных HTML; сохранить доказательство и границы."
+        }
+      },
+      "title": "Переключать язык интерфейса: English / Русский",
+      "x_observability": {
+        "algorithm_refs": [
+          "ALG-READ"
+        ],
+        "intent": {
+          "change": "Добавить перевод UI и сохраняемый переключатель, не меняя исходное содержимое наблюдаемой работы.",
+          "context": "Английский нужен как начальный язык для новой установки; русский остаётся доступным.",
+          "summary": "Выбирать русский или английский язык интерфейса Waypoint."
+        },
+        "outputs": {
+          "O-I18N": {
+            "definition": "English/Russian UI with persisted choice and bounded browser proof",
+            "revision": 1
+          }
+        }
+      },
+      "x_roadmap": {
+        "kind": "packet",
+        "origin": "Explicit owner request 2026-10-20; additive feature, not reopening completed packages.",
+        "owned_paths": [
+          "../waypoint/waypoint/web/",
+          "../waypoint/tests/i18n_browser_check.py"
+        ],
+        "preferred_executor": "CODEX",
+        "reference_root": ".",
+        "resource_policy": "MIXED"
+      }
+    },
     "WPT-NEXT": {
       "acceptance": {
         "A-ALL": {
@@ -4427,10 +4515,11 @@
         }
       },
       "ALG-READ": {
-        "definition_revision": 6,
+        "definition_revision": 7,
         "edge_cases": [
           "Смена фильтра.",
-          "Изменение категории уже видимого сообщения."
+          "Изменение категории уже видимого сообщения.",
+          "Смена EN/RU при открытом фильтре и выделении в прокрученной истории."
         ],
         "id": "ALG-READ",
         "implementation": {
@@ -4454,10 +4543,18 @@
             {
               "path": "waypoint/waypoint/web/filters.js",
               "symbol": "readerQuery"
+            },
+            {
+              "path": "waypoint/waypoint/web/i18n.js",
+              "symbol": "setLanguage"
+            },
+            {
+              "path": "waypoint/waypoint/web/app.js",
+              "symbol": "captureLanguageReaders"
             }
           ],
           "repository": "https://github.com/ViskyG/Waypoint",
-          "revision": "worktree-sha256:c6023591b0c9c2d86d712896648ad8f1f361bd32de152e85bca2149490debac7"
+          "revision": "worktree-sha256:867e501ddb4ed2aa0f928cd2d6b807ea6cc2b2a94b13f08ce00c572bf0e33c8c"
         },
         "inputs": [
           "current reader",
@@ -4482,7 +4579,8 @@
           "Не заменять выделенный текст до снятия выделения.",
           "Сохранить якорь и показать новые совпавшие сообщения.",
           "Сохранить ограниченное окно, item/pixel якорь и точные DOM-границы выделения для каждого фильтра.",
-          "Новые окна получают общий default; существующие сохраняют собственные настройки после перезагрузки."
+          "Новые окна получают общий default; существующие сохраняют собственные настройки после перезагрузки.",
+          "При смене языка сохранить состояние до изменения подписей; восстановить якорь и выделение после перерисовки всех UI-модулей, не менять фильтр и ограниченное окно."
         ],
         "testability": {
           "missing_cases": [
@@ -4495,6 +4593,9 @@
             },
             {
               "path": "waypoint/tests/remaining_browser_check.py"
+            },
+            {
+              "path": "waypoint/tests/i18n_browser_check.py"
             }
           ]
         },

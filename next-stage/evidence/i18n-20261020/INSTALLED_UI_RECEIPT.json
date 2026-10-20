@@ -1,0 +1,47 @@
+{
+  "status": "PASS",
+  "registered_at": "2026-10-20T13:21:14.819398+00:00",
+  "method": "Actual user in-app browser via CUA; DOM/AX read, no API route mocking",
+  "project": "waypoint",
+  "plan_version": "v-6e46fc7f67664fb9",
+  "English_selector_visible_after_refresh": true,
+  "before_done": {
+    "node": "WPT-N10",
+    "reported": "В работе: локализация интерфейса",
+    "result_ref": "next-stage/evidence/i18n-20261020/REPORT_RU.md",
+    "confirmed_checks": "3/3"
+  },
+  "after_done": {
+    "rendered_status": "Reported: ✓ Done",
+    "returned_view": "Map",
+    "selected_language": "English"
+  },
+  "event_receipts": {
+    "acceptance_seqs": [
+      25701,
+      25702,
+      25703,
+      25704,
+      25705,
+      25706,
+      25707
+    ],
+    "done_seq": 25813,
+    "group_status_seq": 25830,
+    "root_focus_release_seq": 25849
+  },
+  "scoped_agents": {
+    "modules_focus": 24437,
+    "modules_release": 24554,
+    "plan_focus": 24451,
+    "plan_release": 24501,
+    "browser_focus": 24644,
+    "browser_release": 25209,
+    "root_focus": 24331
+  },
+  "new_native_IPC_acceptance_claimed": false,
+  "remaining_open": [
+    "WPT-N09",
+    "WPT-INPUT-T3"
+  ]
+}

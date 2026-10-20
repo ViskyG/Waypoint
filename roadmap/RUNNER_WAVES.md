@@ -1,6 +1,6 @@
 # Производные группы пакетов
 
-> Сгенерировано из `ROADMAP.plan.json`, SHA-256 содержимого `ecd6f0684bca3c19a45941c659c4458cef731c9070ed63c2ec13a5a87a249fd1`.
+> Сгенерировано из `ROADMAP.plan.json`, SHA-256 содержимого `31dd56dca487e3add91062c6521349fab8347d9b838c704807a31a7befd5a898`.
 > Это представление плана, не самостоятельный источник статусов. Менять JSON и затем выполнять `python tools/roadmap.py render`.
 
 
@@ -25,7 +25,7 @@
 
 ## Без заданной волны
 
-Состав: `WPT-N00`, `WPT-N01`, `WPT-N02`, `WPT-N02-FIX`, `WPT-N03`, `WPT-N03-FIX`, `WPT-N04`, `WPT-N04-FIX`, `WPT-N05`, `WPT-N05-FIX`, `WPT-N06`, `WPT-N07`, `WPT-N07-FIX`, `WPT-N08`, `WPT-N08-FIX`, `WPT-N09`.
+Состав: `WPT-N00`, `WPT-N01`, `WPT-N02`, `WPT-N02-FIX`, `WPT-N03`, `WPT-N03-FIX`, `WPT-N04`, `WPT-N04-FIX`, `WPT-N05`, `WPT-N05-FIX`, `WPT-N06`, `WPT-N07`, `WPT-N07-FIX`, `WPT-N08`, `WPT-N08-FIX`, `WPT-N09`, `WPT-N10`.
 
 - `WPT-N00` — начало: Нет дополнительных условий; завершение: Нет дополнительных условий.
 - `WPT-N01` — начало: WPT-N00 / O-BASE; завершение: Нет дополнительных условий.
@@ -43,6 +43,7 @@
 - `WPT-N08` — начало: WPT-N02 / O-DEPS; WPT-N03 / O-UX; WPT-N04 / O-FILTERS; WPT-N05 / O-ALGORITHMS; WPT-N06 / O-THEMES; WPT-N07 / O-AUTHORING; завершение: Нет дополнительных условий.
 - `WPT-N08-FIX` — начало: Нет дополнительных условий; завершение: WPT-N02-FIX / O-FIXED; WPT-N03-FIX / O-FIXED; WPT-N04-FIX / O-FIXED; WPT-N05-FIX / O-FIXED; WPT-N07-FIX / O-FIXED.
 - `WPT-N09` — начало: WPT-N06 / O-THEMES; WPT-INPUT-T3 / O-REF; завершение: WPT-N08 / O-INTEGRATED.
+- `WPT-N10` — начало: Нет дополнительных условий; завершение: Нет дополнительных условий.
 
 ## RW-00 — Рабочая копия и первый импорт
 

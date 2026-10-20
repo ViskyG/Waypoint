@@ -1,0 +1,27 @@
+{
+  "scope": "Offline generated HTML in real Chromium; no live service or native Codex",
+  "views": [
+    {
+      "path": "waypoint/preview.html",
+      "sha256": "dfb87fa0d4d5b5301d3494f1609cf900b91018829d66f5ed3f8f17262b46ee7d",
+      "English_default_despite_Russian_browser": true,
+      "both_languages": true,
+      "Russian_persists_reload": true,
+      "authored_data_unchanged": true,
+      "missing_keys": [],
+      "browser_errors": []
+    },
+    {
+      "path": "roadmap/PREVIEW.html",
+      "sha256": "cc55e9ea6065745a4e328bd382ed8062cc7f5dbcd54fbe5b6a8a5076cca929ea",
+      "English_default_despite_Russian_browser": true,
+      "both_languages": true,
+      "Russian_persists_reload": true,
+      "authored_data_unchanged": true,
+      "missing_keys": [],
+      "browser_errors": []
+    }
+  ],
+  "chromium": "143.0.7499.4",
+  "status": "PASS"
+}

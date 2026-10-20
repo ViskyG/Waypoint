@@ -62,7 +62,8 @@ def test_catalogue_shows_effective_state_and_report_age_without_json():
     node = shutil.which('node')
     if node is None:
         pytest.skip('Node unavailable for bounded catalogue rendering check')
-    script = Path(__file__).resolve().parents[1] / 'waypoint/web/projects.js'
+    web = Path(__file__).resolve().parents[1] / 'waypoint/web'
+    script = web / 'projects.js'
     harness = r"""
 const fs = require('node:fs');
 const vm = require('node:vm');
@@ -72,8 +73,10 @@ class Element {
   replaceChildren(...nodes) { this.children=nodes; }
 }
 global.window={};
-global.document={createElement:tag=>new Element(tag), createTextNode:text=>({textContent:text,children:[]})};
+global.document={documentElement:{},createElement:tag=>new Element(tag), createTextNode:text=>({textContent:text,children:[]})};
 vm.runInThisContext(fs.readFileSync(process.argv[1],'utf8'));
+window.WaypointUI.setLanguage('ru');
+vm.runInThisContext(fs.readFileSync(process.argv[2],'utf8'));
 const container=new Element('div');
 window.WaypointUI.mountProjectCatalogue(container, [{project_id:'synthetic',source_health:{state:'stale',sources:[
  {source_key:'observer',state:'stale',reported_state:'connected',reported_at:'2020-01-01T00:00:00Z',age_seconds:86400}
@@ -81,7 +84,7 @@ window.WaypointUI.mountProjectCatalogue(container, [{project_id:'synthetic',sour
 function texts(n) { return [n.textContent, ...n.children.flatMap(texts)]; }
 process.stdout.write(JSON.stringify(texts(container)));
 """
-    rendered = json.loads(subprocess.run([node, '-e', harness, str(script)],
+    rendered = json.loads(subprocess.run([node, '-e', harness, str(web / 'i18n.js'), str(script)],
         check=True, capture_output=True, text=True).stdout)
     assert 'Источники: данные устарели' in rendered
     assert any('сообщение: подключён, 1 дн назад' in text for text in rendered)

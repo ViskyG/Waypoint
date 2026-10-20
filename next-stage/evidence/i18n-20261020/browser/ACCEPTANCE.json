@@ -1,0 +1,208 @@
+{
+  "schema": "waypoint.i18n-browser-acceptance/1",
+  "status": "PASS",
+  "scope": "Current N10 UI localization; synthetic regression and installed-service smoke explicitly separate",
+  "live_codex_tested": false,
+  "production_data_modified": false,
+  "accepted_cases": {
+    "default": {
+      "source": "run-01/RESULT.json",
+      "checks": [
+        {
+          "name": "English is default even when navigator locale is Russian",
+          "passed": true
+        },
+        {
+          "name": "Catalogue generated labels are English; authored title remains exact",
+          "passed": true
+        },
+        {
+          "name": "Russian selector updates catalogue and accessible labels",
+          "passed": true
+        },
+        {
+          "name": "Russian language persists across reload",
+          "passed": true
+        },
+        {
+          "name": "English language persists across reload",
+          "passed": true
+        },
+        {
+          "name": "default: no missing UI translation keys",
+          "passed": true
+        },
+        {
+          "name": "default: no uncaught application errors",
+          "passed": true
+        }
+      ]
+    },
+    "storage_and_labels": {
+      "source": "run-02/RESULT.json",
+      "checks": [
+        {
+          "name": "invalid: fallback English renders without storage access",
+          "passed": true
+        },
+        {
+          "name": "invalid: selector remains usable",
+          "passed": true
+        },
+        {
+          "name": "invalid: no missing UI translation keys",
+          "passed": true
+        },
+        {
+          "name": "invalid: no uncaught application errors",
+          "passed": true
+        },
+        {
+          "name": "getter-denied: fallback English renders without storage access",
+          "passed": true
+        },
+        {
+          "name": "getter-denied: selector remains usable",
+          "passed": true
+        },
+        {
+          "name": "getter-denied: denied persistence safely reloads English",
+          "passed": true
+        },
+        {
+          "name": "getter-denied: no missing UI translation keys",
+          "passed": true
+        },
+        {
+          "name": "getter-denied: no uncaught application errors",
+          "passed": true
+        },
+        {
+          "name": "setter-denied: fallback English renders without storage access",
+          "passed": true
+        },
+        {
+          "name": "setter-denied: selector remains usable",
+          "passed": true
+        },
+        {
+          "name": "setter-denied: denied persistence safely reloads English",
+          "passed": true
+        },
+        {
+          "name": "setter-denied: no missing UI translation keys",
+          "passed": true
+        },
+        {
+          "name": "setter-denied: no uncaught application errors",
+          "passed": true
+        },
+        {
+          "name": "English map: authored project title stays exact",
+          "passed": true
+        },
+        {
+          "name": "English map: authored task title stays exact",
+          "passed": true
+        },
+        {
+          "name": "English map: authored HTML remains text",
+          "passed": true
+        },
+        {
+          "name": "English map theme and project-view labels are localized",
+          "passed": true
+        },
+        {
+          "name": "English inspector tabs and authored human task are distinct",
+          "passed": true
+        },
+        {
+          "name": "Russian map: authored project title stays exact",
+          "passed": true
+        },
+        {
+          "name": "Russian map: authored task title stays exact",
+          "passed": true
+        },
+        {
+          "name": "Russian map: authored HTML remains text",
+          "passed": true
+        },
+        {
+          "name": "Russian map theme tabs and accessibility labels are localized",
+          "passed": true
+        },
+        {
+          "name": "Language selector is visible inside a small viewport",
+          "passed": true
+        },
+        {
+          "name": "Small-viewport selector switches the actual UI",
+          "passed": true
+        },
+        {
+          "name": "labels: no missing UI translation keys",
+          "passed": true
+        },
+        {
+          "name": "labels: no uncaught application errors",
+          "passed": true
+        }
+      ]
+    },
+    "reader_plan_algorithm": {
+      "source": "run-03/RESULT.json",
+      "checks": 25
+    },
+    "installed_read_only_smoke": {
+      "source": "live-01/RESULT.json",
+      "checks": 6
+    }
+  },
+  "preserved_failures": [
+    {
+      "source": "run-01/RESULT.json",
+      "reason": "Harness inadvertently denied sessionStorage writes as well as localStorage; corrected test narrows denial to localStorage."
+    },
+    {
+      "source": "run-02/RESULT.json",
+      "reason": "Actual reader anchor moved by27px after RU controls changed height. Root fixed language-event ordering; run-03 proves unchanged anchor/selection."
+    }
+  ],
+  "reuse_basis": "Root explicitly authorized reuse of passed default/storage/labels cases after a precise ordering fix for reader restoration; only failed/unreached cases rerun.",
+  "current_source_hashes": {
+    "waypoint/waypoint/web/index.html": "412eeed401a7dd7e372ab696c231deb4ee323d7c0ec47ba75536b8cf784fb8d2",
+    "waypoint/waypoint/web/i18n.js": "b015540ca35cf78a25b9fbe965c33ea5034e2267d771307750bbac34653fd1b8",
+    "waypoint/waypoint/web/app.js": "92bf1634fe4e33b90cf246614ac60164e8d0ee271eb2de7f7cc0889a80a7bdd6",
+    "waypoint/waypoint/web/style.css": "70e8d7eabc3d8d26ada0f091bd7616b873810282da83c3ff314d58902e2d318d",
+    "waypoint/waypoint/web/themes.js": "fa18a86ad95ea098c54dc6a6fc1a28b0361f80d68acb88427e5c2ebd201b7b71",
+    "waypoint/waypoint/web/filters.js": "b595b58ad5ea4f98deb2b25af6c514669777572ac9e1720d08811dff6a6cfc95",
+    "waypoint/waypoint/web/projects.js": "ec71f8e0d9383b80d102658241acbf34a1dc19a49a81420e5867a810b0a6de01",
+    "waypoint/waypoint/web/plan.js": "c8e26370b75bc41548ca8c1b09f4f652b90e1080a9f902f78ae870ce23b5fc16",
+    "waypoint/waypoint/web/algorithm_panel.js": "629066aa12667b532db01b4333332152951b107e7a23549bceac649eb2e5c09e",
+    "waypoint/tests/i18n_browser_check.py": "bcb2c2c01795a8b54786337c6cb327eda667765a18c5cca2a87601d3b61960df"
+  },
+  "missing_translation_keys": [],
+  "browser_errors": [],
+  "screenshots_visually_reviewed": [
+    "run-03/reader.png",
+    "run-02/small-viewport.png"
+  ],
+  "limitations": [
+    "Synthetic fixture is not a native Codex run.",
+    "Installed smoke reads the real service and changes only this browser context language preference.",
+    "Existing 237-observation paging correctness is reused; N10 checks only current page2 preservation."
+  ],
+  "artifacts": {
+    "live-01/RESULT.json": "c12c627b25ed923324f1cde9bc5a50d0c6463ff3c0c275e205c600e60be96363",
+    "run-01/RESULT.json": "0079c37f170e4382440b2281505606f16afff250df0c2d7cb13dacb925d01cf2",
+    "run-01/default.png": "effc1bd3a2af9ab7e7eb5884ea0624b5d1452f19d89433e330dff04c709d9419",
+    "run-02/RESULT.json": "2a8941cf51d24f3a492e61c72906152f0fed4cbd50946bc9923cf3ddfe35bdb0",
+    "run-02/small-viewport.png": "312da04fd76473527950d34eb1125e6d71f672c39fa742820c6083e0e7438cb7",
+    "run-03/RESULT.json": "5cbea474d133688a464d2828a9f25ae1cd4aa964815cc1a2a55c3e67ed2ce806",
+    "run-03/algorithm.png": "60056acd31029757fe80e984112a46f9c8bd0244c31e648f4ead4e039d85d413",
+    "run-03/plan.png": "0a033f8976ec7dbf1a0bfec4b418c75ef39fc94af76fc6856c945e155a67a505",
+    "run-03/reader.png": "0127113787962eaedcc1509de61c325adfadd3ee32ba1ce9518ffa67d48d2095"
+  }
+}

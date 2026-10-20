@@ -25,8 +25,8 @@ with tempfile.TemporaryDirectory(prefix='waypoint-map-preview-') as tmp:
         state=store.state(plan['project_id'])
         assert not state['agents'] and not state['checks'] and not state['items']
         data={'current':receipt['version'],'versions':store.versions(plan['project_id']),
-              'states':{receipt['version']:state},'label':'План',
-              'notice':'Снимок плана · исходные декларации поставки; текущая работа не воспроизводится',
+              'states':{receipt['version']:state},'label_key':'shell.plan',
+              'notice_key':'app.savedPlanNotice',
               'projects':[{'project_id':plan['project_id'],'title':plan['title'],
                   'purpose':plan.get('x_observability',{}).get('purpose') or 'Утверждённая дорожная карта Waypoint · сохранённая структура',
                   'distinct_active_agents':None,'distinct_active_blocks':None,'source_health':'Снимок исходной поставки, не живое подключение'}]}
@@ -36,7 +36,7 @@ html=html.replace('<title>Waypoint · Карта работ</title>','<title>Way
 html=html.replace('<link rel="stylesheet" href="/static/style.css">','<style>'+(BASE/'waypoint/web/style.css').read_text(encoding='utf8')+'</style>')
 payload=json.dumps(data,ensure_ascii=False).replace('<','\\u003c')
 html=html.replace('</head>','<script>window.WAYPOINT_DEMO='+payload+';</script></head>')
-modules=('themes','projects','plan','filters','algorithm_panel','app')
+modules=('i18n','themes','projects','plan','filters','algorithm_panel','app')
 for name in modules:
     tag=f'<script src="/static/{name}.js" defer></script>'
     if tag not in html:raise RuntimeError(f'Missing declared script {name}')

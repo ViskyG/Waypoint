@@ -11,6 +11,306 @@
         x.setAttribute(k, v); return x; };
     const demo = window.WAYPOINT_DEMO || null;
     const modules = window.WaypointUI;
+    modules.registerTranslations('app',{
+    "en": {
+        "kind.user": "user",
+        "kind.reasoning": "explanation",
+        "kind.command": "command",
+        "kind.tool": "tool",
+        "kind.files": "files",
+        "subagentEvent": "Subagent event",
+        "noText": "No text content",
+        "truncated": "Long content is limited; the original remains at the source.",
+        "unassigned": "No block attribution",
+        "filter": "Message filter",
+        "saveDefault": "Default for new readers",
+        "defaultSaved": "Filter saved for new readers; existing preferences are kept",
+        "storageDenied": "The browser cannot save this filter",
+        "noMatches": "No messages match this filter",
+        "emptyResult": "No attributed messages. The result and its evidence are available under Acceptance.",
+        "noAttributed": "No attributed messages yet",
+        "historyPrefix": "History · ",
+        "source": "Source",
+        "sourceLower": "source",
+        "outside": "Outside map",
+        "outsideCountHelp": "Count in the latest bounded snapshot; click to open the full stream",
+        "map": "Map",
+        "oldPlan": "Older plan · current activity is shown",
+        "cycles": "The plan contains cyclic dependencies; work is not blocked",
+        "notRun": "not run",
+        "freshnessUnknown": "freshness not confirmed",
+        "freshnessDeclared": "freshness declared by executor",
+        "result": "Result",
+        "completionEvidence": "Completion evidence",
+        "previousPlanSuffix": " · previous plan",
+        "outsideVersionSuffix": " · outside this version",
+        "expandGraph": "Expand internal graph",
+        "details": "Details",
+        "planned": "Planned",
+        "assignmentCap": "TASK",
+        "acceptanceCap": "ACCEPTANCE",
+        "order": "Order",
+        "requires": "Result required",
+        "relation": "Relation",
+        "finish": "finish",
+        "start": "start",
+        "partial": "partial",
+        "withinGroup": "within group",
+        "unknownRelation": "Relation type not specified",
+        "noBlocks": "No blocks at this level yet",
+        "visibleLimit": "Showing up to 1,000 visible blocks · zoom into the area of interest",
+        "idCopied": "ID copied",
+        "blockMissing": "Block not found",
+        "noFullscreen": "Full screen is unavailable in this environment",
+        "noBlockMatch": "No matching block",
+        "unassignedWork": "Unassigned work",
+        "onEdge": "On a relation",
+        "task": "Task",
+        "acceptance": "Acceptance",
+        "messages": "Messages",
+        "tests": "Tests",
+        "status": "Status",
+        "algorithms": "Algorithms",
+        "work": "Work",
+        "copyNativeId": "Copy native/block ID",
+        "copyId": "Copy block/relation ID",
+        "relationCondition": "Relation condition",
+        "orderNoBlock": "Order · does not block",
+        "resultRequired": "Result required",
+        "forFinish": "for completion",
+        "forStart": "for start",
+        "subtree": "block and descendants",
+        "onlyTarget": "target block only",
+        "legacyRelation": "Legacy unclassified relation",
+        "originalEndpoints": "Original endpoints, including other map levels:",
+        "withChildren": "Include descendants ✓",
+        "onlyBlock": "This block only",
+        "combinedStream": "Combined stream for this block and descendants; original messages are stored once.",
+        "olderMessages": "Earlier messages",
+        "workScope": "Observed work scope, not a required task queue.",
+        "parent": "Parent",
+        "notSpecified": "Not specified",
+        "unknown": "Unknown",
+        "agentId": "Agent ID",
+        "session": "Session container",
+        "forOwner": "For owner",
+        "forExecutor": "For executor",
+        "missingIntent": "The owner description is missing. Technical instructions are available under For executor.",
+        "summary": "Summary",
+        "why": "Why",
+        "change": "What changes",
+        "scope": "Scope",
+        "executorTask": "Executor assignment",
+        "relations": "Relations",
+        "expected": "Expected",
+        "actual": "Actual",
+        "noResult": "No result has been described yet",
+        "resultEvidence": "Result evidence",
+        "evidenceRevision": "Recorded evidence revision",
+        "commit": "Commit",
+        "differences": "Differences from expectations",
+        "noDifferences": "Not specified. This does not prove there are no differences.",
+        "resultVersionPrefix": "Result relative to ",
+        "runRegistration": "Run and registration",
+        "checkBasis": "Check basis",
+        "evidence": "Evidence",
+        "lateCheck": "Registered from preserved evidence; this is not a new test execution.",
+        "freshnessHelp": "Registration time does not replace the original execution time. Freshness is an executor declaration, not automatic verification of current source. Passed checks and task status are separate facts.",
+        "reportedStatus": "Reported status",
+        "descendants": "Descendants",
+        "explanation": "Explanation",
+        "notProvided": "Not provided",
+        "lastStatus": "Last status report",
+        "none": "None",
+        "openGraph": "Open internal graph ↘",
+        "copyBlockLink": "Copy block link",
+        "linkCopied": "Link copied",
+        "blockPrefix": "Block: ",
+        "noPreviousVersion": "There is no previous version",
+        "planChanges": "Plan changes",
+        "structureUnchanged": "Structure unchanged",
+        "algorithm": "Algorithm",
+        "projects": "Projects",
+        "fictionalPurpose": "A fictional project to explore Waypoint",
+        "selectProject": "Select project…",
+        "blockAbsent": "This block is absent from the selected version. History is preserved.",
+        "demoNotice": "Demo · fictional events",
+        "localNotice": "Local service · text is not sent to the cloud",
+        "offlineNotice": "Disconnected · showing the latest received data",
+        "connectionLost": "Connection lost · executors were not stopped",
+        "demo": "Demo",
+        "local": "Local",
+        "openLocal": "Open the local address from wp url. The access key is kept only in this tab.",
+        "newMessages": "New messages: {count} · Latest ↓",
+        "activeCount": "{count} working",
+        "planOrdinal": "Plan {ordinal}",
+        "insideScope": "Inside {scope} · click a block title for the combined stream",
+        "checkCount": "Confirmed checks: {passed} of {total}. Click the indicators on the left for details.",
+        "messagesFor": "Messages for {id}",
+        "expandBlock": "Expand {id}",
+        "mapCounts": "{blocks} blocks · {edges} relations",
+        "crossScope": "{direction} {id} · {target} (another level)",
+        "projectCount": "{count} projects",
+        "sourceRefreshError": "Source information could not be updated: {message}",
+        "checkDetails": "Run: {run}\nRegistered: {at}\nReceipt: {seq}\nPlan at registration: {version}\nCurrent plan: {current}",
+        "savedPlanNotice": "Saved plan · original delivery declarations; current work is not replayed",
+        "outcome.passed": "passed",
+        "outcome.failed": "failed",
+        "outcome.error": "error",
+        "outcome.skipped": "skipped",
+        "outcome.not_run": "not run"
+    },
+    "ru": {
+        "kind.user": "пользователь",
+        "kind.reasoning": "пояснение",
+        "kind.command": "команда",
+        "kind.tool": "инструмент",
+        "kind.files": "файлы",
+        "subagentEvent": "Событие подагента",
+        "noText": "Без текстового содержимого",
+        "truncated": "Длинное содержимое ограничено; оригинал остаётся у источника.",
+        "unassigned": "Привязка к блоку не установлена",
+        "filter": "Фильтр сообщений",
+        "saveDefault": "По умолчанию для новых окон",
+        "defaultSaved": "Фильтр сохранён для новых окон; существующие настройки сохранены",
+        "storageDenied": "Браузер не разрешает сохранить фильтр",
+        "noMatches": "Нет сообщений по выбранному фильтру",
+        "emptyResult": "Нет привязанных сообщений. Результат и его основания доступны в «Приёмке».",
+        "noAttributed": "Пока нет привязанных сообщений",
+        "historyPrefix": "История · ",
+        "source": "Источник",
+        "sourceLower": "источник",
+        "outside": "Вне карты",
+        "outsideCountHelp": "Число в последнем ограниченном снимке; полный поток доступен по нажатию",
+        "map": "Карта",
+        "oldPlan": "Старый план · активность показана текущая",
+        "cycles": "В плане есть циклические зависимости; работа не заблокирована",
+        "notRun": "не запускался",
+        "freshnessUnknown": "актуальность не подтверждена",
+        "freshnessDeclared": "актуальность заявлена исполнителем",
+        "result": "Результат",
+        "completionEvidence": "Основание завершения",
+        "previousPlanSuffix": " · прежний план",
+        "outsideVersionSuffix": " · вне версии",
+        "expandGraph": "Раскрыть внутренний граф",
+        "details": "Подробности",
+        "planned": "Запланировано",
+        "assignmentCap": "ЗАДАНИЕ",
+        "acceptanceCap": "ПРИЁМКА",
+        "order": "Порядок",
+        "requires": "Нужен результат",
+        "relation": "Связь",
+        "finish": "завершение",
+        "start": "начало",
+        "partial": "частично",
+        "withinGroup": "внутри группы",
+        "unknownRelation": "Тип связи не задан",
+        "noBlocks": "На этом уровне пока нет блоков",
+        "visibleLimit": "Показано 1000 видимых блоков · приблизьте интересующий участок",
+        "idCopied": "Идентификатор скопирован",
+        "blockMissing": "Блок не найден",
+        "noFullscreen": "Полноэкранный режим недоступен в этой среде",
+        "noBlockMatch": "Нет подходящего блока",
+        "unassignedWork": "Непривязанная работа",
+        "onEdge": "На переходе",
+        "task": "Задание",
+        "acceptance": "Приёмка",
+        "messages": "Сообщения",
+        "tests": "Тесты",
+        "status": "Статус",
+        "algorithms": "Алгоритмы",
+        "work": "Работы",
+        "copyNativeId": "Копировать native/block ID",
+        "copyId": "Копировать ID блока/связи",
+        "relationCondition": "Условие связи",
+        "orderNoBlock": "Порядок · не блокирует",
+        "resultRequired": "Требуется результат",
+        "forFinish": "для завершения",
+        "forStart": "для начала",
+        "subtree": "блок и подблоки",
+        "onlyTarget": "только указанный блок",
+        "legacyRelation": "Старая связь без классификации",
+        "originalEndpoints": "Исходные концы связи, включая другие уровни карты:",
+        "withChildren": "С подблоками ✓",
+        "onlyBlock": "Только этот блок",
+        "combinedStream": "Общий поток блока и подблоков; исходные сообщения сохранены один раз.",
+        "olderMessages": "Более ранние сообщения",
+        "workScope": "Фактическая область работы, не очередь обязательных заданий.",
+        "parent": "Родитель",
+        "notSpecified": "Не указан",
+        "unknown": "Неизвестен",
+        "agentId": "Идентификатор агента",
+        "session": "Контейнер сессии",
+        "forOwner": "Для владельца",
+        "forExecutor": "Для исполнителя",
+        "missingIntent": "Описание для владельца пока не заполнено. Техническое задание доступно во вкладке «Для исполнителя».",
+        "summary": "Суть",
+        "why": "Зачем",
+        "change": "Что изменится",
+        "scope": "Границы",
+        "executorTask": "Задание исполнителю",
+        "relations": "Связи",
+        "expected": "Ожидалось",
+        "actual": "Получено",
+        "noResult": "Результат ещё не описан",
+        "resultEvidence": "Основание результата",
+        "evidenceRevision": "Сохранённая ревизия доказательства",
+        "commit": "Коммит",
+        "differences": "Расхождения с ожиданиями",
+        "noDifferences": "Не указаны. Это не доказательство отсутствия расхождений.",
+        "resultVersionPrefix": "Результат относительно ",
+        "runRegistration": "Запуск и регистрация",
+        "checkBasis": "Основание проверки",
+        "evidence": "Доказательства",
+        "lateCheck": "Результат внесён из сохранённых доказательств; это не новый запуск теста.",
+        "freshnessHelp": "Дата регистрации не заменяет время прежнего выполнения. «Актуальность» — ручная декларация исполнителя, а не автоматическая проверка нынешних исходников. Успешные тесты и статус задачи — отдельные сведения.",
+        "reportedStatus": "Сообщённый статус",
+        "descendants": "Потомки",
+        "explanation": "Пояснение",
+        "notProvided": "Не указано",
+        "lastStatus": "Последнее сообщение о статусе",
+        "none": "Нет",
+        "openGraph": "Открыть внутренний граф ↘",
+        "copyBlockLink": "Копировать адрес блока",
+        "linkCopied": "Адрес скопирован",
+        "blockPrefix": "Блок: ",
+        "noPreviousVersion": "Предыдущей версии нет",
+        "planChanges": "Изменения плана",
+        "structureUnchanged": "Структура не менялась",
+        "algorithm": "Алгоритм",
+        "projects": "Проекты",
+        "fictionalPurpose": "Вымышленный проект для знакомства с Waypoint",
+        "selectProject": "Выбрать проект…",
+        "blockAbsent": "Этот блок отсутствует в выбранной версии. История сохранена.",
+        "demoNotice": "Демо · вымышленные события",
+        "localNotice": "Локальный сервис · тексты не отправляются в облако",
+        "offlineNotice": "Нет связи · показаны последние полученные данные",
+        "connectionLost": "Связь прервана · исполнители не остановлены",
+        "demo": "Демо",
+        "local": "Локально",
+        "openLocal": "Откройте локальный адрес из команды wp url. Ключ доступа хранится только в этой вкладке.",
+        "newMessages": "Новые сообщения: {count} · К последним ↓",
+        "activeCount": "{count} в работе",
+        "planOrdinal": "План {ordinal}",
+        "insideScope": "Внутри {scope} · общий поток доступен по названию блока",
+        "checkCount": "Подтверждено проверок: {passed} из {total}. Подробности — по индикаторам слева.",
+        "messagesFor": "Сообщения {id}",
+        "expandBlock": "Раскрыть {id}",
+        "mapCounts": "{blocks} блоков · {edges} связей",
+        "crossScope": "{direction} {id} · {target} (другой уровень)",
+        "projectCount": "{count} проектов",
+        "sourceRefreshError": "Сведения об источниках не обновлены: {message}",
+        "checkDetails": "Запуск: {run}\nЗарегистрировано: {at}\nReceipt: {seq}\nВерсия карты при регистрации: {version}\nТекущая версия карты: {current}",
+        "savedPlanNotice": "Снимок плана · исходные декларации поставки; текущая работа не воспроизводится",
+        "outcome.passed": "успешно",
+        "outcome.failed": "неуспешно",
+        "outcome.error": "ошибка",
+        "outcome.skipped": "пропущено",
+        "outcome.not_run": "не запускался"
+    }
+});
+    const t=(key,values)=>modules.t('app.'+key,values);
+    const outcomeLabel=value=>value && modules.hasTranslation('app.outcome.'+value) ? t('outcome.'+value) : value || t('notRun');
     const ui = { view: 'projects', summaries: [], project: 'demo', state: null, versions: [], scope: null, selected: null, actor: null, inspector: null, version: null, planMode: false, camera: { x: 60, y: 35, z: .82 }, cameras: {}, drag: null, cursor: 0, busy: false };
     const readers = new Map();
     let key = '', online = false, stopped = false;
@@ -41,6 +341,8 @@
         history.replaceState(null, '', location.pathname + location.search + (remainingHash ? '#' + remainingHash : ''));
     }
     modules.mountThemeSelector($('#theme'));
+    modules.mountLanguageSelector($('#language'));
+    $('#foot-status').removeAttribute('data-i18n');
     function notice(text) { const n = $('#notice'); n.textContent = text; n.hidden = false; clearTimeout(n.timer); n.timer = setTimeout(() => n.hidden = true, 5500); }
     async function api(path) { const requested = context(), signal = navigationController.signal;
         const r = await fetch(path, {headers: {Authorization: 'Bearer ' + key}, cache: 'no-store', signal});
@@ -94,12 +396,12 @@
     } return ui.state.agents.filter(a => ids.has(a.id)); }
     function nodeStatus(id) { const raw = ui.state.node_states.find(s => s.id === id) || {}; return {...raw, status: modules.reportedStatus(ui.state, id)}; }
     function nodeMessages(id, deep = true) { const ids = deep ? childNodes(id) : new Set([id]); return ui.state.items.filter(i => i.node_ids?.some(n => ids.has(n))); }
-    function fmtTime(t) { const d = new Date(t); return Number.isFinite(+d) ? d.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' }) : '—'; }
-    function kindLabel(k) { return { agentMessage: '', userMessage: 'пользователь', reasoning: 'пояснение', commandExecution: 'команда', mcpToolCall: 'инструмент', fileChange: 'файлы' }[k] ?? k; }
+    function fmtTime(t) { const d = new Date(t); return Number.isFinite(+d) ? d.toLocaleTimeString(modules.locale, { hour: '2-digit', minute: '2-digit', hourCycle:'h23' }) : '—'; }
+    function kindLabel(k) { return { agentMessage: '', userMessage: t('kind.user'), reasoning: t('kind.reasoning'), commandExecution: t('kind.command'), mcpToolCall: t('kind.tool'), fileChange: t('kind.files') }[k] ?? k; }
     const itemKey = item => JSON.stringify([item.agent_id || '', item.id]);
     function hasSelection(box) { const selection = window.getSelection(); return selection && !selection.isCollapsed && (box.contains(selection.anchorNode) || box.contains(selection.focusNode)); }
     function patchMessage(box, item) {
-        const signature = JSON.stringify(item);
+        const signature = JSON.stringify([item,modules.language]);
         if (box._signature === signature) return;
         // Keep the actual selected DOM text intact while the reader is copying it.
         if (hasSelection(box)) { box._pendingItem = item; return; }
@@ -108,10 +410,10 @@
         if (box.textContent !== next.textContent) box.replaceChildren(...next.childNodes);
         box.title = next.title;
     }
-    function message(item) { const box = el('div', 'message'); box.dataset.item = item.id; box.dataset.itemKey = itemKey(item); box._signature = JSON.stringify(item); const meta = el('div', 'message-meta'); meta.append(el('b', '', agentCode(item.agent_id || '?')), el('span', '', fmtTime(item.at))); if (kindLabel(item.type))
-        meta.append(el('span', 'message-kind', kindLabel(item.type))); box.append(meta); if (item.node_ids?.length || item.edge_ids?.length) box.append(el('small', 'message-origin', [...(item.node_ids || []), ...(item.edge_ids || [])].join(' · '))); box.append(el('div', 'message-text', item.text || (item.type === 'subAgentActivity' ? ['Событие подагента', item.kind, item.agent_thread_id, item.agent_path].filter(Boolean).join(' · ') : 'Без текстового содержимого'))); if (item.truncated)
-        box.append(el('small', 'source-warning', 'Длинное содержимое ограничено; оригинал остаётся у источника.')); if (item.attribution === 'unassigned')
-        box.title = 'Привязка к блоку не установлена'; return box; }
+    function message(item) { const box = el('div', 'message'); box.dataset.item = item.id; box.dataset.itemKey = itemKey(item); box._signature = JSON.stringify([item,modules.language]); const meta = el('div', 'message-meta'); meta.append(el('b', '', agentCode(item.agent_id || '?')), el('span', '', fmtTime(item.at))); if (kindLabel(item.type))
+        meta.append(el('span', 'message-kind', kindLabel(item.type))); box.append(meta); if (item.node_ids?.length || item.edge_ids?.length) box.append(el('small', 'message-origin', [...(item.node_ids || []), ...(item.edge_ids || [])].join(' · '))); box.append(el('div', 'message-text', item.text || (item.type === 'subAgentActivity' ? [t('subagentEvent'), item.kind, item.agent_thread_id, item.agent_path].filter(Boolean).join(' · ') : t('noText')))); if (item.truncated)
+        box.append(el('small', 'source-warning', t('truncated'))); if (item.attribution === 'unassigned')
+        box.title = t('unassigned'); return box; }
     document.addEventListener('selectionchange', () => { for (const box of document.querySelectorAll('.message')) if (box._pendingItem && !hasSelection(box)) patchMessage(box, box._pendingItem); });
     function readerFor(channel, kind, id, deep = true) {
         const key = JSON.stringify([serviceIdentity, ui.project, ui.state?.version || ui.version, channel, kind, id, deep]);
@@ -170,11 +472,11 @@
         reader.list = list; reader.scroll = scroll; reader.button = button; reader.more = more;
         if (reader.channel === 'inspector' && !reader.filterMount) {
             const panel=el('div','reader-controls');list.before(panel);if(more)panel.append(more);reader.controls=panel;
-            const filter = el('details','reader-filter'); filter.append(el('summary','','Фильтр сообщений')); const controls = el('div','reader-filter-controls'); filter.append(controls);panel.append(filter);
+            const filter = el('details','reader-filter'); filter.append(el('summary','',t('filter'))); const controls = el('div','reader-filter-controls'); filter.append(controls);panel.append(filter);
             // Native focus/click actions may collapse a selection before change.
             panel.addEventListener('pointerdown',()=>{reader.filterSelection=readerSelection(reader);},true);
             panel.addEventListener('keydown',event=>{if (['Enter',' '].includes(event.key)) reader.filterSelection=readerSelection(reader) || reader.filterSelection;},true);
-            filter.append(btn('По умолчанию для новых окон',()=>{try {localStorage.setItem(readerDefaultKey,JSON.stringify(reader.query));notice('Фильтр сохранён для новых окон; существующие настройки сохранены');} catch {notice('Браузер не разрешает сохранить фильтр');}},'reader-save-default'));
+            filter.append(btn(t('saveDefault'),()=>{try {localStorage.setItem(readerDefaultKey,JSON.stringify(reader.query));notice(t('defaultSaved'));} catch {notice(t('storageDenied'));}},'reader-save-default'));
             reader.filterMount = modules.bindTypeFilter(controls,reader.query,{onChange:query=>changeReaderQuery(reader,query)});
         }
         scroll.onscroll = () => { reader.top = scroll.scrollTop; if (!reader.pending.size) reader.follow = scroll.scrollHeight - scroll.scrollTop - scroll.clientHeight < 12; else if (scroll.scrollHeight - scroll.scrollTop - scroll.clientHeight >= 12) reader.follow = false; };
@@ -193,10 +495,10 @@
         if (!reader.items.length && !list.children.length) {
             const filtered = reader.query?.only_errors || reader.query?.categories != null;
             const result = reader.kind === 'node' && modules.resultFor(ui.state,reader.id);
-            list.append(el('div', 'empty-message', filtered ? 'Нет сообщений по выбранному фильтру' : result ? 'Нет привязанных сообщений. Результат и его основания доступны в «Приёмке».' : 'Пока нет привязанных сообщений'));
+            list.append(el('div', 'empty-message', filtered ? t('noMatches') : result ? t('emptyResult') : t('noAttributed')));
         }
         reader.button.hidden = !reader.pending.size;
-        reader.button.textContent = `Новые сообщения: ${reader.pending.size} · К последним ↓`;
+        reader.button.textContent = t('newMessages',{count:reader.pending.size});
         if (reader.more) { reader.more.hidden = !reader.hasMore; reader.more.disabled = !!reader.loading; }
         if (reader.follow) scroll.scrollTop=scroll.scrollHeight;
         else { const anchor=anchors.find(value=>[...list.children].some(x=>x.dataset.itemKey===value.key)); const box=anchor && [...list.children].find(x=>x.dataset.itemKey===anchor.key); if (box) scroll.scrollTop+=box.getBoundingClientRect().top-scroll.getBoundingClientRect().top-anchor.offset; else scroll.scrollTop=reader.top; }
@@ -270,7 +572,7 @@
         const oldRails = new Map([...rail.children].map(card => [card.dataset.actor, card]));
         const actorCards = [], railCards = [];
         const selected = ui.actor ? childAgents(ui.actor) : new Set();
-        $('#active-count').textContent = ui.state.agents.filter(actorActive).length + ' в работе';
+        $('#active-count').textContent = t('activeCount',{count:ui.state.agents.filter(actorActive).length});
         const sorted = [...ui.state.agents].sort((a, b) => Number(actorActive(b)) - Number(actorActive(a)) || a.id.localeCompare(b.id));
         for (const actor of sorted) {
             const scopes = ui.state.scopes.find(scope => scope.agent_id === actor.id)?.node_ids || [];
@@ -281,10 +583,10 @@
                 card.dataset.actor = actor.id; card._signature = signature;
                 if (['completed', 'done'].includes(actor.activity)) card.classList.add('finished');
                 if (selected.has(actor.id)) card.classList.add('selected');
-                card.title = actor.id + (actor.activity_historical ? '\nИстория · ' + (actor.activity_reported_by || actor.activity_source || '') + ' · ' + (actor.activity_at || '') : '');
+                card.title = actor.id + (actor.activity_historical ? '\n'+t('historyPrefix') + (actor.activity_reported_by || actor.activity_source || '') + ' · ' + (actor.activity_at || '') : '');
                 const text = el('div');
-                text.append(el('strong', '', actor.name || agentCode(actor.id)), el('small', '', scopes.join(' · ') || 'Вне карты'));
-                if (actor.activity_historical) text.append(el('small', 'activity-provenance', 'История · ' + (actor.activity_reported_by || 'источник')));
+                text.append(el('strong', '', actor.name || agentCode(actor.id)), el('small', '', scopes.join(' · ') || t('outside')));
+                if (actor.activity_historical) text.append(el('small', 'activity-provenance', t('historyPrefix') + (actor.activity_reported_by || t('sourceLower'))));
                 card.append(el('span', 'agent-code', agentCode(actor.id)), text);
             }
             actorCards.push(card);
@@ -304,18 +606,18 @@
         }
         keyedChildren(strip, actorCards); keyedChildren(rail, railCards);
         const outside = ui.state.items.filter(item => !item.node_ids?.length && !item.edge_ids?.length || item.node_ids?.some(id => !ui.state.plan.nodes[id] && !ui.state.ghosts[id]));
-        $('#outside-count').textContent = outside.length; $('#outside-count').title = 'Число в последнем ограниченном снимке; полный поток доступен по нажатию';
+        $('#outside-count').textContent = outside.length; $('#outside-count').title = t('outsideCountHelp');
         $('#reset-selection').hidden = !ui.actor && !ui.selected;
     }
-    function renderToolbar() { const crumbs = $('#crumbs'); crumbs.replaceChildren(btn('Карта', () => enter(null))); for (const id of parents(ui.scope)) {
+    function renderToolbar() { const crumbs = $('#crumbs'); crumbs.replaceChildren(btn(t('map'), () => enter(null))); for (const id of parents(ui.scope)) {
         crumbs.append(el('span', '', '›'), btn(id, () => enter(id)));
     } $('#up').disabled = !ui.scope; $('#up').onclick = () => enter(ui.state.plan.nodes[ui.scope]?.parent || null); $('#zoom').textContent = Math.round(ui.camera.z * 100) + '%'; $('#version').replaceChildren(); for (const v of ui.versions) {
-        const option = el('option', '', `План ${v.ordinal}`);
+        const option = el('option', '', t('planOrdinal',{ordinal:v.ordinal}));
         option.value = v.version;
         option.selected = v.version === ui.state.version;
         $('#version').append(option);
-    } $('#map-note').textContent = ui.state.version !== ui.state.current_version ? 'Старый план · активность показана текущая' : ui.state.warnings?.length ? 'В плане есть циклические зависимости; работа не заблокирована' : ui.scope ? `Внутри ${ui.scope} · общий поток доступен по названию блока` : ''; }
-    function lamp(check) { const span = el('span', 'lamp ' + (check?.outcome || 'not_run') + (check?.freshness === 'stale' ? ' stale' : ''), check?.outcome === 'passed' ? '✓' : ['failed', 'error'].includes(check?.outcome) ? '×' : ''); span.setAttribute('aria-label', check?.outcome || 'не запускался'); return span; }
+    } $('#map-note').textContent = ui.state.version !== ui.state.current_version ? t('oldPlan') : ui.state.warnings?.length ? t('cycles') : ui.scope ? t('insideScope',{scope:ui.scope}) : ''; }
+    function lamp(check) { const span = el('span', 'lamp ' + (check?.outcome || 'not_run') + (check?.freshness === 'stale' ? ' stale' : ''), check?.outcome === 'passed' ? '✓' : ['failed', 'error'].includes(check?.outcome) ? '×' : ''); span.setAttribute('aria-label', outcomeLabel(check?.outcome)); return span; }
     function renderNode(id, node, simple = false) {
         const card = el('article', 'node');
         card.dataset.node = id;
@@ -338,27 +640,27 @@
         for (const [tid, def] of tests.slice(0, 16)) {
             const check = ui.state.checks.find(c => c.node_id === id && c.test_id === tid);
             const light = lamp(check);
-            light.title = (def.label || tid) + ': ' + (check?.outcome || 'не запускался') + (check?.freshness !== 'current' ? ' · актуальность не подтверждена' : '');
+            light.title = (def.label || tid) + ': ' + outcomeLabel(check?.outcome) + (check?.freshness !== 'current' ? ' · '+t('freshnessUnknown') : '');
             testBtn.append(light);
         }
         test.append(testBtn);
         const result = modules.resultFor(ui.state,id);
-        if (result) { const proof = btn('Результат', () => openInspector('node',id,'acceptance'),'node-result-link'); proof.title = result.evidence_ref || result.summary || 'Основание завершения'; test.append(proof); }
-        const count = el('span', 'test-count', `${passed}/${tests.length}`); count.title = `Подтверждено проверок: ${passed} из ${tests.length}. Подробности — по индикаторам слева.`; test.append(count);
+        if (result) { const proof = btn(t('result'), () => openInspector('node',id,'acceptance'),'node-result-link'); proof.title = result.evidence_ref || result.summary || t('completionEvidence'); test.append(proof); }
+        const count = el('span', 'test-count', `${passed}/${tests.length}`); count.title = t('checkCount',{passed,total:tests.length}); test.append(count);
         const head = el('div', 'node-head'), title = el('div', 'title');
-        title.append(el('span', 'node-id', id + (node.retired ? ' · прежний план' : node.absent_from_view ? ' · вне версии' : '')), el('h3', '', node.title));
-        title.tabIndex = 0; title.setAttribute('role', 'button'); title.setAttribute('aria-label', 'Сообщения ' + id); title.onkeydown = e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); title.click(); } };
+        title.append(el('span', 'node-id', id + (node.retired ? t('previousPlanSuffix') : node.absent_from_view ? t('outsideVersionSuffix') : '')), el('h3', '', node.title));
+        title.tabIndex = 0; title.setAttribute('role', 'button'); title.setAttribute('aria-label', t('messagesFor',{id})); title.onkeydown = e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); title.click(); } };
         title.onclick = () => { ui.selected = id; renderMap(); openInspector('node', id, 'messages'); };
         head.append(title);
         const hasChild = Object.values(ui.state.plan.nodes).some(n => n.parent === id);
         if (hasChild) {
             const down = btn('↘', () => enter(id));
-            down.title = 'Раскрыть внутренний граф';
-            down.setAttribute('aria-label', 'Раскрыть ' + id);
+            down.title = t('expandGraph');
+            down.setAttribute('aria-label', t('expandBlock',{id}));
             head.append(down);
         }
         const detail = btn('⋯', () => openInspector('node', id, 'task'));
-        detail.title = 'Подробности';
+        detail.title = t('details');
         head.append(detail);
         const chat = el('div', 'messages');
         chat.dataset.chat = id;
@@ -366,13 +668,13 @@
         const status = el('div', 'node-status'), state = nodeStatus(id), agents = workActors(id);
         card.dataset.status = state.status;
         const running = agents.some(actorActive);
-        status.append(el('span', 'status-icon' + (running ? ' running' : state.status === 'done' ? ' done' : '')), btn(modules.statusLabel(state.status) || 'Запланировано', () => openInspector('node', id, 'status'), 'status-label'));
+        status.append(el('span', 'status-icon' + (running ? ' running' : state.status === 'done' ? ' done' : '')), btn(modules.statusLabel(state.status) || t('planned'), () => openInspector('node', id, 'status'), 'status-label'));
         const descendantActivity = modules.activityText(modules.nodeView(ui.state,id)); if (descendantActivity) { status.title = descendantActivity; status.append(el('small','descendant-badge',descendantActivity)); }
         const names = el('div', 'node-actors');
         for (const a of agents.slice(0, 4))
             names.append(btn(agentCode(a.id), () => selectActor(a.id)));
         status.append(names);
-        const req = btn('ЗАДАНИЕ', () => openInspector('node', id, 'task'), 'node-tab assignment'), accept = btn('ПРИЁМКА', () => openInspector('node', id, 'acceptance'), 'node-tab acceptance');
+        const req = btn(t('assignmentCap'), () => openInspector('node', id, 'task'), 'node-tab assignment'), accept = btn(t('acceptanceCap'), () => openInspector('node', id, 'acceptance'), 'node-tab acceptance');
         const latest = btn('', null, 'new-messages'); latest.hidden = true;
         card.append(test, head, chat, status, req, accept, latest);
         card.ondblclick = e => { if (hasChild && !e.target.closest('.messages,button'))
@@ -446,8 +748,8 @@
             }
             const spec = edge.x_observability, relation = spec?.relation || 'legacy_unknown';
             const collapsed = a !== edge.from || b !== edge.to, partial = b !== edge.to && spec?.target_scope === 'node';
-            const summary = [relation === 'order' ? 'Порядок' : relation === 'requires' ? 'Нужен результат' : 'Связь', spec?.phase === 'finish' ? 'завершение' : spec ? 'начало' : '', partial ? 'частично' : collapsed ? 'внутри группы' : ''].filter(Boolean).join(' · ');
-            const details = [ids[0],summary,`${edge.from} → ${edge.to}`,spec?.why || 'Тип связи не задан'].join('\n');
+            const summary = [relation === 'order' ? t('order') : relation === 'requires' ? t('requires') : t('relation'), spec?.phase === 'finish' ? t('finish') : spec ? t('start') : '', partial ? t('partial') : collapsed ? t('withinGroup') : ''].filter(Boolean).join(' · ');
+            const details = [ids[0],summary,`${edge.from} → ${edge.to}`,spec?.why || t('unknownRelation')].join('\n');
             const group = svg('g',{'data-edge':ids[0],'data-relation':relation,'data-partial':String(partial),'data-phase':spec?.phase || ''});
             const title = svg('title'); title.textContent = details; group.append(title);
             const path = svg('path', { d, class: 'edge edge-' + relation, 'marker-end': 'url(#arrow)' }), hit = svg('path', { d, class: 'edge-hit', tabindex: 0, role: 'button', 'aria-label': details });
@@ -472,12 +774,12 @@
         }
         }
         renderCrossScope();
-        $('#empty').textContent = !current.length ? 'На этом уровне пока нет блоков' : '';
-        $('#summary').textContent = `${current.length} блоков · ${Object.keys(ui.state.plan.edges).length} связей`;
+        $('#empty').textContent = !current.length ? t('noBlocks') : '';
+        $('#summary').textContent = t('mapCounts',{blocks:current.length,edges:Object.keys(ui.state.plan.edges).length});
         $('#zoom').textContent = Math.round(ui.camera.z * 100) + '%';
         saveMap();
         if (onScreen.length > 1000)
-            $('#map-note').textContent = 'Показано 1000 видимых блоков · приблизьте интересующий участок';
+            $('#map-note').textContent = t('visibleLimit');
     }
     function renderCrossScope() {
         let links = $('#cross-scope');
@@ -486,9 +788,9 @@
         const signature = JSON.stringify([ui.scope, external]);
         if (links._signature === signature) return;
         links._signature = signature; links.replaceChildren();
-        for (const [id, edge] of external.slice(0, 12)) links.append(btn(`${visibleNodeFor(edge.from) ? '→' : '←'} ${id} · ${visibleNodeFor(edge.from) ? edge.to : edge.from} (другой уровень)`, () => openInspector('edge', id), 'scope-link'));
+        for (const [id, edge] of external.slice(0, 12)) links.append(btn(t('crossScope',{direction:visibleNodeFor(edge.from)?'→':'←',id,target:visibleNodeFor(edge.from)?edge.to:edge.from}), () => openInspector('edge', id), 'scope-link'));
     }
-    async function copyId(value) { try { await navigator.clipboard.writeText(value); notice('Идентификатор скопирован'); } catch { notice(value); } }
+    async function copyId(value) { try { await navigator.clipboard.writeText(value); notice(t('idCopied')); } catch { notice(value); } }
     function enter(scope, writeHash = true) { if (scope && !ui.state.plan.nodes[scope])
         return; for (const card of $('#nodes').children) detachReader(card._reader); ui.cameras[ui.scope || '$root'] = { ...ui.camera }; ui.scope = scope; ui.camera = { ...(ui.cameras[scope || '$root'] || { x: 60, y: 30, z: .82 }) }; ui.selected = null; ui.actor = null; closeInspector(); if (writeHash) {
         const h = new URLSearchParams();
@@ -499,7 +801,7 @@
     } saveMap(); renderToolbar(); renderActors(); renderMap(); }
     function cameraZoom(z, point) { const rect = $('#viewport').getBoundingClientRect(); const p = point || { x: rect.width / 2, y: rect.height / 2 }; z = Math.max(.12, Math.min(1.8, z)); const ratio = z / ui.camera.z; ui.camera.x = p.x - (p.x - ui.camera.x) * ratio; ui.camera.y = p.y - (p.y - ui.camera.y) * ratio; ui.camera.z = z; renderMap(); }
     function focusNode(id) { const node = nodesWithGhosts()[id]; if (!node)
-        return notice('Блок не найден'); if ((node.parent || null) !== ui.scope)
+        return notice(t('blockMissing')); if ((node.parent || null) !== ui.scope)
         enter(node.parent || null); ui.selected = id; ui.actor = null; const rect = $('#viewport').getBoundingClientRect(); ui.camera.z = .92; ui.camera.x = rect.width * .38 - ((node.layout?.x || 0) + 165) * ui.camera.z; ui.camera.y = 40 - (node.layout?.y || 0) * ui.camera.z; renderMap(); renderActors(); }
     $('#plus').onclick = () => cameraZoom(ui.camera.z * 1.18);
     $('#minus').onclick = () => cameraZoom(ui.camera.z / 1.18);
@@ -513,7 +815,7 @@
             await document.documentElement.requestFullscreen();
     }
     catch {
-        notice('Полноэкранный режим недоступен в этой среде');
+        notice(t('noFullscreen'));
     } };
     const viewport = $('#viewport');
     viewport.addEventListener('wheel', e => { if (e.target.closest('.messages') && ui.camera.z >= .55 && !e.ctrlKey)
@@ -532,7 +834,7 @@
         openInspector('node', found[0], 'messages');
     }
     else
-        notice('Нет подходящего блока'); });
+        notice(t('noBlockMatch')); });
     $('#reset-selection').onclick = () => { ui.actor = ui.selected = null; renderMap(); renderActors(); closeInspector(); };
     $('#outside').onclick = () => openInspector('outside', null, 'messages');
     $('#close').onclick = closeInspector;
@@ -605,6 +907,15 @@
         (inspector.kind === 'algorithm' ? openAlgorithm(inspector.id,inspector.pageState) : openInspector(inspector.kind, inspector.id, inspector.tab, inspector.deep)).then(() => { $('#inspector-body').scrollTop = top; });
     }
     document.addEventListener('selectionchange', () => { if (ui.inspector?.needsRefresh) refreshInspectorDetails(); });
+    function inspectorChrome(kind,id,tab,deep) {
+        const tabs=$('#tabs');tabs.replaceChildren();
+        if (kind==='algorithm' || kind==='diff') {$('#inspector-id').textContent=id || '';$('#inspector-title').textContent=t(kind==='algorithm'?'algorithm':'planChanges');return;}
+        $('#inspector-id').textContent = id || t('unassignedWork');
+        $('#inspector-title').textContent = kind === 'node' ? nodeName(id) : kind === 'agent' ? agentName(id) : kind === 'edge' ? t('onEdge') : t('outside');
+        const choices = kind === 'node' ? [['task', t('task')], ['acceptance', t('acceptance')], ['messages', t('messages')], ['tests', t('tests')], ['status', t('status')], ['algorithms', t('algorithms')]] : kind === 'agent' ? [['messages', t('messages')], ['work', t('work')]] : [['messages', t('messages')]];
+        for (const [value, name] of choices)
+            tabs.append(btn(name, () => openInspector(kind, id, value, deep), value === tab ? 'current' : ''));
+    }
     async function openInspector(kind, id, tab = 'messages', deep = true) {
         ui.inspector?.algorithmMount?.dispose();
         if (ui.inspector?.reader) detachReader(ui.inspector.reader);
@@ -615,22 +926,18 @@
         inspector.hidden = false;
         body.replaceChildren();
         tabs.replaceChildren();
-        $('#inspector-id').textContent = id || 'Непривязанная работа';
-        $('#inspector-title').textContent = kind === 'node' ? nodeName(id) : kind === 'agent' ? agentName(id) : kind === 'edge' ? 'На переходе' : 'Вне карты';
-        const choices = kind === 'node' ? [['task', 'Задание'], ['acceptance', 'Приёмка'], ['messages', 'Сообщения'], ['tests', 'Тесты'], ['status', 'Статус'], ['algorithms', 'Алгоритмы']] : kind === 'agent' ? [['messages', 'Сообщения'], ['work', 'Работы']] : [['messages', 'Сообщения']];
-        for (const [value, name] of choices)
-            tabs.append(btn(name, () => openInspector(kind, id, value, deep), value === tab ? 'current' : ''));
-        if (kind === 'agent') { const actor = ui.state.agents.find(actor => actor.id === id); if (actor?.activity_historical) body.append(el('p', 'small-note activity-provenance', 'История · ' + (actor.activity_reported_by || actor.activity_source || '') + ' · ' + actor.activity_at)); }
-        if (id) body.append(btn(kind === 'agent' ? 'Копировать native/block ID' : 'Копировать ID блока/связи', () => copyId(id), 'copy-id'));
+        inspectorChrome(kind,id,tab,deep);
+        if (kind === 'agent') { const actor = ui.state.agents.find(actor => actor.id === id); if (actor?.activity_historical) body.append(el('p', 'small-note activity-provenance', t('historyPrefix') + (actor.activity_reported_by || actor.activity_source || '') + ' · ' + actor.activity_at)); }
+        if (id) body.append(btn(kind === 'agent' ? t('copyNativeId') : t('copyId'), () => copyId(id), 'copy-id'));
         if (kind === 'edge') {
             const edge = ui.state.plan.edges[id];
-            if (edge) { const spec = edge.x_observability; blockSection(body,'Условие связи',spec ? `${spec.relation === 'order' ? 'Порядок · не блокирует' : 'Требуется результат'} · ${spec.phase === 'finish' ? 'для завершения' : 'для начала'} · ${spec.target_scope === 'subtree' ? 'блок и подблоки' : 'только указанный блок'}\n${spec.why}` : 'Старая связь без классификации'); body.append(el('p', 'small-note', 'Исходные концы связи, включая другие уровни карты:')); for (const endpoint of [edge.from, edge.to]) body.append(btn(endpoint + ' · ' + nodeName(endpoint), () => focusNode(endpoint), 'related')); }
+            if (edge) { const spec = edge.x_observability; blockSection(body,t('relationCondition'),spec ? `${spec.relation === 'order' ? t('orderNoBlock') : t('resultRequired')} · ${spec.phase === 'finish' ? t('forFinish') : t('forStart')} · ${spec.target_scope === 'subtree' ? t('subtree') : t('onlyTarget')}\n${spec.why}` : t('legacyRelation')); body.append(el('p', 'small-note', t('originalEndpoints'))); for (const endpoint of [edge.from, edge.to]) body.append(btn(endpoint + ' · ' + nodeName(endpoint), () => focusNode(endpoint), 'related')); }
         }
         if (tab === 'messages') {
             if (kind === 'node' && childNodes(id).size > 1)
-                body.append(btn(deep ? 'С подблоками ✓' : 'Только этот блок', () => openInspector(kind, id, tab, !deep), 'more scope-toggle'));
-            if (kind === 'node' && deep) body.append(el('p', 'small-note', 'Общий поток блока и подблоков; исходные сообщения сохранены один раз.'));
-            const more = btn('Более ранние сообщения', null, 'more older-messages'); more.hidden = true;
+                body.append(btn(deep ? t('withChildren') : t('onlyBlock'), () => openInspector(kind, id, tab, !deep), 'more scope-toggle'));
+            if (kind === 'node' && deep) body.append(el('p', 'small-note stream-description', t('combinedStream')));
+            const more = btn(t('olderMessages'), null, 'more older-messages'); more.hidden = true;
             const list = el('div', 'inspector-messages'), latest = btn('', null, 'new-messages inspector-latest'); latest.hidden = true;
             body.append(more, list, latest);
             state.reader = readerFor('inspector', kind, id, deep);
@@ -639,14 +946,14 @@
         }
         if (kind === 'agent' && tab === 'work') {
             const scopes = ui.state.scopes.filter(s => s.agent_id === id);
-            body.append(el('p', 'small-note', 'Фактическая область работы, не очередь обязательных заданий.'));
+            body.append(el('p', 'small-note', t('workScope')));
             for (const s of scopes)
                 for (const n of s.node_ids)
                     body.append(btn(n + ' · ' + nodeName(n), () => focusNode(n), 'related'));
             const a = ui.state.agents.find(a => a.id === id);
-            blockSection(body, 'Родитель', a?.parent_id ? agentName(a.parent_id) : 'Не указан');
-            blockSection(body, 'Идентификатор агента', id);
-            blockSection(body, 'Контейнер сессии', a?.session_id || 'Неизвестен');
+            blockSection(body, t('parent'), a?.parent_id ? agentName(a.parent_id) : t('notSpecified'));
+            blockSection(body, t('agentId'), id);
+            blockSection(body, t('session'), a?.session_id || t('unknown'));
             return;
         }
         const node = nodesWithGhosts()[id];
@@ -654,17 +961,17 @@
             return;
         const status = nodeStatus(id);
         if (['task', 'assignment', 'executor'].includes(tab)) {
-            const subtabs = el('nav', 'task-subtabs'); subtabs.append(btn('Для владельца', () => openInspector(kind,id,'task'), tab !== 'executor' ? 'current' : ''), btn('Для исполнителя', () => openInspector(kind,id,'executor'), tab === 'executor' ? 'current' : '')); body.append(subtabs);
+            const subtabs = el('nav', 'task-subtabs'); subtabs.append(btn(t('forOwner'), () => openInspector(kind,id,'task'), tab !== 'executor' ? 'current' : ''), btn(t('forExecutor'), () => openInspector(kind,id,'executor'), tab === 'executor' ? 'current' : '')); body.append(subtabs);
             if (tab !== 'executor') {
                 const intent = modules.nodeView(ui.state,id).intent || modules.intentFor(node);
-                if (!intent) body.append(el('p','missing-intent','Описание для владельца пока не заполнено. Техническое задание доступно во вкладке «Для исполнителя».'));
-                else for (const [label,field] of [['Суть','summary'],['Зачем','context'],['Что изменится','change'],['Границы','scope']]) if (intent[field]) blockSection(body,label,typeof intent[field] === 'string' ? intent[field] : JSON.stringify(intent[field]));
+                if (!intent) body.append(el('p','missing-intent',t('missingIntent')));
+                else for (const [label,field] of [[t('summary'),'summary'],[t('why'),'context'],[t('change'),'change'],[t('scope'),'scope']]) if (intent[field]) blockSection(body,label,typeof intent[field] === 'string' ? intent[field] : JSON.stringify(intent[field]));
                 modules.appendDependencies(body, modules.nodeView(ui.state,id));
                 return;
             }
-            blockSection(body, 'Задание исполнителю', node.assignment);
+            blockSection(body, t('executorTask'), node.assignment);
             for (const r of node.source_refs || []) {
-                body.append(el('h4', '', r.label || 'Источник'));
+                body.append(el('h4', '', r.label || t('source')));
                 if (/^https?:\/\//.test(r.uri || '')) {
                     const a = el('a', 'prose', r.uri);
                     a.href = r.uri;
@@ -677,7 +984,7 @@
             }
             const edgeEntries = Object.entries(ui.state.plan.edges).filter(([, e]) => e.to === id || e.from === id);
             if (edgeEntries.length)
-                body.append(el('h4', '', 'Связи'));
+                body.append(el('h4', '', t('relations')));
             for (const [, e] of edgeEntries) {
                 const other = e.to === id ? e.from : e.to;
                 body.append(btn((e.to === id ? '← ' : '→ ') + other + ' · ' + nodeName(other), () => focusNode(other), 'related'));
@@ -691,55 +998,55 @@
             } catch(e) { if (e.name !== 'AbortError' && ui.inspector === state) body.append(el('p','source-warning',e.message)); }
         }
         else if (tab === 'acceptance') {
-            body.append(el('h4', '', 'Ожидалось'));
+            body.append(el('h4', '', t('expected')));
             for (const [aid, a] of Object.entries(node.acceptance || {})) {
                 const row = el('div', 'criterion');
                 row.append(el('b', '', aid), el('span', '', a.text || a.label || ''));
                 body.append(row);
             }
-            body.append(el('h4', '', 'Получено'), el('div', 'result-block', status.result?.summary || 'Результат ещё не описан'));
-            if (status.result?.evidence_ref) blockSection(body,'Основание результата',status.result.evidence_ref);
-            if (status.result?.evidence_revision) blockSection(body,'Сохранённая ревизия доказательства',status.result.evidence_revision);
-            if (status.result?.commit) blockSection(body,'Коммит',status.result.commit);
-            body.append(el('h4', '', 'Расхождения с ожиданиями'), el('div', 'result-block', status.result?.difference || 'Не указаны. Это не доказательство отсутствия расхождений.'));
+            body.append(el('h4', '', t('actual')), el('div', 'result-block', status.result?.summary || t('noResult')));
+            if (status.result?.evidence_ref) blockSection(body,t('resultEvidence'),status.result.evidence_ref);
+            if (status.result?.evidence_revision) blockSection(body,t('evidenceRevision'),status.result.evidence_revision);
+            if (status.result?.commit) blockSection(body,t('commit'),status.result.commit);
+            body.append(el('h4', '', t('differences')), el('div', 'result-block', status.result?.difference || t('noDifferences')));
             if (status.result?.plan_version)
-                body.append(el('div', 'result-tag', 'Результат относительно ' + status.result.plan_version));
+                body.append(el('div', 'result-tag', t('resultVersionPrefix') + status.result.plan_version));
         }
         else if (tab === 'tests') {
-            for (const [tid, t] of Object.entries(node.tests || {})) {
+            for (const [tid, definition] of Object.entries(node.tests || {})) {
                 const check = ui.state.checks.find(c => c.node_id === id && c.test_id === tid);
                 const row = el('div', 'checkline'), text = el('div');
-                text.append(el('div', '', t.label || tid), el('small', '', `${tid} · ${check?.outcome || 'не запускался'} · ${check?.freshness === 'current' ? 'актуальность заявлена исполнителем' : 'актуальность не подтверждена'}`));
+                text.append(el('div', '', definition.label || tid), el('small', '', `${tid} · ${outcomeLabel(check?.outcome)} · ${check?.freshness === 'current' ? t('freshnessDeclared') : t('freshnessUnknown')}`));
                 row.append(lamp(check), text);
                 body.append(row);
-                if (check) blockSection(body,'Запуск и регистрация',`Запуск: ${check.run_id || 'не указан'}\nЗарегистрировано: ${check.at || 'неизвестно'}\nReceipt: ${check.seq ?? 'неизвестен'}\nВерсия карты при регистрации: ${check.plan_version || 'неизвестна'}\nТекущая версия карты: ${ui.state.current_version || ui.state.version}`);
-                if (check?.basis) blockSection(body,'Основание проверки',check.basis);
-                if (check?.evidence_refs?.length) blockSection(body,'Доказательства',check.evidence_refs.join('\n'));
-                if (check?.registered_from_existing_evidence) body.append(el('p','small-note','Результат внесён из сохранённых доказательств; это не новый запуск теста.'));
+                if (check) blockSection(body,t('runRegistration'),t('checkDetails',{run:check.run_id || t('notSpecified'),at:check.at || t('unknown'),seq:check.seq ?? t('unknown'),version:check.plan_version || t('unknown'),current:ui.state.current_version || ui.state.version}));
+                if (check?.basis) blockSection(body,t('checkBasis'),check.basis);
+                if (check?.evidence_refs?.length) blockSection(body,t('evidence'),check.evidence_refs.join('\n'));
+                if (check?.registered_from_existing_evidence) body.append(el('p','small-note',t('lateCheck')));
             }
-            body.append(el('p', 'small-note', 'Дата регистрации не заменяет время прежнего выполнения. «Актуальность» — ручная декларация исполнителя, а не автоматическая проверка нынешних исходников. Успешные тесты и статус задачи — отдельные сведения.'));
+            body.append(el('p', 'small-note', t('freshnessHelp')));
         }
         else if (tab === 'status') {
-            blockSection(body, 'Сообщённый статус', status.status || 'Не указан');
-            const activity = modules.activityText(modules.nodeView(ui.state,id)); if (activity) blockSection(body, 'Потомки', activity);
+            blockSection(body, t('reportedStatus'), modules.statusLabel(status.status) || t('notSpecified'));
+            const activity = modules.activityText(modules.nodeView(ui.state,id)); if (activity) blockSection(body, t('descendants'), activity);
             modules.appendDependencies(body, modules.nodeView(ui.state,id));
-            blockSection(body, 'Пояснение', status.explanation || 'Не указано');
-            blockSection(body, 'Последнее сообщение о статусе', status.at || 'Нет');
+            blockSection(body, t('explanation'), status.explanation || t('notProvided'));
+            blockSection(body, t('lastStatus'), status.at || t('none'));
             for (const a of workActors(id))
                 body.append(btn(agentName(a.id) + ' · ' + a.activity, () => openInspector('agent', a.id, 'messages'), 'related'));
         }
         if (Object.values(ui.state.plan.nodes).some(n => n.parent === id))
-            body.append(btn('Открыть внутренний граф ↘', () => enter(id), 'more'));
-        body.append(btn('Копировать адрес блока', async () => { const link = location.origin + location.pathname + '#project=' + encodeURIComponent(ui.project) + '&scope=' + encodeURIComponent(node.parent || '') + '&node=' + encodeURIComponent(id); try {
+            body.append(btn(t('openGraph'), () => enter(id), 'more'));
+        body.append(btn(t('copyBlockLink'), async () => { const link = location.origin + location.pathname + '#project=' + encodeURIComponent(ui.project) + '&scope=' + encodeURIComponent(node.parent || '') + '&node=' + encodeURIComponent(id); try {
             await navigator.clipboard.writeText(link);
-            notice('Адрес скопирован');
+            notice(t('linkCopied'));
         }
         catch {
-            notice('Блок: ' + id);
+            notice(t('blockPrefix') + id);
         } }, 'more'));
     }
     $('#diff').onclick = async () => { const requested = context(); const index = ui.versions.findIndex(v => v.version === ui.state.version), previous = ui.versions[index + 1]; if (!previous)
-        return notice('Предыдущей версии нет'); openInspector('diff', null, 'diff'); $('#inspector-title').textContent = 'Изменения плана'; const body = $('#inspector-body'); body.replaceChildren(); try {
+        return notice(t('noPreviousVersion')); openInspector('diff', null, 'diff'); $('#inspector-title').textContent = t('planChanges'); const body = $('#inspector-body'); body.replaceChildren(); try {
         let changes;
         if (demo) {
             const before = demo.states[previous.version].plan, after = ui.state.plan;
@@ -758,7 +1065,7 @@
             body.append(row);
         }
         if (!changes.length)
-            body.append(el('p', '', 'Структура не менялась'));
+            body.append(el('p', 'diff-empty', t('structureUnchanged')));
     }
     catch (e) {
         if (e.name !== 'AbortError') notice(e.message);
@@ -770,7 +1077,7 @@
     function disposeProjectViews() { planMount?.dispose(); planMount = null; algorithmsMount?.dispose(); algorithmsMount = null; }
     async function openAlgorithm(id,previousPage = null) {
         const requested = context(); const body = $('#inspector-body');
-        closeInspector(); $('#inspector').hidden = false; $('#inspector-id').textContent = id; $('#inspector-title').textContent = 'Алгоритм'; $('#tabs').replaceChildren(); body.replaceChildren();
+        closeInspector(); $('#inspector').hidden = false; $('#inspector-id').textContent = id; $('#inspector-title').textContent = t('algorithm'); $('#tabs').replaceChildren(); body.replaceChildren();
         const selection = {kind:'algorithm',id,signature:inspectorSignature('algorithm',id),pageState:previousPage ? {boundaries:[...previousPage.boundaries],index:previousPage.index} : {boundaries:[null],index:0}}; ui.inspector = selection;
         async function load(index,boundary) {
         if (selection.loading) return;
@@ -811,16 +1118,16 @@
         $('.agents-bar').hidden = view === 'projects'; $('.orchestrators').hidden = view === 'projects'; $('.toolbar').hidden = view === 'projects';
         for (const button of $('#project-views').children) button.classList.toggle('current',button.dataset.view === view);
         for (const id of ['crumbs','up','fit','minus','zoom','plus','full']) $('#'+id).hidden = view !== 'map';
-        $('.project-title').textContent = view === 'projects' ? 'Проекты' : ui.summaries.find(p=>p.project_id===ui.project)?.title || 'Waypoint';
-        if (view === 'projects') { closeInspector(); catalogueDispose?.(); catalogueDispose = modules.mountProjectCatalogue($('#projects-view'),ui.summaries,{onOpenProject:openProject}); $('#summary').textContent = ui.summaries.length + ' проектов'; }
+        $('.project-title').textContent = view === 'projects' ? t('projects') : ui.summaries.find(p=>p.project_id===ui.project)?.title || 'Waypoint';
+        if (view === 'projects') { closeInspector(); catalogueDispose?.(); catalogueDispose = modules.mountProjectCatalogue($('#projects-view'),ui.summaries,{onOpenProject:openProject}); $('#summary').textContent = t('projectCount',{count:ui.summaries.length}); }
         else { savePreferences('navigation',{view}); renderMap(); renderPlan(); if (view === 'algorithms') renderAlgorithms(); }
     }
     async function loadCatalogue() {
         const demoPlan = demo?.states?.[demo.current]?.plan;
-        const result = demo ? demo.projects || [{project_id:demoPlan.project_id,title:demoPlan.title,purpose:demoPlan.x_observability?.purpose || demoPlan.description || 'Вымышленный проект для знакомства с Waypoint',source_health:'fictional'}] : await api('/api/projects?summary=true');
+        const result = demo ? demo.projects || [{project_id:demoPlan.project_id,title:demoPlan.title,purpose:demoPlan.x_observability?.purpose || demoPlan.description || t('fictionalPurpose'),source_health:'fictional'}] : await api('/api/projects?summary=true');
         ui.summaries = Array.isArray(result) ? result : result.projects || [];
-        catalogueRefreshAt = Date.now();
-        $('#project').replaceChildren(el('option','','Выбрать проект…'));
+        catalogueRefreshAt = Date.now();online=true;
+        $('#project').replaceChildren(el('option','',t('selectProject')));
         $('#project').firstChild.value = '';
         for (const project of ui.summaries) { const option = el('option','',project.title); option.value = project.project_id; $('#project').append(option); }
     }
@@ -850,11 +1157,11 @@
             const previousState = ui.state; ui.versions = versions; ui.state = state;
             invalidateReaders(events && (state.cursor || 0) <= ui.cursor ? events : null, previousState);
             ui.cursor = Math.max(ui.cursor,state.cursor || 0);
-            if (ui.scope && !state.plan.nodes[ui.scope]) { ui.scope = null; notice('Этот блок отсутствует в выбранной версии. История сохранена.'); }
+            if (ui.scope && !state.plan.nodes[ui.scope]) { ui.scope = null; notice(t('blockAbsent')); }
             renderToolbar(); renderActors(); renderMap(); renderPlan(); if(ui.view === 'algorithms') renderAlgorithms();
             online = true; $('#foot-status').classList.remove('source-warning');
-            $('#foot-status').textContent = demo || ui.project === 'demo' ? demo?.notice || 'Демо · вымышленные события' : 'Локальный сервис · тексты не отправляются в облако'; refreshInspectorDetails();
-        } catch(e) { if (e.name !== 'AbortError' && matches(requested)) { online = false; $('#foot-status').textContent = 'Нет связи · показаны последние полученные данные'; $('#foot-status').classList.add('source-warning'); notice(e.message); } }
+            $('#foot-status').textContent = demo || ui.project === 'demo' ? (demo?.notice_key ? modules.t(demo.notice_key) : demo?.notice || t('demoNotice')) : t('localNotice'); refreshInspectorDetails();
+        } catch(e) { if (e.name !== 'AbortError' && matches(requested)) { online = false; $('#foot-status').textContent = t('offlineNotice'); $('#foot-status').classList.add('source-warning'); notice(e.message); } }
         finally { if (sequence === refreshSequence && matches(requested)) ui.busy = false; }
     }
     async function watch() {
@@ -862,7 +1169,7 @@
             if (ui.view === 'projects' || !ui.state) {
                 if (ui.view === 'projects' && Date.now() - catalogueRefreshAt >= 5000) {
                     try { await loadCatalogue(); if (ui.view === 'projects') setView('projects'); }
-                    catch (e) { if (e.name !== 'AbortError') notice('Сведения об источниках не обновлены: ' + e.message); catalogueRefreshAt = Date.now(); }
+                    catch (e) { if (e.name !== 'AbortError') notice(t('sourceRefreshError',{message:e.message})); catalogueRefreshAt = Date.now(); }
                 }
                 await new Promise(resolve=>setTimeout(resolve,500)); continue;
             }
@@ -871,15 +1178,15 @@
                 if (!matches(requested)) continue;
                 if (reply.events.length) { ui.cursor = reply.cursor; await refresh(reply.events.some(event=>event.kind==='plan.changed'),reply.events); }
                 else if (!online) await refresh(true);
-            } catch(e) { if (e.name==='AbortError' || !matches(requested)) continue; online=false; $('#foot-status').textContent='Связь прервана · исполнители не остановлены'; $('#foot-status').classList.add('source-warning'); await new Promise(resolve=>setTimeout(resolve,1800)); }
+            } catch(e) { if (e.name==='AbortError' || !matches(requested)) continue; online=false; $('#foot-status').textContent=t('connectionLost'); $('#foot-status').classList.add('source-warning'); await new Promise(resolve=>setTimeout(resolve,1800)); }
         }
     }
     async function boot() {
-        try { await loadCatalogue(); $('#connection').textContent = demo ? demo.label || 'Демо' : 'Локально'; $('#connection').classList.toggle('demo',!!demo);
+        try { await loadCatalogue(); $('#connection').textContent = demo ? (demo.label_key ? modules.t(demo.label_key) : demo.label || t('demo')) : t('local'); $('#connection').classList.toggle('demo',!!demo);
             const hash = new URLSearchParams(location.hash.slice(1)); const project = hash.get('project');
             if(project && ui.summaries.some(summary=>summary.project_id===project)) { await openProject(project,{fromHash:true}); if(hash.get('scope')) enter(hash.get('scope'),false); if(hash.get('node')) {setView('map');focusNode(hash.get('node'));openInspector('node',hash.get('node'),'task');} }
             else setView('projects'); watch();
-        } catch(e) { $('#projects-view').hidden=false; $('#projects-view').textContent='Откройте локальный адрес из команды wp url. Ключ доступа хранится только в этой вкладке.'; $('#foot-status').textContent=e.message; }
+        } catch(e) { $('#projects-view').hidden=false; $('#projects-view').textContent=t('openLocal'); $('#foot-status').textContent=e.message; }
     }
     window.addEventListener('popstate',async()=>{ const hash=new URLSearchParams(location.hash.slice(1)); const project=hash.get('project'); if(!project) {await showProjects(false);return;} if(project!==ui.project||!ui.state) await openProject(project,{fromHash:true}); if(!ui.state)return;setView('map');enter(hash.get('scope')||null,false);if(hash.get('node'))focusNode(hash.get('node')); });
     window.addEventListener('resize', () => renderMap());
@@ -889,6 +1196,56 @@
         e.preventDefault();
         enter(ui.state.plan.nodes[ui.scope]?.parent || null);
     } });
+    function captureLanguageReaders() {
+        for (const reader of readers.values()) if (reader.scroll?.isConnected) {
+            reader.languageSnapshot={anchors:readerAnchors(reader),selection:readerSelection(reader) || reader.languageSelection,top:reader.scroll.scrollTop,follow:reader.follow};
+        }
+    }
+    for (const event of ['pointerdown','keydown']) $('#language').addEventListener(event,()=>{
+        for (const reader of readers.values()) if (reader.scroll?.isConnected) reader.languageSelection=readerSelection(reader);
+    },true);
+    window.addEventListener('waypoint:beforelanguagechange',captureLanguageReaders);
+    window.addEventListener('waypoint:languagechange',()=>{
+        const inspector=ui.inspector;
+        $('#project').options[0] && ($('#project').options[0].textContent=t('selectProject'));
+        $('.project-title').textContent=ui.view==='projects'?t('projects'):ui.summaries.find(p=>p.project_id===ui.project)?.title || 'Waypoint';
+        $('#connection').textContent=demo?(demo.label_key?modules.t(demo.label_key):demo.label || t('demo')):t('local');
+        $('#foot-status').textContent=demo?(demo.notice_key?modules.t(demo.notice_key):demo.notice || t('demoNotice')):t(online?'localNotice':'offlineNotice');
+        if (!$('#notice').hidden) $('#notice').hidden=true;
+        if (ui.view==='projects') $('#summary').textContent=t('projectCount',{count:ui.summaries.length});
+        if (!ui.state) return;
+        for (const node of document.querySelectorAll('.agent-card,.orch,.node,#edges,#cross-scope')) node._signature=null;
+        renderToolbar();renderActors();renderMap();
+        if (ui.view!=='projects') $('#summary').textContent=t('mapCounts',{blocks:Object.values(nodesWithGhosts()).filter(n=>(n.parent || null)===ui.scope).length,edges:Object.keys(ui.state.plan.edges).length});
+        if (inspector) {
+            inspectorChrome(inspector.kind,inspector.id,inspector.tab,inspector.deep);
+            const body=$('#inspector-body');
+            if (inspector.tab==='messages') {
+                const copy=body.querySelector('.copy-id');if(copy)copy.textContent=t(inspector.kind==='agent'?'copyNativeId':'copyId');
+                const toggle=body.querySelector('.scope-toggle');if(toggle)toggle.textContent=t(inspector.deep?'withChildren':'onlyBlock');
+                const description=body.querySelector('.stream-description');if(description)description.textContent=t('combinedStream');
+                const older=body.querySelector('.older-messages');if(older)older.textContent=t('olderMessages');
+                const summary=body.querySelector('.reader-filter summary');if(summary)summary.textContent=t('filter');
+                const defaults=body.querySelector('.reader-save-default');if(defaults)defaults.textContent=t('saveDefault');
+            } else if (inspector.kind==='diff') {
+                const empty=body.querySelector('.diff-empty');if(empty)empty.textContent=t('structureUnchanged');
+            } else if (inspector.kind!=='algorithm' && inspector.tab!=='algorithms') {
+                const top=body.scrollTop,disclosures=[...body.querySelectorAll('details[data-disclosure]')].map(node=>[node.dataset.disclosure,node.open]);
+                openInspector(inspector.kind,inspector.id,inspector.tab,inspector.deep).then(()=>{
+                    if(ui.inspector?.id!==inspector.id || ui.inspector?.tab!==inspector.tab)return;
+                    for(const [key,open] of disclosures){const node=[...body.querySelectorAll('details[data-disclosure]')].find(node=>node.dataset.disclosure===key);if(node)node.open=open;}
+                    body.scrollTop=top;
+                });
+            } else {
+                const copy=body.querySelector('.copy-id');if(copy)copy.textContent=t('copyId');
+            }
+        }
+        for(const reader of readers.values()) if(reader.scroll?.isConnected){
+            const saved=reader.languageSnapshot;
+            if(saved){reader.restoreAnchors=saved.anchors;reader.restoreSelection=saved.selection;reader.top=saved.top;reader.follow=saved.follow;}
+            paintReader(reader);reader.languageSnapshot=null;reader.languageSelection=null;
+        }
+    });
     // Developer diagnostic is read-only and does not expose credentials.
     window.waypointView = () => ({ view:ui.view, basis:ui.state?.basis, generation:navigationGeneration, scope: ui.scope, camera: { ...ui.camera }, visibleNodes: document.querySelectorAll('.node').length, version: ui.state?.version, project: ui.project });
     boot();

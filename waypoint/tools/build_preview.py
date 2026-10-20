@@ -19,7 +19,7 @@ payload=json.dumps(data,ensure_ascii=False).replace('<','\\u003c')
 # Inline the explicitly declared ordered scripts, never discover arbitrary paths.
 import re
 html=html.replace('</head>', '<script>window.WAYPOINT_DEMO='+payload+';</script></head>')
-for name in ('themes','projects','plan','filters','algorithm_panel','app'):
+for name in ('i18n','themes','projects','plan','filters','algorithm_panel','app'):
     script=(root/'waypoint/web'/f'{name}.js').read_text().replace('</script', '<\\/script')
     html=html.replace(f'<script src="/static/{name}.js" defer></script>', '<script>'+script+'</script>')
 if re.search(r'<script[^>]+src=',html):
