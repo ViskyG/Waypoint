@@ -1,0 +1,72 @@
+{
+  "schema": "waypoint.immutable-history-manifest/1",
+  "created_on": "2026-10-20",
+  "scope": "Historical recovery and bounded N07 pin review; not current full acceptance",
+  "files": [
+    {
+      "path": "next-stage/evidence/remaining-20261020/history/HISTORY_REPAIR_RU.md",
+      "sha256": "63908340216f12f99ce98e46b56e8c88a8ba41f17bba09cc12c7a7386b24d7ae",
+      "size_bytes": 8733
+    },
+    {
+      "path": "next-stage/evidence/remaining-20261020/history/N07_PIN_REVIEW.json",
+      "sha256": "d6b650ff0ee79ad5ab281aa62818537aac70f71b23946c131488013bb5644367",
+      "size_bytes": 5843
+    },
+    {
+      "path": "next-stage/evidence/remaining-20261020/history/RECOVERY_CHECK.json",
+      "sha256": "c07931857662876e188807700564f5d1b8071df099afa6b0df4d64a3ee1cbf7f",
+      "size_bytes": 1722
+    },
+    {
+      "path": "next-stage/evidence/remaining-20261020/history/SCOPE_RECEIPT.json",
+      "sha256": "787ba9b3022f04a6f3c0ff1c6b8698a2a91918f0436c5cdf7840c78d9b4f79d4",
+      "size_bytes": 950
+    },
+    {
+      "path": "next-stage/evidence/remaining-20261020/history/n07-validator-20261017-7beca9308216.json",
+      "sha256": "7beca9308216fd3df703ca606230ea8cc065a82b37c46057958951755191aff1",
+      "size_bytes": 17877
+    },
+    {
+      "path": "next-stage/evidence/remaining-20261020/history/original-design-20261016-f1305f39fc1a/ORIGINAL_MANIFEST.json",
+      "sha256": "599727e7a6f25b0b2baee815e28972420da89bec95bd5a2096d372af87dfa2f0",
+      "size_bytes": 12628
+    },
+    {
+      "path": "next-stage/evidence/remaining-20261020/history/original-design-20261016-f1305f39fc1a/RECOVERY.json",
+      "sha256": "9339b694e00bcd1c4ac3e8308f3238530955a9607a4ada7635c66c47f1f20737",
+      "size_bytes": 2370
+    },
+    {
+      "path": "next-stage/evidence/remaining-20261020/history/original-design-20261016-f1305f39fc1a/SOURCE_PACKAGE_MANIFEST.json",
+      "sha256": "e54a243dc299454147ffcfc1a6b2502aff630619c75bc024c6325deca6f4354d",
+      "size_bytes": 18937
+    },
+    {
+      "path": "next-stage/evidence/remaining-20261020/history/original-design-20261016-f1305f39fc1a/browser-results.json",
+      "sha256": "f1305f39fc1a6d2d57d90030b6fd76ddef003f0aeae0cbd4f82e31f0ec85efb0",
+      "size_bytes": 1223
+    },
+    {
+      "path": "next-stage/evidence/remaining-20261020/history/original-design-20261016-f1305f39fc1a/ui-nested.png",
+      "sha256": "e84f75a7d35e8e36a489547b7058823ba4645cc53e3dbfda758d8c26036eb19b",
+      "size_bytes": 112735
+    },
+    {
+      "path": "next-stage/evidence/remaining-20261020/history/original-design-20261016-f1305f39fc1a/ui-obsidian.png",
+      "sha256": "36fd486866ac08e3abd75b7ccb8455c859f51b1c54ae9ccd177a860d75cbdb02",
+      "size_bytes": 239033
+    },
+    {
+      "path": "next-stage/evidence/remaining-20261020/history/original-design-20261016-f1305f39fc1a/ui-terracotta.png",
+      "sha256": "4c4b0313f06574afad512245e678640a4dc616027a995d831041eebe398489dc",
+      "size_bytes": 238848
+    },
+    {
+      "path": "next-stage/tools/reconcile_historical_evidence.py",
+      "sha256": "689397a418d0274c484b5b2fc690fdb388d22e630bd09736adac25d008182dd3",
+      "size_bytes": 6550
+    }
+  ]
+}

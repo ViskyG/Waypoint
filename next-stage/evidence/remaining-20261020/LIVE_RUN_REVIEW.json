@@ -1,0 +1,9 @@
+{
+  "first_attempt": "LIVE-attempt1.json",
+  "first_result": "No candidate; no browser checks accepted.",
+  "diagnosis": "Verifier incorrectly required primary source codex-ipc. The product merges IPC and rollout evidence for one native identity; primary source may remain rollout. observed_sources and independent direct IPC exact-text comparison are the required evidence.",
+  "repair": "Verifier now checks observed_sources. A bounded diagnostic found the new item with both sources and direct IPC equality.",
+  "accepted_result": "LIVE.json",
+  "product_code_changed": false,
+  "synthetic_input_added": false
+}

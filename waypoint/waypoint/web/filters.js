@@ -3,6 +3,7 @@
     'use strict';
     const api = window.WaypointUI = window.WaypointUI || {};
     const categories = {message:'Сообщения',explanation:'Пояснения',plan:'План',command:'Команды',tool:'Инструменты',change:'Изменения',test:'Проверки',agent:'Агенты',other:'Прочее'};
+    api.readerQuery = value => ({categories:Array.isArray(value?.categories) ? Object.keys(categories).filter(key => value.categories.includes(key)) : null,only_errors:value?.only_errors === true});
     api.bindTypeFilter = function (container, initialQuery = {}, {onChange} = {}) {
         let query = {...initialQuery};
         function notify() { onChange?.({...query, categories: query.categories == null ? null : [...query.categories]}); }

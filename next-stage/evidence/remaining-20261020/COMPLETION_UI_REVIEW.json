@@ -1,0 +1,8 @@
+{
+  "first_attempt": "COMPLETION_UI-attempt1.json",
+  "diagnosis": "Opening a Plan row intentionally navigates to Map/inspector. Verifier closed inspector but did not return to Plan before waiting for new Plan status.",
+  "product_defect": false,
+  "accepted_before_timeout": "Per-ID counts, green done for three repairs, actual N07 provenance were checked before submitting prepared N08 done; those exact IDs were accepted at22796/22797.",
+  "repair": "Verifier explicitly returns to Plan; for recovery verifies criterion seq precedes accepted done seq, and resubmits only identical event IDs. Server returned created=false, no duplicate history.",
+  "accepted_receipt": "COMPLETION_UI.json"
+}

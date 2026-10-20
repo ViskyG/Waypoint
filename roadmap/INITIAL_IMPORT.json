@@ -1,7 +1,7 @@
 {
   "warning": "FOR A NEW EMPTY STORE ONLY. Do not apply to an installed project; export its current head first.",
   "initialization_only": true,
-  "request_id": "roadmap-empty-store-87287d0180f84c02a643d1ef",
+  "request_id": "roadmap-empty-store-ecd6f0684bca3c19a45941c6",
   "base_version": null,
   "merge": false,
   "plan": {
@@ -4345,7 +4345,7 @@
           }
         },
         "ALG-PAGE": {
-          "definition_revision": 3,
+          "definition_revision": 4,
           "edge_cases": [
             "Одно сообщение в нескольких потомках.",
             "Старое редкое совпадение."
@@ -4356,10 +4356,26 @@
               {
                 "path": "waypoint/waypoint/store.py",
                 "symbol": "Store.items"
+              },
+              {
+                "path": "waypoint/waypoint/store.py",
+                "symbol": "Store.algorithm_page"
+              },
+              {
+                "path": "waypoint/waypoint/store.py",
+                "symbol": "Store.algorithm_summary"
+              },
+              {
+                "path": "waypoint/waypoint/read_models.py",
+                "symbol": "algorithm"
+              },
+              {
+                "path": "waypoint/waypoint/read_models.py",
+                "symbol": "algorithms"
               }
             ],
             "repository": "https://github.com/ViskyG/Waypoint",
-            "revision": "worktree-sha256:8be85906ce0eecb55d4ee833388412933bfce7aa4e2f9825421e7db5b8b9d92c"
+            "revision": "worktree-sha256:3db550e266675d098de92474772e3d753f9c7bcb838cc608ed406c713d8fba98"
           },
           "inputs": [
             "target refs",
@@ -4367,19 +4383,23 @@
             "cursor"
           ],
           "invariants": [
-            "Фильтр действует до limit."
+            "Фильтр действует до limit.",
+            "Сводные признаки используют всю текущую историю, а не последние 100 наблюдений.",
+            "Все страницы достижимы; DOM содержит одну страницу свидетельств."
           ],
           "outputs": [
             "bounded ordered unique page"
           ],
-          "purpose": "Находить нужные сообщения во всей истории без полного чтения текстов проекта.",
+          "purpose": "Находить сообщения и свидетельства алгоритма во всей истории, читая тела только выбранной страницы.",
           "resource_risks": [
             "Avoid full-history scans and duplicate model/report work where applicable."
           ],
           "steps": [
             "Отобрать связи/тип до чтения тел.",
             "Убрать дубли общей идентичности.",
-            "Выбрать страницу устойчивого порядка."
+            "Выбрать страницу устойчивого порядка.",
+            "Для каталога агрегировать индексированные метаданные без тел наблюдений; для детали выбрать IDs до тел.",
+            "Разрешить ссылки сравнений за границей страницы только внутри того же алгоритма."
           ],
           "testability": {
             "missing_cases": [
@@ -4394,10 +4414,16 @@
               {
                 "path": "waypoint/tests/test_core.py",
                 "symbol": "test_item_pagination_is_stable"
+              },
+              {
+                "path": "waypoint/tests/test_algorithm_paging.py"
+              },
+              {
+                "path": "waypoint/tests/remaining_browser_check.py"
               }
             ]
           },
-          "title": "Выборка сообщений блока",
+          "title": "Индексированная выборка сообщений и свидетельств",
           "x_authoring_reconciliation": {
             "from_revision": 1,
             "previous_definition_sha256": "2a3d3089e2e1aa7ed8c9a7452b7cdf9f0e16213abaa2877dafb3016cea1978ce",
@@ -4407,7 +4433,7 @@
           }
         },
         "ALG-READ": {
-          "definition_revision": 5,
+          "definition_revision": 6,
           "edge_cases": [
             "Смена фильтра.",
             "Изменение категории уже видимого сообщения."
@@ -4422,10 +4448,22 @@
               {
                 "path": "waypoint/waypoint/web/app.js",
                 "symbol": "paintReader"
+              },
+              {
+                "path": "waypoint/waypoint/web/app.js",
+                "symbol": "changeReaderQuery"
+              },
+              {
+                "path": "waypoint/waypoint/web/app.js",
+                "symbol": "readerSelection"
+              },
+              {
+                "path": "waypoint/waypoint/web/filters.js",
+                "symbol": "readerQuery"
               }
             ],
             "repository": "https://github.com/ViskyG/Waypoint",
-            "revision": "worktree-sha256:70cda33ea82d6b495158dce0ed88ef8b5d0af8ca04140a2d6884d053ab58f442"
+            "revision": "worktree-sha256:c6023591b0c9c2d86d712896648ad8f1f361bd32de152e85bca2149490debac7"
           },
           "inputs": [
             "current reader",
@@ -4448,7 +4486,9 @@
           "steps": [
             "Сопоставить элементы по идентичности.",
             "Не заменять выделенный текст до снятия выделения.",
-            "Сохранить якорь и показать новые совпавшие сообщения."
+            "Сохранить якорь и показать новые совпавшие сообщения.",
+            "Сохранить ограниченное окно, item/pixel якорь и точные DOM-границы выделения для каждого фильтра.",
+            "Новые окна получают общий default; существующие сохраняют собственные настройки после перезагрузки."
           ],
           "testability": {
             "missing_cases": [
@@ -4458,6 +4498,9 @@
             "test_refs": [
               {
                 "path": "waypoint/tests/rich_browser_check.py"
+              },
+              {
+                "path": "waypoint/tests/remaining_browser_check.py"
               }
             ]
           },

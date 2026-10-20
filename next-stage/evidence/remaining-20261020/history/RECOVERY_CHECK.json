@@ -1,0 +1,41 @@
+{
+  "schema": "waypoint.history-recovery-check/1",
+  "status": "PASS",
+  "level": "actual-file-hash-and-immutable-write-guard",
+  "verification": {
+    "status": "VERIFIED",
+    "recovered_files": 4,
+    "original_browser_checks": 23,
+    "new_test_run_performed": false
+  },
+  "existing_destination_refused_before_archive_read": true,
+  "later_receipt_check_count": 41,
+  "preserved_later_files": [
+    {
+      "path": "waypoint/evidence/browser-results.json",
+      "current_sha256": "abee7e729df17a48328d044bbfa58f4a90f5a334408f3b519f25d9619a8167df",
+      "original_expected_sha256": "f1305f39fc1a6d2d57d90030b6fd76ddef003f0aeae0cbd4f82e31f0ec85efb0",
+      "legacy_path_modified_by_this_recovery": false
+    },
+    {
+      "path": "waypoint/evidence/ui-nested.png",
+      "current_sha256": "fa1e2adeef7a41b19d872027c154d69de7863eee994f64aad7b185951c16b16d",
+      "original_expected_sha256": "e84f75a7d35e8e36a489547b7058823ba4645cc53e3dbfda758d8c26036eb19b",
+      "legacy_path_modified_by_this_recovery": false
+    },
+    {
+      "path": "waypoint/evidence/ui-obsidian.png",
+      "current_sha256": "6e19eda92cf7b7e531cfd30222e863e44083964340ab462ac44fabe493fe51ed",
+      "original_expected_sha256": "36fd486866ac08e3abd75b7ccb8455c859f51b1c54ae9ccd177a860d75cbdb02",
+      "legacy_path_modified_by_this_recovery": false
+    },
+    {
+      "path": "waypoint/evidence/ui-terracotta.png",
+      "current_sha256": "13df0ecabddfe96af0bb00fecf26e53bf0f206cc96df78eb6e258c25ab9dcfea",
+      "original_expected_sha256": "4c4b0313f06574afad512245e678640a4dc616027a995d831041eebe398489dc",
+      "legacy_path_modified_by_this_recovery": false
+    }
+  ],
+  "new_browser_test_run": false,
+  "native_connection_test": false
+}

@@ -1,0 +1,58 @@
+{
+  "status": "PASS",
+  "captured_at": "2026-10-20T12:22:57.409258+00:00",
+  "evidence_level": "actual_Codex_IPC_installed_HTTP_Store_Chromium",
+  "fixture": false,
+  "checks": [
+    "Fresh guarded plan import retained after restart",
+    "All checkpoint event IDs and hashes preserved",
+    "All prior item identities preserved",
+    "SQLite schema3 and integrity preserved",
+    "Actual source reconnected and outbox healthy",
+    "Verifier belongs to actual root",
+    "New ordinary native message after restart matches direct IPC and API",
+    "Both actual repair workers retain nested parent identity",
+    "Actual23 historical warnings remain one basis period",
+    "Installed registry contains summaries without observation bodies",
+    "Actual root and nested workers rendered in Chromium",
+    "New ordinary native text reaches actual browser unchanged",
+    "Actual None and All filters restore real source",
+    "Updated38-node roadmap rendered",
+    "One genuine acceptance status event updates Plan",
+    "Actual grouped warning appears with raw history retained",
+    "Same status event updates Map",
+    "Browser observes imported plan version",
+    "No uncaught application errors"
+  ],
+  "check_count": 19,
+  "plan_version": "v-d07962a17c5c483d",
+  "checkpoint_event_count": 22290,
+  "checkpoint_max_seq": 22290,
+  "old_item_keys_preserved": 2112,
+  "plan_versions_retained": 10,
+  "native_message_first_seq": 22307,
+  "native_text_exported": false,
+  "actual_repair_workers_rendered": 2,
+  "source_control_commands": 0,
+  "ipc": {
+    "subscription_cleanup_sent": true,
+    "connection_closed": true,
+    "owner_found": true,
+    "methods": [
+      "initialize",
+      "thread-follower-load-complete-history",
+      "thread-owner-discovery",
+      "thread-stream-following-changed"
+    ],
+    "snapshot_frame_bytes": 1456767,
+    "snapshot_samples": 2,
+    "source_control_commands": 0
+  },
+  "browser": "143.0.7499.4",
+  "browser_errors": [],
+  "limits": [
+    "One current root message compared by ID/type/original text, not every future provider item.",
+    "Observed nested identity is not a claim that every historical child has a current IPC owner.",
+    "N09 remains waiting for a confirmed third graphic reference; old missing N07 bytes and unknown starts remain historical unknowns."
+  ]
+}

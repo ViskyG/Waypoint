@@ -1,0 +1,93 @@
+{
+  "at": "2026-10-20T12:25:42.369280+00:00",
+  "evidence_ref": "next-stage/evidence/remaining-20261020/N07_CURRENT_RESULT.json",
+  "evidence_revision": "sha256:6dc9b105abdf618cc53d1792f3ed4f020fb5402d75b3e5027764f624e53e0eb7",
+  "actual_bytes_match": true,
+  "replacement_source": "stage2-acceptance",
+  "past_events_deleted": false,
+  "N08_N07_requirement_current": {
+    "edge_id": "WPT-NEXT-E-14",
+    "producer_id": "WPT-N07",
+    "declared_target_id": "WPT-N08",
+    "consumer_id": "WPT-N08",
+    "phase": "start",
+    "inherited": false,
+    "classification": "requires",
+    "target_scope": "node",
+    "why": "Нужен готовый результат этой ветки для сквозной проверки единой функциональной версии.",
+    "output_id": "O-AUTHORING",
+    "condition_revision": 1,
+    "workspace_policy": "consumer",
+    "requirement_fingerprint": "fa7cd583c53d592e14b3ed665b4bc785c6a572db0edc35618ef408aaf5cb407d",
+    "state": "satisfied",
+    "availability": "satisfied",
+    "reason": "matched_evidence",
+    "receipts": [
+      "stage2-9542b57cccf95caacecd3a527db187aaf8d80ab5"
+    ],
+    "stale_receipts": [
+      {
+        "event_id": "stage2-ec0ce599ef5a0b3d4cbb589ec5a7fad7ab2ae6af",
+        "source": "stage2-acceptance",
+        "seq": 8929,
+        "reason": "replaced_by_reporter"
+      },
+      {
+        "event_id": "audit-fb449ad7ece69a9b2005aee9ccbcbe0cc210ed06",
+        "source": "stage2-acceptance",
+        "seq": 13246,
+        "reason": "replaced_by_reporter"
+      }
+    ],
+    "workspace_ref": {
+      "consumer": "waypoint/local-working-copy",
+      "project": "waypoint/local-working-copy"
+    }
+  },
+  "criteria_recorded_before_done": true,
+  "receipts": {
+    "receipts": [
+      {
+        "seq": 22594,
+        "created": true
+      },
+      {
+        "seq": 22595,
+        "created": true
+      },
+      {
+        "seq": 22596,
+        "created": true
+      },
+      {
+        "seq": 22597,
+        "created": true
+      },
+      {
+        "seq": 22598,
+        "created": true
+      },
+      {
+        "seq": 22599,
+        "created": true
+      },
+      {
+        "seq": 22600,
+        "created": true
+      },
+      {
+        "seq": 22601,
+        "created": true
+      },
+      {
+        "seq": 22602,
+        "created": true
+      },
+      {
+        "seq": 22603,
+        "created": true
+      }
+    ],
+    "cursor_saved": false
+  }
+}

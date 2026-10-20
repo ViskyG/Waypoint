@@ -1,0 +1,47 @@
+{
+  "started_at": "2026-10-20T12:04:30.320087+00:00",
+  "status": "FAIL",
+  "checks": [],
+  "metrics": {},
+  "scope": "SYNTHETIC fixtures; real Chromium → loopback HTTP → disposable schema3 Store",
+  "live_codex_tested": false,
+  "production_data_modified": false,
+  "api_routes_mocked": false,
+  "cases_requested": [
+    "reader",
+    "defaults",
+    "algorithms",
+    "provenance",
+    "warnings"
+  ],
+  "browser_errors": [],
+  "source_hashes_at_start": {
+    "waypoint/waypoint/web/app.js": "5e16f4b40f66db235dca252f5e5e6dc20b849bd4f038c8f75ab7e1abd56337bf",
+    "waypoint/waypoint/web/filters.js": "211a52375ad82e9ac5d0f730cdce96da4bb2c7c331617d56e79e16e0f3ce5a40",
+    "waypoint/waypoint/web/algorithm_panel.js": "a4a11286cb3e24a9d79f805a69091cbcf6029528649b05fd1e4b18e41865d44c",
+    "waypoint/waypoint/web/plan.js": "9d377c9e91ba13a1a53328ae5633a31327d9d410f319ff22ca4afb8432256758",
+    "waypoint/waypoint/store.py": "e5cf09e06af5d5997c0b45357168c2962cfac4720470047ec031bf37c19a3ee9",
+    "waypoint/waypoint/read_models.py": "da56d2315fb972b7218a92ebce498b4bc888868bd9c44733397017dfa60ba440",
+    "waypoint/waypoint/server.py": "6487149caad9cc0d852a8f1cb512caa0d045b0ef5808920d7b00397243466173",
+    "waypoint/waypoint/warning_history.py": "0385a4857edd9014ba02bb7fdd044b5efdd08173fdbffa68ca03d1cc71b1838d"
+  },
+  "limitations": [
+    "This script proves controlled application scenarios, not native Codex observations.",
+    "Native source, production restart and historical artifact review are separate evidence."
+  ],
+  "browser": "143.0.7499.4",
+  "failed_at": "N04 reader setup",
+  "failure": "Traceback (most recent call last):\n  File \"/home/visky/My Projects/Waypoint/waypoint/tests/remaining_browser_check.py\", line 198, in run\n    current='N04 reader setup';context=browser.new_context();open_project(context);open_messages()\n  File \"/home/visky/My Projects/Waypoint/waypoint/tests/remaining_browser_check.py\", line 87, in open_project\n    page = context.new_page(viewport={'width':1660,'height':1050})\nTypeError: BrowserContext.new_page() got an unexpected keyword argument 'viewport'\n",
+  "finished_at": "2026-10-20T12:04:31.414615+00:00",
+  "source_hashes_at_finish": {
+    "waypoint/waypoint/web/app.js": "5e16f4b40f66db235dca252f5e5e6dc20b849bd4f038c8f75ab7e1abd56337bf",
+    "waypoint/waypoint/web/filters.js": "211a52375ad82e9ac5d0f730cdce96da4bb2c7c331617d56e79e16e0f3ce5a40",
+    "waypoint/waypoint/web/algorithm_panel.js": "a4a11286cb3e24a9d79f805a69091cbcf6029528649b05fd1e4b18e41865d44c",
+    "waypoint/waypoint/web/plan.js": "9d377c9e91ba13a1a53328ae5633a31327d9d410f319ff22ca4afb8432256758",
+    "waypoint/waypoint/store.py": "e5cf09e06af5d5997c0b45357168c2962cfac4720470047ec031bf37c19a3ee9",
+    "waypoint/waypoint/read_models.py": "da56d2315fb972b7218a92ebce498b4bc888868bd9c44733397017dfa60ba440",
+    "waypoint/waypoint/server.py": "6487149caad9cc0d852a8f1cb512caa0d045b0ef5808920d7b00397243466173",
+    "waypoint/waypoint/warning_history.py": "0385a4857edd9014ba02bb7fdd044b5efdd08173fdbffa68ca03d1cc71b1838d"
+  },
+  "check_count": 0
+}

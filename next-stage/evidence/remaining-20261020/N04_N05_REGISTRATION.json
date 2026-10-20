@@ -1,0 +1,117 @@
+{
+  "at": "2026-10-20T12:24:48.066887+00:00",
+  "plan_version": "v-d07962a17c5c483d",
+  "criteria_before_done": true,
+  "algorithm_revisions": {
+    "ALG-PAGE": 4,
+    "ALG-READ": 6
+  },
+  "event_kinds": [
+    "test.result",
+    "test.result",
+    "test.result",
+    "test.result",
+    "test.result",
+    "algorithm.observation",
+    "algorithm.observation",
+    "dependency.observation",
+    "node.result",
+    "node.status",
+    "dependency.observation",
+    "node.result",
+    "node.status",
+    "dependency.observation",
+    "node.result",
+    "node.status",
+    "dependency.observation",
+    "node.result",
+    "node.status"
+  ],
+  "receipts": {
+    "receipts": [
+      {
+        "seq": 22491,
+        "created": true
+      },
+      {
+        "seq": 22492,
+        "created": true
+      },
+      {
+        "seq": 22493,
+        "created": true
+      },
+      {
+        "seq": 22494,
+        "created": true
+      },
+      {
+        "seq": 22495,
+        "created": true
+      },
+      {
+        "seq": 22496,
+        "created": true
+      },
+      {
+        "seq": 22497,
+        "created": true
+      },
+      {
+        "seq": 22498,
+        "created": true
+      },
+      {
+        "seq": 22499,
+        "created": true
+      },
+      {
+        "seq": 22500,
+        "created": true
+      },
+      {
+        "seq": 22501,
+        "created": true
+      },
+      {
+        "seq": 22502,
+        "created": true
+      },
+      {
+        "seq": 22503,
+        "created": true
+      },
+      {
+        "seq": 22504,
+        "created": true
+      },
+      {
+        "seq": 22505,
+        "created": true
+      },
+      {
+        "seq": 22506,
+        "created": true
+      },
+      {
+        "seq": 22507,
+        "created": true
+      },
+      {
+        "seq": 22508,
+        "created": true
+      },
+      {
+        "seq": 22509,
+        "created": true
+      }
+    ],
+    "cursor_saved": false
+  },
+  "packets_done": [
+    "WPT-N04-FIX",
+    "WPT-N04",
+    "WPT-N05-FIX",
+    "WPT-N05"
+  ]
+}

@@ -16,6 +16,7 @@
     let key = '', online = false, stopped = false;
     let navigationGeneration = 0, navigationController = new AbortController(), planMount = null, algorithmsMount = null, catalogueDispose = null, refreshSequence = 0, catalogueRefreshAt = 0;
     const serviceIdentity = location.origin === 'null' ? 'offline' : location.origin + location.pathname;
+    const readerDefaultKey = JSON.stringify(['waypoint-reader-default-v1',serviceIdentity]);
     const context = () => ({generation: navigationGeneration, project: ui.project, version: ui.version});
     const matches = request => request.generation === navigationGeneration && request.project === ui.project && request.version === ui.version;
     function cancelNavigation() { navigationGeneration++; navigationController.abort(); navigationController = new AbortController(); ui.busy = false; }
@@ -114,25 +115,76 @@
     document.addEventListener('selectionchange', () => { for (const box of document.querySelectorAll('.message')) if (box._pendingItem && !hasSelection(box)) patchMessage(box, box._pendingItem); });
     function readerFor(channel, kind, id, deep = true) {
         const key = JSON.stringify([serviceIdentity, ui.project, ui.state?.version || ui.version, channel, kind, id, deep]);
-        if (!readers.has(key)) { let query = {categories:null,only_errors:false}; try { query = JSON.parse(localStorage.getItem(key)) || query; } catch {} readers.set(key, { key, kind, id, deep, channel, query, limit: channel === 'card' ? 24 : 100, items: [], latest: [], pending: new Set(), follow: true, top: 0, needsRefresh: true, hasMore: false }); }
+        if (!readers.has(key)) {
+            let query = {categories:null,only_errors:false};
+            try { query = JSON.parse(localStorage.getItem(key)) || JSON.parse(localStorage.getItem(readerDefaultKey)) || query; } catch {}
+            query=modules.readerQuery(query);
+            // Creation establishes this window's own preference, including All.
+            try {localStorage.setItem(key,JSON.stringify(query));} catch {}
+            readers.set(key, { key, kind, id, deep, channel, query, windows:new Map(), limit: channel === 'card' ? 24 : 100, items: [], latest: [], pending: new Set(), follow: true, top: 0, needsRefresh: true, hasMore: false });
+        }
         return readers.get(key);
     }
-    function detachReader(reader) { if (!reader?.scroll) return; reader.top = reader.scroll.scrollTop; reader.scroll = reader.list = reader.button = reader.more = null; reader.filterMount?.dispose(); reader.filterMount = null; }
+    function readerAnchors(reader) {
+        if (!reader.scroll || !reader.list) return [];
+        const top = reader.scroll.getBoundingClientRect().top;
+        const visibleTop = reader.controls?.isConnected ? Math.max(top,reader.controls.getBoundingClientRect().bottom) : top;
+        const candidates = [...reader.list.children].filter(x => x.dataset.itemKey).map(x => ({key:x.dataset.itemKey,offset:x.getBoundingClientRect().top-top,bottom:x.getBoundingClientRect().bottom-top}));
+        const first = candidates.findIndex(x => x.bottom > visibleTop-top);
+        return first < 0 ? candidates.reverse() : [...candidates.slice(first),...candidates.slice(0,first).reverse()];
+    }
+    function readerSelection(reader) {
+        const selection = getSelection();
+        if (!selection || selection.isCollapsed || !reader.list?.contains(selection.anchorNode) || !reader.list.contains(selection.focusNode)) return null;
+        const point = (node,offset) => { const box = (node.nodeType === 1 ? node : node.parentElement)?.closest('.message'); if (!box) return null; const path=[];for(let child=node;child!==box;child=child.parentNode) path.unshift([...child.parentNode.childNodes].indexOf(child)); return {key:box.dataset.itemKey,path,offset}; };
+        const anchor = point(selection.anchorNode,selection.anchorOffset),focus = point(selection.focusNode,selection.focusOffset);
+        return anchor && focus ? {anchor,focus,text:selection.toString()} : null;
+    }
+    function restoreReaderSelection(reader,saved) {
+        if (!saved || !reader.list) return;
+        const point = value => { let node=[...reader.list.children].find(x=>x.dataset.itemKey===value.key); for(const index of value.path || []) node=node?.childNodes[index]; if (!node || value.offset>(node.nodeType===Node.TEXT_NODE ? node.length : node.childNodes.length)) return null; return [node,value.offset]; };
+        const anchor=point(saved.anchor),focus=point(saved.focus);
+        if (anchor && focus) { const selection=getSelection(); selection.setBaseAndExtent(...anchor,...focus); if (selection.toString()!==saved.text) selection.removeAllRanges(); }
+    }
+    function saveReaderWindow(reader) {
+        if (reader.scroll) reader.top=reader.scroll.scrollTop;
+        const selection=readerSelection(reader) || reader.filterSelection; reader.filterSelection=null;
+        reader.windows.set(JSON.stringify(reader.query),{items:reader.items.slice(),latest:reader.latest.slice(),pending:new Set(reader.pending),follow:reader.follow,top:reader.top,before:reader.before,hasMore:reader.hasMore,anchors:readerAnchors(reader),selection});
+        return selection;
+    }
+    function changeReaderQuery(reader,value) {
+        const query=modules.readerQuery(value);
+        if (JSON.stringify(query)===JSON.stringify(reader.query)) return;
+        if (saveReaderWindow(reader)) getSelection().removeAllRanges();
+        reader.query=query;
+        const saved=reader.windows.get(JSON.stringify(query));
+        Object.assign(reader,saved ? {...saved,items:saved.items.slice(),latest:saved.latest.slice(),pending:new Set(saved.pending)} : {items:[],latest:[],pending:new Set(),follow:true,top:0,before:null,hasMore:false});
+        reader.restoreAnchors=saved?.anchors || [];reader.restoreSelection=saved?.selection;
+        try {localStorage.setItem(reader.key,JSON.stringify(query));} catch {}
+        reader.generation=(reader.generation||0)+1;reader.queryGeneration=(reader.queryGeneration||0)+1;reader.needsRefresh=true;
+        paintReader(reader);loadReader(reader);
+    }
+    function detachReader(reader) { if (!reader?.scroll) return; saveReaderWindow(reader); reader.restoreAnchors=readerAnchors(reader); reader.scroll = reader.list = reader.button = reader.more = null; reader.filterMount?.dispose(); reader.filterMount = null; }
     function bindReader(reader, list, scroll, button, more = null) {
         if (reader.scroll && reader.scroll !== scroll) detachReader(reader);
         reader.list = list; reader.scroll = scroll; reader.button = button; reader.more = more;
         if (reader.channel === 'inspector' && !reader.filterMount) {
-            const filter = el('details','reader-filter'); filter.append(el('summary','','Фильтр сообщений')); const controls = el('div','reader-filter-controls'); filter.append(controls); list.before(filter);
-            reader.filterMount = modules.bindTypeFilter(controls,reader.query,{onChange:query=>{ reader.query = query; try{localStorage.setItem(reader.key,JSON.stringify(query));}catch{} reader.generation = (reader.generation||0)+1; reader.queryGeneration = (reader.queryGeneration||0)+1; reader.items=[];reader.latest=[];reader.pending.clear();reader.follow=true;reader.before=null;reader.hasMore=false;reader.needsRefresh=true;paintReader(reader);loadReader(reader); }});
+            const panel=el('div','reader-controls');list.before(panel);if(more)panel.append(more);reader.controls=panel;
+            const filter = el('details','reader-filter'); filter.append(el('summary','','Фильтр сообщений')); const controls = el('div','reader-filter-controls'); filter.append(controls);panel.append(filter);
+            // Native focus/click actions may collapse a selection before change.
+            panel.addEventListener('pointerdown',()=>{reader.filterSelection=readerSelection(reader);},true);
+            panel.addEventListener('keydown',event=>{if (['Enter',' '].includes(event.key)) reader.filterSelection=readerSelection(reader) || reader.filterSelection;},true);
+            filter.append(btn('По умолчанию для новых окон',()=>{try {localStorage.setItem(readerDefaultKey,JSON.stringify(reader.query));notice('Фильтр сохранён для новых окон; существующие настройки сохранены');} catch {notice('Браузер не разрешает сохранить фильтр');}},'reader-save-default'));
+            reader.filterMount = modules.bindTypeFilter(controls,reader.query,{onChange:query=>changeReaderQuery(reader,query)});
         }
         scroll.onscroll = () => { reader.top = scroll.scrollTop; if (!reader.pending.size) reader.follow = scroll.scrollHeight - scroll.scrollTop - scroll.clientHeight < 12; else if (scroll.scrollHeight - scroll.scrollTop - scroll.clientHeight >= 12) reader.follow = false; };
         button.onclick = () => { reader.follow = true; reader.items = reader.latest.slice(-reader.limit); reader.pending.clear(); paintReader(reader); };
-        if (more) more.onclick = () => loadReader(reader, true);
+        if (more) more.onclick = () => {reader.restoreSelection=readerSelection(reader) || reader.filterSelection;reader.filterSelection=null;loadReader(reader,true);};
         paintReader(reader); if (reader.needsRefresh && !reader.loading) loadReader(reader);
     }
     function paintReader(reader, prepend = false) {
         if (!reader.list || !reader.scroll?.isConnected) return;
-        const { list, scroll } = reader, oldHeight = scroll.scrollHeight, oldTop = scroll.scrollTop;
+        const { list, scroll } = reader, anchors=reader.restoreAnchors || readerAnchors(reader); reader.restoreAnchors=null;
         const existing = new Map([...list.children].filter(x => x.dataset.itemKey).map(x => [x.dataset.itemKey, x]));
         const keys = new Set(reader.items.map(itemKey));
         for (const child of [...list.children]) if (!keys.has(child.dataset.itemKey)) child.remove();
@@ -146,8 +198,10 @@
         reader.button.hidden = !reader.pending.size;
         reader.button.textContent = `Новые сообщения: ${reader.pending.size} · К последним ↓`;
         if (reader.more) { reader.more.hidden = !reader.hasMore; reader.more.disabled = !!reader.loading; }
-        scroll.scrollTop = reader.follow ? scroll.scrollHeight : prepend ? oldTop + scroll.scrollHeight - oldHeight : reader.top;
+        if (reader.follow) scroll.scrollTop=scroll.scrollHeight;
+        else { const anchor=anchors.find(value=>[...list.children].some(x=>x.dataset.itemKey===value.key)); const box=anchor && [...list.children].find(x=>x.dataset.itemKey===anchor.key); if (box) scroll.scrollTop+=box.getBoundingClientRect().top-scroll.getBoundingClientRect().top-anchor.offset; else scroll.scrollTop=reader.top; }
         reader.top = scroll.scrollTop;
+        if (reader.restoreSelection) {restoreReaderSelection(reader,reader.restoreSelection);reader.restoreSelection=null;}
     }
     function updateReader(reader, items, result) {
         const old = new Map(reader.items.map(i => [itemKey(i), i]));
@@ -539,7 +593,7 @@
             if (tab === 'status') return JSON.stringify([nodeStatus(id), workActors(id),ui.state.node_views?.[id]]);
             if (tab === 'algorithms') return JSON.stringify([ui.state.basis,ui.state.node_views?.[id]?.algorithm_refs]);
         }
-        if (kind === 'algorithm') return JSON.stringify(ui.state.basis);
+        if (kind === 'algorithm') return JSON.stringify([ui.state.version,ui.state.algorithm_cursor,ui.state.plan.x_observability?.algorithms?.[id]]);
         if (kind === 'agent') return JSON.stringify([actor, ui.state.scopes.filter(scope => scope.agent_id === id)]);
         return null;
     }
@@ -548,7 +602,7 @@
         if (!inspector || inspector.tab === 'messages' || inspector.kind === 'diff' || inspector.signature === inspectorSignature(inspector.kind, inspector.id, inspector.tab)) return;
         if (hasSelection($('#inspector-body'))) { inspector.needsRefresh = true; return; }
         const top = $('#inspector-body').scrollTop;
-        (inspector.kind === 'algorithm' ? openAlgorithm(inspector.id) : openInspector(inspector.kind, inspector.id, inspector.tab, inspector.deep)).then(() => { $('#inspector-body').scrollTop = top; });
+        (inspector.kind === 'algorithm' ? openAlgorithm(inspector.id,inspector.pageState) : openInspector(inspector.kind, inspector.id, inspector.tab, inspector.deep)).then(() => { $('#inspector-body').scrollTop = top; });
     }
     document.addEventListener('selectionchange', () => { if (ui.inspector?.needsRefresh) refreshInspectorDetails(); });
     async function openInspector(kind, id, tab = 'messages', deep = true) {
@@ -658,11 +712,12 @@
                 text.append(el('div', '', t.label || tid), el('small', '', `${tid} · ${check?.outcome || 'не запускался'} · ${check?.freshness === 'current' ? 'актуальность заявлена исполнителем' : 'актуальность не подтверждена'}`));
                 row.append(lamp(check), text);
                 body.append(row);
+                if (check) blockSection(body,'Запуск и регистрация',`Запуск: ${check.run_id || 'не указан'}\nЗарегистрировано: ${check.at || 'неизвестно'}\nReceipt: ${check.seq ?? 'неизвестен'}\nВерсия карты при регистрации: ${check.plan_version || 'неизвестна'}\nТекущая версия карты: ${ui.state.current_version || ui.state.version}`);
                 if (check?.basis) blockSection(body,'Основание проверки',check.basis);
                 if (check?.evidence_refs?.length) blockSection(body,'Доказательства',check.evidence_refs.join('\n'));
                 if (check?.registered_from_existing_evidence) body.append(el('p','small-note','Результат внесён из сохранённых доказательств; это не новый запуск теста.'));
             }
-            body.append(el('p', 'small-note', 'Успешные тесты, актуальность результата и статус задачи — отдельные сведения. Карта не меняет статус исполнителя.'));
+            body.append(el('p', 'small-note', 'Дата регистрации не заменяет время прежнего выполнения. «Актуальность» — ручная декларация исполнителя, а не автоматическая проверка нынешних исходников. Успешные тесты и статус задачи — отдельные сведения.'));
         }
         else if (tab === 'status') {
             blockSection(body, 'Сообщённый статус', status.status || 'Не указан');
@@ -713,15 +768,25 @@
         return [...new Set([...Object.keys(a), ...Object.keys(b)])].flatMap(k => objectDiff(a[k], b[k], [...path, k]));
     } return [{ path, op: a === undefined ? 'add' : b === undefined ? 'remove' : 'replace', before: a, after: b }]; }
     function disposeProjectViews() { planMount?.dispose(); planMount = null; algorithmsMount?.dispose(); algorithmsMount = null; }
-    async function openAlgorithm(id) {
+    async function openAlgorithm(id,previousPage = null) {
         const requested = context(); const body = $('#inspector-body');
         closeInspector(); $('#inspector').hidden = false; $('#inspector-id').textContent = id; $('#inspector-title').textContent = 'Алгоритм'; $('#tabs').replaceChildren(); body.replaceChildren();
-        const selection = {kind:'algorithm',id,signature:inspectorSignature('algorithm',id)}; ui.inspector = selection;
-        try { const result = await api(base() + '/algorithms/' + encodeURIComponent(id) + '?' + new URLSearchParams({version:ui.state.version}));
+        const selection = {kind:'algorithm',id,signature:inspectorSignature('algorithm',id),pageState:previousPage ? {boundaries:[...previousPage.boundaries],index:previousPage.index} : {boundaries:[null],index:0}}; ui.inspector = selection;
+        async function load(index,boundary) {
+        if (selection.loading) return;
+        selection.loading=true;body.querySelectorAll('.algorithm-pages button').forEach(button=>button.disabled=true);
+        try { const params=new URLSearchParams({version:ui.state.version,limit:100});if(boundary!=null)params.set('before',boundary);
+            const result = await api(base() + '/algorithms/' + encodeURIComponent(id) + '?' + params);
             if (!matches(requested) || ui.inspector !== selection) return;
+            selection.pageState.boundaries[index]=boundary;selection.pageState.index=index;
             const algorithms = result.algorithms || [result.algorithm || result];
-            selection.algorithmMount = modules.mountAlgorithms(body, {algorithms,basis:result.basis}, {onOpenNode: target => {setView('map');focusNode(target);openInspector('node',target,'task');},onOpenAlgorithm:()=>{}});
+            selection.algorithmMount?.dispose();
+            selection.algorithmMount = modules.mountAlgorithms(body, {algorithms,basis:result.basis}, {canGoNewer:index>0,onOlder:before=>load(index+1,before),onNewer:()=>load(index-1,selection.pageState.boundaries[index-1]),onOpenNode: target => {setView('map');focusNode(target);openInspector('node',target,'task');},onOpenAlgorithm:()=>{}});
+            body.scrollTop=0;
         } catch(e) { if (e.name !== 'AbortError' && ui.inspector === selection) body.append(el('p','source-warning',e.message)); }
+        finally {selection.loading=false;body.querySelectorAll('.algorithm-pages button').forEach(button=>button.disabled=false);}
+        }
+        await load(selection.pageState.index,selection.pageState.boundaries[selection.pageState.index]);
     }
     async function renderAlgorithms() {
         if (!ui.state || ui.view !== 'algorithms') return;

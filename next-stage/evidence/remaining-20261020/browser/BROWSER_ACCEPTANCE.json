@@ -1,0 +1,126 @@
+{
+  "registered_at": "2026-10-20T12:16:24.509106+00:00",
+  "status": "PASS_WITH_REUSED_COMPLETED_CASES",
+  "evidence_level": "synthetic_actual_Chromium_HTTP_disposable_Store",
+  "live_codex_tested": false,
+  "production_data_modified": false,
+  "browser": "143.0.7499.4",
+  "functional_assertions": 34,
+  "additional_integrity_assertions": 2,
+  "product_source_hashes": {
+    "waypoint/waypoint/web/app.js": "edb85fe5301822148f606f1efa3e219d382e82c7df453fbc82fc7c902018fb87",
+    "waypoint/waypoint/web/filters.js": "211a52375ad82e9ac5d0f730cdce96da4bb2c7c331617d56e79e16e0f3ce5a40",
+    "waypoint/waypoint/web/style.css": "3dafcac53999af114c52338c09ef53b4d8fd011a4571beb22de5b62b881ef600",
+    "waypoint/waypoint/web/algorithm_panel.js": "a4a11286cb3e24a9d79f805a69091cbcf6029528649b05fd1e4b18e41865d44c",
+    "waypoint/waypoint/web/plan.js": "9d377c9e91ba13a1a53328ae5633a31327d9d410f319ff22ca4afb8432256758",
+    "waypoint/waypoint/store.py": "e5cf09e06af5d5997c0b45357168c2962cfac4720470047ec031bf37c19a3ee9",
+    "waypoint/waypoint/read_models.py": "da56d2315fb972b7218a92ebce498b4bc888868bd9c44733397017dfa60ba440",
+    "waypoint/waypoint/server.py": "6487149caad9cc0d852a8f1cb512caa0d045b0ef5808920d7b00397243466173",
+    "waypoint/waypoint/warning_history.py": "0385a4857edd9014ba02bb7fdd044b5efdd08173fdbffa68ca03d1cc71b1838d"
+  },
+  "product_hashes_identical_between_positive_runs": true,
+  "positive_evidence": [
+    {
+      "ref": "run-07-real-clicks/RESULT.json",
+      "overall_status": "FAIL",
+      "accepted_completed_cases": [
+        "reader",
+        "defaults"
+      ],
+      "passed_assertions": 19,
+      "excluded_failure": "Test harness sought nested graph button in early-return human Task subtab; actual map arrow used in next run. Product source unchanged.",
+      "explanation": "These19 checks completed successfully before the harness locator timeout; they are reused rather than rerun."
+    },
+    {
+      "ref": "run-08-unreached/RESULT.json",
+      "overall_status": "PASS",
+      "accepted_completed_cases": [
+        "nested_default",
+        "algorithms",
+        "provenance",
+        "warnings"
+      ],
+      "passed_assertions": 17
+    }
+  ],
+  "criteria_evidence": {
+    "WPT-N04-FIX/T02": [
+      "run-07-real-clicks/RESULT.json#checks[0:9]"
+    ],
+    "WPT-N04-FIX/T03": [
+      "run-07-real-clicks/RESULT.json#checks[9:19]",
+      "run-08-unreached/RESULT.json#checks[0]"
+    ],
+    "WPT-N05-FIX/T01": [
+      "run-08-unreached/RESULT.json#checks[1:9]"
+    ],
+    "WPT-N05-FIX/T02": [
+      "run-08-unreached/RESULT.json#checks[1:3]",
+      "../algorithms/UNIT_API_RECEIPT.json"
+    ],
+    "WPT-N07-FIX/T04": [
+      "run-08-unreached/RESULT.json#checks[9:12]"
+    ],
+    "WPT-N08-FIX/T01": [
+      "run-07-real-clicks/RESULT.json",
+      "run-08-unreached/RESULT.json"
+    ],
+    "WPT-N08-FIX/T03": [
+      "run-08-unreached/RESULT.json#checks[12:15]"
+    ]
+  },
+  "failure_history": [
+    {
+      "ref": "run-01/RESULT.json",
+      "kind": "harness",
+      "reason": "Unsupported BrowserContext.new_page(viewport) argument before any assertions; corrected test only."
+    },
+    {
+      "ref": "run-02/RESULT.json",
+      "kind": "product_regression",
+      "reason": "Filter-return selection lost despite correct old window and anchor."
+    },
+    {
+      "ref": "run-03-reader-diagnostic/RESULT.json",
+      "kind": "product_regression_diagnostic",
+      "reason": "Expected original selected text, actual empty; frozen source."
+    },
+    {
+      "ref": "run-04/RESULT.json",
+      "kind": "product_regression",
+      "reason": "Pre-focus capture alone did not fix endpoint ambiguity."
+    },
+    {
+      "ref": "run-05-reader/RESULT.json",
+      "kind": "product_regression_diagnostic",
+      "reason": "Explicit pointerdown did not fix endpoint ambiguity; never a passing acceptance claim."
+    },
+    {
+      "ref": "run-06-serializer-diagnostic/RESULT.json",
+      "kind": "product_regression_diagnostic",
+      "reason": "Linear Range boundary restored preceding ROOT text end; rendered Selection prepended newline, then runtime mismatch guard removed range."
+    }
+  ],
+  "fix_confirmed": "Exact child-node paths and native offsets preserve selection; sticky controls allow actual physical Playwright clicks without driver scroll changing viewport precondition.",
+  "limits": [
+    "No production service installation/restart proof from this worker.",
+    "No native Codex→Store receipt claimed; integration owner verifies separately.",
+    "These34 functional assertions are scoped cases, not a percentage of whole product acceptance.",
+    "Earlier diagnostic runs used DOM control invocation; all accepted positive evidence uses actual Playwright locator.click()."
+  ],
+  "artifact_sha256": {
+    "run-01/RESULT.json": "d4c2c25043942ede8ee57b1e652f1acee99828fe446de99ea938551700f01c13",
+    "run-02/RESULT.json": "ff0db04db1b5b22ecd647efc1f9d5c9a14b3236966813ce5449f6f3ba68051ea",
+    "run-03-reader-diagnostic/RESULT.json": "64787deed9d6c39663d604a24e6c6fcbb296b5deb5faf718f22f88d71725623d",
+    "run-04/RESULT.json": "87f52548dc2e1b9ac97fd7da8168bb6d5ac4859307f05a345b744e8a25613927",
+    "run-05-reader/RESULT.json": "63ecd3fcbcfe37ce712f471e7ed5b961bb54799cbb45d9892c6ba241abf4c24d",
+    "run-06-serializer-diagnostic/RESULT.json": "61f885a847c51d8f2e80cc38890f4b596a13331b5bb4839873569d314f86be4d",
+    "run-07-real-clicks/RESULT.json": "b48f378bcbbf897bb9f73284a2addfc4da4b6356bee3f7c4f7c1d0d8ae6ca48c",
+    "run-07-real-clicks/reader.png": "5a2da521f0b362688b167297d6a28531b821eb29a632b67cbae488ccd9d5efc6",
+    "run-08-unreached/RESULT.json": "bee6d06da3fb01de2fd9ea8fb518af60f7555915b5fcc10aaf405d5b1d7c5278",
+    "run-08-unreached/algorithms.png": "a2e8b0ed2198aa42c88f98a1f428de6c360cb181c13ea9b52766ed70fe2b5833",
+    "run-08-unreached/nested-default.png": "9d4ec7eca2d5a7084b8f8e51c9efd241490411007d8f8509ed44e57bebbdbd20",
+    "run-08-unreached/provenance.png": "4321caf8232c17a9a0e459485f6e9496b400a12c3de48a07b6f20256f5de928f",
+    "run-08-unreached/warnings.png": "75acbc454380f4fea79e4e2835940830f5e4cd237d28461fe8f9a6d80ff6d1f3"
+  }
+}

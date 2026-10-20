@@ -1,0 +1,165 @@
+{
+  "captured_at": "2026-10-20T12:25:21.240513+00:00",
+  "actual_native_executors": 3,
+  "events": [
+    {
+      "seq": 18682,
+      "event_id": "cea6d7100d2d47e58677f1ddf7735c3f",
+      "at": "2026-10-20T11:54:12.601720+00:00",
+      "actor": "codex/01a14856-3f21-78c3-846f-c876180f8d67",
+      "node_ids": [
+        "WPT-N04-FIX"
+      ],
+      "source_boundary": {
+        "generation": "a8b2fb0eb56041778fcab5b7c6d51c0d",
+        "revision": 3426,
+        "source_key": "ipc:waypoint:01a14856-3f21-78c3-846f-c876180f8d67"
+      }
+    },
+    {
+      "seq": 20083,
+      "event_id": "0b2afc66729c423da137132b021529fa",
+      "at": "2026-10-20T11:54:17.911915+00:00",
+      "actor": "codex/01a15929-2593-7bd2-a1d8-9544e5317324",
+      "node_ids": [
+        "WPT-N05-FIX"
+      ],
+      "source_boundary": null
+    },
+    {
+      "seq": 20290,
+      "event_id": "3d4fe3b50736452b8ffb3dd066881ac6",
+      "at": "2026-10-20T11:54:50.026369+00:00",
+      "actor": "codex/01a15929-4c41-7321-8b50-b12d74937c65",
+      "node_ids": [
+        "WPT-N07-FIX"
+      ],
+      "source_boundary": null
+    },
+    {
+      "seq": 20480,
+      "event_id": "dbad9f09735540f7b6bbb2e7c99be909",
+      "at": "2026-10-20T11:57:57.323368+00:00",
+      "actor": "codex/01a15929-2593-7bd2-a1d8-9544e5317324",
+      "node_ids": [],
+      "source_boundary": null
+    },
+    {
+      "seq": 20528,
+      "event_id": "baefc0ee7e374d7f8ddb9f139fb44d6a",
+      "at": "2026-10-20T11:58:59.188849+00:00",
+      "actor": "codex/01a15929-4c41-7321-8b50-b12d74937c65",
+      "node_ids": [],
+      "source_boundary": null
+    },
+    {
+      "seq": 20599,
+      "event_id": "34b3ab95598c41c58863d896061299e3",
+      "at": "2026-10-20T12:00:22.338419+00:00",
+      "actor": "codex/01a15929-2593-7bd2-a1d8-9544e5317324",
+      "node_ids": [
+        "WPT-N08-FIX"
+      ],
+      "source_boundary": null
+    },
+    {
+      "seq": 21576,
+      "event_id": "7dc1a5ca52444ff0a822cda5e132314b",
+      "at": "2026-10-20T12:15:06.625821+00:00",
+      "actor": "codex/01a15929-4c41-7321-8b50-b12d74937c65",
+      "node_ids": [
+        "WPT-N08-FIX"
+      ],
+      "source_boundary": null
+    },
+    {
+      "seq": 21752,
+      "event_id": "44485109d01b4fa2aa2032dcf8a6120a",
+      "at": "2026-10-20T12:16:24.537327+00:00",
+      "actor": "codex/01a15929-2593-7bd2-a1d8-9544e5317324",
+      "node_ids": [],
+      "source_boundary": null
+    },
+    {
+      "seq": 21793,
+      "event_id": "85a484bb1f0640e3a2de32f10fb4f607",
+      "at": "2026-10-20T12:16:36.360922+00:00",
+      "actor": "codex/01a15929-4c41-7321-8b50-b12d74937c65",
+      "node_ids": [],
+      "source_boundary": null
+    },
+    {
+      "seq": 21817,
+      "event_id": "248a53ed6c784d629d69ca8c3a1f7be9",
+      "at": "2026-10-20T12:16:49.421337+00:00",
+      "actor": "codex/01a15929-2593-7bd2-a1d8-9544e5317324",
+      "node_ids": [
+        "WPT-N05-FIX"
+      ],
+      "source_boundary": null
+    },
+    {
+      "seq": 22037,
+      "event_id": "f1c512ddd0df4bbeb3f4c28b391bccdd",
+      "at": "2026-10-20T12:18:56.999145+00:00",
+      "actor": "codex/01a15929-2593-7bd2-a1d8-9544e5317324",
+      "node_ids": [],
+      "source_boundary": null
+    },
+    {
+      "seq": 22186,
+      "event_id": "7eb9b35f75964ef98bdd3d4de91c23fd",
+      "at": "2026-10-20T12:20:14.718425+00:00",
+      "actor": "codex/01a14856-3f21-78c3-846f-c876180f8d67",
+      "node_ids": [
+        "WPT-N04-FIX",
+        "WPT-N05-FIX",
+        "WPT-N07-FIX",
+        "WPT-N08-FIX"
+      ],
+      "source_boundary": {
+        "generation": "a8b2fb0eb56041778fcab5b7c6d51c0d",
+        "revision": 581,
+        "source_key": "ipc:waypoint:01a14856-3f21-78c3-846f-c876180f8d67"
+      }
+    },
+    {
+      "seq": 22528,
+      "event_id": "a274668c14284cdeafb27d4ec79779d1",
+      "at": "2026-10-20T12:24:50.141318+00:00",
+      "actor": "codex/01a14856-3f21-78c3-846f-c876180f8d67",
+      "node_ids": [
+        "WPT-N07-FIX",
+        "WPT-N08-FIX"
+      ],
+      "source_boundary": {
+        "generation": "a8b2fb0eb56041778fcab5b7c6d51c0d",
+        "revision": 666,
+        "source_key": "ipc:waypoint:01a14856-3f21-78c3-846f-c876180f8d67"
+      }
+    },
+    {
+      "seq": 22558,
+      "event_id": "f12b49ad0ea44295aac9e72668e17d95",
+      "at": "2026-10-20T12:25:21.168526+00:00",
+      "actor": "codex/01a14856-3f21-78c3-846f-c876180f8d67",
+      "node_ids": [
+        "WPT-N08-FIX"
+      ],
+      "source_boundary": {
+        "generation": "a8b2fb0eb56041778fcab5b7c6d51c0d",
+        "revision": 673,
+        "source_key": "ipc:waypoint:01a14856-3f21-78c3-846f-c876180f8d67"
+      }
+    }
+  ],
+  "new_manual_item_links": 0,
+  "own_bindings_verified_by_each_cli": true,
+  "child_identity_and_parent_verified_in": "LIVE.json",
+  "historical_unassigned_messages_reconstructed": false,
+  "scope_meaning": "Source-bounded declarations for subsequent observations; no code ownership lock. Root started in N04, declared combined integration at22186 and removed completed scopes on handoff. No historical relink inferred.",
+  "root_current_scope": [
+    "WPT-N08-FIX"
+  ],
+  "limits": "This proves current repair declarations/handoffs, not missing historical starts or future executor behavior."
+}

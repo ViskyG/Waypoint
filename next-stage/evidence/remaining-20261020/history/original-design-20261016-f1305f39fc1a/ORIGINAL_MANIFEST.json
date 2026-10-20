@@ -1,0 +1,385 @@
+{
+  "schema_version": "waypoint-delivery-manifest/1",
+  "project_id": "waypoint",
+  "design_session_id": "WAYPOINT-DESIGN-20261016-1312895b",
+  "state": "COMPLETED_DESIGN_REFERENCE_IMPLEMENTATION",
+  "file_count": 75,
+  "files": [
+    {
+      "path": ".gitignore",
+      "size_bytes": 153,
+      "sha256": "4997d4bd73a8ada88b72fa1c61757755a3367eb83fb626b935ef7d657f5f464b"
+    },
+    {
+      "path": "CODEX_START.md",
+      "size_bytes": 4017,
+      "sha256": "04eb5a8e84897f56394708f734d6a274fd81149d1f54c76a2c5c2d96413e7637"
+    },
+    {
+      "path": "NOTICE.md",
+      "size_bytes": 507,
+      "sha256": "10bed3d6d9ea8d1403faba2c2580707b5060c4d3d41371763b3875219c6e83f1"
+    },
+    {
+      "path": "README_RU.md",
+      "size_bytes": 6370,
+      "sha256": "c44dc6cc7c524478f2897e98ef6c94d7709eb809b2519d169d39d779a4301c8e"
+    },
+    {
+      "path": "SESSION.json",
+      "size_bytes": 1209,
+      "sha256": "07d809204816e9a786bfbbe948f00652a11e7ead573f3b19ad9999c9d9afe3d7"
+    },
+    {
+      "path": "START_HERE.md",
+      "size_bytes": 1104,
+      "sha256": "d9e04269881aae41b4f207c35cdc34153ffc80b4abc6b1942f40ed44b5b35632"
+    },
+    {
+      "path": "design/ACCEPTANCE.md",
+      "size_bytes": 6635,
+      "sha256": "c797786083d381db91cfa61ec43cce8099a9bfc2f7e420c757594afacbb60c99"
+    },
+    {
+      "path": "design/ARCHITECTURE.md",
+      "size_bytes": 16573,
+      "sha256": "c51eec95ca896cdcdc959ca4925518f708bfffd0d677d8b95c43e396e7e0d43b"
+    },
+    {
+      "path": "design/CONTRACTS.md",
+      "size_bytes": 12354,
+      "sha256": "80d74212ab862a3aa1ff1df924e6b1101008db53c791308023230976c0b7414e"
+    },
+    {
+      "path": "design/DECISIONS_AND_DOUBTS.md",
+      "size_bytes": 2484,
+      "sha256": "a15b7ca7677cb975d629852c3e72cf541e97536a028f77e568f11682a2a15e81"
+    },
+    {
+      "path": "design/IMPLEMENTATION_MAP.md",
+      "size_bytes": 7733,
+      "sha256": "588aaf21ca78dac6cb34d277981442208d5b521082b5211c2e5d33d032127856"
+    },
+    {
+      "path": "design/OPERATIONS.md",
+      "size_bytes": 7766,
+      "sha256": "9b48f5154a8ea2e4a702d5f344a37b2d2d81246baf773d74a89036d9f4291658"
+    },
+    {
+      "path": "design/WORK_PACKETS.md",
+      "size_bytes": 6913,
+      "sha256": "17a2db871b5657e7ac9b9e18460f1871767288cda038c245430e533c6fcc092a"
+    },
+    {
+      "path": "evidence/RESULTS.md",
+      "size_bytes": 5568,
+      "sha256": "b3a30164daf2539ff5cb92cc9cb7a9f98f4a237e8aecc4c9804f74b6df9a778a"
+    },
+    {
+      "path": "evidence/browser-http-limitation.json",
+      "size_bytes": 304,
+      "sha256": "b29508f820478c895bfbafc88bf85e3bcf788505c10dec5e9a6be321b80ccd68"
+    },
+    {
+      "path": "evidence/browser-results.json",
+      "size_bytes": 1223,
+      "sha256": "f1305f39fc1a6d2d57d90030b6fd76ddef003f0aeae0cbd4f82e31f0ec85efb0"
+    },
+    {
+      "path": "evidence/delivery-validation.json",
+      "size_bytes": 435,
+      "sha256": "bd585e7679e749a69e753c843d29245c0c6717b71fd6e135c5bd1f5cbdc11df6"
+    },
+    {
+      "path": "evidence/environment.json",
+      "size_bytes": 1567,
+      "sha256": "25fc921ac69450e74779e39fd9edae5ee250edd9750394b40969ff7cd762d6a4"
+    },
+    {
+      "path": "evidence/http-results.json",
+      "size_bytes": 494,
+      "sha256": "d601ce7751844c45982c10b95e8f297394b42c700714dc90bb7515cff1d738e1"
+    },
+    {
+      "path": "evidence/packaging-build.json",
+      "size_bytes": 410,
+      "sha256": "57e66e95b9f4cff65d6e26bfe7e59522b26590a15f22d965cfaf56b6f8bf7780"
+    },
+    {
+      "path": "evidence/python-compatibility.json",
+      "size_bytes": 182,
+      "sha256": "74130817d16822e445ddf503fed7a1c3b8478f1f0ca1c710268dcb5270134833"
+    },
+    {
+      "path": "evidence/ui-nested.png",
+      "size_bytes": 112735,
+      "sha256": "e84f75a7d35e8e36a489547b7058823ba4645cc53e3dbfda758d8c26036eb19b"
+    },
+    {
+      "path": "evidence/ui-obsidian.png",
+      "size_bytes": 239033,
+      "sha256": "36fd486866ac08e3abd75b7ccb8455c859f51b1c54ae9ccd177a860d75cbdb02"
+    },
+    {
+      "path": "evidence/ui-terracotta.png",
+      "size_bytes": 238848,
+      "sha256": "4c4b0313f06574afad512245e678640a4dc616027a995d831041eebe398489dc"
+    },
+    {
+      "path": "evidence/unit-results.xml",
+      "size_bytes": 4043,
+      "sha256": "ac40892ca765f5f25b784089ff5625c93be3ed39309c9315623cbbeabbaa98df"
+    },
+    {
+      "path": "evidence/unit-tests.txt",
+      "size_bytes": 99,
+      "sha256": "2ddc5cd3143f17254258cb4009ce9c311d021371ee9778531d4a61ee61c3d9c5"
+    },
+    {
+      "path": "examples/demo-plan.json",
+      "size_bytes": 12673,
+      "sha256": "1389eaf526a9cfcfc9b868d7530c8d2296d9524b95bbb8b92c26b3585a353db3"
+    },
+    {
+      "path": "handoff/HANDOFF_RU.md",
+      "size_bytes": 4562,
+      "sha256": "69465b24f310ccac315f707e3f8454baeec11f19125b907c05970d5979a966f5"
+    },
+    {
+      "path": "handoff/PUBLICATION.md",
+      "size_bytes": 3729,
+      "sha256": "dc6e296798dbab16a799331caeaa18e8e4372675f7cc2ea41eea6ec30d981727"
+    },
+    {
+      "path": "handoff/REGISTRY_MERGE_REQUEST.json",
+      "size_bytes": 8704,
+      "sha256": "77cf6424293bb951a035bf3283bded7607b51c94b8af39602ceac0cc9828ba18"
+    },
+    {
+      "path": "handoff/UDOT_TRANSIT_ITEM.json",
+      "size_bytes": 1930,
+      "sha256": "38ded452e60b2100fe017245133a9d3280b8b3babf3c5b5e770bfa327ec4da84"
+    },
+    {
+      "path": "preview.html",
+      "size_bytes": 126488,
+      "sha256": "d27b472825b6164a64cd19065e30b3ad0a0e0bcbc5e90fcc2c0d496edce437d9"
+    },
+    {
+      "path": "pyproject.toml",
+      "size_bytes": 636,
+      "sha256": "e718c0f8555aa5ccefa401a25aab4a97fdb7c8ce6389836579501623987692e6"
+    },
+    {
+      "path": "reports/RETURN_TO_CHAT_RU.md",
+      "size_bytes": 2802,
+      "sha256": "d1bd305f771fd4a3ecf258be22dc9bd8d8323db7d347e63f99704cd86a00f460"
+    },
+    {
+      "path": "requirements-tested.txt",
+      "size_bytes": 378,
+      "sha256": "e58efe04e406f6231637af84e04bb292a625255d733866543ff9a09f3949d493"
+    },
+    {
+      "path": "schemas/event.schema.json",
+      "size_bytes": 4591,
+      "sha256": "5734bf15e043171edbd66c3704b7e8672fb65af2a9969d037922dcdc75a65b84"
+    },
+    {
+      "path": "schemas/openapi.json",
+      "size_bytes": 16779,
+      "sha256": "148114ebea95eaadd379fc6e7a1a7021606515cb1302de94193501faf0ea0f93"
+    },
+    {
+      "path": "schemas/plan.schema.json",
+      "size_bytes": 3098,
+      "sha256": "a5c3573d83a90699d97f5fbd64b9d9838361f5ecb38126e392cb7238cfca39b7"
+    },
+    {
+      "path": "skills/INTEGRATION.md",
+      "size_bytes": 1711,
+      "sha256": "08b976ed43ebaeb72878613699eb0959c0b2c72f9bea441dad612ea99363eb88"
+    },
+    {
+      "path": "skills/waypoint-map/SKILL.md",
+      "size_bytes": 2101,
+      "sha256": "12bad9c1b0c469bd149a2a0fa0bcbdc2f9ae287d0e610e92b0937be8e08dadbc"
+    },
+    {
+      "path": "skills/waypoint-map/SKILL.ru.md",
+      "size_bytes": 3400,
+      "sha256": "4d99ae095c36c86c1a2e316e73a0ffd9a331adb0690c1c03644f30a68cb7d5bd"
+    },
+    {
+      "path": "skills/waypoint-observe/SKILL.md",
+      "size_bytes": 2237,
+      "sha256": "7a402be58c19206a42aabee410e071712f5a0986cbbeb18fc3f4ae9b57eaf84c"
+    },
+    {
+      "path": "skills/waypoint-observe/SKILL.ru.md",
+      "size_bytes": 3650,
+      "sha256": "d8dace30488d7967a4a55775f5655caa46b519fb234e76359722ca5092d1ffa9"
+    },
+    {
+      "path": "sources/INPUTS.md",
+      "size_bytes": 1784,
+      "sha256": "cc5400fabcf53f1c01ec910203eee6d5187e30413166b361d1415023f80805af"
+    },
+    {
+      "path": "sources/Waypoint — Design Context (discovery).txt",
+      "size_bytes": 26813,
+      "sha256": "884276937dce80baaae6b64f40d3e6dda3566c8f55fd65aaf7f1412e006715bb"
+    },
+    {
+      "path": "sources/Waypoint — Feasibility Findings 2026-10-16.txt",
+      "size_bytes": 15738,
+      "sha256": "f9fdd7652e09334491d76df139302f5e968306daac565164f30dde7550dc4b9d"
+    },
+    {
+      "path": "sources/feasibility-evidence-v3.zip",
+      "size_bytes": 217599,
+      "sha256": "51fa3627053ea6c9e5e75046401274d08d0d069a806620ad75d57d1028960698"
+    },
+    {
+      "path": "sources/obsidian-reference.png",
+      "size_bytes": 2301771,
+      "sha256": "087db550daab26e5be7404bef2e74b86e1b9aa3cc266cdb022172375bdd773a4"
+    },
+    {
+      "path": "sources/terracotta-reference.png",
+      "size_bytes": 2277203,
+      "sha256": "794ca5d7e23bf3bddeb6f1ae6d39bb70dbe6964be365196caf3a1d10e70b8588"
+    },
+    {
+      "path": "tests/browser_check.py",
+      "size_bytes": 8441,
+      "sha256": "1b29f880b43c2085540ae1657fa3b87c4606ef18a8bd7dae9ad062fa2dddf1f5"
+    },
+    {
+      "path": "tests/test_adapters.py",
+      "size_bytes": 7081,
+      "sha256": "ad008f8d448815d8bea2a21129dfd728387063a99a66d774029be13db8e15e7d"
+    },
+    {
+      "path": "tests/test_core.py",
+      "size_bytes": 9991,
+      "sha256": "dde0b6b303566fb12b96d1756fc712375505881261523a915ce04e73ea1a3847"
+    },
+    {
+      "path": "tests/test_schema.py",
+      "size_bytes": 786,
+      "sha256": "277273f1f183a5c54cdfbe30342ed021996eee41bbb03269c800eae5c7b4cbaa"
+    },
+    {
+      "path": "tools/build_preview.py",
+      "size_bytes": 1332,
+      "sha256": "378f57b22ab61a3b0a7467ea7905e2799d8b346c266c915c9ca64ce918e9686d"
+    },
+    {
+      "path": "tools/generate_contracts.py",
+      "size_bytes": 3905,
+      "sha256": "4b68076eb4be254da8f0103c6dd8e2e16deaa9eca8ff02676ad6fdedb519a612"
+    },
+    {
+      "path": "tools/verify_http.py",
+      "size_bytes": 4394,
+      "sha256": "6bc17f5a023f0f6aadb7ea838bad66f91ac784497f0e0347ede3ba2075c98913"
+    },
+    {
+      "path": "tools/verify_package.py",
+      "size_bytes": 2297,
+      "sha256": "3b6d5486c19b4fc6205cf330a9116b9132b5f59d4ca3c94ff845f0500a0a1e11"
+    },
+    {
+      "path": "waypoint/__init__.py",
+      "size_bytes": 79,
+      "sha256": "8b0dd1bccf9dc223b2e8fa6ae3ff9947501ac1c268296311529d26db59b037e5"
+    },
+    {
+      "path": "waypoint/__main__.py",
+      "size_bytes": 47,
+      "sha256": "79ee6f134c5c5193377cf9b189cbdcc3e2095e49ba9cec310114441c15a917c4"
+    },
+    {
+      "path": "waypoint/adapters/__init__.py",
+      "size_bytes": 85,
+      "sha256": "c1cca14514c90a743bef6097f39afc553adbb3a5a3b9db8310b1ed65523bbd16"
+    },
+    {
+      "path": "waypoint/adapters/codex.py",
+      "size_bytes": 13057,
+      "sha256": "e73f28923e50d7f087895db7bd8d73999c7916029d605dbd44efcfe9d7bfacba"
+    },
+    {
+      "path": "waypoint/adapters/ipc.py",
+      "size_bytes": 8159,
+      "sha256": "d49cd3448b50512e0ccf0042d9579c8ca2f732f50f678cf1e844fc407f46d6c0"
+    },
+    {
+      "path": "waypoint/adapters/patches.py",
+      "size_bytes": 6550,
+      "sha256": "3440b19c97cdba84f89dfc7c9d9adc935c3bc15ecd21c6c9a3a7c6f13302836a"
+    },
+    {
+      "path": "waypoint/cli.py",
+      "size_bytes": 8615,
+      "sha256": "7f3534479642df2a4af2f341c7fafe6c80c7541983e7b0c5dee2d4f8a437d908"
+    },
+    {
+      "path": "waypoint/client.py",
+      "size_bytes": 2116,
+      "sha256": "c9967d923a299f2bd3f03e5914891cfaee559c142184f20251a87c15f36292de"
+    },
+    {
+      "path": "waypoint/collector.py",
+      "size_bytes": 6999,
+      "sha256": "c45cb81068145d77c76c5abada2e1134812dc9a0543ec76407c97012f2256d56"
+    },
+    {
+      "path": "waypoint/demo.py",
+      "size_bytes": 10826,
+      "sha256": "910495a8c44d507ad92b25461eac58c10300b48ba98944e090ea0a75eb394166"
+    },
+    {
+      "path": "waypoint/domain.py",
+      "size_bytes": 11299,
+      "sha256": "94cfcd5b2b2a9ca4475ece794d4d7a90d36e4fcd19742d1339122ddaf0c6d938"
+    },
+    {
+      "path": "waypoint/security.py",
+      "size_bytes": 1071,
+      "sha256": "57904de13c2a716216cdd82b97eab129eab5fde33e198d40a39143d6b15e5fd4"
+    },
+    {
+      "path": "waypoint/server.py",
+      "size_bytes": 6668,
+      "sha256": "46139bfdc2542811be2604d9f43ab27ffcb1226cf69357035f3e61b1a6c20bf9"
+    },
+    {
+      "path": "waypoint/spool.py",
+      "size_bytes": 2199,
+      "sha256": "6deb7a53330c084c1e72c019ed074736307f3645e5ba62c962f555aa9f676118"
+    },
+    {
+      "path": "waypoint/store.py",
+      "size_bytes": 22328,
+      "sha256": "37702099349ff260f5ef5a768cf650af010841485b3ce5563f6c60c921353161"
+    },
+    {
+      "path": "waypoint/web/app.js",
+      "size_bytes": 39129,
+      "sha256": "c7de049dc3245dc3e85838600296a90a3780dd34d994650798c7e02ffa8c3420"
+    },
+    {
+      "path": "waypoint/web/index.html",
+      "size_bytes": 2929,
+      "sha256": "bd0d67e018782c710bdbd4adca9a3be4c0b618a04ddc96ac930285efd1e16782"
+    },
+    {
+      "path": "waypoint/web/style.css",
+      "size_bytes": 12646,
+      "sha256": "763a14dd46f89c31baf32df9741f92af7d834cb66523f2490923eb9f5758348a"
+    }
+  ],
+  "note": "File integrity for unmodified delivery, not author authenticity or target integration evidence."
+}

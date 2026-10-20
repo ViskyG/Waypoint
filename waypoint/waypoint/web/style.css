@@ -19,3 +19,5 @@
 .dependency-history-warning{border-left:3px solid var(--wait);padding:1px 12px;margin:12px 0}.dependency-history-warning h4{font-size:12px}
 
 .edge-order{stroke-dasharray:7 5}.edge-context{font-size:10px;fill:var(--muted);paint-order:stroke;stroke:var(--bg);stroke-width:4px;pointer-events:none}
+
+.reader-controls{position:sticky;top:0;z-index:3;background:var(--panel);padding:4px 0 8px;max-height:50vh;overflow:auto;border-bottom:1px solid var(--line)}.reader-controls .older-messages{margin:0 0 6px}.reader-save-default{margin-top:8px;font-size:11px}

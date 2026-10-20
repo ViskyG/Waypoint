@@ -1,0 +1,29 @@
+{
+  "registered_at": "2026-10-20T12:18:56.971484+00:00",
+  "status": "PASS",
+  "evidence_level": "synthetic_unit_Store_startup_reconciliation",
+  "command": "PYTHONPATH=waypoint waypoint/.venv/bin/pytest waypoint/tests/test_algorithm_paging.py::test_schema3_legacy_write_and_rebuild_reconcile_missing_and_orphan_facts waypoint/tests/test_algorithm_paging.py::test_additive_schema3_backfill_restart_and_rebuild_preserve_immutable_history -q",
+  "result": "2 passed, 1 warning in 0.47s",
+  "exit_code": 0,
+  "scope": [
+    "Legacy schema3 projection writes ledger/event-plan/algorithm_evidence but omitsnewfacts while persistentmarker1 stays unchanged.",
+    "An orphan plus missingrow leaves equal tablecounts; startup identity reconciliation repairsboth atomically and indexes onlymissingbody.",
+    "Secondopen doesnot reindex existingbody; ledgerbytes/hashes/IDs, cursor99, planhead retained; wholehistoryfailure/conflict summary corrected.",
+    "Existing schema3 backfill, restart and rebuild preservation rechecked against final Store startup changes."
+  ],
+  "source_hashes": {
+    "waypoint/waypoint/store.py": "f1d001cb05a04fa7460158ba66bbabecd4dfedb6bc873b5746c2c74f8014fb4a",
+    "waypoint/tests/test_algorithm_paging.py": "2a5d5efa97358a7b55fd42f69875fcdd1a2ebbf7e6a3a6b1329f422c76cd0a67"
+  },
+  "additional_integration_change": "Added dependency_start_lookup(project,node,seq), initialized dependency-historycache and cleared it after successfulrebuild at root request; parent owns warninghistory regression.",
+  "algorithm_read_projection_section_unchanged": true,
+  "algorithm_read_projection_section_sha256": "0ddf3adeec55af80504bddb1b95c036e744ceb3efaed8b9fe5891060baed9ede",
+  "prior_browser_evidence": "../browser/BROWSER_ACCEPTANCE.json",
+  "browser_proof_reuse_basis": "This addon changes startup metadata reconciliation only; algorithm page/registry projection contracts and UI unchanged by this worker. Browsercases were not rerun for this startup repair. Parent later warninghistory edits are separate.",
+  "limitations": [
+    "This is a synthetic controlled legacy-writer fixture, not running an oldbinary concurrently with the newserver.",
+    "Production service needs integration-owner restart before claiming installed startupreconciliation.",
+    "No new native Codex or Chromium claim from these two pytestcases."
+  ],
+  "registration_method": "Saved from successful final narrow pytest output; not an additionaltestexecution"
+}

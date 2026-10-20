@@ -25,6 +25,11 @@
                 const status = element('p', null, 'algorithm-status');
                 for (const label of [`Определение r${d.definition_revision || '?'}`, record.implemented ? 'Код указан' : 'Реализация запланирована', `Корректность: ${{passed:'подтверждена',failed:'есть неуспешная проверка',not_run:'не проверена'}[record.tested] || 'не проверена'}`, record.measured ? 'Измерения записаны' : 'Измерений нет', record.installed ? 'Интеграция подтверждена' : 'Интеграция не подтверждена']) status.append(element('span', label + ' · '));
                 card.append(status);
+                if (record.evidence_count != null) {
+                    card.append(element('p',`Всего свидетельств: ${record.evidence_count} · на этой странице: ${(record.evidence || []).length}`,'algorithm-history-summary'));
+                    if (record.correctness_conflict) card.append(element('p','Есть противоречивые текущие проверки; успешный результат не отменяет неуспешный.','source-warning'));
+                    if (record.comparisons_summary) card.append(element('p',`Сравнений всего: ${record.comparisons_summary.total}; не найдено основание: ${record.comparisons_summary.unresolved}. ${record.comparisons_scope === 'page' ? 'Ниже показаны сравнения только этой страницы.' : 'Откройте историю для отдельных свидетельств и сравнений.'}`,'small-note'));
+                }
                 for (const association of record.associations || []) { const b = element('button', `${association.node_id}${association.direct ? '' : ' (потомок)'}`); b.type = 'button'; b.onclick = () => callbacks.onOpenNode?.(association.node_id); card.append(b); }
                 list(card, 'Входы', d.inputs); list(card, 'Результаты', d.outputs); list(card, 'Шаги', d.steps); list(card, 'Инварианты', d.invariants); list(card, 'Пограничные случаи', d.edge_cases);
                 if (d.implementation) { const h = element('h4', 'Исходный код'); card.append(h); for (const ref of d.implementation.refs || []) reference(card, ref, d.implementation.repository, d.implementation.revision); }
@@ -32,6 +37,12 @@
                 list(card, 'Риски ресурсов', d.resource_risks);
                 for (const evidence of record.evidence || []) { const p = evidence.payload || {}; const details = element('details', null, 'algorithm-evidence'); details.append(element('summary', `${evidence.event_id} · ${evidence.freshness === 'stale' ? 'устарело' : 'текущая версия'} · ${p.correctness?.outcome || 'not_run'}`)); details.append(element('p', `${evidence.source || ''} · ${evidence.at || ''}`)); list(details, 'Причины устаревания', evidence.stale_reasons); list(details, 'Свидетельства', p.correctness?.evidence_refs); if (p.measurement) { const m = p.measurement; details.append(element('p', `${m.metric}: ${m.value} ${m.unit}; n=${m.n}; ${m.statistic}; ${m.method}`), element('p', `Среда: ${m.environment_ref}; данные: ${m.dataset_ref}; нагрузка: ${m.workload_ref}; семантика: ${m.semantic_revision}`)); } else details.append(element('p', 'Измерение отсутствует')); if (p.note) details.append(element('p', p.note)); card.append(details); }
                 for (const comparison of record.comparisons || []) { card.append(element('p', `Сравнение: ${comparison.state}; ${(comparison.reasons || []).join(', ')} · свидетельство: ${comparison.freshness || 'unknown'}; база: ${comparison.baseline_freshness || 'unknown'}; кандидат: ${comparison.candidate_freshness || 'unknown'}`), element('p', comparison.note || '')); }
+                if (record.evidence_scope === 'page') {
+                    const controls=element('div',null,'algorithm-pages');
+                    if (callbacks.canGoNewer) {const newer=element('button','Более новые свидетельства','algorithm-newer');newer.onclick=()=>callbacks.onNewer?.();controls.append(newer);}
+                    if (record.has_more) {const older=element('button','Более ранние свидетельства','algorithm-older');older.onclick=()=>callbacks.onOlder?.(record.before);controls.append(older);}
+                    card.append(controls);
+                }
                 container.append(card);
             }
         }

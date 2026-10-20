@@ -1,0 +1,66 @@
+{
+  "status": "PASS",
+  "captured_at": "2026-10-20T12:31:27.607695+00:00",
+  "plan_version": "v-d07962a17c5c483d",
+  "cursor": 22975,
+  "node_count": 38,
+  "edge_count": 43,
+  "node_statuses": {
+    "WPT-N00": "done",
+    "WPT-N01": "done",
+    "WPT-N02": "done",
+    "WPT-N03": "done",
+    "WPT-N04": "done",
+    "WPT-N05": "done",
+    "WPT-N06": "done",
+    "WPT-N07": "done",
+    "WPT-N08": "done",
+    "WPT-N02-FIX": "done",
+    "WPT-N03-FIX": "done",
+    "WPT-N04-FIX": "done",
+    "WPT-N05-FIX": "done",
+    "WPT-N07-FIX": "done",
+    "WPT-N08-FIX": "done",
+    "WPT-N09": "awaiting reference",
+    "WPT-INPUT-T3": "awaiting reference",
+    "WPT-NEXT": "Функциональная фаза принята · N09 ожидает референс"
+  },
+  "fix_checks": {
+    "WPT-N02-FIX": {
+      "T01": "passed",
+      "T02": "passed"
+    },
+    "WPT-N03-FIX": {
+      "T01": "passed"
+    },
+    "WPT-N04-FIX": {
+      "T01": "passed",
+      "T02": "passed",
+      "T03": "passed"
+    },
+    "WPT-N05-FIX": {
+      "T01": "passed",
+      "T02": "passed"
+    },
+    "WPT-N07-FIX": {
+      "T01": "passed",
+      "T02": "passed",
+      "T03": "passed",
+      "T04": "passed"
+    },
+    "WPT-N08-FIX": {
+      "T01": "passed",
+      "T02": "passed",
+      "T03": "passed",
+      "T04": "passed"
+    }
+  },
+  "own_focus_released": true,
+  "own_focus_seq": 22927,
+  "exact_algorithm_implementation_pins_match": true,
+  "source_freeze_matches_deployed_product": true,
+  "all_10_plan_versions_preserved": true,
+  "new_manual_relinks": 0,
+  "global_skills_published_or_installed": false,
+  "private_native_text_exported": false
+}

@@ -1,0 +1,32 @@
+{
+  "schema": "waypoint.executor-scope-proof/1",
+  "own_identity_verified": true,
+  "executor_native_id": "01a15929-4c41-7321-8b50-b12d74937c65",
+  "declared_before_recovery_output": true,
+  "released_on_handoff": true,
+  "events": [
+    {
+      "seq": 20290,
+      "event_id": "3d4fe3b50736452b8ffb3dd066881ac6",
+      "kind": "scope.set",
+      "agent": "codex/01a15929-4c41-7321-8b50-b12d74937c65",
+      "at": "2026-10-20T11:54:50.026369+00:00",
+      "observed_at": "2026-10-20T11:54:50.028750+00:00",
+      "node_ids": [
+        "WPT-N07-FIX"
+      ],
+      "payload": {}
+    },
+    {
+      "seq": 20528,
+      "event_id": "baefc0ee7e374d7f8ddb9f139fb44d6a",
+      "kind": "scope.set",
+      "agent": "codex/01a15929-4c41-7321-8b50-b12d74937c65",
+      "at": "2026-10-20T11:58:59.188849+00:00",
+      "observed_at": "2026-10-20T11:58:59.194899+00:00",
+      "node_ids": [],
+      "payload": {}
+    }
+  ],
+  "historical_items_relinked": false
+}

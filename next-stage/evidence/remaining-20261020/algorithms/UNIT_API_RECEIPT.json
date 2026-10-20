@@ -1,0 +1,41 @@
+{
+  "registered_at": "2026-10-20T12:01:17.775123+00:00",
+  "status": "PASS",
+  "evidence_level": "synthetic_unit_and_authenticated_TestClient_API",
+  "native_codex_tested": false,
+  "production_data_modified": false,
+  "registration_method": "Saved once from successful exec-command outputs; no test rerun",
+  "runs": [
+    {
+      "command": "PYTHONPATH=waypoint waypoint/.venv/bin/pytest waypoint/tests/test_algorithm_paging.py -q -k 'not authenticated_api' waypoint/tests/test_algorithm_evidence.py",
+      "result": "12 passed, 1 deselected, 1 warning in 0.92s",
+      "exit_code": 0,
+      "tool_chunk_id": "744c1a"
+    },
+    {
+      "command": "PYTHONPATH=waypoint waypoint/.venv/bin/pytest waypoint/tests/test_algorithm_paging.py::test_authenticated_api_preserves_page_contract waypoint/tests/test_stage2_store_api.py::test_schema2_migration_retains_ledger_receipt_unknown_and_rebuilds waypoint/tests/test_stage2_store_api.py::test_interrupted_schema2_migration_rolls_back_and_retry_preserves_input waypoint/tests/test_stage2_store_api.py::test_new_routes_preserve_auth_origin_and_observer_boundary -q",
+      "result": "4 passed, 1 warning in 0.96s",
+      "exit_code": 0,
+      "tool_chunk_id": "f4da84",
+      "execution": "elevated local test permission; disposable tmp_path databases"
+    }
+  ],
+  "distinct_passed_tests": 16,
+  "scope": [
+    "237 evidence pages 100/100/37 without duplicates",
+    "Whole-history current tested/measured/installed/conflicting flags despite tail100",
+    "Comparisons resolve historical references outside page and reject other-algorithm references",
+    "Registry does not select evidence bodies; detail selects indexed IDs before at-most-page body retrieval",
+    "Historical plan freshness; schema3 additive backfill, restarts and rebuild preserving ledger/cursor",
+    "Authenticated API paging and existing route/security/migration regressions"
+  ],
+  "limitations": [
+    "No Chromium or native Codex claim from these runs.",
+    "Root later integrated warning-history code into read_models.py; parent owns composed verification of final source."
+  ],
+  "source_snapshot_at_registration": {
+    "waypoint/waypoint/store.py": "c3f537086312f63ee4f495b52ac422f6f49901320cddb7eebbd06105a4a13104",
+    "waypoint/tests/test_algorithm_paging.py": "a2871fa5b9d5d852ed5596b0f7f1b0f89c1f8d725ffa74b9562bb0da6d62cf66"
+  },
+  "algorithm_projection_section_sha256": "0ddf3adeec55af80504bddb1b95c036e744ceb3efaed8b9fe5891060baed9ede"
+}

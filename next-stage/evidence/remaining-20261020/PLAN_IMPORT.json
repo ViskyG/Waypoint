@@ -1,0 +1,27 @@
+{
+  "base_version": "v-397c97605fdf4fbb",
+  "receipt": {
+    "version": "v-d07962a17c5c483d",
+    "ordinal": 10,
+    "changed": true,
+    "warnings": []
+  },
+  "identical_retry_same_receipt": true,
+  "node_ids_preserved": true,
+  "edge_ids_preserved": true,
+  "changed_algorithms": {
+    "ALG-PAGE": {
+      "definition_revision": 4,
+      "implementation_revision": "worktree-sha256:3db550e266675d098de92474772e3d753f9c7bcb838cc608ed406c713d8fba98"
+    },
+    "ALG-READ": {
+      "definition_revision": 6,
+      "implementation_revision": "worktree-sha256:c6023591b0c9c2d86d712896648ad8f1f361bd32de152e85bca2149490debac7"
+    }
+  },
+  "unchanged_algorithms": [
+    "ALG-DEPS",
+    "ALG-MERGE"
+  ],
+  "observed_version": "v-d07962a17c5c483d"
+}

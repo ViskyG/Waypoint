@@ -1,0 +1,130 @@
+{
+  "schema": "waypoint.historical-pin-review/1",
+  "captured_at": "2026-10-20",
+  "reviewed_ledger_cut": 20469,
+  "status": "HISTORICAL_MISMATCH_EXPLICIT_CURRENT_ACCEPTANCE_PENDING",
+  "old_artifact": {
+    "path": "next-stage/evidence/N07-roadmap.json",
+    "receipt_revision": "sha256:8644191889867ac6ed328be2b89825c9e503593f045850eda8c5de66afdd0f62",
+    "receipt_seqs": [
+      8929,
+      8930
+    ],
+    "current_sha256": "7beca9308216fd3df703ca606230ea8cc065a82b37c46057958951755191aff1",
+    "bytes_match_old_receipt": false,
+    "preserved_current_bytes": "next-stage/evidence/remaining-20261020/history/n07-validator-20261017-7beca9308216.json",
+    "original_bytes_recovered": false
+  },
+  "ledger_receipts": [
+    {
+      "seq": 8929,
+      "event_id": "stage2-ec0ce599ef5a0b3d4cbb589ec5a7fad7ab2ae6af",
+      "event_hash": "2f73ef58d2a5d1cd8a8c1d470a9728973d436a56ed2437089840a6bb2d82e9a3",
+      "source": "stage2-acceptance",
+      "kind": "dependency.observation",
+      "registered_at": "2026-10-17T10:08:24.814185+00:00",
+      "node_ids": [
+        "WPT-N08"
+      ],
+      "payload": {
+        "availability": "available",
+        "basis": {
+          "explanation": "Reviewed concrete packet result exists in this installed working copy; completion status alone is not the basis.",
+          "kind": "artifact",
+          "ref": "next-stage/evidence/N07-roadmap.json",
+          "revision": "sha256:8644191889867ac6ed328be2b89825c9e503593f045850eda8c5de66afdd0f62"
+        },
+        "consumer_id": "WPT-N08",
+        "edge_id": "WPT-NEXT-E-14",
+        "occurred_at": "2026-10-17T10:08:24.814185+00:00",
+        "requirement_fingerprint": "fa7cd583c53d592e14b3ed665b4bc785c6a572db0edc35618ef408aaf5cb407d",
+        "workspace_ref": "waypoint/local-working-copy"
+      }
+    },
+    {
+      "seq": 8930,
+      "event_id": "stage2-1a88d182341b8179396cfe8792e38aeb2182d142",
+      "event_hash": "4832624524e6614ac0b3400d18c31c1c9403933af21e21771f85b1b290d54f80",
+      "source": "stage2-acceptance",
+      "kind": "node.result",
+      "registered_at": "2026-10-17T10:08:24.814185+00:00",
+      "node_ids": [
+        "WPT-N07"
+      ],
+      "payload": {
+        "evidence_ref": "next-stage/evidence/N07-roadmap.json",
+        "evidence_revision": "sha256:8644191889867ac6ed328be2b89825c9e503593f045850eda8c5de66afdd0f62",
+        "plan_version": "v-97d3f60f3b04408f",
+        "summary": "Target verified; next-stage/evidence/N07-roadmap.json"
+      }
+    },
+    {
+      "seq": 13246,
+      "event_id": "audit-fb449ad7ece69a9b2005aee9ccbcbe0cc210ed06",
+      "event_hash": "e26a99bfdb4c8a9b2561eb8f97d2fc311d975770c8a63bc76b1efc1483868e9d",
+      "source": "stage2-acceptance",
+      "kind": "dependency.observation",
+      "registered_at": "2026-10-17T11:23:22.041991+00:00",
+      "node_ids": [
+        "WPT-N08"
+      ],
+      "payload": {
+        "availability": "missing",
+        "basis": {
+          "explanation": "N07 current pinned proof does not match artifact bytes; reviewed immutable replacement is missing. Existing source files remain present. Reviewed correction of stage2 acceptance, not inferred from status.",
+          "kind": "artifact",
+          "ref": "next-stage/audit/CONFORMANCE_RU.md",
+          "revision": "sha256:703df28ad86524c18b3d3e96faacab4cebb02b5b9d9bc5f9325d90191a7a9505"
+        },
+        "consumer_id": "WPT-N08",
+        "edge_id": "WPT-NEXT-E-14",
+        "occurred_at": "2026-10-17T11:23:22.041991+00:00",
+        "requirement_fingerprint": "fa7cd583c53d592e14b3ed665b4bc785c6a572db0edc35618ef408aaf5cb407d",
+        "workspace_ref": "waypoint/local-working-copy"
+      }
+    }
+  ],
+  "search": {
+    "reachable_git_path_commits": [
+      {
+        "commit": "ed3a303cf60f4496a76826ab6a0845b7b9d22bb7",
+        "sha256": "7beca9308216fd3df703ca606230ea8cc065a82b37c46057958951755191aff1"
+      }
+    ],
+    "git_unreachable_blob_count": 1,
+    "git_unreachable_blob_sha256": "eb9d06b3df05e3afa73b8fe055a94b677a1ffc02dcd3350815510688b46588af",
+    "selected_stage2_private_and_N07_json_count": 23,
+    "matching_old_hash_found": false,
+    "local_generated_archives_with_N07": [
+      "Waypoint-completion-ui-2026-10-17.zip",
+      "Waypoint-conformance-audit-2026-10-17.zip",
+      "Waypoint-four-defects-fixed-2026-10-17-r2.zip",
+      "Waypoint-four-defects-fixed-2026-10-17.zip",
+      "Waypoint-stage2-functional-2026-10-17.zip"
+    ],
+    "all_archived_N07_sha256": "7beca9308216fd3df703ca606230ea8cc065a82b37c46057958951755191aff1",
+    "claim_boundary": "Not found in these bounded local sources; not a claim that no other copy can exist."
+  },
+  "preserved_scope": {
+    "check_count": 279,
+    "node_count": 32,
+    "edge_count": 38,
+    "new_current_roadmap_validation": false,
+    "basis": "Historical merged-authoring validator output; preserves its actual 2026-10-17 scope only."
+  },
+  "next_action": {
+    "owner": "root integration",
+    "steps": [
+      "Validate the actually revised current roadmap with its exact content hash and applicable project skills.",
+      "Create a NEW immutable versioned acceptance artifact that names historical recovery and honest limits.",
+      "Append reviewed node.result and replacement dependency.observation for WPT-NEXT-E-14 using the same stage2-acceptance reporter and current requirement fingerprint/workspace.",
+      "Keep seq8929/8930 and audited missing seq13246 unchanged; do not imply recovery of the missing old artifact or old execution times."
+    ]
+  },
+  "non_claims": [
+    "No reconstruction of absent native chats or historical starts.",
+    "No new native Codex/browser/source test is represented by this hash review.",
+    "Recovered old 23-check browser receipt is not the later 41-check HTTP run.",
+    "Test freshness=current remains an executor declaration, not an automatic code hash check."
+  ]
+}

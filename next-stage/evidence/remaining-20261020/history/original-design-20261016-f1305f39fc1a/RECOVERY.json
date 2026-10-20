@@ -1,0 +1,57 @@
+{
+  "schema": "waypoint.historical-evidence-recovery/1",
+  "status": "VERIFIED_RECOVERY",
+  "recovered_at": "2026-10-20T11:57:03.560227+00:00",
+  "source_archive": {
+    "basename": "waypoint-roadmap-package-2026-10-16.zip",
+    "sha256": "6c5c77322e79d56df988a5954830353d2493c6400750f87d040e62a054f40da6",
+    "integrity_only_not_author_authentication": true
+  },
+  "source_manifest_sha256": "599727e7a6f25b0b2baee815e28972420da89bec95bd5a2096d372af87dfa2f0",
+  "source_package_manifest_sha256": "e54a243dc299454147ffcfc1a6b2502aff630619c75bc024c6325deca6f4354d",
+  "recovery_worktree_commit": "5fc85d0803f5d57023ed8182b3ca8db876f8bf63",
+  "files": [
+    {
+      "path": "browser-results.json",
+      "size_bytes": 1223,
+      "sha256": "f1305f39fc1a6d2d57d90030b6fd76ddef003f0aeae0cbd4f82e31f0ec85efb0",
+      "source_member": "waypoint-roadmap-2026-10-16/waypoint/evidence/browser-results.json",
+      "original_manifest_pin_matches": true,
+      "outer_manifest_pin_matches": true
+    },
+    {
+      "path": "ui-nested.png",
+      "size_bytes": 112735,
+      "sha256": "e84f75a7d35e8e36a489547b7058823ba4645cc53e3dbfda758d8c26036eb19b",
+      "source_member": "waypoint-roadmap-2026-10-16/waypoint/evidence/ui-nested.png",
+      "original_manifest_pin_matches": true,
+      "outer_manifest_pin_matches": true
+    },
+    {
+      "path": "ui-obsidian.png",
+      "size_bytes": 239033,
+      "sha256": "36fd486866ac08e3abd75b7ccb8455c859f51b1c54ae9ccd177a860d75cbdb02",
+      "source_member": "waypoint-roadmap-2026-10-16/waypoint/evidence/ui-obsidian.png",
+      "original_manifest_pin_matches": true,
+      "outer_manifest_pin_matches": true
+    },
+    {
+      "path": "ui-terracotta.png",
+      "size_bytes": 238848,
+      "sha256": "4c4b0313f06574afad512245e678640a4dc616027a995d831041eebe398489dc",
+      "source_member": "waypoint-roadmap-2026-10-16/waypoint/evidence/ui-terracotta.png",
+      "original_manifest_pin_matches": true,
+      "outer_manifest_pin_matches": true
+    }
+  ],
+  "scope": {
+    "original_run_date": "2026-10-16",
+    "checks": 23,
+    "mode": "offline-set-content",
+    "fixture": "SYNTHETIC",
+    "live_codex_tested": false,
+    "browser_http_integration": "NOT_RUN_POLICY_BLOCKED",
+    "new_test_run_performed": false
+  },
+  "preservation": "Existing evidence paths were not modified; later 41-check receipt remains separate history."
+}

@@ -1,0 +1,37 @@
+{
+  "status": "PASS",
+  "captured_at": "2026-10-20T12:26:33.148271+00:00",
+  "snapshots": [
+    {
+      "private_snapshot_label": "initial.sqlite",
+      "event_prefix": 18681,
+      "max_seq": 18681,
+      "event_ids_and_hashes_equal": true,
+      "old_plan_bodies_equal": 9,
+      "old_item_keys_retained": 1194,
+      "identity_digest": "b4e2d81cdbeaa786c7026336ad23f6e33e796762357a51171e062967ad1cde99"
+    },
+    {
+      "private_snapshot_label": "before-service-restart.sqlite",
+      "event_prefix": 21639,
+      "max_seq": 21639,
+      "event_ids_and_hashes_equal": true,
+      "old_plan_bodies_equal": 9,
+      "old_item_keys_retained": 2008,
+      "identity_digest": "5f2909a9262f98528c6b1ec9c9acd06c3bfc7b2374f76000ead9ac3b950f9b28"
+    },
+    {
+      "private_snapshot_label": "before-final-restart.sqlite",
+      "event_prefix": 22290,
+      "max_seq": 22290,
+      "event_ids_and_hashes_equal": true,
+      "old_plan_bodies_equal": 10,
+      "old_item_keys_retained": 2112,
+      "identity_digest": "fc1a626b50610f1b4e45ed3d3727c96fe73a6dc7269dd368cbe4051079d53b52"
+    }
+  ],
+  "integrity": "ok",
+  "schema": "3",
+  "original71criteria_present": true,
+  "current_data_not_exported": true
+}

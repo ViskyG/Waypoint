@@ -1,10 +1,10 @@
 {
   "schema_version": "waypoint-delivery-manifest/1",
   "project_id": "waypoint",
-  "state": "FOUR_DEFECTS_FIXED_REMAINING_AUDIT_OPEN_20261017",
+  "state": "FUNCTIONAL_N00_N08_ACCEPTED_N09_REFERENCE_OPEN_20261020",
   "source_archive_sha256": "6c5c77322e79d56df988a5954830353d2493c6400750f87d040e62a054f40da6",
   "next_stage_archive_sha256": "eb9d06b3df05e3afa73b8fe055a94b677a1ffc02dcd3350815510688b46588af",
-  "file_count": 137,
+  "file_count": 143,
   "files": [
     {
       "path": ".gitignore",
@@ -273,8 +273,8 @@
     },
     {
       "path": "preview.html",
-      "size_bytes": 237350,
-      "sha256": "789bd425ec1fce23b06b3d378b0d7c8db21bff66dc2a54ee941672495450371c"
+      "size_bytes": 250882,
+      "sha256": "48657300cc13a9c0a2bf481eaef504051e2eae0a928517bff8a2574b4d6e2dd0"
     },
     {
       "path": "pyproject.toml",
@@ -412,6 +412,21 @@
       "sha256": "ff182e6cb9bcfef9c827b812fb99891c1029d6488f507b456018b8ff9ee692f6"
     },
     {
+      "path": "tests/remaining_browser_check.py",
+      "size_bytes": 34363,
+      "sha256": "eff3f7887fb753f04064da8e9d39beb1e672178b609482cbb3db675707cd07ae"
+    },
+    {
+      "path": "tests/remaining_completion_check.py",
+      "size_bytes": 6289,
+      "sha256": "a4950c12c99d1896121f0f74373e7d6f5ac5142e0c5e5c2ae312542e1eb0f182"
+    },
+    {
+      "path": "tests/remaining_live_check.py",
+      "size_bytes": 9974,
+      "sha256": "0f29db33260256b5bd0bc5a508f31b94aaefc7c07d2ade41e8cd434338c43f61"
+    },
+    {
       "path": "tests/rich_browser_check.py",
       "size_bytes": 12682,
       "sha256": "070cd3b5c27769541d152b719981687fbbcae0970ba5a5a90315622de114a8e3"
@@ -445,6 +460,11 @@
       "path": "tests/test_algorithm_evidence.py",
       "size_bytes": 5008,
       "sha256": "c851f42b242df33025e6fe1211daf2306bdbb818a8caef0fe5dcd395bc57a35c"
+    },
+    {
+      "path": "tests/test_algorithm_paging.py",
+      "size_bytes": 13641,
+      "sha256": "2a5d5efa97358a7b55fd42f69875fcdd1a2ebbf7e6a3a6b1329f422c76cd0a67"
     },
     {
       "path": "tests/test_authoring_next_stage.py",
@@ -502,6 +522,11 @@
       "sha256": "3571b645c17263be47f1e47697c761f76d9f8b740bbeee3ba06640fe5b943651"
     },
     {
+      "path": "tests/test_warning_history.py",
+      "size_bytes": 2870,
+      "sha256": "9c4e9e28294e3938a47e0d4d4cfa1995ee1bd14134f6f65ab0f502cf14c49fe8"
+    },
+    {
       "path": "tools/build_preview.py",
       "size_bytes": 1723,
       "sha256": "c5ae57fbf96a49ac4b6792da0f656b2c71ed25d38123769cb473a0a4bb8766b7"
@@ -518,8 +543,8 @@
     },
     {
       "path": "tools/package_local.py",
-      "size_bytes": 3920,
-      "sha256": "3e0fe9aa57fbbf1376351e7aafd9e81588236ccae3139ff8632735db8a627afd"
+      "size_bytes": 3932,
+      "sha256": "4a025b59616166bc42c0c89300ff6e599b2d5937d1eae9951c9f0fc12f82e668"
     },
     {
       "path": "tools/verify_completion_ui.py",
@@ -623,8 +648,8 @@
     },
     {
       "path": "waypoint/read_models.py",
-      "size_bytes": 6796,
-      "sha256": "596d0dbe8dc671a419c8d0223e7a439a88936f1c906e24283bd967f83f33914d"
+      "size_bytes": 7991,
+      "sha256": "af33b20199cc8ad7cded7cde16476903ffe2f58d91b10b4e02e47a95c12b4de6"
     },
     {
       "path": "waypoint/security.py",
@@ -633,8 +658,8 @@
     },
     {
       "path": "waypoint/server.py",
-      "size_bytes": 9821,
-      "sha256": "d16c962db5f6ab49fe6dc132e1a93dbe4a323fdbf17bda4b7fa2bf593e765b53"
+      "size_bytes": 9696,
+      "sha256": "89c1cdf27b0f9fa142c7a1d62e101ada63b3bed6bf8606bf3a3ea73fbf17045a"
     },
     {
       "path": "waypoint/source_health.py",
@@ -648,23 +673,28 @@
     },
     {
       "path": "waypoint/store.py",
-      "size_bytes": 40152,
-      "sha256": "ac6bcca677c966c11af617b93160db9a30c9f3d54159da38380f95b91e49b0d5"
+      "size_bytes": 47948,
+      "sha256": "f1d001cb05a04fa7460158ba66bbabecd4dfedb6bc873b5746c2c74f8014fb4a"
+    },
+    {
+      "path": "waypoint/warning_history.py",
+      "size_bytes": 3321,
+      "sha256": "5e4e2573bdd6e443e2aca4379991798a1f495b390a86d901134ed63747d4c71d"
     },
     {
       "path": "waypoint/web/algorithm_panel.js",
-      "size_bytes": 5812,
-      "sha256": "bba32110bf515adab794c0885d9b236be1bb91cd72fd4bdfca0fdfc72bc50848"
+      "size_bytes": 7446,
+      "sha256": "a4a11286cb3e24a9d79f805a69091cbcf6029528649b05fd1e4b18e41865d44c"
     },
     {
       "path": "waypoint/web/app.js",
-      "size_bytes": 71747,
-      "sha256": "07602ee19965b6fd61044f9d34dc6a201be238f6babee74d411d6fa60083e1b0"
+      "size_bytes": 78530,
+      "sha256": "edb85fe5301822148f606f1efa3e219d382e82c7df453fbc82fc7c902018fb87"
     },
     {
       "path": "waypoint/web/filters.js",
-      "size_bytes": 2440,
-      "sha256": "499f93ded176728a02e3c5f0ca946ae323ce8309a8ecd390c0987793880727c9"
+      "size_bytes": 2639,
+      "sha256": "211a52375ad82e9ac5d0f730cdce96da4bb2c7c331617d56e79e16e0f3ce5a40"
     },
     {
       "path": "waypoint/web/index.html",
@@ -673,8 +703,8 @@
     },
     {
       "path": "waypoint/web/plan.js",
-      "size_bytes": 9829,
-      "sha256": "60820861e4293091e0fb5a92e335eacb6859a325375e834bf6b8bd8c4a2ed495"
+      "size_bytes": 11426,
+      "sha256": "920c026309ba90850bee4ebde167319e23aa4e6ff120a44c32fb661b4c317cc3"
     },
     {
       "path": "waypoint/web/projects.js",
@@ -683,8 +713,8 @@
     },
     {
       "path": "waypoint/web/style.css",
-      "size_bytes": 18184,
-      "sha256": "a96889f84d57a93b924a90bed5fbcc0c9136f0cff32f73bb3ddbb2fc6560f9ff"
+      "size_bytes": 18442,
+      "sha256": "3dafcac53999af114c52338c09ef53b4d8fd011a4571beb22de5b62b881ef600"
     },
     {
       "path": "waypoint/web/themes.js",

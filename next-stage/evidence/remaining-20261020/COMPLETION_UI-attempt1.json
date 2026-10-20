@@ -1,0 +1,7 @@
+{
+  "status": "FAIL",
+  "tool_chunk_id": "7571fe",
+  "error_type": "TimeoutError",
+  "diagnostic": "A wait for actual UI timed out; no receipt accepted; inspect N07 test tab initialization and N08 status to identify completed scope.",
+  "no_success_claim": true
+}

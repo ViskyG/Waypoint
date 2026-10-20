@@ -1,0 +1,37 @@
+{
+  "captured_at": "2026-10-20T12:32:20.242419+00:00",
+  "scope_notes": {
+    "ALG-READ": "Installed real Codex root message exact IPC/API/browser and actual None/All restore after restart. Bounded current message check, not every future reader scenario.",
+    "ALG-PAGE": "Installed real database registry summary without observation bodies and successful final startup/history preservation. Multi-page237 traversal is separate synthetic browser/API proof, not claimed native237."
+  },
+  "receipts": {
+    "receipts": [
+      {
+        "seq": 23047,
+        "created": true
+      },
+      {
+        "seq": 23048,
+        "created": true
+      }
+    ],
+    "cursor_saved": false
+  },
+  "observed_registry_flags": {
+    "ALG-PAGE": {
+      "tested": "passed",
+      "measured": false,
+      "installed": true,
+      "current_evidence_count": 2,
+      "stale_evidence_count": 4
+    },
+    "ALG-READ": {
+      "tested": "passed",
+      "measured": false,
+      "installed": true,
+      "current_evidence_count": 2,
+      "stale_evidence_count": 4
+    }
+  },
+  "new_performance_measurement": false
+}

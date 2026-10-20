@@ -42,12 +42,24 @@
             const history = el('section','dependency-history-warning');
             history.append(el('h4','','Работа началась до подтверждения входов'));
             history.append(el('p','small-note','Сохранённое наблюдение о начале работы. Позднее подтверждение входов сохраняет эту историю.'));
+            if (projection.dependency_incidents?.length) {
+                history.append(el('p','small-note',`Периодов с одинаковым основанием: ${projection.dependency_incident_count ?? projection.dependency_incidents.length} · записей журнала: ${projection.dependency_warning_count}`));
+                if (projection.dependency_incidents_has_more) history.append(el('p','small-note','Показаны последние 20 периодов. Полные записи сохранены в журнале событий.'));
+                for (const incident of projection.dependency_incidents) {
+                    const record=el('div','dependency-incident');record.dataset.incident=incident.incident_id;
+                    record.append(el('strong','',`${incident.receipt_count} наблюдений одного периода`),el('p','small-note',`${incident.first_observed_at || 'неизвестно'} — ${incident.last_observed_at || 'неизвестно'} · receipt ${incident.first_seq}–${incident.last_seq}`));
+                    for (const requirement of incident.requirements || []) record.append(el('p','',`${requirement.producer_id || requirement.edge_id} · ${requirement.availability || 'unknown'}`));
+                    history.append(record);
+                }
+            }
+            const raw=el('details','dependency-warning-raw');raw.append(el('summary','',`Исходные записи: последние ${projection.dependency_warnings.length}; журнал сохранён`));
             for (const warning of projection.dependency_warnings) {
                 const record = el('div','dependency-record');
                 record.append(el('p','',`Получено: ${warning.observed_at || 'время неизвестно'} · версия ${warning.basis?.plan_version || 'неизвестна'}`));
                 for (const requirement of warning.requirements || []) record.append(el('p','',`${requirement.producer_id || requirement.edge_id} · при старте: ${requirement.availability || requirement.state || 'unknown'}`));
-                history.append(record);
+                raw.append(record);
             }
+            history.append(raw);
             container.append(history);
         }
     };

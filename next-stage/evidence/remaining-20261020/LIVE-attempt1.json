@@ -1,0 +1,8 @@
+{
+  "status": "FAIL",
+  "at": "2026-10-20T12:22:16.390018+00:00",
+  "tool_chunk_id": "bf7832",
+  "error_type": "StopIteration",
+  "scope": "No completed LIVE receipt, no browser assertion accepted; inspect native pipeline candidate timing",
+  "fixture": false
+}

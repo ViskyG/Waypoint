@@ -46,6 +46,8 @@ class Store:
         self.db.executescript(DDL)
         self.db.execute("INSERT OR IGNORE INTO meta VALUES('schema','1')")
         self._facets_ready = False
+        self._algorithm_facts_ready = False
+        self._dependency_history_cache = {}
         schema = self.db.execute("SELECT value FROM meta WHERE key='schema'").fetchone()[0]
         if schema not in {"1", "2", "3"}:
             raise ContractError("db_version", "Database schema is newer/incompatible; do not overwrite")
@@ -53,6 +55,9 @@ class Store:
             self._migrate_targets()
         if schema in {"1", "2"}:
             self._migrate_observability()
+        self.db.execute('CREATE INDEX IF NOT EXISTS dependency_start_lookup ON dependency_starts(project,node,seq)')
+        self._ensure_algorithm_facts()
+        self._algorithm_facts_ready = True
         self._facets_ready = True
         os.chmod(self.path, 0o600)
 
@@ -91,6 +96,53 @@ class Store:
             self.db.execute('COMMIT')
         except BaseException:
             self.db.execute('ROLLBACK');raise
+
+    def _ensure_algorithm_facts(self):
+        """Add disposable metadata indexes to schema 3 without rewriting the ledger.
+
+        The registry aggregates compact facts in SQLite; it never decodes the
+        observation bodies. First open backfills atomically; subsequent opens
+        reconcile metadata omitted by a legacy schema-3 writer or rebuild.
+        """
+        self.db.execute('BEGIN IMMEDIATE')
+        try:
+            self.db.execute("""CREATE TABLE IF NOT EXISTS algorithm_facts(
+                project TEXT NOT NULL,event_id TEXT PRIMARY KEY,algorithm TEXT NOT NULL,
+                seq INTEGER NOT NULL,definition_revision INTEGER NOT NULL,
+                implementation_key TEXT NOT NULL,implementation_string TEXT,
+                correctness TEXT NOT NULL,measured INTEGER NOT NULL,installed INTEGER NOT NULL,
+                comparison INTEGER NOT NULL,baseline TEXT,candidate TEXT)""")
+            self.db.execute('CREATE INDEX IF NOT EXISTS algorithm_fact_lookup ON algorithm_facts(project,algorithm,seq)')
+            self.db.execute('CREATE INDEX IF NOT EXISTS algorithm_fact_project_seq ON algorithm_facts(project,seq)')
+            self.db.execute('CREATE INDEX IF NOT EXISTS algorithm_fact_revision ON algorithm_facts(project,algorithm,definition_revision,implementation_key)')
+            ready = self.db.execute("SELECT value FROM meta WHERE key='algorithm_facts_projection'").fetchone()
+            if not ready or ready[0] != '1':
+                self.db.execute('DELETE FROM algorithm_facts')
+            # A schema-3 legacy writer/rebuild knows algorithm_evidence but not
+            # this additive index. Its writes leave the marker unchanged. Repair
+            # identity-set differences on every open, decoding only missing rows;
+            # equal counts or max(seq) cannot detect a missing row plus an orphan.
+            self.db.execute('''DELETE FROM algorithm_facts WHERE NOT EXISTS (
+                SELECT 1 FROM algorithm_evidence e WHERE e.event_id=algorithm_facts.event_id)''')
+            for row in self.db.execute('''SELECT e.body FROM algorithm_evidence e
+                WHERE NOT EXISTS (SELECT 1 FROM algorithm_facts f WHERE f.event_id=e.event_id)
+                ORDER BY e.seq'''):
+                self._index_algorithm_fact(json.loads(row[0]))
+            self.db.execute("INSERT OR REPLACE INTO meta VALUES('algorithm_facts_projection','1')")
+            self.db.execute('COMMIT')
+        except BaseException:
+            self.db.execute('ROLLBACK'); raise
+
+    def _index_algorithm_fact(self, event):
+        payload = event['payload']; reference = payload.get('implementation_ref')
+        comparison = payload.get('comparison') or {}
+        outcome = payload.get('correctness', {}).get('outcome', 'not_run')
+        self.db.execute('INSERT OR REPLACE INTO algorithm_facts VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)',
+            (event['project_id'],event['event_id'],payload['algorithm_id'],event['seq'],
+             payload['definition_revision'],canonical(reference),reference if isinstance(reference,str) else None,
+             outcome,int(payload.get('measurement') is not None),
+             int(payload.get('observation_kind') == 'integration' and outcome == 'passed'),
+             int(bool(comparison)),comparison.get('baseline_observation_id'),comparison.get('candidate_observation_id')))
 
     def _index_facet(self, project, item):
         facet=classify(item)
@@ -257,7 +309,9 @@ class Store:
             if table=='dependency_evidence':
                 if not all(isinstance(payload.get(k),str) for k in ('edge_id','consumer_id','requirement_fingerprint','workspace_ref')):return
                 self.db.execute('INSERT OR REPLACE INTO dependency_evidence VALUES(?,?,?,?,?,?)',(project,event['event_id'],payload['edge_id'],payload['consumer_id'],seq,canonical(record)))
-            elif isinstance(payload.get('algorithm_id'),str):self.db.execute('INSERT OR REPLACE INTO algorithm_evidence VALUES(?,?,?,?,?)',(project,event['event_id'],payload['algorithm_id'],seq,canonical(record)))
+            elif isinstance(payload.get('algorithm_id'),str):
+                self.db.execute('INSERT OR REPLACE INTO algorithm_evidence VALUES(?,?,?,?,?)',(project,event['event_id'],payload['algorithm_id'],seq,canonical(record)))
+                if self._algorithm_facts_ready:self._index_algorithm_fact(record)
             return
         capture = self.db.execute("SELECT version FROM event_plan WHERE seq=?", (seq,)).fetchone()
         plan_version = capture[0] if capture else None
@@ -485,6 +539,61 @@ class Store:
         if limit is not None:sql+=' LIMIT ?';values.append(limit)
         return [json.loads(r[0]) for r in self.db.execute(sql,values)]
 
+    def algorithm_summary(self, project, aid, definition):
+        """Full-history facts; only scalar aggregate results leave SQLite."""
+        reference = definition.get('implementation')
+        revision = reference.get('revision') if isinstance(reference,dict) else None
+        current = '(f.definition_revision=? AND (f.implementation_key=? OR (f.implementation_string IS NOT NULL AND f.implementation_string=?)))'
+        values = [definition['definition_revision'],canonical(reference),revision,project,aid]
+        # A CTE computes freshness once. Referential joins are algorithm-local:
+        # another algorithm cannot supply a baseline under the same project.
+        row = self.db.execute("""WITH facts AS (
+            SELECT f.*, """+current+""" AS current FROM algorithm_facts f
+            WHERE f.project=? AND f.algorithm=?)
+            SELECT COUNT(*) AS total,COALESCE(SUM(f.current),0) AS current,
+                COALESCE(SUM(f.current AND f.correctness='passed'),0) AS passed,
+                COALESCE(SUM(f.current AND f.correctness='failed'),0) AS failed,
+                COALESCE(SUM(f.current AND f.correctness='not_run'),0) AS not_run,
+                COALESCE(SUM(f.current AND f.measured),0) AS measured,
+                COALESCE(SUM(f.current AND f.installed),0) AS installed,
+                COALESCE(SUM(f.comparison),0) AS comparisons,
+                COALESCE(SUM(f.comparison AND f.current),0) AS current_comparisons,
+                COALESCE(SUM(f.comparison AND (a.event_id IS NULL OR b.event_id IS NULL)),0) AS unresolved
+            FROM facts f
+            LEFT JOIN algorithm_facts a ON a.event_id=f.baseline AND a.project=f.project AND a.algorithm=f.algorithm
+            LEFT JOIN algorithm_facts b ON b.event_id=f.candidate AND b.project=f.project AND b.algorithm=f.algorithm""",values).fetchone()
+        return {'evidence_count':row['total'],'current_evidence_count':row['current'],
+                'stale_evidence_count':row['total']-row['current'],
+                'correctness_counts':{key:row[key] for key in ('passed','failed','not_run')},
+                'correctness_conflict':bool(row['passed'] and row['failed']),
+                'tested':'failed' if row['failed'] else 'passed' if row['passed'] else 'not_run',
+                'measured':bool(row['measured']),'installed':bool(row['installed']),
+                'comparisons_summary':{'total':row['comparisons'],'current':row['current_comparisons'],
+                    'stale':row['comparisons']-row['current_comparisons'],'unresolved':row['unresolved']}}
+
+    def algorithm_observations_by_id(self, project, aid, identifiers):
+        """Resolve page/reference IDs, never other algorithms' bodies."""
+        identifiers = sorted(set(identifiers)); records = []
+        for offset in range(0,len(identifiers),400):
+            chunk = identifiers[offset:offset+400]
+            marks = ','.join('?' for _ in chunk)
+            records.extend(json.loads(row[0]) for row in self.db.execute(
+                'SELECT body FROM algorithm_evidence WHERE project=? AND algorithm=? AND event_id IN ('+marks+')',
+                [project,aid,*chunk]))
+        return records
+
+    def algorithm_page(self, project, aid, before=None, limit=100):
+        """Select indexed IDs before decoding at most one requested page."""
+        limit = min(max(limit,1),500)
+        clause = 'project=? AND algorithm=?'; values = [project,aid]
+        if before is not None:clause += ' AND seq<?'; values.append(before)
+        rows = self.db.execute('SELECT event_id,seq FROM algorithm_evidence WHERE '+clause+
+            ' ORDER BY seq DESC LIMIT ?',[*values,limit+1]).fetchall()
+        more = len(rows)>limit; rows = rows[:limit]
+        records = self.algorithm_observations_by_id(project,aid,[r['event_id'] for r in rows])
+        records.sort(key=lambda event:event['seq'])
+        return {'evidence':records,'has_more':more,'before':records[0]['seq'] if more and records else None}
+
     def _capture_dependency_start(self,event,seq,nodes):
         from .read_models import prerequisite_view
         project=event['project_id'];capture=self.db.execute('SELECT version FROM event_plan WHERE seq=?',(seq,)).fetchone()
@@ -520,7 +629,7 @@ class Store:
         with self.changed:
             self.db.execute("BEGIN IMMEDIATE")
             try:
-                for table in ("agents", "scopes", "items", "item_targets", "item_facets", "dependency_evidence", "algorithm_evidence", "dependency_starts", "node_states", "checks", "source_health"):
+                for table in ("agents", "scopes", "items", "item_targets", "item_facets", "dependency_evidence", "algorithm_evidence", "algorithm_facts", "dependency_starts", "node_states", "checks", "source_health"):
                     self.db.execute(f"DELETE FROM {table}")
                 count = 0
                 for row in self.db.execute("SELECT seq,body FROM events ORDER BY seq").fetchall():
@@ -530,5 +639,6 @@ class Store:
             except BaseException:
                 self.db.execute("ROLLBACK")
                 raise
+            self._dependency_history_cache = {}
             self.changed.notify_all()
             return {"replayed": count, "external_sources_read": False}

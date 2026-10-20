@@ -52,6 +52,7 @@ def activity_views(plan,agents,scopes,sources):
     return by_node
 
 def augment_state(store,state):
+    from .warning_history import dependency_history
     plan=state['plan'];project=plan['project_id'];document={'plan':plan,'version':state['version']}
     shared_basis=basis(store,document)
     sources=aggregate_source_health(state['sources'])['sources']
@@ -59,15 +60,13 @@ def augment_state(store,state):
     statuses={x['id']:x for x in state['node_states']}
     # Read once per consistent Store lock, never once per card/transcript.
     observations=store.observations(project,'dependency')
-    warnings={}
-    for row in store.db.execute('SELECT node,body FROM dependency_starts WHERE project=? ORDER BY seq DESC',(project,)):
-        if len(warnings.setdefault(row['node'],[]))<20:warnings[row['node']].append(json.loads(row['body']))
     views={}
     for node,definition in plan['nodes'].items():
         extension=definition.get('x_observability',{}); intent=extension.get('intent')
         prerequisites={phase:evaluated_relations(plan,node,phase,observations) for phase in ('start','finish')}
-        views[node]={'id':node,'intent':intent or None,'description_incomplete':not intent,'status':statuses.get(node,{}),'activity':active[node],'prerequisites':prerequisites,'basis':{**shared_basis,'workspace_ref':workspace_basis(plan,node)},'dependency_warnings':warnings.get(node,[]),'algorithm_refs':extension.get('algorithm_refs',[])}
-    return {**state,'sources':sources,'basis':shared_basis,'node_views':views,'purpose':plan.get('x_observability',{}).get('purpose'),'capabilities':CAPABILITIES}
+        views[node]={'id':node,'intent':intent or None,'description_incomplete':not intent,'status':statuses.get(node,{}),'activity':active[node],'prerequisites':prerequisites,'basis':{**shared_basis,'workspace_ref':workspace_basis(plan,node)},**dependency_history(store,project,node),'algorithm_refs':extension.get('algorithm_refs',[])}
+    algorithm_cursor=store.db.execute('SELECT MAX(seq) FROM algorithm_facts WHERE project=?',(project,)).fetchone()[0] or 0
+    return {**state,'sources':sources,'basis':shared_basis,'node_views':views,'algorithm_cursor':algorithm_cursor,'purpose':plan.get('x_observability',{}).get('purpose'),'capabilities':CAPABILITIES}
 
 def project_summaries(store):
     summaries=[]
@@ -88,13 +87,31 @@ def project_summaries(store):
 
 def algorithms(store,project,node=None,deep=False,version=None):
     document=store.plan(project,version)
-    return {'basis':basis(store,document),'algorithms':algorithm_views(document['plan'],store.observations(project,'algorithm'),node,deep)}
+    # Definitions/associations are plan-sized. Evidence summary is a SQL
+    # aggregate over compact metadata; no observation bodies enter this list.
+    records=algorithm_views(document['plan'],[],node,deep)
+    for record in records:
+        record.update(store.algorithm_summary(project,record['id'],record['definition']),
+                      evidence_scope='summary',comparisons_scope='summary')
+    return {'basis':basis(store,document),'algorithms':records}
 
 def algorithm(store,project,aid,version=None,before=None,limit=100):
-    result=algorithms(store,project,version=version)
-    record=next((a for a in result['algorithms'] if a['id']==aid),None)
-    if record is None:raise ContractError('not_found','Algorithm not found')
-    evidence=[e for e in record['evidence'] if before is None or e.get('seq',0)<before]
-    limit=min(max(limit,1),500);more=len(evidence)>limit
-    selected=evidence[-limit:];record={**record,'evidence':selected,'has_more':more,'before':selected[0]['seq'] if more and selected else None}
-    return {'basis':result['basis'],'algorithm':record}
+    document=store.plan(project,version);plan=document['plan']
+    definition=plan.get('x_observability',{}).get('algorithms',{}).get(aid)
+    if definition is None:raise ContractError('not_found','Algorithm not found')
+    page=store.algorithm_page(project,aid,before,limit)
+    page_ids={event['event_id'] for event in page['evidence']}
+    references=set()
+    for event in page['evidence']:
+        comparison=event['payload'].get('comparison')
+        if comparison:references.update(comparison[key] for key in ('baseline_observation_id','candidate_observation_id'))
+    referenced=store.algorithm_observations_by_id(project,aid,references-page_ids)
+    # Preserve historical baseline revisions while projecting comparisons only
+    # for this page. Reference lookups cannot add hidden rows to the response.
+    scoped_plan={**plan,'x_observability':{**plan.get('x_observability',{}),'algorithms':{aid:definition}}}
+    record=algorithm_views(scoped_plan,[*page['evidence'],*referenced])[0]
+    record['evidence']=[event for event in record['evidence'] if event['event_id'] in page_ids]
+    record['comparisons']=[comparison for comparison in record['comparisons'] if comparison['event_id'] in page_ids]
+    record.update(store.algorithm_summary(project,aid,definition),has_more=page['has_more'],
+                  before=page['before'],evidence_scope='page',comparisons_scope='page')
+    return {'basis':basis(store,document),'algorithm':record}

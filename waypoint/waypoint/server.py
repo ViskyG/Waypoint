@@ -148,9 +148,8 @@ def create_app(data_dir: Path, tokens: dict | None = None, testing: bool = False
         with store.lock:
             result=packet_core(project,node_id)
             document=store.plan(project)
-            import json
-            warnings=[json.loads(r[0]) for r in store.db.execute('SELECT body FROM dependency_starts WHERE project=? AND node=? ORDER BY seq DESC LIMIT 20',(project,node_id))]
-            result.update(intent=document['plan']['nodes'][node_id].get('x_observability',{}).get('intent'),prerequisites={phase:prerequisite_view(store,document,node_id,phase) for phase in ('start','finish')},dependency_warnings=warnings,algorithm_refs=document['plan']['nodes'][node_id].get('x_observability',{}).get('algorithm_refs',[]),basis=basis(store,document,node_id))
+            from .warning_history import dependency_history
+            result.update(intent=document['plan']['nodes'][node_id].get('x_observability',{}).get('intent'),prerequisites={phase:prerequisite_view(store,document,node_id,phase) for phase in ('start','finish')},**dependency_history(store,project,node_id),algorithm_refs=document['plan']['nodes'][node_id].get('x_observability',{}).get('algorithm_refs',[]),basis=basis(store,document,node_id))
             return result
 
     def packet_core(project,node_id):

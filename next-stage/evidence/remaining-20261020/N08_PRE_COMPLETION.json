@@ -1,0 +1,40 @@
+{
+  "at": "2026-10-20T12:28:46.238914+00:00",
+  "criteria_and_result_before_done": true,
+  "final_report_revision": "sha256:d4e764b4854248cd5dfd514363376d03865b566ed066f93c2c69373f100965cc",
+  "finish_requirements_satisfied": 5,
+  "receipts": {
+    "receipts": [
+      {
+        "seq": 22748,
+        "created": true
+      },
+      {
+        "seq": 22749,
+        "created": true
+      },
+      {
+        "seq": 22750,
+        "created": true
+      },
+      {
+        "seq": 22751,
+        "created": true
+      },
+      {
+        "seq": 22752,
+        "created": true
+      },
+      {
+        "seq": 22753,
+        "created": true
+      },
+      {
+        "seq": 22754,
+        "created": true
+      }
+    ],
+    "cursor_saved": false
+  },
+  "completion_events_prepared_not_submitted": 2
+}

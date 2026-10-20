@@ -1,0 +1,45 @@
+{
+  "schema": "waypoint.reviewed-n07-result/1",
+  "captured_at": "2026-10-20T12:25:21.240677+00:00",
+  "status": "PASS_CURRENT_SCOPED_ACCEPTANCE",
+  "plan_version": "v-d07962a17c5c483d",
+  "plan_validation_checks": 327,
+  "scope": [
+    "Fresh current roadmap native schema/ref/Store roundtrip validation",
+    "Exact old browser23+threePNG recovered from genuine source archive with matching manifests",
+    "Current actual scoped repair declarations and handoffs, no guessed past relinks",
+    "Run/date/receipt/plan/basis provenance shown separately in Chromium",
+    "One unchanged shared workflow for designer/executor/auditor with unpublished global candidates"
+  ],
+  "evidence_files": {
+    "ROADMAP_VALIDATION.json": "54b8d7bb71850a54efb77d63bbc9bbd365fdea289693673b5593927db811356f",
+    "PLAN_IMPORT.json": "f5777be66770498dbba12e6b6d9a8509f3dc86ed4e512cb8e52bc62a608db5f0",
+    "EXECUTION_SCOPE.json": "f69e05523364a684ba4bbee52185815d2a37929bdc8e9e9745b717f8df6a22ce",
+    "history/HISTORY_MANIFEST.json": "f4fb2cf4d99e9edbd198be93d729cc76b25a43be71e8746924f40e8277174ebc",
+    "history/N07_PIN_REVIEW.json": "d6b650ff0ee79ad5ab281aa62818537aac70f71b23946c131488013bb5644367",
+    "browser/BROWSER_ACCEPTANCE.json": "bd5a783278372014bad60040796b64975ae903d83f3308c88409c4d95831c514",
+    "LIVE.json": "7426e4685cdb6d533ab8cbb2d0ee2c5f948368dc236ffc230771a6ccb69189d0"
+  },
+  "unchanged_skill_contract": {
+    "ref": "next-stage/skills/conformance/WAYPOINT_WORKFLOW.md",
+    "sha256": "18b4810f31d8b82dbbd7ced2c69b6f83b9f82cf497b5229c3c1606c3d3aaf6bf",
+    "prior_validation_reused": "next-stage/skills/conformance/VALIDATION.json",
+    "global_publication_or_installation": false
+  },
+  "historical_exception": {
+    "old_receipt_revision": "sha256:8644191889867ac6ed328be2b89825c9e503593f045850eda8c5de66afdd0f62",
+    "old_bytes_recovered": false,
+    "old_ledger_events_preserved": [
+      8929,
+      8930,
+      13246
+    ],
+    "current_replacement": "This new immutable file will be pinned by reviewed stage2-acceptance receipts. Replacement fixes current acceptance, not historical chronology."
+  },
+  "not_claimed": [
+    "Native chat reconstructed for old empty blocks",
+    "Past run times recovered from registration dates",
+    "Global skills installed or published",
+    "N09 third theme accepted"
+  ]
+}

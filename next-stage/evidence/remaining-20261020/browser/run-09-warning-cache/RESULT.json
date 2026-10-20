@@ -1,0 +1,75 @@
+{
+  "started_at": "2026-10-20T12:19:01.180890+00:00",
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "N08 API groups repeated starts by exact unresolved basis and retains five raw records",
+      "passed": true
+    },
+    {
+      "name": "N08 UI shows grouped incidents after later availability instead of five independent starts",
+      "passed": true
+    },
+    {
+      "name": "N08 UI retains expandable raw warning history",
+      "passed": true
+    },
+    {
+      "name": "No uncaught browser application errors",
+      "passed": true
+    },
+    {
+      "name": "Source stayed frozen during acceptance",
+      "passed": true
+    }
+  ],
+  "metrics": {
+    "dependency_incidents": {
+      "groups": 2,
+      "raw_records": 5,
+      "counts": [
+        2,
+        3
+      ]
+    }
+  },
+  "scope": "SYNTHETIC fixtures; real Chromium → loopback HTTP → disposable schema3 Store",
+  "live_codex_tested": false,
+  "production_data_modified": false,
+  "api_routes_mocked": false,
+  "cases_requested": [
+    "warnings"
+  ],
+  "browser_errors": [],
+  "source_hashes_at_start": {
+    "waypoint/waypoint/web/app.js": "edb85fe5301822148f606f1efa3e219d382e82c7df453fbc82fc7c902018fb87",
+    "waypoint/waypoint/web/filters.js": "211a52375ad82e9ac5d0f730cdce96da4bb2c7c331617d56e79e16e0f3ce5a40",
+    "waypoint/waypoint/web/style.css": "3dafcac53999af114c52338c09ef53b4d8fd011a4571beb22de5b62b881ef600",
+    "waypoint/waypoint/web/algorithm_panel.js": "a4a11286cb3e24a9d79f805a69091cbcf6029528649b05fd1e4b18e41865d44c",
+    "waypoint/waypoint/web/plan.js": "920c026309ba90850bee4ebde167319e23aa4e6ff120a44c32fb661b4c317cc3",
+    "waypoint/waypoint/store.py": "f1d001cb05a04fa7460158ba66bbabecd4dfedb6bc873b5746c2c74f8014fb4a",
+    "waypoint/waypoint/read_models.py": "af33b20199cc8ad7cded7cde16476903ffe2f58d91b10b4e02e47a95c12b4de6",
+    "waypoint/waypoint/server.py": "89c1cdf27b0f9fa142c7a1d62e101ada63b3bed6bf8606bf3a3ea73fbf17045a",
+    "waypoint/waypoint/warning_history.py": "5e4e2573bdd6e443e2aca4379991798a1f495b390a86d901134ed63747d4c71d",
+    "waypoint/tests/remaining_browser_check.py": "eff3f7887fb753f04064da8e9d39beb1e672178b609482cbb3db675707cd07ae"
+  },
+  "limitations": [
+    "This script proves controlled application scenarios, not native Codex observations.",
+    "Native source, production restart and historical artifact review are separate evidence."
+  ],
+  "browser": "143.0.7499.4",
+  "finished_at": "2026-10-20T12:19:02.421566+00:00",
+  "source_hashes_at_finish": {
+    "waypoint/waypoint/web/app.js": "edb85fe5301822148f606f1efa3e219d382e82c7df453fbc82fc7c902018fb87",
+    "waypoint/waypoint/web/filters.js": "211a52375ad82e9ac5d0f730cdce96da4bb2c7c331617d56e79e16e0f3ce5a40",
+    "waypoint/waypoint/web/style.css": "3dafcac53999af114c52338c09ef53b4d8fd011a4571beb22de5b62b881ef600",
+    "waypoint/waypoint/web/algorithm_panel.js": "a4a11286cb3e24a9d79f805a69091cbcf6029528649b05fd1e4b18e41865d44c",
+    "waypoint/waypoint/web/plan.js": "920c026309ba90850bee4ebde167319e23aa4e6ff120a44c32fb661b4c317cc3",
+    "waypoint/waypoint/store.py": "f1d001cb05a04fa7460158ba66bbabecd4dfedb6bc873b5746c2c74f8014fb4a",
+    "waypoint/waypoint/read_models.py": "af33b20199cc8ad7cded7cde16476903ffe2f58d91b10b4e02e47a95c12b4de6",
+    "waypoint/waypoint/server.py": "89c1cdf27b0f9fa142c7a1d62e101ada63b3bed6bf8606bf3a3ea73fbf17045a",
+    "waypoint/waypoint/warning_history.py": "5e4e2573bdd6e443e2aca4379991798a1f495b390a86d901134ed63747d4c71d",
+    "waypoint/tests/remaining_browser_check.py": "eff3f7887fb753f04064da8e9d39beb1e672178b609482cbb3db675707cd07ae"
+  },
+  "check_count": 5
+}
