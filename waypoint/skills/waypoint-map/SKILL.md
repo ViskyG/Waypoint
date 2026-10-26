@@ -2,13 +2,22 @@
 name: waypoint-map
 description: "Create or revise the user's Waypoint work map as part of an authorized design/roadmap task; preserve requirements, acceptance, identity and cheap executor context."
 metadata:
-  version: "0.3.0"
+  version: "0.3.1"
   status: "draft-candidate"
 ---
 
 # Author a Waypoint map
 
 Use the approved project context and `schemas/plan.schema.json` in the owning Waypoint package. This candidate is not installed or registered in the global library. It does not start work or grant permissions.
+
+When creating/adopting a project map, use the project's `.project/passport.json`
+when available for its human name and verified identity. For a new identity,
+follow the [shared project-passport skill](https://github.com/ViskyG/agent-skills/blob/main/skills/shared/project-passport/SKILL.md)
+once. Keep the existing `waypoint.plan/1` `project_id` stable; if different
+from passport `id`, record the verified mapping in `bindings.waypoint`.
+Do not derive names from Runner IDs, rewrite historical map/task IDs, or treat
+the passport as proof that the installed Waypoint imports it. Routine map
+revisions do not require loading the passport skill.
 
 Create one dependency graph, not a second roadmap alongside the existing plan. Each meaningful block needs a stable readable ID, title, assignment, acceptance criteria keyed by ID, relevant planned tests and source references. Choose coherent work units rather than one block per function or file. A block may contain another graph. Parentage and dependency edges are explicit; horizontal expansion and vertical refinement are layout hints. Preserve existing positions when adding work. Do not resize/replan on each incoming message.
 
