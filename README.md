@@ -47,7 +47,7 @@ Waypoint is a **passive observer**. It does not schedule, launch, stop, or appro
 | Executor and every subagent | [waypoint-observe](waypoint/skills/waypoint-observe/SKILL.md) · [RU](waypoint/skills/waypoint-observe/SKILL.ru.md) | Verify the executor's own identity, declare task scope, record actual checks and results, and release scope at handoff |
 | Planner, executor, and reviewer | [WAYPOINT_WORKFLOW.md](next-stage/skills/conformance/WAYPOINT_WORKFLOW.md) | Share the exact CLI protocol, evidence levels, roadmap update rules, and completion discipline |
 
-The two project skills are bundled as **version 0.3.0, `draft-candidate`**. They are available for explicit project-local use; they are not automatically loaded by Waypoint, globally installed, or registered in the external skill library. Reading a skill does not start an agent or grant execution permissions. See the [integration boundary](waypoint/skills/INTEGRATION.md).
+The project skills are bundled as **waypoint-map 0.3.1** and **waypoint-observe 0.3.0**, both `draft-candidate`. They are available for explicit project-local use; they are not automatically loaded by Waypoint, globally installed, or registered in the external skill library. Reading a skill does not start an agent or grant execution permissions. See the [integration boundary](waypoint/skills/INTEGRATION.md).
 
 ### Apply the profile to a project
 
