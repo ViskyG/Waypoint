@@ -1,0 +1,31 @@
+{
+  "schema": "project-passport/1",
+  "id": "waypoint",
+  "name": "Waypoint",
+  "summary": "Локальная карта разработки, которая связывает дорожные карты, зависимости задач, наблюдаемую активность Codex и субагентов, сообщения и доказательства результатов в одном браузерном интерфейсе.",
+  "kind": "application",
+  "workflow": {
+    "profile": "standard"
+  },
+  "references": {
+    "overview": "README.md",
+    "user_guide": "README_RU.md",
+    "roadmap": "roadmap/ROADMAP.plan.json"
+  },
+  "repositories": [
+    {
+      "role": "primary",
+      "url": "https://github.com/ViskyG/Waypoint"
+    }
+  ],
+  "tags": [
+    "roadmaps",
+    "agents",
+    "observability"
+  ],
+  "bindings": {
+    "waypoint": {
+      "project_id": "waypoint"
+    }
+  }
+}
